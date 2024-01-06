@@ -19,6 +19,9 @@ module.exports = {
     extend: {
       fontFamily: {
         oswald: ['var(--font-oswald)'],
+        poppins: ['var(--font-poppins)'],
+        monsterrat: ['var(--font-monsterrat)'],
+        montserrat2: ['var(--font-montserrat2)'],
       },
       keyframes: {
         'accordion-down': {

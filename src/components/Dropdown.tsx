@@ -3,8 +3,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { useState } from 'react'
@@ -19,15 +17,10 @@ const Dropdown = () => {
       <DropdownMenuTrigger className='text-3xl'>
         {dropdownIsOpen ? <ImCross /> : <GiHamburgerMenu />}
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='w-[100vw] flex flex-col items-center *:font-semibold *:text-2xl *:font-oswald p-8'>
-        <DropdownMenuLabel className='text-center'>
-          My Account
-        </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem>Billing</DropdownMenuItem>
-        <DropdownMenuItem>Team</DropdownMenuItem>
-        <DropdownMenuItem>Subscription</DropdownMenuItem>
+      <DropdownMenuContent className='w-[100vw] flex flex-col items-center *:font-thin *:text-2xl *:font-poppins p-8 rounded-none'>
+        <DropdownMenuItem>Post a Job</DropdownMenuItem>
+        <DropdownMenuItem>About Us</DropdownMenuItem>
+        <DropdownMenuItem>Log in</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
