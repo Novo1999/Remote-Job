@@ -1,8 +1,12 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Oswald } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const oswald = Oswald({
+  subsets: ['cyrillic'],
+  variable: '--font-oswald',
+  weight: ['400', '500', '700'],
+})
 
 export const metadata: Metadata = {
   title: 'Remote Job',
@@ -16,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={inter.className}>{children}</body>
+      <body className={oswald.variable}>{children}</body>
     </html>
   )
 }
