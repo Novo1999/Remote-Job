@@ -20,7 +20,7 @@ module.exports = {
       fontFamily: {
         oswald: ['var(--font-oswald)'],
         poppins: ['var(--font-poppins)'],
-        monsterrat: ['var(--font-monsterrat)'],
+        montserrat: ['var(--font-montserrat)'],
         montserrat2: ['var(--font-montserrat2)'],
       },
       keyframes: {
