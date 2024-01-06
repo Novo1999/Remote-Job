@@ -1,7 +1,3 @@
-import Image from 'next/image'
-import nomadImage from '../../public/images/nomad.jpg'
-import { Button } from '@/components/ui/button'
-
 const Hero = () => {
   return (
     <section className='flex justify-center'>
@@ -12,9 +8,8 @@ const Hero = () => {
           className='lg:h-[32rem] xl:h-[48rem] object-cover'
           placeholder='blur'
         /> */}
-        <p className='text-center drop-shadow-xl xl:text-5xl sm:text-3xl font-semibold font-oswald sm:mx-20 lg:mx-40 xl:mx-80'>
-          Discover Remote Opportunities Tailored to Your Expertise – Where
-          Distance is No Barrier to Success.
+        <p className='text-center drop-shadow-xl xl:text-5xl sm:text-3xl font-semibold font-montserrat sm:mx-20 lg:mx-40 xl:mx-80'>
+          Discover Remote Opportunities Tailored to Your Expertise
         </p>
       </div>
     </section>

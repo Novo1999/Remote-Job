@@ -5,6 +5,7 @@ import {
   Poppins,
   Montserrat,
   Montserrat_Subrayada,
+  Chewy,
 } from 'next/font/google'
 import './globals.css'
 
@@ -12,6 +13,11 @@ const oswald = Oswald({
   subsets: ['cyrillic'],
   variable: '--font-oswald',
   weight: ['400', '500', '700'],
+})
+const chewy = Chewy({
+  subsets: ['latin'],
+  variable: '--font-chewy',
+  weight: ['400'],
 })
 
 const poppins = Poppins({
@@ -44,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${oswald.variable} ${poppins.variable} ${montserrat2.variable} ${montserrat.variable}`}
+        className={`${oswald.variable} ${poppins.variable} ${montserrat2.variable} ${montserrat.variable} ${chewy.variable}`}
       >
         {children}
       </body>

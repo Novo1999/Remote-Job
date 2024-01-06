@@ -8,8 +8,15 @@ const Search = () => {
       <div className='absolute text-black left-6'>
         <CiSearch />
       </div>
-      <Input className='pl-9 text-black ' type='email' placeholder='Search' />
-      <Button className='bg-white text-black hover:text-white' type='submit'>
+      <Input
+        className='pl-9 text-black rounded-full'
+        type='email'
+        placeholder='Search for any job'
+      />
+      <Button
+        className='bg-white text-black hover:text-white absolute right-0 rounded-full'
+        type='submit'
+      >
         Search
       </Button>
     </div>

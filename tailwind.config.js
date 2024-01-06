@@ -22,6 +22,7 @@ module.exports = {
         poppins: ['var(--font-poppins)'],
         montserrat: ['var(--font-montserrat)'],
         montserrat2: ['var(--font-montserrat2)'],
+        chewy: ['var(--font-chewy)'],
       },
       keyframes: {
         'accordion-down': {
