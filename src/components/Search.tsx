@@ -4,7 +4,7 @@ import { CiSearch } from 'react-icons/ci'
 
 const Search = () => {
   return (
-    <div className='flex w-full max-w-sm items-center space-x-2 mt-8 relative m-auto'>
+    <div className='flex w-full max-w-xs items-center space-x-2 mt-8 relative m-auto'>
       <div className='absolute text-black left-6'>
         <CiSearch />
       </div>

@@ -5,7 +5,7 @@ import { BsFillSignpostFill } from 'react-icons/bs'
 import { FaLocationDot } from 'react-icons/fa6'
 import { FaRupeeSign } from 'react-icons/fa'
 
-type JobPost = {
+export type JobPost = {
   title: string
   companyName: string
   positions: string[]
@@ -50,7 +50,7 @@ const JobItem = ({ jobPost }: { jobPost: JobPost }) => {
           ))}
         </div>
       </div>
-      <div className='hidden sm:flex flex-col col-span-2 lg:flex-row justify-between lg:col-span-3'>
+      <div className='hidden sm:flex flex-col col-span-2 justify-evenly lg:flex-row lg:col-span-3'>
         <p className='flex gap-2 items-center xl:gap-6'>
           <BsFillSignpostFill />
           {postedAgo}

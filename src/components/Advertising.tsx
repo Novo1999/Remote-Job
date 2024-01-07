@@ -20,7 +20,7 @@ const Advertising = () => {
   }
 
   return (
-    <div className='bg-orange-500 fixed z-20 w-full'>
+    <div className='bg-orange-500 fixed z-20 xl:w-full'>
       <motion.div
         variants={textVariants}
         initial='initial'
@@ -28,6 +28,7 @@ const Advertising = () => {
         className='text-2xl font-bold overflow-hidden'
       >
         <span className='flex gap-10 text-sm p-1'>
+          {/* showing new and featured jobs */}
           {newAndFeatured.map((job, index) => {
             if (job.isFeatured) {
               return (
