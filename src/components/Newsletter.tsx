@@ -13,13 +13,13 @@ const Newsletter = () => {
               collaboration, and more. Subscribe for a career without
               boundaries.
             </p>
-            <div className='flex items-stretch mt-12'>
+            <div className='flex items-stretch mt-12 justify-center'>
               <input
-                className='bg-gray-100 rounded-lg rounded-r-none text-base leading-none text-gray-800 p-5 w-4/5 border border-transparent focus:outline-none focus:border-gray-500'
+                className='bg-gray-100 h-6 rounded-lg rounded-r-none text-base leading-none text-gray-800 p-5 w-3/5 border border-transparent focus:outline-none focus:border-gray-500'
                 type='email'
                 placeholder='Your Email'
               />
-              <button className='w-32 rounded-l-none hover:bg-blue-600 bg-blue-700 rounded text-base font-medium leading-none text-white p-5 uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700'>
+              <button className='w-24 rounded-l-none hover:bg-blue-600 bg-blue-700 rounded font-medium leading-none text-white p-3 text-xs uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700'>
                 subscribe
               </button>
             </div>

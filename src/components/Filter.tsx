@@ -8,9 +8,10 @@ import {
 } from '@/utils/extractPositions'
 import { jobPosts } from '@/utils/dummyData'
 import { useState } from 'react'
-import SelectComponent from './SelectItem'
+import { MultiSelect } from './SelectItem'
 import { typesArray } from '@/utils/Constants'
 import { FaDollarSign } from 'react-icons/fa6'
+import { Label } from './ui/label'
 
 const Filter = ({ category }: { category: string }) => {
   const [salary, setSalary] = useState<number[]>([0])
@@ -19,15 +20,7 @@ const Filter = ({ category }: { category: string }) => {
   const uniquePositions = mergeAndUnique(positionsArray)
   const benefitsArray = extractBenefits(jobPosts)
   const uniqueBenefits = mergeAndUnique(benefitsArray)
-
-  if (category === 'location') {
-    return (
-      <SelectComponent
-        placeholder='Location'
-        contents={locations as string[]}
-      />
-    )
-  }
+  const [selected, setSelected] = useState<string[]>([])
 
   if (category === 'salary') {
     return (
@@ -47,15 +40,59 @@ const Filter = ({ category }: { category: string }) => {
     )
   }
 
+  if (category === 'location') {
+    return (
+      <div className='w-full flex flex-col'>
+        <Label htmlFor='location'>Location</Label>
+        <MultiSelect
+          onChange={setSelected}
+          selected={selected}
+          className='w-[180px] rounded-full text-black '
+          options={locations as string[]}
+        />
+      </div>
+    )
+  }
+
   if (category === 'position') {
-    return <SelectComponent placeholder='Position' contents={uniquePositions} />
+    return (
+      <div className='w-full flex-col'>
+        <Label htmlFor='position'>Position</Label>
+        <MultiSelect
+          onChange={setSelected}
+          selected={selected}
+          className='w-[180px] rounded-full text-black '
+          options={uniquePositions}
+        />
+      </div>
+    )
   }
   if (category === 'benefits') {
-    return <SelectComponent placeholder='Benefits' contents={uniqueBenefits} />
+    return (
+      <div className='w-full flex-col'>
+        <Label htmlFor='benefits'>Benefits</Label>
+        <MultiSelect
+          onChange={setSelected}
+          selected={selected}
+          className='w-[180px] rounded-full text-black '
+          options={uniqueBenefits}
+        />
+      </div>
+    )
   }
 
   if (category === 'types') {
-    return <SelectComponent placeholder='Job Types' contents={typesArray} />
+    return (
+      <div className='w-full flex-col'>
+        <Label htmlFor='types'>Types</Label>
+        <MultiSelect
+          onChange={setSelected}
+          selected={selected}
+          className='w-[180px] rounded-full text-black '
+          options={typesArray}
+        />
+      </div>
+    )
   }
 }
 export default Filter

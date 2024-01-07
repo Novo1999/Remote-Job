@@ -9,7 +9,7 @@ const Hero = () => {
           placeholder='blur'
         /> */}
         <p className='text-center text-xl drop-shadow-xl xl:text-5xl sm:text-3xl font-semibold font-montserrat animate-in fade-in transition-all duration-500 zoom-in sm:mx-20 lg:mx-40 xl:mx-80'>
-          Your Next Remote Career Awaits
+          Discover remote jobs and work from anywhere
         </p>
       </div>
     </section>

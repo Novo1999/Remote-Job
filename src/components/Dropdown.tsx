@@ -34,9 +34,9 @@ const Dropdown = () => {
           </div>
         }
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='w-[100vw] flex flex-col items-center *:font-thin *:text-2xl *:font-poppins p-8 rounded-none'>
+      <DropdownMenuContent className='w-[100vw] flex flex-col items-center m-auto *:font-thin *:text-xl *:font-poppins rounded-none'>
         <DropdownMenuItem>Post a Job</DropdownMenuItem>
-        <DropdownMenuItem>Advertisement</DropdownMenuItem>
+        <DropdownMenuItem>Advertise</DropdownMenuItem>
         <DropdownMenuItem>About Us</DropdownMenuItem>
         <DropdownMenuItem>Log in</DropdownMenuItem>
       </DropdownMenuContent>
