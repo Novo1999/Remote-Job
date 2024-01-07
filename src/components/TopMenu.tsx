@@ -14,25 +14,17 @@ const TopMenu = () => {
     <NavigationMenu className='font-poppins'>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <div className='flex gap-4 *:text-black'>
-            <Button
-              className={`${navigationMenuTriggerStyle()} hover:bg-slate-200`}
-            >
+          <div className='flex gap-4 *:text-black *:hover:bg-slate-200'>
+            <Button className={`${navigationMenuTriggerStyle()} `}>
               Post a Job
             </Button>
-            <Button
-              className={`${navigationMenuTriggerStyle()} hover:bg-slate-200`}
-            >
+            <Button className={`${navigationMenuTriggerStyle()} `}>
               Advertising
             </Button>
-            <Button
-              className={`${navigationMenuTriggerStyle()}hover:bg-slate-200`}
-            >
+            <Button className={`${navigationMenuTriggerStyle()}`}>
               About Us
             </Button>
-            <Button
-              className={`${navigationMenuTriggerStyle()} hover:bg-slate-200`}
-            >
+            <Button className={`${navigationMenuTriggerStyle()} `}>
               Login
             </Button>
           </div>

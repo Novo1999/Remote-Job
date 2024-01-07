@@ -29,7 +29,7 @@ const Filter = ({ category }: { category: string }) => {
 
   if (category === 'salary') {
     return (
-      <div>
+      <div className='flex flex-col gap-2'>
         <label htmlFor='salary'>Salary: ₹{salary}</label>
         <Slider
           className='hover:cursor-pointer'

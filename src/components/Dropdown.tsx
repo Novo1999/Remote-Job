@@ -15,8 +15,25 @@ const Dropdown = () => {
 
   return (
     <DropdownMenu onOpenChange={() => setDropDownIsOpen(!dropdownIsOpen)}>
-      <DropdownMenuTrigger className='text-3xl'>
-        {dropdownIsOpen ? <ImCross /> : <GiHamburgerMenu />}
+      <DropdownMenuTrigger className='text-3xl relative'>
+        {
+          <div className='flex'>
+            <ImCross
+              className={`transition-transform ${
+                dropdownIsOpen
+                  ? 'rotate-0 opacity-100 absolute ease'
+                  : 'rotate-90 opacity-0'
+              }`}
+            />
+            <GiHamburgerMenu
+              className={`transition-transform ${
+                dropdownIsOpen
+                  ? '-rotate-90 opacity-0 ease'
+                  : 'rotate-0 opacity-100'
+              }`}
+            />
+          </div>
+        }
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-[100vw] flex flex-col items-center *:font-thin *:text-2xl *:font-poppins p-8 rounded-none'>
         <DropdownMenuItem>Post a Job</DropdownMenuItem>

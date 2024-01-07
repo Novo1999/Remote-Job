@@ -3,10 +3,8 @@ import Image from 'next/image'
 import dummyLogo from '../../../public/images/dummylogo.png'
 
 import { MdOutlineStarBorder } from 'react-icons/md'
-import { Button } from '../ui/button'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { FaArrowRight } from 'react-icons/fa'
 import JobPositions from './JobPositions'
 import JobDetails from './JobDetails'
 
@@ -22,6 +20,7 @@ export type JobPost = {
   isNew?: boolean
   index?: number
   currentHovered?: number
+  isAd?: boolean
 }
 
 const JobItem = ({ jobPost, index }: { jobPost: JobPost; index: number }) => {
@@ -37,6 +36,7 @@ const JobItem = ({ jobPost, index }: { jobPost: JobPost; index: number }) => {
     salaryRange,
     isFeatured,
     isNew,
+    isAd,
   } = jobPost
   return (
     <motion.div
@@ -49,10 +49,10 @@ const JobItem = ({ jobPost, index }: { jobPost: JobPost; index: number }) => {
       {index === currentHovered && (
         <div className='absolute left-0 h-full border-r-4 rounded-l-full border-orange-500'></div>
       )}
-      {index === currentHovered && (
-        <Button className='absolute right-1 rounded-full top-1  block lg:hidden'>
-          <FaArrowRight />
-        </Button>
+      {isAd && (
+        <div className='bg-slate-300 shadow-md rounded-full absolute right-2 top-2 px-2'>
+          Ad
+        </div>
       )}
       <div className='col-span-1 flex'>
         <button className='text-2xl'>
@@ -72,6 +72,7 @@ const JobItem = ({ jobPost, index }: { jobPost: JobPost; index: number }) => {
       />
       {/* salary, location */}
       <JobDetails
+        isAd={isAd}
         postedAgo={postedAgo}
         location={location}
         salaryRange={salaryRange}

@@ -12,19 +12,20 @@ const JobDetails = ({
   isNew,
   index,
   currentHovered,
+  isAd,
 }: JobPost) => {
   return (
     <>
-      <div className='hidden sm:flex flex-col col-span-2 lg:text-base justify-evenly lg:flex-row lg:col-span-4'>
-        <p className='flex gap-2 items-center xl:gap-6'>
+      <div className='hidden sm:flex flex-col gap-2 col-span-2 lg:text-base justify-evenly lg:flex-row lg:col-span-4 *:border *:border-black *:shadow-md'>
+        <p className='flex gap-2 items-center xl:gap-6 bg-stone-300 px-2 sm:text-sm rounded-full'>
           <BsFillSignpostFill />
           {postedAgo}
         </p>
-        <p className='flex gap-2 items-center'>
+        <p className='flex gap-2 items-center bg-amber-300 px-2 sm:text-sm rounded-full'>
           <FaLocationDot />
           {location}
         </p>
-        <p className='flex gap-2 items-center'>
+        <p className='flex gap-2 items-center bg-red-300 px-2 sm:text-sm rounded-full'>
           <FaRupeeSign />
           {salaryRange}
         </p>
@@ -47,18 +48,23 @@ const JobDetails = ({
           {index === currentHovered && (
             <Button className='rounded-full'>Apply</Button>
           )}
+          {isAd && (
+            <div className='bg-slate-300 shadow-md rounded-full right-2 top-2 px-2 sm:hidden'>
+              Ad
+            </div>
+          )}
         </div>
         {/* salary, location */}
-        <div className='text-black sm:hidden'>
-          <p className='flex gap-2 items-center xl:gap-6'>
+        <div className='text-black sm:hidden flex flex-col gap-2'>
+          <p className='flex gap-2 items-center xl:gap-6 bg-stone-300 px-2 rounded-full'>
             <BsFillSignpostFill />
             {postedAgo}
           </p>
-          <p className='flex gap-2 items-center'>
+          <p className='flex gap-2 items-center bg-amber-300 px-2 rounded-full'>
             <FaLocationDot />
             {location}
           </p>
-          <p className='flex gap-2 items-center'>
+          <p className='flex gap-2 items-center bg-red-300 px-2 rounded-full'>
             <FaRupeeSign />
             {salaryRange}
           </p>

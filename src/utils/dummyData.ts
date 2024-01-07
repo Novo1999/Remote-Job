@@ -8,6 +8,7 @@ export const jobPosts = [
     salaryRange: '₹80,000 - ₹100,000',
     isFeatured: true,
     isNew: false,
+    isAd: true,
     benefits: [
       'Flexible work hours',
       'Health insurance',
@@ -23,6 +24,7 @@ export const jobPosts = [
     salaryRange: '₹90,000 - ₹110,000',
     isFeatured: false,
     isNew: true,
+    isAd: true,
     benefits: [
       'Competitive salary',
       '401(k) matching',
