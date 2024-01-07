@@ -5,7 +5,7 @@ export const jobPosts = [
     positions: ['Senior', 'Developer'],
     postedAgo: '2 days ago',
     location: 'San Francisco, CA',
-    salaryRange: '₹80,000 - ₹100,000',
+    salaryRange: '$80K - $100K',
     isFeatured: true,
     isNew: false,
     isAd: true,
@@ -14,6 +14,7 @@ export const jobPosts = [
       'Health insurance',
       'Remote-first culture',
     ],
+    type: 'full-time',
   },
   {
     title: 'Backend Engineer',
@@ -21,7 +22,7 @@ export const jobPosts = [
     positions: ['Developer', 'Backend'],
     postedAgo: '1 week ago',
     location: 'New York, NY',
-    salaryRange: '₹90,000 - ₹110,000',
+    salaryRange: '$90K - $110K',
     isFeatured: false,
     isNew: true,
     isAd: true,
@@ -30,6 +31,7 @@ export const jobPosts = [
       '401(k) matching',
       'Professional development',
     ],
+    type: 'contract',
   },
   {
     title: 'Data Analyst',
@@ -37,10 +39,11 @@ export const jobPosts = [
     positions: ['Analyst'],
     postedAgo: '3 days ago',
     location: 'Seattle, WA',
-    salaryRange: '₹70,000 - ₹90,000',
+    salaryRange: '$70K - $90K',
     isFeatured: true,
     isNew: false,
     benefits: ['Remote work options', 'Wellness programs', 'Paid time off'],
+    type: 'full-time',
   },
   {
     title: 'Full Stack Developer',
@@ -48,7 +51,7 @@ export const jobPosts = [
     positions: ['Developer', 'Full Stack'],
     postedAgo: '4 days ago',
     location: 'Austin, TX',
-    salaryRange: '₹85,000 - ₹105,000',
+    salaryRange: '$85k - $105k',
     isFeatured: false,
     isNew: true,
     benefits: [
@@ -56,6 +59,7 @@ export const jobPosts = [
       'Health and dental benefits',
       'Career growth opportunities',
     ],
+    type: 'part-time',
   },
   {
     title: 'UX/UI Designer',
@@ -63,7 +67,7 @@ export const jobPosts = [
     positions: ['Designer', 'UX', 'UI'],
     postedAgo: '5 days ago',
     location: 'Los Angeles, CA',
-    salaryRange: '₹75,000 - ₹95,000',
+    salaryRange: '$75k - $95k',
     isFeatured: true,
     isNew: false,
     benefits: [
@@ -71,6 +75,7 @@ export const jobPosts = [
       'Team collaboration',
       'Training and development programs',
     ],
+    type: 'full-time',
   },
   {
     title: 'Software Engineer',
@@ -78,7 +83,7 @@ export const jobPosts = [
     positions: ['Developer', 'Software'],
     postedAgo: '2 weeks ago',
     location: 'Chicago, IL',
-    salaryRange: '₹88,000 - ₹108,000',
+    salaryRange: '$88k - $108k',
     isFeatured: false,
     isNew: false,
     benefits: [
@@ -86,6 +91,7 @@ export const jobPosts = [
       'Work-life balance',
       'Remote-friendly culture',
     ],
+    type: 'intern',
   },
   {
     title: 'Product Manager',
@@ -93,7 +99,7 @@ export const jobPosts = [
     positions: ['Manager', 'Product'],
     postedAgo: '6 days ago',
     location: 'Boston, MA',
-    salaryRange: '₹95,000 - ₹115,000',
+    salaryRange: '$95k - $115k',
     isFeatured: false,
     isNew: true,
     benefits: [
@@ -101,6 +107,7 @@ export const jobPosts = [
       'Health and wellness programs',
       '401(k) plan',
     ],
+    type: 'full-time',
   },
   {
     title: 'Security Analyst',
@@ -108,7 +115,7 @@ export const jobPosts = [
     positions: ['Analyst', 'Security'],
     postedAgo: '1 day ago',
     location: 'Denver, CO',
-    salaryRange: '₹80,000 - ₹100,000',
+    salaryRange: '$80K - $100K',
     isFeatured: true,
     isNew: false,
     benefits: [
@@ -116,6 +123,7 @@ export const jobPosts = [
       'Health benefits',
       'Professional development opportunities',
     ],
+    type: 'full-time',
   },
   {
     title: 'Machine Learning Engineer',
@@ -123,7 +131,7 @@ export const jobPosts = [
     positions: ['Developer', 'Machine Learning'],
     postedAgo: '3 weeks ago',
     location: 'Portland, OR',
-    salaryRange: '₹90,000 - ₹110,000',
+    salaryRange: '$90K - $110K',
     isFeatured: false,
     isNew: false,
     benefits: [
@@ -131,6 +139,7 @@ export const jobPosts = [
       'Competitive salary',
       'Learning and growth opportunities',
     ],
+    type: 'freelance',
   },
   {
     title: 'Marketing Specialist',
@@ -138,7 +147,7 @@ export const jobPosts = [
     positions: ['Specialist', 'Marketing'],
     postedAgo: '7 days ago',
     location: 'Miami, FL',
-    salaryRange: '₹70,000 - ₹90,000',
+    salaryRange: '$70K - $90K',
     isFeatured: true,
     isNew: true,
     benefits: [
@@ -146,5 +155,6 @@ export const jobPosts = [
       'Health and wellness benefits',
       'Career advancement opportunities',
     ],
+    type: 'full-time',
   },
 ]

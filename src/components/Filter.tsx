@@ -9,6 +9,8 @@ import {
 import { jobPosts } from '@/utils/dummyData'
 import { useState } from 'react'
 import SelectComponent from './SelectItem'
+import { typesArray } from '@/utils/Constants'
+import { FaDollarSign } from 'react-icons/fa6'
 
 const Filter = ({ category }: { category: string }) => {
   const [salary, setSalary] = useState<number[]>([0])
@@ -21,7 +23,7 @@ const Filter = ({ category }: { category: string }) => {
   if (category === 'location') {
     return (
       <SelectComponent
-        placeholder='Locations'
+        placeholder='Location'
         contents={locations as string[]}
       />
     )
@@ -30,7 +32,9 @@ const Filter = ({ category }: { category: string }) => {
   if (category === 'salary') {
     return (
       <div className='flex flex-col gap-2'>
-        <label htmlFor='salary'>Salary: ₹{salary}</label>
+        <label htmlFor='salary' className='flex items-center'>
+          Salary: <FaDollarSign /> {salary}
+        </label>
         <Slider
           className='hover:cursor-pointer'
           onValueChange={(value) => setSalary(value)}
@@ -44,12 +48,14 @@ const Filter = ({ category }: { category: string }) => {
   }
 
   if (category === 'position') {
-    return (
-      <SelectComponent placeholder='Positions' contents={uniquePositions} />
-    )
+    return <SelectComponent placeholder='Position' contents={uniquePositions} />
   }
   if (category === 'benefits') {
     return <SelectComponent placeholder='Benefits' contents={uniqueBenefits} />
+  }
+
+  if (category === 'types') {
+    return <SelectComponent placeholder='Job Types' contents={typesArray} />
   }
 }
 export default Filter

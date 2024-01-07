@@ -7,8 +7,9 @@ const Filters = () => {
       <Filter category='location' />
       <Filter category='position' />
       <Filter category='benefits' />
+      <Filter category='types' />
       <Sort />
-      <span className='w-full col-span-2 sm:col-span-4 lg:col-span-4 sm:p-4 text-white rounded-full'>
+      <span className='w-full sm:col-span-3 text-white rounded-full'>
         <Filter category='salary' />
       </span>
     </div>

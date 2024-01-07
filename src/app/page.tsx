@@ -1,5 +1,4 @@
 import Advertising from '@/components/Advertising'
-import Filter from '@/components/Filter'
 import Filters from '@/components/Filters'
 import Footer from '@/components/Footer'
 import Hero from '@/components/Hero'
@@ -7,8 +6,6 @@ import JobContainer from '@/components/JobContainer'
 import Navbar from '@/components/Navbar'
 import Newsletter from '@/components/Newsletter'
 import Search from '@/components/Search'
-import Sort from '@/components/Sort'
-import { jobPosts } from '@/utils/dummyData'
 
 export default function Home() {
   return (

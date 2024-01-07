@@ -21,6 +21,7 @@ const Sort = () => {
           <SelectItem value='most-viewed'>Most Viewed</SelectItem>
           <SelectItem value='new-jobs'>New Jobs</SelectItem>
           <SelectItem value='featured-jobs'>Featured Jobs</SelectItem>
+          <SelectItem value='ads'>Advertisements</SelectItem>
         </SelectContent>
       </Select>
     </div>
