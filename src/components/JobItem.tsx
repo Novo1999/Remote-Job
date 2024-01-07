@@ -4,6 +4,7 @@ import Ping from './ui/Ping'
 import { BsFillSignpostFill } from 'react-icons/bs'
 import { FaLocationDot } from 'react-icons/fa6'
 import { FaRupeeSign } from 'react-icons/fa'
+import { Button } from './ui/button'
 
 export type JobPost = {
   title: string
@@ -33,20 +34,20 @@ const JobItem = ({ jobPost }: { jobPost: JobPost }) => {
         <Image
           src={dummyLogo}
           alt='logo'
-          className='w-12 sm:w-16 rounded-full m-auto'
+          className='w-12 sm:w-16 rounded-full m-auto shadow-lg lg:w-[90px] xl:w-20'
         />
       </div>
       <div className='flex flex-col ml-2 flex-1 gap-1 col-span-3 sm:col-span-2'>
-        <p className='font-semibold'>{title}</p>
+        <p className='font-semibold lg:text-lg'>{title}</p>
         <p className=''>{companyName}</p>
         <div className='flex flex-wrap gap-2'>
           {positions.map((pos: string) => (
-            <p
-              className='bg-teal-400 w-fit rounded-full px-2 flex justify-center items-center'
+            <button
+              className='bg-teal-400 w-fit text-xs rounded-full px-2 flex justify-center items-center hover:bg-teal-300 transition-all shadow-md'
               key={crypto.randomUUID()}
             >
               {pos}
-            </p>
+            </button>
           ))}
         </div>
       </div>
@@ -66,12 +67,16 @@ const JobItem = ({ jobPost }: { jobPost: JobPost }) => {
       </div>
       <div className='flex gap-4 h-fit justify-end text-white'>
         {isFeatured && (
-          <p className='bg-green-400 px-1 rounded-full sm:p-3'>Featured</p>
+          <button className='bg-green-400 hover:bg-green-300 px-1 rounded-full sm:p-3 transition-all shadow-md'>
+            Featured
+          </button>
         )}
         {isNew && (
           <div className='relative'>
             <Ping />
-            <p className='bg-orange-400 px-1 rounded-full sm:p-3'>New</p>
+            <button className='bg-orange-400 hover:bg-orange-300 px-1 rounded-full sm:p-3 transition-all shadow-md'>
+              New
+            </button>
           </div>
         )}
       </div>

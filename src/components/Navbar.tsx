@@ -3,7 +3,7 @@ import TopMenu from './TopMenu'
 const Navbar = () => {
   return (
     <nav className='p-6 flex justify-between'>
-      <div className='text-2xl font-chewy'>RemoteJumbo</div>
+      <p className='text-2xl font-chewy'>RemoteJumbo</p>
       <div className='block sm:hidden'>
         <Dropdown />
       </div>
