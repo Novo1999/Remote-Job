@@ -1,6 +1,7 @@
 'use client'
 import { FaSquareFacebook } from 'react-icons/fa6'
 import { FaInstagram } from 'react-icons/fa'
+import Link from 'next/link'
 const Footer = () => {
   return (
     <>
@@ -18,13 +19,16 @@ const Footer = () => {
               dream remote job is just a click away.
             </p>
             <div className='w-44 pt-6 md:pt-0'>
-              <a className='bg-red-500 justify-center text-center rounded-lg shadow px-10 py-3 flex items-center font-poppins'>
+              <Link
+                href='/'
+                className='bg-red-500 transition-colors hover:bg-red-400 justify-center text-center rounded-lg shadow px-10 py-3 flex items-center font-poppins'
+              >
                 Contact US
-              </a>
+              </Link>
             </div>
           </div>
           <div className='flex flex-col'>
-            <div className='flex mt-24 mb-12 flex-row justify-between'>
+            <div className='flex mt-24 mb-12 flex-row justify-between *:transition-all'>
               <p className='text-2xl font-chewy'>RemoteJumbo</p>
               <a className='hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase'>
                 About

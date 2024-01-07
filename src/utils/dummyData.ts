@@ -2,12 +2,17 @@ export const jobPosts = [
   {
     title: 'Senior Frontend Developer',
     companyName: 'Tech Co',
-    positions: ['Senior', 'Developer', 'Frontend'],
+    positions: ['Senior', 'Developer'],
     postedAgo: '2 days ago',
     location: 'San Francisco, CA',
     salaryRange: '₹80,000 - ₹100,000',
     isFeatured: true,
     isNew: false,
+    benefits: [
+      'Flexible work hours',
+      'Health insurance',
+      'Remote-first culture',
+    ],
   },
   {
     title: 'Backend Engineer',
@@ -18,6 +23,11 @@ export const jobPosts = [
     salaryRange: '₹90,000 - ₹110,000',
     isFeatured: false,
     isNew: true,
+    benefits: [
+      'Competitive salary',
+      '401(k) matching',
+      'Professional development',
+    ],
   },
   {
     title: 'Data Analyst',
@@ -28,6 +38,7 @@ export const jobPosts = [
     salaryRange: '₹70,000 - ₹90,000',
     isFeatured: true,
     isNew: false,
+    benefits: ['Remote work options', 'Wellness programs', 'Paid time off'],
   },
   {
     title: 'Full Stack Developer',
@@ -38,6 +49,11 @@ export const jobPosts = [
     salaryRange: '₹85,000 - ₹105,000',
     isFeatured: false,
     isNew: true,
+    benefits: [
+      'Flexible work environment',
+      'Health and dental benefits',
+      'Career growth opportunities',
+    ],
   },
   {
     title: 'UX/UI Designer',
@@ -48,6 +64,11 @@ export const jobPosts = [
     salaryRange: '₹75,000 - ₹95,000',
     isFeatured: true,
     isNew: false,
+    benefits: [
+      'Remote work flexibility',
+      'Team collaboration',
+      'Training and development programs',
+    ],
   },
   {
     title: 'Software Engineer',
@@ -58,6 +79,11 @@ export const jobPosts = [
     salaryRange: '₹88,000 - ₹108,000',
     isFeatured: false,
     isNew: false,
+    benefits: [
+      'Competitive compensation',
+      'Work-life balance',
+      'Remote-friendly culture',
+    ],
   },
   {
     title: 'Product Manager',
@@ -68,6 +94,11 @@ export const jobPosts = [
     salaryRange: '₹95,000 - ₹115,000',
     isFeatured: false,
     isNew: true,
+    benefits: [
+      'Remote work options',
+      'Health and wellness programs',
+      '401(k) plan',
+    ],
   },
   {
     title: 'Security Analyst',
@@ -78,6 +109,11 @@ export const jobPosts = [
     salaryRange: '₹80,000 - ₹100,000',
     isFeatured: true,
     isNew: false,
+    benefits: [
+      'Flexible scheduling',
+      'Health benefits',
+      'Professional development opportunities',
+    ],
   },
   {
     title: 'Machine Learning Engineer',
@@ -88,6 +124,11 @@ export const jobPosts = [
     salaryRange: '₹90,000 - ₹110,000',
     isFeatured: false,
     isNew: false,
+    benefits: [
+      'Remote work flexibility',
+      'Competitive salary',
+      'Learning and growth opportunities',
+    ],
   },
   {
     title: 'Marketing Specialist',
@@ -98,5 +139,10 @@ export const jobPosts = [
     salaryRange: '₹70,000 - ₹90,000',
     isFeatured: true,
     isNew: true,
+    benefits: [
+      'Flexible work arrangements',
+      'Health and wellness benefits',
+      'Career advancement opportunities',
+    ],
   },
 ]

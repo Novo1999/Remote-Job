@@ -1,11 +1,11 @@
 import { jobPosts } from '@/utils/dummyData'
-import JobItem from './JobItem'
+import JobItem from './Job/JobItem'
 
 const JobContainer = () => {
   return (
-    <section className='flex flex-col gap-4 justify-center mt-12 mx-7'>
-      {jobPosts.map((job) => (
-        <JobItem jobPost={job} key={crypto.randomUUID()} />
+    <section className='flex flex-col gap-4 justify-center mt-12 mx-2 sm:mx-7'>
+      {jobPosts.map((job, index) => (
+        <JobItem jobPost={job} index={index} key={crypto.randomUUID()} />
       ))}
     </section>
   )

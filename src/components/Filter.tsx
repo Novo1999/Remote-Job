@@ -1,38 +1,29 @@
 'use client'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import { Slider } from '@/components/ui/slider'
-import { JobPost } from './JobItem'
-import { extractPositions, mergeAndUnique } from '@/utils/extractPostions'
+import { JobPost } from './Job/JobItem'
+import {
+  extractBenefits,
+  extractPositions,
+  mergeAndUnique,
+} from '@/utils/extractPositions'
 import { jobPosts } from '@/utils/dummyData'
 import { useState } from 'react'
+import SelectComponent from './SelectItem'
 
 const Filter = ({ category }: { category: string }) => {
   const [salary, setSalary] = useState<number[]>([0])
   const locations = jobPosts.map((job: JobPost) => job.location)
-  const salaries = jobPosts.map((job: JobPost) => job.salaryRange)
   const positionsArray = extractPositions(jobPosts)
   const uniquePositions = mergeAndUnique(positionsArray)
+  const benefitsArray = extractBenefits(jobPosts)
+  const uniqueBenefits = mergeAndUnique(benefitsArray)
 
   if (category === 'location') {
     return (
-      <Select>
-        <SelectTrigger className='w-[180px] rounded-full text-black'>
-          <SelectValue placeholder='Location' />
-        </SelectTrigger>
-        <SelectContent>
-          {locations.map((c: string, index: number) => (
-            <SelectItem key={index} value={c.toLowerCase()}>
-              {c}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      <SelectComponent
+        placeholder='Locations'
+        contents={locations as string[]}
+      />
     )
   }
 
@@ -54,19 +45,11 @@ const Filter = ({ category }: { category: string }) => {
 
   if (category === 'position') {
     return (
-      <Select>
-        <SelectTrigger className='w-[180px] rounded-full text-black'>
-          <SelectValue placeholder='Positions' />
-        </SelectTrigger>
-        <SelectContent>
-          {uniquePositions.map((c: string, index: number) => (
-            <SelectItem key={index} value={c.toLowerCase()}>
-              {c}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      <SelectComponent placeholder='Positions' contents={uniquePositions} />
     )
+  }
+  if (category === 'benefits') {
+    return <SelectComponent placeholder='Benefits' contents={uniqueBenefits} />
   }
 }
 export default Filter

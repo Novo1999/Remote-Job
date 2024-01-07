@@ -21,6 +21,11 @@ const TopMenu = () => {
               Post a Job
             </Button>
             <Button
+              className={`${navigationMenuTriggerStyle()} hover:bg-slate-200`}
+            >
+              Advertising
+            </Button>
+            <Button
               className={`${navigationMenuTriggerStyle()}hover:bg-slate-200`}
             >
               About Us

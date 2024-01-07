@@ -1,4 +1,4 @@
-import { JobPost } from '@/components/JobItem'
+import { JobPost } from '@/components/Job/JobItem'
 
 export const mergeAndUnique = (...arrays: string[][]) => {
   const mergedArray = ([] as string[]).concat(...arrays)
@@ -14,7 +14,16 @@ export const extractPositions = (jobPosts: JobPost[]): string[] => {
   const allPositions: string[] = []
 
   jobPosts.forEach((job) => {
-    allPositions.push(...job.positions)
+    allPositions.push(...job.positions!)
+  })
+
+  return allPositions
+}
+export const extractBenefits = (jobPosts: JobPost[]): string[] => {
+  const allPositions: string[] = []
+
+  jobPosts.forEach((job) => {
+    allPositions.push(...job.benefits!)
   })
 
   return allPositions
