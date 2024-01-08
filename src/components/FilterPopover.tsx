@@ -1,13 +1,11 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { IoFilterSharp } from 'react-icons/io5'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { IoFilterSharp } from 'react-icons/io5'
 import Filters from './Filters'
 
 const FilterPopover = () => {

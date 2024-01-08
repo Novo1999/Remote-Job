@@ -7,9 +7,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { ReactNode, useState } from 'react'
 import { BsFillInfoCircleFill } from 'react-icons/bs'
-import { FaBriefcase } from 'react-icons/fa6'
 import { RiAdvertisementFill, RiLoginBoxFill } from 'react-icons/ri'
-import { RxCross1, RxHamburgerMenu } from 'react-icons/rx'
 
 const Content = ({
   menuText,

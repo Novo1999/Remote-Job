@@ -6,6 +6,7 @@ const Advertise = () => {
   const [timer, setTimer] = useState<number>(5)
   const [showAd, setShowAd] = useState<boolean>(true)
 
+  // decrementing timer
   useEffect(() => {
     const intervalId = setInterval(() => {
       setTimer((prevTime: number) => {
@@ -23,7 +24,7 @@ const Advertise = () => {
   return (
     showAd && (
       <div
-        className='bg-orange-400 w-screen text-white font-montserrat px-4 py-3 h-12 shadow-md'
+        className='bg-orange-400 w-full text-white font-montserrat px-4 xl:px-12 py-3 h-12 shadow-md'
         role='alert'
       >
         <div className='flex gap-2 justify-between'>
@@ -42,7 +43,7 @@ const Advertise = () => {
                 <p className='absolute text-black text-xs'>{timer}</p>
               </div>
             ) : (
-              <div onClick={() => setShowAd(false)}>
+              <div className='cursor-pointer' onClick={() => setShowAd(false)}>
                 <RxCross2 />
               </div>
             )}

@@ -1,7 +1,7 @@
 'use client'
-import { FaSquareFacebook, FaTwitter, FaYoutube } from 'react-icons/fa6'
-import { FaInstagram } from 'react-icons/fa'
 import Link from 'next/link'
+import { FaInstagram } from 'react-icons/fa'
+import { FaSquareFacebook, FaTwitter, FaYoutube } from 'react-icons/fa6'
 
 const FooterLink = ({ text }: { text: string }) => {
   return (
