@@ -32,7 +32,7 @@ const Dropdown = () => {
           </div>
         }
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='w-[100vw] flex flex-col items-center m-auto *:font-thin *:text-xl *:font-poppins rounded-none'>
+      <DropdownMenuContent className='w-full flex flex-col items-center m-auto *:font-thin *:text-xl *:font-poppins rounded-none'>
         <DropdownMenuItem>Post a Job</DropdownMenuItem>
         <DropdownMenuItem>Advertise</DropdownMenuItem>
         <DropdownMenuItem>About Us</DropdownMenuItem>
