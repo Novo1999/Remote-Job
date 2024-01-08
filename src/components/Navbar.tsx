@@ -14,3 +14,5 @@ const Navbar = () => {
   )
 }
 export default Navbar
+
+// TODO: Add advertise on top 5 second close button

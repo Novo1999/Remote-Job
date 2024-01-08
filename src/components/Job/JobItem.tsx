@@ -4,7 +4,6 @@ import dummyLogo from '../../../public/images/dummylogo.png'
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { MdOutlineStarBorder } from 'react-icons/md'
 import JobDetailsPC from './JobDetailsPC'
 import JobPositions from './JobPositions'
 import SpecialJobs from './SpecialJobs'
@@ -46,11 +45,6 @@ const JobItem = ({ jobPost, index }: { jobPost: JobPost; index: number }) => {
     >
       {index === currentHovered && (
         <div className='absolute left-0 h-full border-r-4 rounded-l-full border-orange-500'></div>
-      )}
-      {isAd && (
-        <div className='bg-slate-500 text-white shadow-md rounded-full absolute -right-2 -top-2 px-2 hidden sm:block'>
-          Ad
-        </div>
       )}
       {/* main items */}
       <div className='flex col-span-1'>

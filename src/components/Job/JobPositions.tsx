@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import JobDetailsMobile from './JobDetailsMobile'
 import { JobPost } from './JobItem'
 
@@ -6,7 +7,9 @@ const JobPositions = ({ jobPost }: { jobPost: JobPost }) => {
 
   return (
     <div className='flex flex-col ml-4 flex-1 gap-1 shrink col-span-6 sm:col-span-2'>
-      <p className='font-semibold lg:text-lg'>{title}</p>
+      <p className='font-semibold lg:text-[15px] lg:whitespace-nowrap'>
+        {title}
+      </p>
       <p>{companyName}</p>
       <JobDetailsMobile jobPost={jobPost} />
       <div className='hidden gap-2 sm:flex'>
@@ -18,9 +21,12 @@ const JobPositions = ({ jobPost }: { jobPost: JobPost }) => {
             {pos}
           </button>
         ))}
-        <p className='font-semibold bg-purple-500 text-white whitespace-nowrap rounded-md px-1 text-center flex items-center'>
+        <Link
+          href='/'
+          className='font-semibold bg-purple-500 text-white whitespace-nowrap rounded-md px-1 text-center hover:bg-purple-400 transition-colors flex items-center'
+        >
           {type?.toUpperCase()}
-        </p>
+        </Link>
       </div>
     </div>
   )

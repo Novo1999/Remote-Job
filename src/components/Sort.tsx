@@ -6,12 +6,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { MdSort } from 'react-icons/md'
 
 const Sort = () => {
   return (
     <div>
       <Select>
-        <SelectTrigger className='w-full text-xs rounded-full text-black'>
+        <SelectTrigger className='w-36 min-[375px]:w-48 text-xs rounded-full text-black border-0'>
+          <MdSort />
           <SelectValue placeholder='Sort By' />
         </SelectTrigger>
         <SelectContent>

@@ -8,7 +8,6 @@ const Filters = () => {
       <Filter category='position' />
       <Filter category='benefits' />
       <Filter category='types' />
-      <Sort />
       <div className='w-full sm:col-span-1 text-black lg:col-span-3 rounded-full'>
         <Filter category='salary' />
       </div>
@@ -17,4 +16,5 @@ const Filters = () => {
 }
 
 // TODO: ADD ICONS FOR FILTER
+// TODO: ADD ICONS FOR NAV MOBILE
 export default Filters

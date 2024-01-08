@@ -8,14 +8,11 @@ const Newsletter = () => {
               Remote work, limitless possibilities!
             </h1>
             <p className='text-sm mx-4 leading-normal text-gray-200 text-center '>
-              Stay ahead of the curve with our newsletter featuring handpicked
-              remote job listings, expert tips for successful virtual
-              collaboration, and more. Subscribe for a career without
-              boundaries.
+              Get remote job alerts sent directly to your inbox by subscribing.
             </p>
             <div className='flex items-stretch mt-12 justify-center'>
               <input
-                className='bg-gray-100 h-6 rounded-lg rounded-r-none text-base leading-none text-gray-800 p-5 w-3/5 border border-transparent focus:outline-none focus:border-gray-500'
+                className='bg-gray-100 h-6 rounded-lg rounded-r-none text-xs leading-none text-gray-800 p-5 w-3/5 border border-transparent focus:outline-none focus:border-gray-500'
                 type='email'
                 placeholder='Your Email'
               />

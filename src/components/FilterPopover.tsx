@@ -2,6 +2,7 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { IoFilterSharp } from 'react-icons/io5'
 import {
   Popover,
   PopoverContent,
@@ -12,11 +13,11 @@ import Filters from './Filters'
 const FilterPopover = () => {
   return (
     <Popover>
-      <PopoverTrigger
-        className='w-full mt-2 rounded-full text-xs text-black'
-        asChild
-      >
-        <Button variant='outline'>Filter</Button>
+      <PopoverTrigger className='rounded-full w-20 text-xs text-black' asChild>
+        <Button className='space-x-1' variant='outline'>
+          <IoFilterSharp />
+          <span>Filter</span>
+        </Button>
       </PopoverTrigger>
       <PopoverContent className='w-80'>
         <Filters />
