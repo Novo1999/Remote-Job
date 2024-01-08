@@ -11,7 +11,7 @@ const Sort = () => {
   return (
     <div>
       <Select>
-        <SelectTrigger className='w-[6rem] sm:w-32 text-xs rounded-full text-black'>
+        <SelectTrigger className='w-full text-xs rounded-full text-black'>
           <SelectValue placeholder='Sort By' />
         </SelectTrigger>
         <SelectContent>

@@ -1,6 +1,5 @@
 'use client'
 import { cn } from '@/lib/utils'
-import * as React from 'react'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -17,6 +16,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { Check, ChevronsUpDown, X } from 'lucide-react'
+import { useState } from 'react'
 
 interface MultiSelectProps {
   options: string[]
@@ -32,7 +32,7 @@ function MultiSelect({
   className,
   ...props
 }: MultiSelectProps) {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
 
   const handleUnselect = (item: string) => {
     onChange(selected.filter((i) => i !== item))
@@ -45,17 +45,17 @@ function MultiSelect({
           variant='outline'
           role='combobox'
           aria-expanded={open}
-          className={`w-48 justify-between ${
+          className={`w-full justify-between ${
             selected.length > 1 ? 'h-full' : 'h-10'
           }`}
           onClick={() => setOpen(!open)}
         >
-          <div className='flex gap-1 flex-wrap'>
+          <div className='flex gap-1 flex-wrap text-wrap'>
             {selected.map((item) => (
               <Badge
                 variant='secondary'
                 key={item}
-                className='mr-1 mb-1'
+                className='mr-1 mb-1 rounded-md'
                 onClick={() => handleUnselect(item)}
               >
                 {item}

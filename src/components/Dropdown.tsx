@@ -6,9 +6,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { useState } from 'react'
-import { GiHamburgerMenu } from 'react-icons/gi'
-import { ImCross } from 'react-icons/im'
-
+import { RxCross1, RxHamburgerMenu } from 'react-icons/rx'
 const Dropdown = () => {
   const [dropdownIsOpen, setDropDownIsOpen] = useState(false)
 
@@ -17,14 +15,14 @@ const Dropdown = () => {
       <DropdownMenuTrigger className='text-3xl relative'>
         {
           <div className='flex'>
-            <ImCross
+            <RxCross1
               className={`transition-transform ${
                 dropdownIsOpen
                   ? 'rotate-0 opacity-100 absolute ease'
                   : 'rotate-90 opacity-0'
               }`}
             />
-            <GiHamburgerMenu
+            <RxHamburgerMenu
               className={`transition-transform ${
                 dropdownIsOpen
                   ? '-rotate-90 opacity-0 ease'

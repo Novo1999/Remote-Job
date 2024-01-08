@@ -1,5 +1,5 @@
 'use client'
-import { FaSquareFacebook } from 'react-icons/fa6'
+import { FaSquareFacebook, FaTwitter, FaYoutube } from 'react-icons/fa6'
 import { FaInstagram } from 'react-icons/fa'
 import Link from 'next/link'
 const Footer = () => {
@@ -15,21 +15,35 @@ const Footer = () => {
           <div className='flex flex-col'>
             <div className='flex mt-24 mb-12 flex-row justify-evenly sm:justify-between *:transition-all'>
               <p className='text-2xl font-chewy'>RemoteJumbo</p>
-              <a className='hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase'>
+              <Link
+                href='/'
+                className='hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase'
+              >
                 About
-              </a>
-              <a className='hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase'>
+              </Link>
+              <Link
+                href='/'
+                className='hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase'
+              >
                 Services
-              </a>
-              <a className='hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase'>
+              </Link>
+              <Link
+                href='/'
+                className='hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase'
+              >
                 Why us
-              </a>
-              <a className='hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase'>
+              </Link>
+              <Link
+                href='/'
+                className='hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase'
+              >
                 Contact
-              </a>
+              </Link>
               <div className='flex flex-row space-x-8 items-center justify-between'>
                 <FaSquareFacebook />
                 <FaInstagram />
+                <FaTwitter />
+                <FaYoutube />
               </div>
             </div>
             <hr className='border-gray-600' />

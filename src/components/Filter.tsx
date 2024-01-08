@@ -42,12 +42,12 @@ const Filter = ({ category }: { category: string }) => {
 
   if (category === 'location') {
     return (
-      <div className='w-full flex flex-col'>
+      <div className='w-80 sm:w-full flex flex-col items-center gap-2'>
         <Label htmlFor='location'>Location</Label>
         <MultiSelect
           onChange={setSelected}
           selected={selected}
-          className='w-[180px] rounded-full text-black '
+          className='w-[180px] rounded-full text-black'
           options={locations as string[]}
         />
       </div>
@@ -56,12 +56,12 @@ const Filter = ({ category }: { category: string }) => {
 
   if (category === 'position') {
     return (
-      <div className='w-full flex-col'>
+      <div className='w-80 sm:w-full flex flex-col items-center gap-2'>
         <Label htmlFor='position'>Position</Label>
         <MultiSelect
           onChange={setSelected}
           selected={selected}
-          className='w-[180px] rounded-full text-black '
+          className='w-[180px] rounded-full text-black'
           options={uniquePositions}
         />
       </div>
@@ -69,12 +69,12 @@ const Filter = ({ category }: { category: string }) => {
   }
   if (category === 'benefits') {
     return (
-      <div className='w-full flex-col'>
+      <div className='w-80 sm:w-full flex flex-col items-center gap-2'>
         <Label htmlFor='benefits'>Benefits</Label>
         <MultiSelect
           onChange={setSelected}
           selected={selected}
-          className='w-[180px] rounded-full text-black '
+          className='w-[180px] rounded-full text-black'
           options={uniqueBenefits}
         />
       </div>
@@ -83,12 +83,12 @@ const Filter = ({ category }: { category: string }) => {
 
   if (category === 'types') {
     return (
-      <div className='w-full flex-col'>
+      <div className='w-80 sm:w-full flex flex-col items-center gap-2'>
         <Label htmlFor='types'>Types</Label>
         <MultiSelect
           onChange={setSelected}
           selected={selected}
-          className='w-[180px] rounded-full text-black '
+          className='w-[180px] rounded-full text-black'
           options={typesArray}
         />
       </div>

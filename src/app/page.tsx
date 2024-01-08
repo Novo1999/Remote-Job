@@ -1,4 +1,3 @@
-import Advertising from '@/components/Advertising'
 import Filters from '@/components/Filters'
 import Footer from '@/components/Footer'
 import Hero from '@/components/Hero'
@@ -11,7 +10,7 @@ export default function Home() {
   return (
     <>
       {/* <Advertising /> */}
-      <main className='relative top-20 xl:mx-32 2xl:mx-64'>
+      <main className='relative xl:mx-32 2xl:mx-64'>
         <Navbar />
         <Hero />
         <div className='flex flex-col items-center gap-3'>

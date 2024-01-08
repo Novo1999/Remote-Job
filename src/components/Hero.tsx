@@ -1,7 +1,7 @@
 const Hero = () => {
   return (
     <section className='flex justify-center'>
-      <div className='h-full flex-col items-center relative justify-center'>
+      <div className='h-full flex-col items-center relative justify-center py-20'>
         {/* <Image
           src={nomadImage}
           alt='nomad image'
