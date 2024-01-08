@@ -8,14 +8,14 @@ const SpecialJobs = ({ jobPost }: { jobPost: JobPost }) => {
       <div className='flex gap-2 flex-col justify-end'>
         <div className='flex justify-end gap-2'>
           {isFeatured && (
-            <button className='bg-green-400 hover:bg-green-300 px-1 rounded-full sm:p-2 transition-all shadow-md'>
+            <button className='bg-orange-400 hover:bg-orange-300 px-1 rounded-full sm:p-2 transition-all shadow-md'>
               Featured
             </button>
           )}
           {isNew && (
             <div className='relative'>
               <Ping />
-              <button className='bg-orange-400 hover:bg-orange-300 px-1 rounded-full sm:p-2 transition-all shadow-md'>
+              <button className='bg-green-400 hover:bg-green-300 px-1 rounded-full sm:p-2 transition-all shadow-md'>
                 New
               </button>
             </div>

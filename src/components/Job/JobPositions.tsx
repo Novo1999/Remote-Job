@@ -1,13 +1,14 @@
-import JobDetails from './JobDetailsMobile'
+import JobDetailsMobile from './JobDetailsMobile'
 import { JobPost } from './JobItem'
 
 const JobPositions = ({ jobPost }: { jobPost: JobPost }) => {
   const { title, companyName, positions, type } = jobPost
 
   return (
-    <div className='flex flex-col ml-4 flex-1 gap-1 shrink col-span-4 sm:col-span-2 '>
+    <div className='flex flex-col ml-4 flex-1 gap-1 shrink col-span-6 sm:col-span-2'>
       <p className='font-semibold lg:text-lg'>{title}</p>
       <p>{companyName}</p>
+      <JobDetailsMobile jobPost={jobPost} />
       <div className='hidden gap-2 sm:flex'>
         {positions!.map((pos: string) => (
           <button
@@ -21,8 +22,6 @@ const JobPositions = ({ jobPost }: { jobPost: JobPost }) => {
           {type?.toUpperCase()}
         </p>
       </div>
-
-      <JobDetails jobPost={jobPost} />
     </div>
   )
 }

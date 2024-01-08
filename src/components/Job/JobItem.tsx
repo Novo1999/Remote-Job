@@ -42,7 +42,7 @@ const JobItem = ({ jobPost, index }: { jobPost: JobPost; index: number }) => {
       onHoverEnd={() => setCurrentHovered(undefined)}
       whileHover={{ scale: 1.01 }}
       transition={{ type: 'spring', stiffness: 200, damping: 10 }}
-      className='w-full bg-sky-200 relative py-2 px-2 gap-3 sm:px-6 sm:py-3 rounded-lg text-black grid grid-cols-7 sm:grid-cols-7 lg:grid-cols-8 sm:items-start lg:items-center text-xs  font-poppins'
+      className='w-full bg-sky-200 relative py-2 px-2 sm:px-6 sm:py-3 rounded-lg text-black grid grid-cols-9 sm:grid-cols-7 lg:grid-cols-8 sm:items-start lg:items-center text-xs  font-poppins'
     >
       {index === currentHovered && (
         <div className='absolute left-0 h-full border-r-4 rounded-l-full border-orange-500'></div>
@@ -53,10 +53,7 @@ const JobItem = ({ jobPost, index }: { jobPost: JobPost; index: number }) => {
         </div>
       )}
       {/* main items */}
-      <div className='col-span-1 flex'>
-        <button className='text-2xl'>
-          <MdOutlineStarBorder />
-        </button>
+      <div className='flex col-span-1'>
         <Image
           src={dummyLogo}
           alt='logo'

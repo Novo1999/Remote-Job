@@ -42,7 +42,7 @@ const Filter = ({ category }: { category: string }) => {
 
   if (category === 'location') {
     return (
-      <div className='w-80 sm:w-full flex flex-col items-center gap-2'>
+      <div className='w-64 sm:w-full flex flex-col items-center gap-2'>
         <Label htmlFor='location'>Location</Label>
         <MultiSelect
           onChange={setSelected}
@@ -56,7 +56,7 @@ const Filter = ({ category }: { category: string }) => {
 
   if (category === 'position') {
     return (
-      <div className='w-80 sm:w-full flex flex-col items-center gap-2'>
+      <div className='w-64 sm:w-full flex flex-col items-center gap-2'>
         <Label htmlFor='position'>Position</Label>
         <MultiSelect
           onChange={setSelected}
@@ -69,7 +69,7 @@ const Filter = ({ category }: { category: string }) => {
   }
   if (category === 'benefits') {
     return (
-      <div className='w-80 sm:w-full flex flex-col items-center gap-2'>
+      <div className='w-64 sm:w-full flex flex-col items-center gap-2'>
         <Label htmlFor='benefits'>Benefits</Label>
         <MultiSelect
           onChange={setSelected}
@@ -83,7 +83,7 @@ const Filter = ({ category }: { category: string }) => {
 
   if (category === 'types') {
     return (
-      <div className='w-80 sm:w-full flex flex-col items-center gap-2'>
+      <div className='w-64 sm:w-full flex flex-col items-center gap-2'>
         <Label htmlFor='types'>Types</Label>
         <MultiSelect
           onChange={setSelected}

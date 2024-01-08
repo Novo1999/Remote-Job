@@ -148,7 +148,7 @@ export const jobPosts = [
     postedAgo: '7 days ago',
     location: 'Miami, FL',
     salaryRange: '$70K - $90K',
-    isFeatured: true,
+    isFeatured: false,
     isNew: true,
     benefits: [
       'Flexible work arrangements',
