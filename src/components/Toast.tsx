@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 
 const Toast = () => {
@@ -14,6 +14,7 @@ const Toast = () => {
       theme: 'light',
     })
 
+  // showing ad on page load
   useEffect(() => {
     notify()
   }, [])

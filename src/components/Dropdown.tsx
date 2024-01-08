@@ -56,7 +56,7 @@ const Dropdown = () => {
           />
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='w-screen h-fit flex flex-col items-center lg:hidden relative top-2 font-poppins'>
+      <DropdownMenuContent className='w-screen h-fit flex flex-col items-center rounded-none lg:hidden relative top-2 font-poppins'>
         <Content
           className='text-red-500 hover:text-red-600'
           menuText='Post a Job'

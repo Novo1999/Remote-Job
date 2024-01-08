@@ -11,15 +11,17 @@ import Newsletter from '@/components/Newsletter'
 import Search from '@/components/Search'
 import Sort from '@/components/Sort'
 import Toast from '@/components/Toast'
+import Advertise from '@/components/Advertise'
 
 export default function Home() {
   return (
     <>
       {/* <Advertising /> */}
+      <Advertise />
       <main className='relative flex flex-col mx-4 xl:mx-48 2xl:mx-96'>
         <Navbar />
         <Hero />
-        <Toast />
+        {/* <Toast /> */}
         <div className='flex flex-col mx-4 sm:mx-20 lg:mx-40 xl:mx-60 2xl:mx-96'>
           <Search />
           <div className='flex justify-center font-poppins gap-2 font-semibold mt-2'>

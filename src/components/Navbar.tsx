@@ -2,7 +2,7 @@ import Dropdown from './Dropdown'
 import TopMenu from './TopMenu'
 const Navbar = () => {
   return (
-    <nav className='p-6 flex justify-between items-center'>
+    <nav className='py-2 flex justify-between items-center'>
       <p className='text-2xl font-chewy'>RemoteJumbo</p>
       <div className='block sm:hidden'>
         <Dropdown />
