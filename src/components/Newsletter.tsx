@@ -1,7 +1,7 @@
 const Newsletter = () => {
   return (
     <>
-      <div className='p-6 container md:w-2/3 xl:w-auto mx-auto mt-20 flex flex-col xl:items-stretch justify-between xl:flex-row font-poppins'>
+      <div className='p-6 container md:w-2/3 xl:w-auto mt-20 flex flex-col xl:items-stretch justify-between xl:flex-row font-poppins'>
         <div className='md:mb-14 xl:mb-0 relative h-auto flex items-center justify-center'>
           <div className='w-full xl:w-2/3 xl:py-28 '>
             <h1 className='text-xl md:text-3xl xl:text-5xl font-bold leading-10 text-white mb-4 text-center xl:text-center md:mt-0 mt-4 '>

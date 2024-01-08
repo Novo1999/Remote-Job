@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <>
       <div className='w-full px-10 xl:px-36 mt-20 h-full flex items-center justify-center bg-black'>
-        <div className=' w-full text-white flex flex-col'>
+        <div className='w-full text-white flex flex-col'>
           <div className='flex mt-8 flex-col items-center md:flex-row md:justify-between'>
             <p className='w-full text-gray-400 font-semibold font-poppins text-center md:text-xl xl:text-2xl'>
               Unlock Your Remote Career. Where Talent Meets Opportunity.
