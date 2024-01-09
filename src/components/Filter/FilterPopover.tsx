@@ -5,17 +5,16 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { useState } from 'react'
 import { IoFilterSharp } from 'react-icons/io5'
 import Filters from './Filters'
-import { RxCross2 } from 'react-icons/rx'
-import { useState } from 'react'
 
 const FilterPopover = () => {
   const [filterOpen, setFilterOpen] = useState<boolean>(false)
   return (
     <Popover onOpenChange={() => setFilterOpen(!filterOpen)} open={filterOpen}>
       <PopoverTrigger className='rounded-full w-20 text-xs text-black' asChild>
-        <Button className='space-x-1 ' variant='outline'>
+        <Button className='space-x-1 font-semibold w-full' variant='outline'>
           <IoFilterSharp />
           <span>Filter</span>
         </Button>
