@@ -65,7 +65,7 @@ const FilterCategory = ({
  p-2 rounded-lg text-white flex gap-2 border-2 border-black'
         category={category}
       />
-      <div className='w-64 max-h-48 sm:w-full flex flex-col items-center gap-2 overflow-y-auto overflow-x-auto'>
+      <div className='w-64 max-h-48 sm:w-full flex flex-col items-center gap-2 overflow-auto scrollbar-hide'>
         <MultiSelect
           onChange={onChange}
           selected={selected}

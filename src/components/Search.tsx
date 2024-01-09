@@ -36,7 +36,7 @@ const Search = () => {
   }, [])
 
   return (
-    <div className='flex items-center mt-8 w-full relative'>
+    <div className='flex items-center mt-8 w-80 xl:w-96 mx-auto relative'>
       <div className='absolute text-black left-6'>
         <CiSearch />
       </div>

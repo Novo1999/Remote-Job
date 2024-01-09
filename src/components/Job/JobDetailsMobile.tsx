@@ -7,7 +7,7 @@ const JobDetailsMobile = ({ jobPost }: { jobPost: JobPost }) => {
   const brokenPostedAgo = postedAgo?.split(' ') as string[]
   return (
     <div className='text-black sm:hidden min-[375px]:flex grid grid-cols-2 grow gap-2 just'>
-      <p className='font-thin bg-purple-500 text-white whitespace-nowrap rounded-lg px-1 text-center flex items-center w-fit'>
+      <p className='font-thin bg-purple-500 text-[10px] sm:text-sm text-white whitespace-nowrap rounded-lg px-1 text-center flex items-center w-fit'>
         {type?.toUpperCase()}
       </p>
       <p className='flex gap-2 items-center bg-amber-300 px-2 rounded-lg whitespace-nowrap'>
