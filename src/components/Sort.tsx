@@ -10,7 +10,7 @@ import { MdSort } from 'react-icons/md'
 
 const Sort = () => {
   return (
-    <div className='w-full mb-2'>
+    <div className='w-full'>
       <Select>
         <SelectTrigger className='w-full text-xs rounded-full text-black border-0'>
           <MdSort />
