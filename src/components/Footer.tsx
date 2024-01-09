@@ -84,22 +84,27 @@ const Footer = () => {
                     Job Guidelines
                   </a>
                 </li>
+              </ul>
+            </div>
+            <div className='space-y-3'>
+              <div className='uppercase dark:text-gray-50'>Vision</div>
+              <ul className='space-y-1'>
+                <li>
+                  <a rel='noopener noreferrer' href='#'>
+                    Advertise
+                  </a>
+                </li>
+                <li>
+                  <a rel='noopener noreferrer' href='#'>
+                    Careers
+                  </a>
+                </li>
                 <li>
                   <a rel='noopener noreferrer' href='#'>
                     Useful Career Resources
                   </a>
                 </li>
               </ul>
-            </div>
-
-            <div className='space-y-3'>
-              <div className='uppercase dark:text-gray-50'>Social media</div>
-              <div className='flex justify-start space-x-3 text-white'>
-                <FaSquareFacebook />
-                <FaInstagram />
-                <FaTwitter />
-                <FaYoutube />
-              </div>
             </div>
           </div>
         </div>

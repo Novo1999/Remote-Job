@@ -1,16 +1,16 @@
 'use client'
 import { Slider } from '@/components/ui/slider'
-import { JobPost } from './Job/JobItem'
+import { typesArray } from '@/utils/Constants'
+import { jobPosts } from '@/utils/dummyData'
 import {
   extractBenefits,
   extractPositions,
   mergeAndUnique,
 } from '@/utils/extractPositions'
-import { jobPosts } from '@/utils/dummyData'
 import { useState } from 'react'
-import { MultiSelect } from './SelectItem'
-import { typesArray } from '@/utils/Constants'
 import { FaDollarSign } from 'react-icons/fa6'
+import { JobPost } from './Job/JobItem'
+import { MultiSelect } from './SelectItem'
 import { Label } from './ui/label'
 
 const Filter = ({ category }: { category: string }) => {
@@ -47,8 +47,9 @@ const Filter = ({ category }: { category: string }) => {
         <MultiSelect
           onChange={setSelected}
           selected={selected}
-          className='w-[180px] rounded-full text-black'
+          className='text-black'
           options={locations as string[]}
+          category={category}
         />
       </div>
     )
@@ -61,8 +62,9 @@ const Filter = ({ category }: { category: string }) => {
         <MultiSelect
           onChange={setSelected}
           selected={selected}
-          className='w-[180px] rounded-full text-black'
+          className='text-black'
           options={uniquePositions}
+          category={category}
         />
       </div>
     )
@@ -74,8 +76,9 @@ const Filter = ({ category }: { category: string }) => {
         <MultiSelect
           onChange={setSelected}
           selected={selected}
-          className='w-[180px] rounded-full text-black'
+          className='text-black'
           options={uniqueBenefits}
+          category={category}
         />
       </div>
     )
@@ -88,8 +91,9 @@ const Filter = ({ category }: { category: string }) => {
         <MultiSelect
           onChange={setSelected}
           selected={selected}
-          className='w-[180px] rounded-full text-black'
+          className='text-black'
           options={typesArray}
+          category={category}
         />
       </div>
     )
