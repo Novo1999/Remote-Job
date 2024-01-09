@@ -14,14 +14,11 @@ const JobPositions = ({ jobPost }: { jobPost: JobPost }) => {
           {title}
         </p>
         {positions!.map((pos: string) => (
-          <>
-            <button
-              className='bg-teal-400 w-fit text-xs rounded-md whitespace-nowrap px-2 hidden sm:flex justify-center items-center hover:bg-teal-300 transition-all shadow-md lg:p-1'
-              key={crypto.randomUUID()}
-            >
+          <div key={crypto.randomUUID()}>
+            <button className='bg-teal-400 w-fit text-xs rounded-md whitespace-nowrap px-2 hidden sm:flex justify-center items-center hover:bg-teal-300 transition-all shadow-md lg:p-1'>
               {pos}
             </button>
-          </>
+          </div>
         ))}
       </div>
       <div className='flex gap-2'>

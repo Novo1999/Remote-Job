@@ -2,14 +2,25 @@
 import { cn } from '@/lib/utils'
 
 import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer'
+
+import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
 } from '@/components/ui/command'
-import { Check, X } from 'lucide-react'
 import { useState } from 'react'
+import { Button } from '../ui/button'
 
 const setSelectItemColor = (category: string) => {
   if (category === 'location') {
@@ -43,52 +54,69 @@ const MultiSelect = ({
   ...props
 }: MultiSelectProps) => {
   const [open, setOpen] = useState(false)
-
+  const [showMore, setShowMore] = useState<string>()
   const handleUnselect = (item: string) => {
     onChange(selected.filter((i) => i !== item))
   }
 
+  let gridSize = ''
+  if (category === 'benefits') {
+    gridSize = 'grid-cols-1'
+  } else {
+    gridSize = 'grid-cols-2'
+  }
+
+  const handleShowMore = (newShowMore: string) => {
+    setShowMore(newShowMore)
+  }
+
+  console.log(showMore)
+  console.log(showMore)
   return (
     <div {...props}>
-      <div className='w-60 sm:w-72 p-0'>
-        <Command className={className}>
-          {/* items */}
-          <div
-            className={`grid grid-cols-1 ${setSelectItemColor(
-              category
-            )} text-white`}
-          >
-            {options.map((option) => (
-              <CommandItem
-                key={option}
-                onSelect={() => {
+      <div
+        className={`grid ${gridSize} ${setSelectItemColor(
+          category
+        )} text-white text-xs`}
+      >
+        {options
+          .map((option) => (
+            <div
+              className='text-xs font-light h-6'
+              key={option}
+              onSelect={() => {
+                onChange(
+                  selected.includes(option)
+                    ? selected.filter((item) => item !== option)
+                    : [...selected, option]
+                )
+                setOpen(true)
+              }}
+            >
+              <input
+                type='checkbox'
+                checked={selected.includes(option)}
+                onChange={() =>
                   onChange(
                     selected.includes(option)
                       ? selected.filter((item) => item !== option)
                       : [...selected, option]
                   )
-                  setOpen(true)
-                }}
-              >
-                <input
-                  type='checkbox'
-                  checked={selected.includes(option)}
-                  onChange={() =>
-                    onChange(
-                      selected.includes(option)
-                        ? selected.filter((item) => item !== option)
-                        : [...selected, option]
-                    )
-                  }
-                  className={`checkbox checkbox-accent shadow-sm absolute right-2 ${setSelectItemColor(
-                    category
-                  )} border-white`}
-                />
-                {option}
-              </CommandItem>
-            ))}
-          </div>
-        </Command>
+                }
+                className={`checkbox checkbox-accent hidden sm:block shadow-sm absolute right-2 ${setSelectItemColor(
+                  category
+                )} border-white`}
+              />
+              {option}
+            </div>
+          ))
+          .slice(0, showMore === category ? undefined : 4)}
+        <button
+          onClick={() => handleShowMore(category)}
+          className='text-start ml-2'
+        >
+          Show More
+        </button>
       </div>
     </div>
   )
@@ -96,6 +124,9 @@ const MultiSelect = ({
 
 export { MultiSelect }
 
+// <div>
+//   <Command className={`${className}`}>{/* items */}</Command>
+// </div>
 {
   /* <div className='grid grid-cols-2 gap-1 lg:grid-cols-3 flex-wrap text-wrap'>
         {selected.map((item) => (
