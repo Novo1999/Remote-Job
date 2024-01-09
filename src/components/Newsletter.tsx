@@ -14,8 +14,8 @@ import Link from 'next/link'
 
 const Newsletter = () => {
   return (
-    <div className='mt-16 mx-auto max-w-7xl sm:px-6 lg:px-8 lg:w-full my-8 font-montserrat'>
-      <div className='bg-gradient-to-l from-gray-700 via-gray-900 to-black rounded-md py-10 px-6 sm:py-16 sm:px-12 lg:flex flex-col lg:items-center lg:flex-row lg:gap-10'>
+    <div className='mt-16 mx-auto lg:w-full font-montserrat'>
+      <div className='bg-gradient-to-l from-gray-700 xl:px-36 grid grid-cols-1 lg:grid-cols-2 via-gray-900 to-black py-10 px-6 sm:py-16 sm:px-12 lg:gap-10'>
         <div className='flex flex-col gap-6'>
           <div className='lg:flex-1'>
             <h2 className='text-xl font-bold tracking-tight text-white'>
@@ -63,9 +63,12 @@ const Newsletter = () => {
           </div>
         </div>
         <Footer />
-      </div>
-      <div className='py-6 text-sm text-center dark:text-gray-400'>
-        © 2023 RemoteJumbo. All rights reserved.
+        <div className='py-6 text-sm text-center dark:text-gray-400 block lg:hidden '>
+          © 2023 RemoteJumbo. All rights reserved.
+        </div>
+        <div className='py-6 text-sm text-center dark:text-gray-400 hidden lg:block col-span-3'>
+          © 2023 RemoteJumbo. All rights reserved.
+        </div>
       </div>
     </div>
   )

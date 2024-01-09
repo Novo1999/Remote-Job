@@ -1,6 +1,6 @@
 'use client'
 import Advertise from '@/components/Advertise'
-import FilterPopover from '@/components/FilterPopover'
+import FilterPopover from '@/components/Filter/FilterPopover'
 import Hero from '@/components/Hero'
 import JobContainer from '@/components/JobContainer'
 import Navbar from '@/components/Navbar'
@@ -24,8 +24,8 @@ export default function Home() {
           </div>
         </div>
         <JobContainer />
-        <Newsletter />
       </main>
+      <Newsletter />
     </>
   )
 }

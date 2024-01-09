@@ -19,9 +19,7 @@ const Footer = () => {
         <div className='flex flex-col py-10 mx-auto space-y-8 lg:flex-row justify-start lg:space-y-0'>
           <div className='grid grid-cols-1 min-[375px]:grid-cols-2 text-sm gap-y-8 sm:grid-cols-3 gap-20'>
             <div className='space-y-3'>
-              <h3 className='trackingng uppercase dark:text-gray-50'>
-                Product
-              </h3>
+              <h3 className='tracking uppercase dark:text-gray-50'>Product</h3>
               <ul className='space-y-1 '>
                 <li>
                   <a
