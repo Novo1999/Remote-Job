@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import {
-  Inter,
   Oswald,
   Poppins,
   Montserrat,

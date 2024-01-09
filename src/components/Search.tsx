@@ -36,21 +36,21 @@ const Search = () => {
   }, [])
 
   return (
-    <div className='flex items-center mt-8 w-80 xl:w-96 mx-auto relative'>
+    <div className='flex items-center mt-8 w-fit sm:w-80 xl:w-96 mx-auto relative'>
       <div className='absolute text-black left-6'>
         <CiSearch />
       </div>
       {!searchIsFocused && (
         <div
           onClick={handleClick}
-          className='absolute left-12 bottom-[6px] *:text-lg font-semibold font-poppins text-black search-type-effect'
+          className='absolute left-12 bottom-[6px] *:text-lg font-semibold font-poppins text-black search-type-effect w-full'
         >
           <TypeEffect />
         </div>
       )}
       <Input
         ref={inputRef}
-        className='pl-9 text-black rounded-full'
+        className='pl-12 text-black rounded-full font-montserrat font-semibold'
         type='email'
       />
 

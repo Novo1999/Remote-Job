@@ -41,13 +41,13 @@ const JobItem = ({ jobPost, index }: { jobPost: JobPost; index: number }) => {
       onHoverEnd={() => setCurrentHovered(undefined)}
       whileHover={{ scale: 1.01 }}
       transition={{ type: 'spring', stiffness: 200, damping: 10 }}
-      className='w-full bg-sky-200 relative py-2 px-2 sm:px-6 sm:py-3 rounded-lg text-black grid grid-cols-9 sm:grid-cols-7 lg:grid-cols-8 sm:items-start lg:items-center text-xs  font-poppins'
+      className='w-full relative py-2 px-2 sm:py-3 rounded-lg bg-gradient-to-r from-rose-100 to-teal-100 text-black grid grid-cols-9 sm:grid-cols-7 lg:grid-cols-8 sm:items-start lg:items-center text-xs font-poppins'
     >
       {index === currentHovered && (
         <div className='absolute left-0 h-full border-r-4 rounded-l-full border-orange-500'></div>
       )}
       {/* main items */}
-      <div className='flex col-span-1'>
+      <div className='flex col-span-1 m-auto'>
         <Image
           src={dummyLogo}
           alt='logo'
@@ -55,7 +55,7 @@ const JobItem = ({ jobPost, index }: { jobPost: JobPost; index: number }) => {
         />
       </div>
       <JobPositions jobPost={jobPost} />
-      <JobDetailsPC jobPost={jobPost} />
+      {/* <JobDetailsPC jobPost={jobPost} /> */}
       <SpecialJobs jobPost={jobPost} />
     </motion.div>
   )
