@@ -59,13 +59,13 @@ const FilterCategory = ({
   onChange,
 }: MultiSelectProps) => {
   return (
-    <div className=''>
+    <div>
       <FilterLabel
         className='relative capitalize
-        p-2 rounded-lg text-white flex mb-2 gap-2 border-2 border-black'
+        p-2 rounded-lg text-white w-fit flex mb-2 gap-2 border-2 border-black'
         category={category}
       />
-      <div className='gap2 overflow-auto scrollbar-hide max-h-48 border border-black'>
+      <div className='overflow-auto scrollbar-hide max-h-52'>
         <MultiSelect
           onChange={onChange}
           selected={selected}
