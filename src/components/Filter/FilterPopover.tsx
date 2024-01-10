@@ -25,7 +25,7 @@ const FilterPopover = () => {
       </SheetTrigger>
       <SheetContent
         side='left'
-        className='flex flex-col gap-4 px-2 max-w-md w-full mx-auto overflow-auto p-4 rounded-t-[10px]'
+        className='flex flex-col gap-4 px-2 max-w-md w-full mx-auto overflow-auto p-4 rounded-t-[10px] scrollbar-hide'
       >
         <Filter category='location' />
         <Filter category='position' />

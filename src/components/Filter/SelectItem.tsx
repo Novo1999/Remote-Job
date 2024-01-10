@@ -13,7 +13,7 @@ const MoreOrLessButton = ({
   return (
     <button
       onClick={handler}
-      className={`text-start btn btn-xs ml-2 w-fit h-fit ${
+      className={`text-start btn btn-xs flex !rounded-none ml-2 w-fit h-fit ${
         category === 'types' && 'hidden'
       } self-center my-2`}
     >
@@ -84,12 +84,12 @@ const MultiSelect = ({
       <div
         className={`grid ${gridSize} ${setSelectItemColor(
           category
-        )} text-black rounded-md text-xs`}
+        )} text-black text-xs`}
       >
         {options
           .map((option) => (
             <div
-              className='text-xs flex p-2 justify-between border m-1 gap-1 font-semibold  border-black rounded-md shadow-md '
+              className='text-xs flex p-2 justify-between border m-1 gap-1 font-semibold  border-black shadow-md'
               key={option}
               onClick={() => {
                 onChange(

@@ -62,14 +62,14 @@ const FilterCategory = ({
     <div>
       <FilterLabel
         className='relative capitalize
-        p-2 rounded-lg text-white w-fit flex mb-2 gap-2 border-2 border-black'
+        p-2 text-white w-fit flex shadow-md mb-2 gap-2'
         category={category}
       />
       <div className='overflow-auto scrollbar-hide max-h-52'>
         <MultiSelect
           onChange={onChange}
           selected={selected}
-          className='text-black border-2 rounded-lg border-black'
+          className='text-black border-2 border-black'
           options={options}
           category={category}
         />

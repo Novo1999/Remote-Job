@@ -1,3 +1,4 @@
+'use client'
 import type { Metadata } from 'next'
 import {
   Oswald,
@@ -7,6 +8,9 @@ import {
   Chewy,
 } from 'next/font/google'
 import './globals.css'
+import Advertise from '@/components/Advertise'
+import Navbar from '@/components/Navbar'
+import Newsletter from '@/components/Newsletter'
 
 const oswald = Oswald({
   subsets: ['cyrillic'],
@@ -36,7 +40,7 @@ const montserrat2 = Montserrat_Subrayada({
   weight: ['400', '700'],
 })
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: 'Remote Job',
   description: 'Remote Job Listing Site',
 }
@@ -51,7 +55,10 @@ export default function RootLayout({
       <body
         className={`${oswald.variable} ${poppins.variable} ${montserrat2.variable} ${montserrat.variable} ${chewy.variable}`}
       >
+        <Advertise />
+        <Navbar />
         {children}
+        <Newsletter />
       </body>
     </html>
   )
