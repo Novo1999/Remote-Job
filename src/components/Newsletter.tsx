@@ -38,10 +38,10 @@ const Newsletter = () => {
                 id='email-address'
                 type='email'
                 autoComplete='email'
-                className='w-full rounded-md text-black bg-white border-white px-5 py-2 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-700'
+                className='w-full rounded-md text-black bg-white 2xl:w-96 border-white px-5 py-2 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-700'
                 placeholder='Your email'
               />
-              <button className='bg-white text-black hover:text-white absolute right-2 text-2xl top-2'>
+              <button className='bg-white text-black hover:text-white absolute 2xl:relative 2xl:right-2 2xl:rounded-r-lg 2xl:hover:text-black 2xl:pr-2 2xl:top-0 right-2 text-2xl top-2'>
                 <FaArrowCircleRight />
               </button>
               <input

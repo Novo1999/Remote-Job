@@ -18,7 +18,7 @@ export default function Home() {
         <Hero />
         <div className='flex flex-col mx-4 sm:mx-20 lg:mx-40'>
           <Search />
-          <div className='flex justify-center font-poppins gap-2 font-semibold mt-6 sm:mx-32 lg:mx-48'>
+          <div className='flex justify-center item mx-12 xl:mx-60 font-poppins gap-2 font-semibold mt-6 sm:mx-32 lg:mx-48 mb-4'>
             <FilterPopover />
             <Sort />
           </div>

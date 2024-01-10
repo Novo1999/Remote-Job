@@ -24,7 +24,7 @@ const FilterPopover = () => {
   const [filterOpen, setFilterOpen] = useState<boolean>(false)
   return (
     <Drawer>
-      <DrawerTrigger className='rounded-full text-xs text-black'>
+      <DrawerTrigger className='w-full rounded-full text-xs text-black'>
         <Button
           className='space-x-1 font-semibold w-full text-black rounded-full'
           variant='outline'
