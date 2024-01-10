@@ -12,7 +12,7 @@ const Sort = () => {
   return (
     <div className='w-full'>
       <Select>
-        <SelectTrigger className='w-full text-xs rounded-full text-black border-0'>
+        <SelectTrigger className='w-full hover:bg-slate-200 transition-colors text-xs rounded-full text-black border-0'>
           <MdSort />
           <SelectValue placeholder='Sort By' />
         </SelectTrigger>

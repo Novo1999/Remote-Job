@@ -8,7 +8,7 @@ const JobPositions = ({ jobPost }: { jobPost: JobPost }) => {
   const { title, companyName, type, positions } = jobPost
 
   return (
-    <div className='flex flex-col ml-4 flex-1 gap-1 lg:gap-3 shrink col-span-6 sm:col-span-5 lg:col-span-6'>
+    <div className='flex flex-col ml-4 flex-1 gap-1 lg:gap-3 shrink col-span-6 sm:gap-3 sm:col-span-5 lg:col-span-6'>
       <div className='flex flex-wrap gap-2 items-center'>
         <p className='font-semibold lg:text-[15px] lg:whitespace-nowrap'>
           {title}

@@ -3,7 +3,9 @@ import { FaDollarSign, FaLocationDot } from 'react-icons/fa6'
 import { JobPost } from './JobItem'
 import { MdOutlineStarBorder } from 'react-icons/md'
 import JobDate from './JobDate'
+import { useState } from 'react'
 const JobDetailsPC = ({ jobPost }: { jobPost: JobPost }) => {
+  const [checked, setChecked] = useState(false)
   const { location, salaryRange } = jobPost
   return (
     <div className='hidden sm:flex flex-col sm:flex-row gap-0 sm:gap-2 col-span-3 lg:text-base justify-evenly lg:col-span-4 *:border *:border-black *:shadow-md *:sm:text-xs *:lg:text-sm'>
@@ -19,7 +21,17 @@ const JobDetailsPC = ({ jobPost }: { jobPost: JobPost }) => {
           <FaDollarSign />
         </span>
         <button className='text-2xl absolute right-2'>
-          <MdOutlineStarBorder />
+          {/* <MdOutlineStarBorder /> */}
+          <div className='rating rating-md transition-all'>
+            <input
+              onChange={() => setChecked(!checked)}
+              type='checkbox'
+              name='rating-8'
+              className={`mask mask-star-2 ${
+                checked ? 'bg-orange-400' : 'bg-gray-400'
+              }`}
+            />
+          </div>
         </button>
         <span className='block lg:hidden'>
           &#8805;{salaryRange?.split('-')[0]}
