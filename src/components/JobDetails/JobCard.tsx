@@ -38,7 +38,8 @@ const JobCard = () => {
           React JS, the senior frontend developer at Tech Co is proficient in
           state management, component-based architecture, and integrating APIs.
           They keep abreast of the latest developments in the React ecosystem,
-          applying this knowledge to enhance the company's frontend projects.
+          applying this knowledge to enhance the company&apos;s frontend
+          projects.
           <Button className='flex gap-2 w-full'>
             <BriefcaseIcon /> Apply
           </Button>
