@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/card'
 const AboutCompany = () => {
   return (
-    <Card className='font-poppins bg-gradient-to-r from-teal-200 to-lime-200'>
+    <Card className='font-poppins bg-gradient-to-r from-teal-200 to-lime-200 h-fit'>
       <CardHeader>
         <CardTitle>About Company</CardTitle>
         <CardDescription className='text-xs leading-6 text-black lg:text-base'>

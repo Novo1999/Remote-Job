@@ -12,12 +12,13 @@ import ProfileImage from './Avatar'
 import Link from 'next/link'
 import Tabs from './Tabs'
 import { useState } from 'react'
+import ApplyButton from './ApplyButton'
 
 const JobCard = () => {
   const [currentTab, setCurrentTab] = useState<string>('description')
 
   return (
-    <Card className='font-poppins bg-gradient-to-bl from-indigo-200 via-red-200 to-yellow-100'>
+    <Card className='font-poppins bg-gradient-to-bl from-indigo-200 via-red-200 to-yellow-100 h-fit'>
       <Tabs setCurrentTab={setCurrentTab} currentTab={currentTab} />
       <CardHeader>
         <div className='flex gap-2 justify-between'>
@@ -30,7 +31,7 @@ const JobCard = () => {
           <Link href='/company'>Tech Co.</Link>
         </Badge>
         {currentTab === 'description' ? (
-          <CardDescription className='text-xs leading-6 flex flex-col gap-6 sm:gap-20 text-black lg:text-base'>
+          <CardDescription className='text-xs leading-6 flex flex-col gap-6 text-black lg:text-base'>
             A senior frontend developer at Tech Co is a seasoned professional
             with extensive experience in web development, particularly focusing
             on React JS and CSS. They play a crucial role in designing and
@@ -46,12 +47,17 @@ const JobCard = () => {
             and integrating APIs. They keep abreast of the latest developments
             in the React ecosystem, applying this knowledge to enhance the
             company&apos;s frontend projects.
-            <Button className='flex gap-2 w-full'>
-              <BriefcaseIcon /> Apply
-            </Button>
+            <div className='flex justify-between flex-col gap-2'>
+              <div className='flex flex-col gap-1 *:bg-black *:text-white *:w-fit'>
+                <Badge variant='outline'>Type: CONTRACT</Badge>
+                <Badge variant='outline'>Location: Seattle, WA</Badge>
+                <Badge variant='outline'>Salary: $70K - 90K</Badge>
+              </div>
+              <ApplyButton />
+            </div>
           </CardDescription>
         ) : (
-          <div className='text-xs leading-6 flex flex-col gap-6 sm:gap-20 text-black lg:text-base'>
+          <div className='text-xs leading-6 flex flex-col gap-6 sm:gap-20 text-black lg:text-base h-fit'>
             <span>
               <li>5+ years of PHP expertise</li>
               <li>3+ years mastering Symfony 4+</li>
@@ -66,9 +72,7 @@ const JobCard = () => {
               <li>Independent thinker and doer</li>
               <li>Seasoned professional</li>
             </span>
-            <Button className='flex gap-2 w-full'>
-              <BriefcaseIcon /> Apply
-            </Button>
+            <ApplyButton />
           </div>
         )}
       </CardHeader>
