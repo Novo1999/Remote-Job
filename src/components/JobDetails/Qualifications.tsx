@@ -1,9 +1,13 @@
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
+import { BsStars } from 'react-icons/bs'
 const Qualifications = () => {
   return (
     <section className='font-poppins h-fit sm:col-span-2 bg-transparent'>
       <div className='flex flex-col gap-2 justify-between'>
-        <CardTitle className='text-base lg:text-xl'>Qualifications</CardTitle>
+        <CardTitle className='text-base lg:text-xl flex items-center text-white bg-black px-2 py-1 rounded-md'>
+          <BsStars />
+          Qualifications
+        </CardTitle>
         <div className='text-black'>
           <li>
             Proven experience as a Frontend Developer, with a strong portfolio

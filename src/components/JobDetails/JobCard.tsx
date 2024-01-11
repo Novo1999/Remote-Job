@@ -14,6 +14,7 @@ import ApplyButton from './ApplyButton'
 import Qualifications from './Qualifications'
 import Warning from './Warning'
 import ProfileImage from './Avatar'
+import { FaArrowAltCircleRight, FaCheckCircle } from 'react-icons/fa'
 
 const JobCard = () => {
   const [currentTab, setCurrentTab] = useState<string>('description')
@@ -23,8 +24,12 @@ const JobCard = () => {
       <CardHeader>
         <div className='flex gap-2 justify-between items-center'>
           <ProfileImage />
-          <CardTitle className='text-base lg:text-xl flex-1'>
-            Senior Frontend Developer
+          <CardTitle className='text-base lg:text-xl flex gap-2 items-center flex-1'>
+            <p>Senior Frontend Developer</p>
+            <button className='btn-xs btn transition-all ease-in-out rounded-full flex gap-2 bg-red-500 text-white'>
+              <p className='outline-none'>Apply Now</p>
+              <FaArrowAltCircleRight />
+            </button>
           </CardTitle>
           <div className='rating rating-md transition-all'>
             <Star />
@@ -35,7 +40,7 @@ const JobCard = () => {
             <Link href='/company'>Tech Co.</Link>
           </Badge>
           <Badge variant='secondary' className='w-fit'>
-            <p>Jan 27, 2024</p>
+            <p>2d Ago</p>
           </Badge>
         </div>
         <CardContent className='text-xs leading-6 flex flex-col gap-6 p-0 lg:text-base'>
@@ -52,7 +57,7 @@ const JobCard = () => {
               <Badge variant='outline' className='rounded-md'>
                 Salary{' '}
               </Badge>
-              <p className='p-2 rounded-md font-thin'>$70K - 90K</p>
+              <p className='p-2 rounded-md font-thin'>$70K - $90K</p>
             </div>
           </div>
           <p>
@@ -61,7 +66,8 @@ const JobCard = () => {
             you are growth-oriented, you love what you do, and you enjoy working
             on new ideas to develop exciting products and growth features.
           </p>
-          <CardTitle className='text-base lg:text-xl'>
+          <CardTitle className='text-base lg:text-xl bg-black text-white rounded-md px-2 py-1 flex items-center gap-2'>
+            <FaCheckCircle />
             Responsibilities
           </CardTitle>
           <div className='text-xs leading-6 flex flex-col gap-6 sm:gap-20 text-black lg:text-base h-fit'>
