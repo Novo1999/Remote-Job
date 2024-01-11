@@ -1,11 +1,15 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { StaticImageData } from 'next/image'
+import dummyLogo from '../../../public/images/dummylogo.png'
+import Image from 'next/image'
 
 const ProfileImage = () => {
   return (
     <Avatar>
-      <AvatarImage src='https://github.com/shadcn.png' />
-      <AvatarFallback>CN</AvatarFallback>
+      <Image
+        src={dummyLogo}
+        alt='logo'
+        className='w-12 sm:w-16 rounded-full m-auto shadow-lg lg:w-[90px] xl:w-20'
+      />
     </Avatar>
   )
 }

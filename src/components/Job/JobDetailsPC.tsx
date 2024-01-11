@@ -4,6 +4,7 @@ import { JobPost } from './JobItem'
 import { MdOutlineStarBorder } from 'react-icons/md'
 import JobDate from './JobDate'
 import { useState } from 'react'
+import Star from './Star'
 const JobDetailsPC = ({ jobPost }: { jobPost: JobPost }) => {
   const [checked, setChecked] = useState(false)
   const { location, salaryRange } = jobPost
@@ -23,14 +24,7 @@ const JobDetailsPC = ({ jobPost }: { jobPost: JobPost }) => {
         <button className='text-2xl absolute right-2'>
           {/* <MdOutlineStarBorder /> */}
           <div className='rating rating-md transition-all'>
-            <input
-              onChange={() => setChecked(!checked)}
-              type='checkbox'
-              name='rating-8'
-              className={`mask mask-star-2 ${
-                checked ? 'bg-orange-400' : 'bg-gray-400'
-              }`}
-            />
+            <Star checked={checked} setChecked={setChecked} />
           </div>
         </button>
         <span className='block lg:hidden'>
