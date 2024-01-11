@@ -12,8 +12,8 @@ const AboutCompany = () => {
     <Card className='font-poppins bg-gradient-to-r from-teal-200 to-lime-200 h-full sm:col-span-1'>
       <CardHeader>
         <div className='flex gap-2 items-center'>
-          <CardTitle>About Company</CardTitle>
           <ProfileImage />
+          <CardTitle>Tech Co.</CardTitle>
         </div>
         <CardDescription className='text-xs leading-6 text-black lg:text-base'>
           <span className='font-bold'>Tech Co </span>is a dynamic and innovative
@@ -26,17 +26,7 @@ const AboutCompany = () => {
           React JS and CSS to create seamless and visually appealing user
           interfaces. The company&apos;s dedication to staying ahead of industry
           trends is evident in its pursuit of continuous improvement in frontend
-          architecture. Tech Co fosters a collaborative work environment where
-          cross-functional teams, including frontend and backend developers,
-          designers, and other professionals, work together to bring innovative
-          ideas to life. The company places a premium on talent development,
-          providing opportunities for skill enhancement and growth. As a tech
-          enthusiast, you&apos;ll find Tech Co to be an exciting and vibrant
-          workplace, where creativity and technical expertise converge to create
-          impactful digital solutions. Whether it&apos;s through developing
-          state-of-the-art web applications or exploring new technologies, Tech
-          Co remains dedicated to pushing the boundaries of what&apos;s possible
-          in the tech industry.
+          architecture.
         </CardDescription>
       </CardHeader>
     </Card>
