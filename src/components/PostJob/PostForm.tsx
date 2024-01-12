@@ -96,6 +96,7 @@ const PostForm = () => {
         onSubmit={form.handleSubmit(onSubmit)}
         className='space-y-8 font-poppins mx-4 min-[425px]:mx-6 sm:mx-32 lg:mx-60 xl:mx-96'
       >
+        <h1 className='text-2xl font-bold'>Tell us about your Job</h1>
         <FormField
           control={form.control}
           name='jobTitle'
