@@ -42,6 +42,19 @@ const JobCard = () => {
           <Badge variant='secondary' className='w-fit'>
             <p>2d Ago</p>
           </Badge>
+          <p>Tags: </p>
+          <Badge
+            variant='secondary'
+            className='w-fit bg-teal-500 text-white hover:bg-teal-400'
+          >
+            <p>Senior</p>
+          </Badge>
+          <Badge
+            variant='secondary'
+            className='w-fit bg-teal-500 text-white hover:bg-teal-400'
+          >
+            <p>Developer</p>
+          </Badge>
         </div>
         <CardContent className='text-xs leading-6 flex flex-col gap-6 p-0 lg:text-base'>
           <div className=' flex justify-between flex-col gap-2'>

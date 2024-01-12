@@ -1,3 +1,4 @@
+import Stats from '@/components/Stats'
 import { RiRemoteControlFill } from 'react-icons/ri'
 
 export default function Page({ params }: { params: { id: string } }) {
@@ -26,7 +27,9 @@ export default function Page({ params }: { params: { id: string } }) {
           content, and featured job listings. Contact us to discuss how we can
           tailor a package that meets your marketing goals.
         </p>
-
+        <div>
+          <Stats />
+        </div>
         <h2 className='font-bold text-2xl mt-6 mb-4'>Contact Us</h2>
         <p>
           Ready to promote your brand to our engaged audience? Contact our
