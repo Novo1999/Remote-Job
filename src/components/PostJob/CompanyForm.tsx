@@ -1,7 +1,14 @@
 import { FormField } from '@/components/ui/form'
 import FormRow from './FornRow'
+import { z } from 'zod'
+import { formSchema } from './PostForm'
+import { UseFormReturn } from 'react-hook-form'
 
-const CompanyForm = ({ form }) => {
+interface CompanyFormProps {
+  form: UseFormReturn<z.infer<typeof formSchema>>
+}
+
+const CompanyForm = ({ form }: CompanyFormProps) => {
   return (
     <section className='space-y-8'>
       <h1 className='text-2xl font-bold'>Tell us about your Company</h1>
