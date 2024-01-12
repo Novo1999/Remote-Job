@@ -1,6 +1,6 @@
 'use client'
 import { Slider } from '@/components/ui/slider'
-import { typesArray } from '@/utils/Constants'
+import { typesArray } from '@/utils/constants'
 import { jobPosts } from '@/utils/dummyData'
 import {
   extractBenefits,
