@@ -1,3 +1,6 @@
+import { jobPosts } from './dummyData'
+import { extractBenefits, mergeAndUnique } from './extractPositions'
+
 export const typesArray = [
   'Full-Time',
   'Part-Time',
@@ -64,4 +67,31 @@ export const zodRemoteJobPositions = [
   'Customer Support Representative',
   'Content Writer',
   'Project Manager',
+] as const
+
+export const zodRemoteJobBenefits = [
+  'Flexible work hours',
+  'Health insurance',
+  'Remote-first culture',
+  'Competitive salary',
+  '401(k) matching',
+  'Professional development',
+  'Remote work options',
+  'Wellness programs',
+  'Paid time off',
+  'Flexible work environment',
+  'Health and dental benefits',
+  'Career growth opportunities',
+  'Remote work flexibility',
+  'Team collaboration',
+  'Training and development programs',
+  'Competitive compensation',
+  'Work-life balance',
+  'Remote-friendly culture',
+  'Health and wellness programs',
+  '401(k) plan',
+  'Flexible scheduling',
+  'Professional development opportunities',
+  'Learning and growth opportunities',
+  'Career advancement opportunities',
 ] as const

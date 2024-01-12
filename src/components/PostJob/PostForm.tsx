@@ -3,21 +3,26 @@ import {
   remoteJobLocations,
   remoteJobPositions,
   typesArray,
+  zodRemoteJobBenefits,
   zodRemoteJobLocations,
   zodRemoteJobPositions,
   zodTypesArray,
 } from '../../utils/constants'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import { FieldValues, useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 import { Form, FormField } from '@/components/ui/form'
-import FormRow from './FornRow'
+import FormRow from './FormRow'
 import { FormRowSelect } from './FormRowSelect'
 import * as z from 'zod'
 import CompanyForm from './CompanyForm'
+import { FilterBar } from './FilterBar'
+import { extractBenefits, mergeAndUnique } from '@/utils/extractPositions'
+import { jobPosts } from '@/utils/dummyData'
 
 const jobTypeEnum = z.enum(zodTypesArray)
 const jobLocationEnum = z.enum(zodRemoteJobLocations)
+const jobBenefitsEnum = z.enum(zodRemoteJobBenefits)
 const jobPositionEnum = z.enum(zodRemoteJobPositions)
 
 const MAX_FILE_SIZE = 2000000
@@ -35,6 +40,7 @@ export const formSchema = z.object({
   jobType: jobTypeEnum,
   jobLocation: jobLocationEnum,
   jobPosition: jobPositionEnum,
+  jobBenefits: jobBenefitsEnum,
   salary: z.string().refine((value) => /^\$\d+K - \$\d+K$/.test(value), {
     message: 'Invalid salary range format. It should be like "$50K - $60K"',
   }),
@@ -74,6 +80,8 @@ export const formSchema = z.object({
 })
 
 const PostForm = () => {
+  const benefitsArray = extractBenefits(jobPosts)
+  const uniqueBenefits = mergeAndUnique(benefitsArray)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -124,10 +132,10 @@ const PostForm = () => {
           control={form.control}
           name='jobLocation'
           render={({ field }) => (
-            <FormRowSelect
-              field={field}
-              placeholder='Select Job Location'
-              label='Job Location *'
+            <FilterBar
+              form={form}
+              field={field.value}
+              filterFor='jobLocation'
               options={remoteJobLocations}
             />
           )}
@@ -136,11 +144,23 @@ const PostForm = () => {
           control={form.control}
           name='jobPosition'
           render={({ field }) => (
-            <FormRowSelect
-              field={field}
-              placeholder='Select Job Position'
-              label='Job Position *'
+            <FilterBar
+              form={form}
+              field={field.value}
+              filterFor='jobPosition'
               options={remoteJobPositions}
+            />
+          )}
+        />
+        <FormField
+          control={form.control}
+          name='jobBenefits'
+          render={({ field }) => (
+            <FilterBar
+              form={form}
+              field={field.value}
+              filterFor='jobBenefits'
+              options={uniqueBenefits}
             />
           )}
         />

@@ -1,5 +1,5 @@
 import { FormField } from '@/components/ui/form'
-import FormRow from './FornRow'
+import FormRow from './FormRow'
 import { z } from 'zod'
 import { formSchema } from './PostForm'
 import { UseFormReturn } from 'react-hook-form'
@@ -37,13 +37,7 @@ const CompanyForm = ({ form }: CompanyFormProps) => {
       <FormField
         control={form.control}
         name='companyImage'
-        render={({ field }) => (
-          <FormRow
-            label='Company Logo'
-            placeholder='e.g. www.mycompany.com'
-            field={field}
-          />
-        )}
+        render={({ field }) => <FormRow label='Company Logo' field={field} />}
       />
       <FormField
         control={form.control}

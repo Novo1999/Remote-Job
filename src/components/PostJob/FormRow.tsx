@@ -12,7 +12,7 @@ const FormRow = ({
   field,
 }: {
   label: string
-  placeholder: string
+  placeholder?: string
   field: Record<string, any>
 }) => {
   if (label === 'Job Description *' || label === 'Company Description *') {
@@ -26,7 +26,7 @@ const FormRow = ({
         <FormControl>
           <Textarea
             placeholder={textForPlaceHolder}
-            className='resize-none'
+            className='resize-y text-black'
             {...field}
           />
         </FormControl>
