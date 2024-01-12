@@ -10,7 +10,7 @@ import { useState } from 'react'
 import { FaDollarSign } from 'react-icons/fa6'
 import FilterCategory from './FilterCategory'
 import { JobPost } from '../Job/JobItem'
-import { typesArray } from '@/utils/constants'
+import { typesArray } from '../../utils/constants'
 
 const Filter = ({ category }: { category: string }) => {
   const [salary, setSalary] = useState<number[]>([0])
