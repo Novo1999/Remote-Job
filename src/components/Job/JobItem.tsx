@@ -38,7 +38,7 @@ const JobItem = ({ jobPost, index }: { jobPost: JobPost; index: number }) => {
   return (
     <motion.div
       ref={ref}
-      onClickCapture={handleClick}
+      onClick={handleClick}
       onHoverStart={() => setCurrentHovered(index)}
       onHoverEnd={() => setCurrentHovered(undefined)}
       whileHover={{ scale: 1.01 }}

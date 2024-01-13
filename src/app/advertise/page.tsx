@@ -11,7 +11,7 @@ export default function Page({ params }: { params: { id: string } }) {
           <RiRemoteControlFill />
         </h1>
       </header>
-      <div className='text-center font-semibold bg-gradient-to-r from-gray-400 via-gray-400 to-gray-600 rounded-md p-10'>
+      <div className='text-center font-semibold rounded-md p-10'>
         <p className='sm:text-xl'>
           Unlock Boundless Opportunities with Our Remote Job Platform!
         </p>

@@ -22,39 +22,43 @@ const JobCard = () => {
   return (
     <Card className='font-poppins bg-gradient-to-bl from-indigo-200 via-red-200 to-yellow-100 h-fit sm:col-span-1'>
       <CardHeader>
-        <div className='flex gap-2 justify-between items-center'>
+        <div className='flex gap-2 justify-between items-center flex-wrap'>
           <ProfileImage />
           <CardTitle className='text-base lg:text-xl flex gap-2 items-center flex-1'>
-            <p>Senior Frontend Developer</p>
-            <button className='btn-xs btn transition-all ease-in-out rounded-full flex gap-2 bg-red-500 text-white'>
-              <p className='outline-none'>Apply Now</p>
-              <FaArrowAltCircleRight />
-            </button>
+            <p className='sm:whitespace-nowrap'>Senior Frontend Developer</p>
+            <div className='flex flex-wrap justify-between gap-2 w-48 sm:w-full'>
+              <button className='btn-xs btn transition-all ease-in-out rounded-full flex gap-2 bg-red-500 text-white'>
+                <p className='outline-none'>Apply Now</p>
+                <FaArrowAltCircleRight />
+              </button>
+              <div className='rating rating-md transition-all'>
+                <Star />
+              </div>
+            </div>
           </CardTitle>
-          <div className='rating rating-md transition-all'>
-            <Star />
-          </div>
         </div>
-        <div className='flex gap-2'>
+        <div className='flex flex-wrap gap-2'>
           <Badge variant='destructive' className='w-fit'>
             <Link href='/company'>Tech Co.</Link>
           </Badge>
           <Badge variant='secondary' className='w-fit'>
             <p>2d Ago</p>
           </Badge>
-          <p>Tags: </p>
-          <Badge
-            variant='secondary'
-            className='w-fit bg-teal-500 text-white hover:bg-teal-400'
-          >
-            <p>Senior</p>
-          </Badge>
-          <Badge
-            variant='secondary'
-            className='w-fit bg-teal-500 text-white hover:bg-teal-400'
-          >
-            <p>Developer</p>
-          </Badge>
+          <div className='flex gap-2 flex-wrap'>
+            <p>Tags: </p>
+            <Badge
+              variant='secondary'
+              className='w-fit bg-teal-500 text-white hover:bg-teal-400'
+            >
+              <p>Senior</p>
+            </Badge>
+            <Badge
+              variant='secondary'
+              className='w-fit bg-teal-500 text-white hover:bg-teal-400'
+            >
+              <p>Developer</p>
+            </Badge>
+          </div>
         </div>
         <CardContent className='text-xs leading-6 flex flex-col gap-6 p-0 lg:text-base'>
           <div className=' flex justify-between flex-col gap-2'>

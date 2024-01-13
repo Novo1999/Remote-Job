@@ -82,3 +82,20 @@ export const zodRemoteJobBenefits = [
   'Remote work flexibility',
   'Team collaboration',
 ] as const
+
+export const remoteJobBenefits = [
+  'Flexible work hours',
+  'Health insurance',
+  'Remote-first culture',
+  'Competitive salary',
+  '401(k) matching',
+  'Professional development',
+  'Remote work options',
+  'Wellness programs',
+  'Paid time off',
+  'Flexible work environment',
+  'Health and dental benefits',
+  'Career growth opportunities',
+  'Remote work flexibility',
+  'Team collaboration',
+]

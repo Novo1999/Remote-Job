@@ -1,5 +1,6 @@
 'use client'
 import {
+  remoteJobBenefits,
   remoteJobLocations,
   remoteJobPositions,
   typesArray,
@@ -160,7 +161,7 @@ const PostForm = () => {
               form={form}
               field={field.value}
               filterFor='jobBenefits'
-              options={uniqueBenefits}
+              options={remoteJobBenefits}
             />
           )}
         />
@@ -187,7 +188,9 @@ const PostForm = () => {
           )}
         />
         <CompanyForm form={form} />
-        <Button type='submit'>Submit</Button>
+        <Button className='hover:bg-white hover:text-black' type='submit'>
+          Submit
+        </Button>
       </form>
     </Form>
   )

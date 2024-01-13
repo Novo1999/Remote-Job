@@ -19,6 +19,11 @@ const AdBadge = ({ pc, mobile }: { pc: boolean; mobile: boolean }) => {
 }
 
 const SpecialJobs = ({ jobPost }: { jobPost: JobPost }) => {
+  const handleButtonClick = (e: React.SyntheticEvent) => {
+    e.stopPropagation()
+    console.log('Button clicked')
+  }
+
   const { isFeatured, isNew, isAd } = jobPost
   return (
     <div className='flex gap-4 h-fit justify-end text-white flex-col col-span-2 sm:col-span-1 lg:col-span-1 lg:self-start relative z-50'>
@@ -26,12 +31,15 @@ const SpecialJobs = ({ jobPost }: { jobPost: JobPost }) => {
         <div className='flex justify-end gap-2'>
           <div className='flex gap-2'>
             {isFeatured && (
-              <button className='bg-orange-400 hover:bg-orange-300 px-1 rounded-full sm:p-2 transition-all shadow-md'>
+              <button
+                onClick={handleButtonClick}
+                className='bg-orange-400 hover:bg-orange-300 px-1 rounded-full sm:p-2 transition-all shadow-md'
+              >
                 Featured
               </button>
             )}
             {isNew && (
-              <div className='relative'>
+              <div onClick={handleButtonClick} className='relative'>
                 <Ping />
                 <button className='bg-green-400 hover:bg-green-300 px-1 rounded-full sm:p-2 transition-all shadow-md'>
                   New
@@ -40,7 +48,10 @@ const SpecialJobs = ({ jobPost }: { jobPost: JobPost }) => {
             )}
 
             {isAd && (
-              <div className='bg-slate-500 shadow-md rounded-full self-center p-2 hidden sm:block'>
+              <div
+                onClick={handleButtonClick}
+                className='bg-slate-500 shadow-md rounded-full self-center p-2 hidden sm:block hover:bg-slate-400'
+              >
                 Ad
               </div>
             )}
