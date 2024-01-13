@@ -14,6 +14,7 @@ import { ReactNode } from 'react'
 import { BsFillInfoCircleFill } from 'react-icons/bs'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { UserButton } from '@clerk/nextjs'
 
 const MenuBtn = ({
   menuText,
@@ -71,6 +72,7 @@ const TopMenu = () => {
               menuText='Login'
               icon={<RiLoginBoxFill />}
             />
+            <UserButton />
           </div>
           <NavigationMenuContent>
             <NavigationMenuLink className='w-full px-10'>

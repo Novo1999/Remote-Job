@@ -9,7 +9,7 @@ const StatBlock = ({
 }) => {
   return (
     <div
-      className={`flex flex-col items-center ${className} bg-slate-700 rounded-md w-full pb-8`}
+      className={`flex flex-col items-center ${className} bg-gradient-to-b from-gray-900 to-gray-600 bg-gradient-to-r rounded-md w-full pb-8`}
     >
       <h3 className='my-3 text-sm font-semibold'>{statName}</h3>
       <p>{stat}</p>

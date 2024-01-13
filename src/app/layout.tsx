@@ -11,6 +11,7 @@ import './globals.css'
 import Advertise from '@/components/Advertise'
 import Navbar from '@/components/Navbar'
 import Newsletter from '@/components/Newsletter'
+import { ClerkProvider } from '@clerk/nextjs'
 
 const oswald = Oswald({
   subsets: ['cyrillic'],
@@ -51,15 +52,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang='en'>
-      <body
-        className={`${oswald.variable} ${poppins.variable} ${montserrat2.variable} ${montserrat.variable} ${chewy.variable}`}
-      >
-        <Advertise />
-        <Navbar />
-        {children}
-        <Newsletter />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang='en'>
+        <body
+          className={`${oswald.variable} ${poppins.variable} ${montserrat2.variable} ${montserrat.variable} ${chewy.variable}`}
+        >
+          <Advertise />
+          <Navbar />
+          {children}
+          <Newsletter />
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }

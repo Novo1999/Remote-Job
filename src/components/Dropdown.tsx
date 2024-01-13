@@ -5,6 +5,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { UserButton } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
 import { ReactNode, useState } from 'react'
 import { BsFillInfoCircleFill } from 'react-icons/bs'
@@ -89,6 +90,7 @@ const Dropdown = () => {
           menuText='Login'
           icon={<RiLoginBoxFill />}
         />
+        <UserButton />
       </DropdownMenuContent>
     </DropdownMenu>
   )
