@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 
 const Star = ({
   setChecked,
@@ -9,9 +9,13 @@ const Star = ({
   checked?: boolean
   className?: string
 }) => {
+  const handleCheck = () => {
+    setChecked!(!checked)
+  }
   return (
     <input
-      onChange={() => setChecked!(!checked)}
+      onClick={(e) => e.stopPropagation()}
+      onChange={handleCheck}
       type='checkbox'
       name='rating-8'
       className={`mask mask-star-2 ${className} ${
