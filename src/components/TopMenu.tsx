@@ -14,12 +14,6 @@ import { ReactNode } from 'react'
 import { BsFillInfoCircleFill } from 'react-icons/bs'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import {
-  RedirectToSignIn,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs'
 
 const MenuBtn = ({
   menuText,
@@ -71,19 +65,6 @@ const TopMenu = () => {
               menuText='About'
               icon={<BsFillInfoCircleFill />}
             />
-            <SignedOut>
-              <MenuBtn
-                onClick={() => handleRouting('/login')}
-                className='bg-blue-500 hover:bg-blue-600'
-                menuText='Login'
-                icon={<RiLoginBoxFill />}
-              />
-            </SignedOut>
-            <SignedIn>
-              <div className='mt-1'>
-                <UserButton afterSignOutUrl='/' />
-              </div>
-            </SignedIn>
           </div>
           <NavigationMenuContent>
             <NavigationMenuLink className='w-full px-10'>
