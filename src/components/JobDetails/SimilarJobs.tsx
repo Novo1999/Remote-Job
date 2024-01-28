@@ -10,7 +10,7 @@ import Error, { EmptyResponse } from '../Dummies'
 const SimilarJobs = ({ id, position }: { id: string; position: string }) => {
   const { isLoading, isError, error, data } = useGetRandomJobsQuery({
     id,
-    relevant: position,
+    relevant: position.split(' ').at(0) as string,
   })
   let content = null
 
@@ -39,7 +39,6 @@ const SimilarJobs = ({ id, position }: { id: string; position: string }) => {
         <CardTitle className='text-base lg:text-2xl'>Similar Jobs</CardTitle>
       </CardHeader>
       <div className='text-xs flex flex-col gap-4'>{content}</div>
-      <CardContent></CardContent>
       <CardFooter className='flex justify-between'></CardFooter>
     </div>
   )

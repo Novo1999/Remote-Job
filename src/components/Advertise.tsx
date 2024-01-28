@@ -1,10 +1,31 @@
-import { useEffect, useState } from 'react'
+import { Job, useGetAllJobsQuery } from '@/app/features/jobsApi/jobsApi'
+import { useEffect, useRef, useState } from 'react'
 import { FaCircleInfo } from 'react-icons/fa6'
 import { RxCross2 } from 'react-icons/rx'
 
 const Advertise = () => {
   const [timer, setTimer] = useState<number>(5)
   const [showAd, setShowAd] = useState<boolean>(true)
+  const { data, isLoading, isError } = useGetAllJobsQuery()
+  const ref = useRef<Job>()
+
+  let content = null
+
+  if (isLoading) {
+    content = <p>Loading...</p>
+  }
+
+  if (!isLoading && !isError) {
+    content = (
+      <p className='font-semibold text-xs animate-in slide-in-from-top-24'>
+        {ref.current?.company} is Hiring {ref.current?.position}!!!
+      </p>
+    )
+  }
+
+  if (isError) {
+    content = <p>Error Loading Ad</p>
+  }
 
   // decrementing timer
   useEffect(() => {
@@ -21,6 +42,13 @@ const Advertise = () => {
     return () => clearInterval(intervalId)
   }, [])
 
+  // for random jobs, as the timer makes the info of ad re render and fetch new, using a ref here shows only one ad and prevents re loading another
+  useEffect(() => {
+    if (!isLoading && !isError) {
+      ref.current = data![Math.floor(Math.random() * data!.length)]
+    }
+  }, [data, isError, isLoading])
+
   return (
     showAd && (
       <div
@@ -32,9 +60,7 @@ const Advertise = () => {
             <div className=''>
               <FaCircleInfo />
             </div>
-            <p className='font-semibold text-xs animate-in slide-in-from-top-24'>
-              Tech Co is Hiring Senior Frontend Developer!!!
-            </p>
+            {content}
           </div>
           <span className='text-2xl text-end'>
             {timer > 0 ? (

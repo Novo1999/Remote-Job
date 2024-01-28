@@ -16,7 +16,7 @@ const JobPositions = ({ jobPost }: { jobPost: Job }) => {
 
         <div>
           <button className='bg-teal-400 w-fit text-xs rounded-md whitespace-nowrap px-2 hidden sm:flex justify-center items-center hover:bg-teal-300 transition-all shadow-md lg:p-1'>
-            {position}
+            {position.split(' ').at(0)}
           </button>
         </div>
       </div>
