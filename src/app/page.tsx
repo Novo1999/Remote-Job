@@ -1,12 +1,15 @@
+'use client'
 import FilterPopover from '@/components/Filter/FilterPopover'
 import Hero from '@/components/Hero'
 import JobContainer from '@/components/JobContainer'
 import Search from '@/components/Search'
 import Sort from '@/components/Sort'
+import { Provider } from 'react-redux'
+import store from './store'
 
 export default function Home() {
   return (
-    <>
+    <Provider store={store}>
       <Hero />
       <main className='relative flex flex-col mx-4 xl:mx-48 2xl:mx-96'>
         <div className='flex flex-col mx-4 sm:mx-20 lg:mx-40'>
@@ -18,6 +21,6 @@ export default function Home() {
         </div>
         <JobContainer />
       </main>
-    </>
+    </Provider>
   )
 }

@@ -1,5 +1,5 @@
+import { Job } from '@/app/features/jobsApi/jobsApi'
 import Ping from '../ui/Ping'
-import { JobPost } from './JobItem'
 
 const AdBadge = ({ pc, mobile }: { pc: boolean; mobile: boolean }) => {
   if (pc) {
@@ -18,13 +18,13 @@ const AdBadge = ({ pc, mobile }: { pc: boolean; mobile: boolean }) => {
   }
 }
 
-const SpecialJobs = ({ jobPost }: { jobPost: JobPost }) => {
+const SpecialJobs = ({ jobPost }: { jobPost: Job }) => {
   const handleButtonClick = (e: React.SyntheticEvent) => {
     e.stopPropagation()
     console.log('Button clicked')
   }
 
-  const { isFeatured, isNew, isAd } = jobPost
+  const { isFeatured, new: isNew, isAd } = jobPost
   return (
     <div className='flex gap-4 h-fit justify-end text-white flex-col col-span-2 sm:col-span-1 lg:col-span-1 lg:self-start relative z-50'>
       <div className='flex gap-2 flex-col justify-end'>

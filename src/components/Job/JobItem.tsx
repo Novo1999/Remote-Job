@@ -7,24 +7,9 @@ import { useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
 import JobPositions from './JobPositions'
 import SpecialJobs from './SpecialJobs'
+import { Job } from '@/app/features/jobsApi/jobsApi'
 
-export type JobPost = {
-  title?: string
-  companyName?: string
-  positions?: string[]
-  benefits?: string[]
-  postedAgo?: string
-  location?: string
-  salaryRange?: string
-  isFeatured?: boolean
-  isNew?: boolean
-  index?: number
-  currentHovered?: number
-  isAd?: boolean
-  type?: string
-}
-
-const JobItem = ({ jobPost, index }: { jobPost: JobPost; index: number }) => {
+const JobItem = ({ jobPost, index }: { jobPost: Job; index: number }) => {
   const [currentHovered, setCurrentHovered] = useState<number | undefined>(
     undefined
   )
