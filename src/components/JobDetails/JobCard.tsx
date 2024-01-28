@@ -15,9 +15,20 @@ import Qualifications from './Qualifications'
 import Warning from './Warning'
 import ProfileImage from './Avatar'
 import { FaArrowAltCircleRight, FaCheckCircle } from 'react-icons/fa'
+import { Job } from '@/app/features/jobsApi/jobsApi'
+import { usePostedDate } from '@/hooks/usePostedDate'
 
-const JobCard = () => {
-  const [currentTab, setCurrentTab] = useState<string>('description')
+const JobCard = ({ job }: { job: Job }) => {
+  const {
+    posted,
+    title,
+    company,
+    location,
+    salary: { min, max },
+    position,
+    jobType,
+  } = job
+  const { formattedDate } = usePostedDate(posted)
 
   return (
     <Card className='font-poppins bg-gradient-to-bl from-indigo-200 via-red-200 to-yellow-100 h-fit sm:col-span-1'>
@@ -25,7 +36,7 @@ const JobCard = () => {
         <div className='flex gap-2 justify-between items-center flex-wrap'>
           <ProfileImage />
           <CardTitle className='text-base lg:text-xl flex gap-2 items-center flex-1'>
-            <p className='sm:whitespace-nowrap'>Senior Frontend Developer</p>
+            <p className='sm:whitespace-nowrap'>{title}</p>
             <div className='flex flex-wrap justify-between gap-2 w-48 sm:w-full'>
               <button className='btn-xs btn transition-all ease-in-out rounded-full flex gap-2 bg-red-500 text-white'>
                 <p className='outline-none'>Apply Now</p>
@@ -39,24 +50,18 @@ const JobCard = () => {
         </div>
         <div className='flex flex-wrap gap-2'>
           <Badge variant='destructive' className='w-fit'>
-            <Link href='/company'>Tech Co.</Link>
+            <Link href='/company'>{company}</Link>
           </Badge>
           <Badge variant='secondary' className='w-fit'>
-            <p>2d Ago</p>
+            <p>{formattedDate}</p>
           </Badge>
           <div className='flex gap-2 flex-wrap'>
-            <p>Tags: </p>
+            <p>Tag: </p>
             <Badge
               variant='secondary'
               className='w-fit bg-teal-500 text-white hover:bg-teal-400'
             >
-              <p>Senior</p>
-            </Badge>
-            <Badge
-              variant='secondary'
-              className='w-fit bg-teal-500 text-white hover:bg-teal-400'
-            >
-              <p>Developer</p>
+              <p>{position}</p>
             </Badge>
           </div>
         </div>
@@ -66,15 +71,19 @@ const JobCard = () => {
               <Badge variant='outline' className='rounded-md'>
                 Type
               </Badge>
-              <p className='p-2 rounded-md font-thin'>CONTRACT</p>
+              <p className='p-2 rounded-md font-thin'>
+                {jobType.toUpperCase()}
+              </p>
               <Badge variant='outline' className='rounded-md'>
                 Location{' '}
               </Badge>
-              <p className='p-2 rounded-md font-thin'>Seattle, WA</p>
+              <p className='p-2 rounded-md font-thin'>{location}</p>
               <Badge variant='outline' className='rounded-md'>
                 Salary{' '}
               </Badge>
-              <p className='p-2 rounded-md font-thin'>$70K - $90K</p>
+              <p className='p-2 rounded-md font-thin'>
+                {min}K-{max}K
+              </p>
             </div>
           </div>
           <p>

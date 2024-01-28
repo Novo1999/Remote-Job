@@ -28,7 +28,17 @@ const jobsApi = api.injectEndpoints({
     getAllJobs: builder.query<Array<Job>, void>({
       query: () => '/all',
     }),
+    getRandomJobs: builder.query<Array<Job>, { id: string; relevant: string }>({
+      query: ({ id, relevant }) => `/random/${id}?relevant=${relevant}`,
+    }),
+    getSingleJob: builder.query<Job, string>({
+      query: (id) => `/${id}`,
+    }),
   }),
 })
 
-export const { useGetAllJobsQuery } = jobsApi
+export const {
+  useGetAllJobsQuery,
+  useGetRandomJobsQuery,
+  useGetSingleJobQuery,
+} = jobsApi

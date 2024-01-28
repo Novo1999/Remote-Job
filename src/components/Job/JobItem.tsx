@@ -10,6 +10,7 @@ import SpecialJobs from './SpecialJobs'
 import { Job } from '@/app/features/jobsApi/jobsApi'
 
 const JobItem = ({ jobPost, index }: { jobPost: Job; index: number }) => {
+  const { _id } = jobPost
   const [currentHovered, setCurrentHovered] = useState<number | undefined>(
     undefined
   )
@@ -17,7 +18,7 @@ const JobItem = ({ jobPost, index }: { jobPost: Job; index: number }) => {
   const ref = useRef<HTMLDivElement>(null)
   const handleClick = (e: React.SyntheticEvent) => {
     e.preventDefault()
-    router.push('/job/123', { scroll: true })
+    router.push(`/job/${_id}`, { scroll: true })
   }
 
   return (
