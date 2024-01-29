@@ -7,18 +7,20 @@ import { useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
 import JobPositions from './JobPositions'
 import SpecialJobs from './SpecialJobs'
-import { Job } from '@/app/features/jobsApi/jobsApi'
+import { Job, useAddViewCountMutation } from '@/app/features/jobsApi/jobsApi'
 
 const JobItem = ({ jobPost, index }: { jobPost: Job; index: number }) => {
   const { _id } = jobPost
   const [currentHovered, setCurrentHovered] = useState<number | undefined>(
     undefined
   )
+  const [addViewCount] = useAddViewCountMutation()
   const router = useRouter()
   const ref = useRef<HTMLDivElement>(null)
   const handleClick = (e: React.SyntheticEvent) => {
     e.preventDefault()
     router.push(`/job/${_id}`, { scroll: true })
+    addViewCount(_id)
   }
 
   return (

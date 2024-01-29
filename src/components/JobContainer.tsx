@@ -2,9 +2,11 @@
 import { useGetAllJobsQuery } from '@/app/features/jobsApi/jobsApi'
 import JobItem from './Job/JobItem'
 import Error, { EmptyResponse } from './Dummies'
+import { useState } from 'react'
 
 const JobContainer = () => {
-  const { isLoading, isError, error, data } = useGetAllJobsQuery()
+  const [limit, setLimit] = useState(10)
+  const { isLoading, isError, error, data } = useGetAllJobsQuery(limit)
   let content = null
 
   if (isLoading) {

@@ -31,7 +31,6 @@ export default function Page({ params }: { params: { id: string } }) {
   }
 
   if (!isLoading && !isError && job?.title) {
-    console.log(job._id)
     content = <JobCard job={job!} />
   }
 

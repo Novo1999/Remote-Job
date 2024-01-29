@@ -1,22 +1,16 @@
 'use client'
+import { Job } from '@/app/features/jobsApi/jobsApi'
 import { Badge } from '@/components/ui/badge'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { LuMousePointerClick } from 'react-icons/lu'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { usePostedDate } from '@/hooks/usePostedDate'
 import Link from 'next/link'
-import { useState } from 'react'
+import { FaArrowAltCircleRight, FaCheckCircle } from 'react-icons/fa'
 import Star from '../Job/Star'
 import ApplyButton from './ApplyButton'
+import ProfileImage from './Avatar'
 import Qualifications from './Qualifications'
 import Warning from './Warning'
-import ProfileImage from './Avatar'
-import { FaArrowAltCircleRight, FaCheckCircle } from 'react-icons/fa'
-import { Job } from '@/app/features/jobsApi/jobsApi'
-import { usePostedDate } from '@/hooks/usePostedDate'
 
 const JobCard = ({ job }: { job: Job }) => {
   const {
@@ -27,6 +21,7 @@ const JobCard = ({ job }: { job: Job }) => {
     salary: { min, max },
     position,
     jobType,
+    viewCount,
   } = job
   const { formattedDate } = usePostedDate(posted)
 
@@ -42,7 +37,10 @@ const JobCard = ({ job }: { job: Job }) => {
                 <p className='outline-none'>Apply Now</p>
                 <FaArrowAltCircleRight />
               </button>
-              <div className='rating rating-md transition-all'>
+              <div className='rating rating-md transition-all flex gap-2'>
+                <p className='font-thin flex gap-2 items-center'>
+                  <LuMousePointerClick /> Viewed: {viewCount} times
+                </p>
                 <Star />
               </div>
             </div>

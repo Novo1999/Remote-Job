@@ -6,7 +6,7 @@ import { RxCross2 } from 'react-icons/rx'
 const Advertise = () => {
   const [timer, setTimer] = useState<number>(5)
   const [showAd, setShowAd] = useState<boolean>(true)
-  const { data, isLoading, isError } = useGetAllJobsQuery()
+  const { data, isLoading, isError } = useGetAllJobsQuery(undefined)
   const ref = useRef<Job>()
 
   let content = null

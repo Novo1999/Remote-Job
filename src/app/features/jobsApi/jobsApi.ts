@@ -24,15 +24,38 @@ export interface Job {
 }
 
 const jobsApi = api.injectEndpoints({
+  overrideExisting: true,
   endpoints: (builder) => ({
-    getAllJobs: builder.query<Array<Job>, void>({
-      query: () => '/all',
+    // GET JOBS
+    getAllJobs: builder.query<Array<Job>, number | undefined>({
+      query: (limit = 10) => `/all?limit=${limit}`,
     }),
+    // GET SIMILAR JOBS
     getRandomJobs: builder.query<Array<Job>, { id: string; relevant: string }>({
       query: ({ id, relevant }) => `/random/${id}?relevant=${relevant}`,
     }),
+    // GET JOB
     getSingleJob: builder.query<Job, string>({
       query: (id) => `/${id}`,
+    }),
+    // INCREMENT VIEW COUNT WHEN USER CLICKS
+    addViewCount: builder.mutation<void, string>({
+      query: (id) => ({
+        method: 'PATCH',
+        url: `/${id}`,
+      }),
+      async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          jobsApi.util.updateQueryData('getSingleJob', id, (draft: Job) => {
+            draft.viewCount += 1
+          })
+        )
+        try {
+          await queryFulfilled
+        } catch (error) {
+          patchResult.undo()
+        }
+      },
     }),
   }),
 })
@@ -41,4 +64,5 @@ export const {
   useGetAllJobsQuery,
   useGetRandomJobsQuery,
   useGetSingleJobQuery,
+  useAddViewCountMutation,
 } = jobsApi
