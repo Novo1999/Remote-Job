@@ -1,4 +1,9 @@
 'use client'
+import { Button } from '@/components/ui/button'
+import { Form, FormField } from '@/components/ui/form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
 import {
   remoteJobBenefits,
   remoteJobLocations,
@@ -9,17 +14,10 @@ import {
   zodRemoteJobPositions,
   zodTypesArray,
 } from '../../utils/constants'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { FieldValues, useForm } from 'react-hook-form'
-import { Button } from '@/components/ui/button'
-import { Form, FormField } from '@/components/ui/form'
-import FormRow from './FormRow'
-import { FormRowSelect } from './FormRowSelect'
-import * as z from 'zod'
 import CompanyForm from './CompanyForm'
 import { FilterBar } from './FilterBar'
-import { extractBenefits, mergeAndUnique } from '@/utils/extractPositions'
-import { jobPosts } from '@/utils/dummyData'
+import FormRow from './FormRow'
+import { FormRowSelect } from './FormRowSelect'
 
 const jobTypeEnum = z.enum(zodTypesArray)
 const jobLocationEnum = z.enum(zodRemoteJobLocations)
@@ -81,8 +79,6 @@ export const formSchema = z.object({
 })
 
 const PostForm = () => {
-  const benefitsArray = extractBenefits(jobPosts)
-  const uniqueBenefits = mergeAndUnique(benefitsArray)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

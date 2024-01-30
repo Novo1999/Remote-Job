@@ -11,14 +11,14 @@ const Advertise = () => {
 
   let content = null
 
-  if (isLoading) {
+  if (isLoading && !ref.current?.company && !ref.current?.position) {
     content = <p>Loading...</p>
   }
 
-  if (!isLoading && !isError) {
+  if (!isLoading && !isError && ref.current?.company && ref.current?.position) {
     content = (
       <p className='font-semibold text-xs animate-in slide-in-from-top-24'>
-        {ref.current?.company} is Hiring {ref.current?.position}!!!
+        {`${ref.current?.company} is Hiring ${ref.current?.position}!!!`}
       </p>
     )
   }

@@ -1,24 +1,36 @@
 'use client'
 import { Slider } from '@/components/ui/slider'
 import { jobPosts } from '@/utils/dummyData'
-import {
-  extractBenefits,
-  extractPositions,
-  mergeAndUnique,
-} from '@/utils/extractPositions'
+
 import { useState } from 'react'
 import { FaDollarSign } from 'react-icons/fa6'
-import FilterCategory from './FilterCategory'
-import { JobPost } from '../Job/JobItem'
 import { typesArray } from '../../utils/constants'
+import FilterCategory from './FilterCategory'
+import { useGetAllJobsQuery } from '@/app/features/jobsApi/jobsApi'
 
 const Filter = ({ category }: { category: string }) => {
   const [salary, setSalary] = useState<number[]>([0])
-  const locations = jobPosts.map((job: JobPost) => job.location)
-  const positionsArray = extractPositions(jobPosts)
-  const uniquePositions = mergeAndUnique(positionsArray)
-  const benefitsArray = extractBenefits(jobPosts)
-  const uniqueBenefits = mergeAndUnique(benefitsArray)
+  const { data, isLoading } = useGetAllJobsQuery(undefined)
+
+  const locations =
+    !isLoading &&
+    data
+      ?.map((item) => item.location)
+      .filter((value, index, self) => self.indexOf(value) === index)
+  const positions =
+    !isLoading &&
+    data
+      ?.map((item) => item.position)
+      .filter((value, index, self) => self.indexOf(value) === index)
+  const benefits =
+    !isLoading &&
+    (data?.reduce((acc: string[], curr) => {
+      return [...acc, ...curr.benefits].filter(
+        (value, index, self) => self.indexOf(value) === index
+      )
+    }, []) ||
+      [])
+
   const [selected, setSelected] = useState<string[]>([])
 
   if (category === 'salary') {
@@ -60,7 +72,7 @@ const Filter = ({ category }: { category: string }) => {
         onChange={setSelected}
         selected={selected}
         className='text-black'
-        options={uniquePositions}
+        options={positions as string[]}
         category={category}
       />
     )
@@ -71,7 +83,7 @@ const Filter = ({ category }: { category: string }) => {
         onChange={setSelected}
         selected={selected}
         className='text-black'
-        options={uniqueBenefits}
+        options={benefits as string[]}
         category={category}
       />
     )

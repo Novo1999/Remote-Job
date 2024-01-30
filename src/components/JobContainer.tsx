@@ -1,12 +1,24 @@
 'use client'
 import { useGetAllJobsQuery } from '@/app/features/jobsApi/jobsApi'
-import JobItem from './Job/JobItem'
+import { useEffect, useState } from 'react'
 import Error, { EmptyResponse } from './Dummies'
-import { useState } from 'react'
+import JobItem from './Job/JobItem'
+import { useInView } from 'react-intersection-observer'
 
 const JobContainer = () => {
   const [limit, setLimit] = useState(10)
   const { isLoading, isError, error, data } = useGetAllJobsQuery(limit)
+  const { ref, inView } = useInView({
+    threshold: 0,
+  })
+
+  useEffect(() => {
+    // fetch more jobs as user scrolls
+    if (inView) {
+      setLimit((currentLimit) => currentLimit + 10)
+    }
+  }, [inView])
+
   let content = null
 
   if (isLoading) {
@@ -27,7 +39,7 @@ const JobContainer = () => {
 
   if (!isLoading && !isError && data?.length! > 0) {
     content = data?.map((job, index) => (
-      <JobItem jobPost={job} index={index} key={job._id} />
+      <JobItem ref={ref} jobPost={job} index={index} key={job._id} />
     ))
   }
 
