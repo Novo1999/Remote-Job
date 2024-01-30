@@ -1,6 +1,6 @@
-import { Job } from '@/app/features/jobsApi/jobsApi'
-import Ping from '../ui/Ping'
 import { usePostedDate } from '@/hooks/usePostedDate'
+import Ping from '../ui/Ping'
+import { Job } from '@/utils/interfaces'
 
 const AdBadge = ({ pc, mobile }: { pc: boolean; mobile: boolean }) => {
   if (pc) {
@@ -20,11 +20,10 @@ const AdBadge = ({ pc, mobile }: { pc: boolean; mobile: boolean }) => {
 }
 
 const SpecialJobs = ({ jobPost }: { jobPost: Job }) => {
-  const { isFeatured, new: isAd, posted } = jobPost
+  const { isFeatured, isAd, posted } = jobPost
   const { formattedDate } = usePostedDate(posted)
   const handleButtonClick = (e: React.SyntheticEvent) => {
     e.stopPropagation()
-    console.log('Button clicked')
   }
 
   return (

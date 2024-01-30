@@ -1,27 +1,42 @@
 'use client'
-import { useGetAllJobsQuery } from '@/app/features/jobsApi/jobsApi'
-import { useEffect, useState } from 'react'
+import {
+  useGetAllJobsQuery,
+  useGetTotalJobsQuery,
+} from '@/app/features/jobsApi/jobsApi'
+import { changeLimit } from '@/app/features/limit/limitSlice'
+import { useAppDispatch, useAppSelector } from '@/app/hooks'
+import { useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
 import Error, { EmptyResponse } from './Dummies'
 import JobItem from './Job/JobItem'
-import { useInView } from 'react-intersection-observer'
+import { useSearchParams } from 'next/navigation'
 
 const JobContainer = () => {
-  const [limit, setLimit] = useState(10)
-  const { isLoading, isError, error, data } = useGetAllJobsQuery(limit)
+  const searchParams = useSearchParams()
+  const { limit } = useAppSelector((state) => state.limit)
+  const { data: totalJobs } = useGetTotalJobsQuery()
+  const sortParam = searchParams.get('sort')
+
+  const dispatch = useAppDispatch()
+  const { isLoading, isError, error, data, isFetching } = useGetAllJobsQuery({
+    sortBy: sortParam,
+    limit,
+  })
   const { ref, inView } = useInView({
     threshold: 0,
   })
 
   useEffect(() => {
     // fetch more jobs as user scrolls
-    if (inView) {
-      setLimit((currentLimit) => currentLimit + 10)
+    if (inView && limit < totalJobs!) {
+      dispatch(changeLimit(10))
     }
-  }, [inView])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView, dispatch, totalJobs])
 
   let content = null
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     content = (
       <span className='loading loading-dots loading-lg min-h-screen'></span>
     )
@@ -37,7 +52,7 @@ const JobContainer = () => {
     content = <EmptyResponse />
   }
 
-  if (!isLoading && !isError && data?.length! > 0) {
+  if (!isLoading && !isError && !isFetching && data?.length! > 0) {
     content = data?.map((job, index) => (
       <JobItem ref={ref} jobPost={job} index={index} key={job._id} />
     ))

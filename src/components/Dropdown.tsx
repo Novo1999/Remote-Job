@@ -5,7 +5,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
 import { ReactNode, useState } from 'react'
 import { BsFillInfoCircleFill } from 'react-icons/bs'
@@ -84,19 +83,13 @@ const Dropdown = () => {
           menuText='About'
           icon={<BsFillInfoCircleFill />}
         />
-        <SignedOut>
-          <Content
-            onClick={() => handleRouting('/login')}
-            className='text-blue-500 hover:text-blue-600'
-            menuText='Login'
-            icon={<RiLoginBoxFill />}
-          />
-        </SignedOut>
-        <SignedIn>
-          <div className='mt-1'>
-            <UserButton afterSignOutUrl='/' />
-          </div>
-        </SignedIn>
+
+        <Content
+          onClick={() => handleRouting('/login')}
+          className='text-blue-500 hover:text-blue-600'
+          menuText='Login'
+          icon={<RiLoginBoxFill />}
+        />
       </DropdownMenuContent>
     </DropdownMenu>
   )

@@ -1,4 +1,5 @@
-import { Job, useGetAllJobsQuery } from '@/app/features/jobsApi/jobsApi'
+import { useGetAllJobsQuery } from '@/app/features/jobsApi/jobsApi'
+import { Job } from '@/utils/interfaces'
 import { useEffect, useRef, useState } from 'react'
 import { FaCircleInfo } from 'react-icons/fa6'
 import { RxCross2 } from 'react-icons/rx'
@@ -6,7 +7,10 @@ import { RxCross2 } from 'react-icons/rx'
 const Advertise = () => {
   const [timer, setTimer] = useState<number>(5)
   const [showAd, setShowAd] = useState<boolean>(true)
-  const { data, isLoading, isError } = useGetAllJobsQuery(undefined)
+  const { data, isLoading, isError } = useGetAllJobsQuery({
+    sortBy: '',
+    limit: 0,
+  })
   const ref = useRef<Job>()
 
   let content = null

@@ -9,7 +9,7 @@ import FilterCategory from './FilterCategory'
 import { useGetAllJobsQuery } from '@/app/features/jobsApi/jobsApi'
 
 const Filter = ({ category }: { category: string }) => {
-  const [salary, setSalary] = useState<number[]>([0])
+  const [salary, setSalary] = useState<number[]>([10000])
   const { data, isLoading } = useGetAllJobsQuery(undefined)
 
   const locations =
@@ -43,11 +43,11 @@ const Filter = ({ category }: { category: string }) => {
           Salary: <FaDollarSign /> {salary}
         </label>
         <Slider
-          className='hover:cursor-pointer'
+          className='hover:cursor-grab'
           onValueChange={(value) => setSalary(value)}
           value={[salary[0]]}
           min={10000}
-          max={100000}
+          max={200000}
           step={1}
         />
       </div>

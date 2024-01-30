@@ -1,43 +1,25 @@
+import { GetJobs, GetRandomJobs, Job } from '@/utils/interfaces'
 import api from '../api/apiSlice'
-
-export interface Job {
-  _id: string
-  title: string
-  salary: {
-    min: number
-    max: number
-  }
-  position: string
-  new: boolean
-  location: string
-  jobType: string
-  isStarred: {
-    userId: Array<string>
-  }
-  isFeatured: boolean
-  isAd: boolean
-  company: string
-  benefits: Array<string>
-  applyCount: number
-  viewCount: number
-  posted: string
-}
 
 const jobsApi = api.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
     // GET JOBS
-    getAllJobs: builder.query<Array<Job>, number | undefined>({
-      query: (limit = 10) => `/all?limit=${limit}`,
+    getAllJobs: builder.query<Array<Job>, GetJobs>({
+      query: ({ sortBy, limit = 10 }) => `/all?sortBy=${sortBy}&limit=${limit}`,
     }),
     // GET SIMILAR JOBS
-    getRandomJobs: builder.query<Array<Job>, { id: string; relevant: string }>({
+    getRandomJobs: builder.query<Array<Job>, GetRandomJobs>({
       query: ({ id, relevant }) => `/random/${id}?relevant=${relevant}`,
     }),
     // GET JOB
     getSingleJob: builder.query<Job, string>({
       query: (id) => `/${id}`,
     }),
+    // GET SORTED JOBS
+    // getSortedJobs: builder.query<Job, GetSortedJobs>({
+    //   query: ({ sortBy, limit }) => `/sort/${sortBy}?limit=${limit}`,
+    // }),
     // INCREMENT VIEW COUNT WHEN USER CLICKS
     addViewCount: builder.mutation<void, string>({
       query: (id) => ({
@@ -57,6 +39,10 @@ const jobsApi = api.injectEndpoints({
         }
       },
     }),
+    // TOTAL JOB COUNT
+    getTotalJobs: builder.query<number, void>({
+      query: () => '/total-jobs',
+    }),
   }),
 })
 
@@ -65,4 +51,6 @@ export const {
   useGetRandomJobsQuery,
   useGetSingleJobQuery,
   useAddViewCountMutation,
+  useGetTotalJobsQuery,
+  useGetSortedJobsQuery,
 } = jobsApi
