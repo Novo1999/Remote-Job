@@ -16,10 +16,6 @@ const jobsApi = api.injectEndpoints({
     getSingleJob: builder.query<Job, string>({
       query: (id) => `/${id}`,
     }),
-    // GET SORTED JOBS
-    // getSortedJobs: builder.query<Job, GetSortedJobs>({
-    //   query: ({ sortBy, limit }) => `/sort/${sortBy}?limit=${limit}`,
-    // }),
     // INCREMENT VIEW COUNT WHEN USER CLICKS
     addViewCount: builder.mutation<void, string>({
       query: (id) => ({
@@ -43,6 +39,10 @@ const jobsApi = api.injectEndpoints({
     getTotalJobs: builder.query<number, void>({
       query: () => '/total-jobs',
     }),
+    // SEARCH JOB
+    getSearchedJob: builder.query<void, string>({
+      query: (query) => `/search?q=${query}`,
+    }),
   }),
 })
 
@@ -52,5 +52,5 @@ export const {
   useGetSingleJobQuery,
   useAddViewCountMutation,
   useGetTotalJobsQuery,
-  useGetSortedJobsQuery,
+  useGetSearchedJobQuery,
 } = jobsApi

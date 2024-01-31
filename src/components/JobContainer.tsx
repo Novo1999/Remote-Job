@@ -1,23 +1,27 @@
 'use client'
 import {
   useGetAllJobsQuery,
+  useGetSearchedJobQuery,
   useGetTotalJobsQuery,
 } from '@/app/features/jobsApi/jobsApi'
 import { changeLimit } from '@/app/features/limit/limitSlice'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
+import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import Error, { EmptyResponse } from './Dummies'
-import JobItem from './Job/JobItem'
-import { useSearchParams } from 'next/navigation'
-import Skeleton from './Job/Skeleton'
 import JobChart from './Job/JobChart'
+import JobItem from './Job/JobItem'
+import Skeleton from './Job/Skeleton'
 import { Job } from '@/utils/interfaces'
 
 const JobContainer = () => {
   const searchParams = useSearchParams()
   const { limit } = useAppSelector((state) => state.limit)
+  const { isSearching, query } = useAppSelector((state) => state.search)
   const { data: totalJobs } = useGetTotalJobsQuery()
+  const { data: searchData } = useGetSearchedJobQuery(query)
+  console.log(searchData)
   const sortParam = searchParams.get('sort')
 
   const dispatch = useAppDispatch()
@@ -56,7 +60,13 @@ const JobContainer = () => {
     content = <EmptyResponse />
   }
 
-  if (!isLoading && !isError && data?.length! > 0) {
+  if (isSearching && (searchData! as Job[]).length! > 0) {
+    content = (searchData! as Job[])?.map((job: Job, index: number) => (
+      <JobItem ref={ref} jobPost={job} index={index} key={job._id} />
+    ))
+  }
+
+  if (!isLoading && !isError && data?.length! > 0 && !isSearching) {
     content = (
       <>
         <JobChart data={data} />
@@ -69,13 +79,9 @@ const JobContainer = () => {
 
   return (
     <section
-      style={{
-        scrollBehavior: 'unset',
-      }}
       className='flex flex-col gap-4 justify-center items-center mt-2
       min-[425px]:mx-2 sm:mx-7'
     >
-      {/* {!isLoading && !isError && data?.length! > 0 && <JobChart />} */}
       {content}
     </section>
   )
