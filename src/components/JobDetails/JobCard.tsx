@@ -1,5 +1,4 @@
 'use client'
-import { Job } from '@/app/features/jobsApi/jobsApi'
 import { Badge } from '@/components/ui/badge'
 import { LuMousePointerClick } from 'react-icons/lu'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -11,6 +10,7 @@ import ApplyButton from './ApplyButton'
 import ProfileImage from './Avatar'
 import Qualifications from './Qualifications'
 import Warning from './Warning'
+import { Job } from '@/utils/interfaces'
 
 const JobCard = ({ job }: { job: Job }) => {
   const {

@@ -2,13 +2,13 @@ import Link from 'next/link'
 import JobDetailsMobile from './JobDetailsMobile'
 import JobDetailsPC from './JobDetailsPC'
 import JobDate from './JobDate'
-import { Job } from '@/app/features/jobsApi/jobsApi'
+import { Job } from '@/utils/interfaces'
 
 const JobPositions = ({ jobPost }: { jobPost: Job }) => {
   const { title, company, jobType, position } = jobPost
 
   return (
-    <div className='flex flex-col ml-4 flex-1 gap-1 lg:gap-3 w-fit col-span-6 sm:gap-3 sm:col-span-5 lg:col-span-6 z-50'>
+    <div className='flex flex-col ml-4 flex-1 gap-2 lg:gap-3 w-fit col-span-6 sm:gap-3 sm:col-span-5 lg:col-span-6 z-50'>
       <div className='flex flex-wrap gap-2 items-center'>
         <p className='font-semibold lg:text-[15px] lg:whitespace-nowrap'>
           {title}
@@ -20,7 +20,7 @@ const JobPositions = ({ jobPost }: { jobPost: Job }) => {
           </button>
         </div>
       </div>
-      <div className='flex gap-2'>
+      <div className='flex'>
         <p>{company}</p>
         <JobDate jobPost={jobPost} />
       </div>

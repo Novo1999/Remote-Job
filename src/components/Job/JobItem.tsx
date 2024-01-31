@@ -3,12 +3,14 @@
 import Image from 'next/image'
 import dummyLogo from '../../../public/images/dummylogo.png'
 
-import { Job, useAddViewCountMutation } from '@/app/features/jobsApi/jobsApi'
+import { useAddViewCountMutation } from '@/app/features/jobsApi/jobsApi'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { Ref, forwardRef, useState } from 'react'
 import JobPositions from './JobPositions'
 import SpecialJobs from './SpecialJobs'
+import { Job } from '@/utils/interfaces'
+import Star from './Star'
 
 const JobItem = forwardRef(
   (
@@ -41,12 +43,17 @@ const JobItem = forwardRef(
           <div className='absolute left-0 h-full border-r-4 rounded-l-full border-orange-500'></div>
         )}
         {/* main items */}
-        <div className='flex col-span-1 m-auto'>
+        <div className='flex col-span-1 flex-col gap-1 items-center m-auto sm:flex-row'>
           <Image
             src={dummyLogo}
             alt='logo'
             className='w-12 sm:w-16 rounded-full m-auto shadow-lg lg:w-[90px] xl:w-20'
           />
+          <button className='text-lg right-2 sm:hidden'>
+            <div className='rating rating-sm transition-all'>
+              <Star />
+            </div>
+          </button>
         </div>
         <JobPositions jobPost={jobPost} />
         <SpecialJobs jobPost={jobPost} />

@@ -8,19 +8,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { useChangeSearchParams } from '@/hooks/useChangeSearchParams'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { MdSort } from 'react-icons/md'
 
 const Sort = () => {
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-
-  const handleSort = (value: string) => {
-    const params = new URLSearchParams(searchParams.toString())
-    params.set('sort', value)
-    router.push(pathname + '?' + params.toString(), { scroll: false })
-  }
+  const { handleSort } = useChangeSearchParams()
 
   return (
     <div className='w-full'>

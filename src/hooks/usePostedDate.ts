@@ -5,8 +5,9 @@ export const usePostedDate = (posted: string) => {
   const daysAgo = moment().diff(postedDate, 'days')
   let formattedDate = ''
 
+  // showing how many days / weeks / months ago the job was posted by comparing todays date with the date the job has
   switch (true) {
-    case daysAgo < 1:
+    case daysAgo <= 1:
       formattedDate = 'Today'
       break
     case daysAgo < 7:

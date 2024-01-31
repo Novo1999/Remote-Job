@@ -1,5 +1,5 @@
-import { Job } from '@/app/features/jobsApi/jobsApi'
 import { usePostedDate } from '@/hooks/usePostedDate'
+import { Job } from '@/utils/interfaces'
 import { BsFillSignpostFill } from 'react-icons/bs'
 
 const JobDate = ({ jobPost }: { jobPost: Job }) => {
@@ -7,7 +7,7 @@ const JobDate = ({ jobPost }: { jobPost: Job }) => {
   const { formattedDate, mobilePostedAgo } = usePostedDate(posted)
 
   return (
-    <p className='flex gap-1 items-center bg-stone-300 px-2 rounded-md flex-wrap'>
+    <p className='flex gap-1 items-center bg-stone-300 px-2 rounded-md flex-wrap ml-1'>
       <span className='hidden lg:block'>
         <BsFillSignpostFill />
       </span>

@@ -10,6 +10,7 @@ import { useInView } from 'react-intersection-observer'
 import Error, { EmptyResponse } from './Dummies'
 import JobItem from './Job/JobItem'
 import { useSearchParams } from 'next/navigation'
+import Skeleton from './Job/Skeleton'
 
 const JobContainer = () => {
   const searchParams = useSearchParams()
@@ -18,7 +19,7 @@ const JobContainer = () => {
   const sortParam = searchParams.get('sort')
 
   const dispatch = useAppDispatch()
-  const { isLoading, isError, error, data, isFetching } = useGetAllJobsQuery({
+  const { isLoading, isError, error, data } = useGetAllJobsQuery({
     sortBy: sortParam,
     limit,
   })
@@ -36,10 +37,11 @@ const JobContainer = () => {
 
   let content = null
 
-  if (isLoading || isFetching) {
-    content = (
-      <span className='loading loading-dots loading-lg min-h-screen'></span>
-    )
+  if (isLoading) {
+    // making skeletons for 10 jobs hard coded
+    content = Array.from({ length: 10 }).map((_, index) => (
+      <Skeleton key={index} />
+    ))
   }
 
   if (isError) {
@@ -52,7 +54,7 @@ const JobContainer = () => {
     content = <EmptyResponse />
   }
 
-  if (!isLoading && !isError && !isFetching && data?.length! > 0) {
+  if (!isLoading && !isError && data?.length! > 0) {
     content = data?.map((job, index) => (
       <JobItem ref={ref} jobPost={job} index={index} key={job._id} />
     ))
