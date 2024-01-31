@@ -11,6 +11,8 @@ import Error, { EmptyResponse } from './Dummies'
 import JobItem from './Job/JobItem'
 import { useSearchParams } from 'next/navigation'
 import Skeleton from './Job/Skeleton'
+import JobChart from './Job/JobChart'
+import { Job } from '@/utils/interfaces'
 
 const JobContainer = () => {
   const searchParams = useSearchParams()
@@ -55,16 +57,25 @@ const JobContainer = () => {
   }
 
   if (!isLoading && !isError && data?.length! > 0) {
-    content = data?.map((job, index) => (
-      <JobItem ref={ref} jobPost={job} index={index} key={job._id} />
-    ))
+    content = (
+      <>
+        <JobChart data={data} />
+        {data?.map((job, index) => (
+          <JobItem ref={ref} jobPost={job} index={index} key={job._id} />
+        ))}
+      </>
+    )
   }
 
   return (
     <section
+      style={{
+        scrollBehavior: 'unset',
+      }}
       className='flex flex-col gap-4 justify-center items-center mt-2
       min-[425px]:mx-2 sm:mx-7'
     >
+      {/* {!isLoading && !isError && data?.length! > 0 && <JobChart />} */}
       {content}
     </section>
   )
