@@ -1,48 +1,13 @@
 'use client'
 import { Slider } from '@/components/ui/slider'
-
-import { useGetAllJobsQuery } from '@/app/features/jobsApi/jobsApi'
-import { useState } from 'react'
+import { useFilter } from '@/hooks/useFilter'
 import { FaDollarSign } from 'react-icons/fa6'
 import { typesArray } from '../../utils/constants'
 import FilterCategory from './FilterCategory'
-import { useAppDispatch, useAppSelector } from '@/app/hooks'
-import { changeFilter, changeSalary } from '@/app/features/filter/filterSlice'
 
 const Filter = ({ category }: { category: string }) => {
-  const { filterBy } = useAppSelector((state) => state.filter)
-  const dispatch = useAppDispatch()
-  console.log(filterBy)
-  const { data, isLoading } = useGetAllJobsQuery({
-    sortBy: '',
-    limit: 0,
-  })
-
-  const handleSalary = (value: number[]) => {
-    dispatch(changeSalary(value[0]))
-  }
-
-  // getting unique locations, positions and benefits
-  const locations =
-    !isLoading &&
-    data
-      ?.map((item) => item.location)
-      .filter((value, index, self) => self.indexOf(value) === index)
-
-  const positions =
-    !isLoading &&
-    data
-      ?.map((item) => item.position)
-      .filter((value, index, self) => self.indexOf(value) === index)
-
-  const benefits =
-    !isLoading &&
-    (data?.reduce((acc: string[], curr) => {
-      return [...acc, ...curr.benefits].filter(
-        (value, index, self) => self.indexOf(value) === index
-      )
-    }, []) ||
-      [])
+  const { handleSalary, locations, positions, benefits, filterBy, dispatch } =
+    useFilter()
 
   if (category === 'salary') {
     return (
@@ -57,7 +22,7 @@ const Filter = ({ category }: { category: string }) => {
           className='hover:cursor-grab'
           onValueChange={handleSalary}
           value={[filterBy.salary]}
-          min={10000}
+          min={75000}
           max={200000}
           step={1}
         />

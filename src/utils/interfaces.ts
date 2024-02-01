@@ -1,3 +1,5 @@
+import { Dispatch } from 'react'
+
 export interface Job {
   _id: string
   title: string
@@ -32,4 +34,23 @@ export interface GetRandomJobs {
 
 export interface LimitState {
   limit: number
+}
+
+export interface FilterBy {
+  filterBy: {
+    locations: string[]
+    positions: string[]
+    types: string[]
+    benefits: string[]
+    salary: number
+  }
+  filteredJobs: Job[]
+}
+
+export interface MultiSelectProps {
+  options: string[]
+  selected: string[]
+  className?: string
+  onChange: Dispatch
+  category: string
 }

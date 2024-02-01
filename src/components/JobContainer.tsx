@@ -1,44 +1,14 @@
 'use client'
-import {
-  useGetAllJobsQuery,
-  useGetSearchedJobQuery,
-  useGetTotalJobsQuery,
-} from '@/app/features/jobsApi/jobsApi'
-import { changeLimit } from '@/app/features/limit/limitSlice'
-import { useAppDispatch, useAppSelector } from '@/app/hooks'
-import { useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
-import { useInView } from 'react-intersection-observer'
+import { Job } from '@/utils/interfaces'
 import Error, { EmptyResponse } from './Dummies'
 import JobChart from './Job/JobChart'
 import JobItem from './Job/JobItem'
 import Skeleton from './Job/Skeleton'
-import { Job } from '@/utils/interfaces'
+import { useJob } from '@/hooks/useJob'
 
 const JobContainer = () => {
-  const searchParams = useSearchParams()
-  const { limit } = useAppSelector((state) => state.limit)
-  const { isSearching, query } = useAppSelector((state) => state.search)
-  const { data: totalJobs } = useGetTotalJobsQuery()
-  const { data: searchData } = useGetSearchedJobQuery(query)
-  const sortParam = searchParams.get('sort')
-
-  const dispatch = useAppDispatch()
-  const { isLoading, isError, error, data } = useGetAllJobsQuery({
-    sortBy: sortParam,
-    limit,
-  })
-  const { ref, inView } = useInView({
-    threshold: 0,
-  })
-
-  useEffect(() => {
-    // fetch more jobs as user scrolls
-    if (inView && limit < totalJobs!) {
-      dispatch(changeLimit(10))
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView, dispatch, totalJobs])
+  const { isLoading, isError, error, data, searchData, ref, isSearching } =
+    useJob()
 
   let content = null
 
@@ -50,7 +20,7 @@ const JobContainer = () => {
   }
 
   if (isError) {
-    if ('status' in error) {
+    if ('status' in error!) {
       content = <Error error={error} />
     }
   }

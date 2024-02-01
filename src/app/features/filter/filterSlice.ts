@@ -1,16 +1,7 @@
+import { FilterBy } from '@/utils/interfaces'
 import { createSlice } from '@reduxjs/toolkit'
 
-interface FilterBy {
-  filterBy: {
-    locations: string[]
-    positions: string[]
-    types: string[]
-    benefits: string[]
-    salary: number
-  }
-}
-
-type Category = 'locations' | 'positions' | 'types' | 'benefits'
+export type Category = 'locations' | 'positions' | 'types' | 'benefits'
 
 const initialState: FilterBy = {
   filterBy: {
@@ -20,6 +11,7 @@ const initialState: FilterBy = {
     benefits: [],
     salary: 75000,
   },
+  filteredJobs: [],
 }
 
 const filterSlice = createSlice({
@@ -28,24 +20,31 @@ const filterSlice = createSlice({
   reducers: {
     changeFilter: (state, action) => {
       const category = action.payload.category as Category
+      const stateCategory = state.filterBy[category]
       const { newOption } = action.payload
-      if (state.filterBy[category].includes(newOption)) {
-        const optionToRemove = state.filterBy[category].findIndex(
+      // if option already exists, remove it
+      if (stateCategory.includes(newOption)) {
+        const optionToRemove = stateCategory.findIndex(
           (opt) => opt === newOption
         )
-        state.filterBy[category].splice(optionToRemove, 1)
+        stateCategory.splice(optionToRemove, 1)
       } else {
+        // add new option if it does not exist
         state.filterBy = {
           ...state.filterBy,
-          [category]: [...state.filterBy[category], newOption],
+          [category]: [...stateCategory, newOption],
         }
       }
     },
     changeSalary: (state, action) => {
       state.filterBy.salary = action.payload
     },
+    setFilteredJobs: (state, action) => {
+      state.filteredJobs = action.payload
+    },
   },
 })
 
-export const { changeFilter, changeSalary } = filterSlice.actions
+export const { changeFilter, changeSalary, setFilteredJobs } =
+  filterSlice.actions
 export default filterSlice.reducer
