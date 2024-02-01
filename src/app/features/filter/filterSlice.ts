@@ -9,9 +9,11 @@ const initialState: FilterBy = {
     positions: [],
     types: [],
     benefits: [],
-    salary: 75000,
+    salary: 90000,
   },
-  filteredJobs: [],
+  filterQuery: '',
+  isFiltering: false,
+  filterOpen: false,
 }
 
 const filterSlice = createSlice({
@@ -39,12 +41,16 @@ const filterSlice = createSlice({
     changeSalary: (state, action) => {
       state.filterBy.salary = action.payload
     },
-    setFilteredJobs: (state, action) => {
-      state.filteredJobs = action.payload
+    setFilterQuery: (state, action) => {
+      state.filterQuery = action.payload.query
+      state.isFiltering = action.payload.isFiltering
+    },
+    setFilterOpen: (state, action) => {
+      state.filterOpen = action.payload
     },
   },
 })
 
-export const { changeFilter, changeSalary, setFilteredJobs } =
+export const { changeFilter, changeSalary, setFilterQuery, setFilterOpen } =
   filterSlice.actions
 export default filterSlice.reducer

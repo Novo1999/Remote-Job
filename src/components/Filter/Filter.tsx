@@ -22,7 +22,7 @@ const Filter = ({ category }: { category: string }) => {
           className='hover:cursor-grab'
           onValueChange={handleSalary}
           value={[filterBy.salary]}
-          min={75000}
+          min={90000}
           max={200000}
           step={1}
         />

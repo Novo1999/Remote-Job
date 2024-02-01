@@ -44,7 +44,9 @@ export interface FilterBy {
     benefits: string[]
     salary: number
   }
-  filteredJobs: Job[]
+  filterQuery: string
+  isFiltering: boolean
+  filterOpen: boolean
 }
 
 export interface MultiSelectProps {
@@ -53,4 +55,12 @@ export interface MultiSelectProps {
   className?: string
   onChange: Dispatch
   category: string
+}
+
+export interface FilterParam {
+  locations: string[]
+  positions: string[]
+  types: string[]
+  benefits: string[]
+  salary: number
 }

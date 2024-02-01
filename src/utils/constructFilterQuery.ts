@@ -1,10 +1,6 @@
-export const constructFilterQuery = (filterBy: {
-  locations: string[]
-  positions: string[]
-  types: string[]
-  benefits: string[]
-  salary: number
-}) => {
+import { FilterParam } from './interfaces'
+
+export const constructFilterQuery = (filterBy: FilterParam) => {
   let query = ''
 
   for (const [property, values] of Object.entries(filterBy)) {
