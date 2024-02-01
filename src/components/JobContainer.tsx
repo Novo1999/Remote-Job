@@ -21,7 +21,6 @@ const JobContainer = () => {
   const { isSearching, query } = useAppSelector((state) => state.search)
   const { data: totalJobs } = useGetTotalJobsQuery()
   const { data: searchData } = useGetSearchedJobQuery(query)
-  console.log(searchData)
   const sortParam = searchParams.get('sort')
 
   const dispatch = useAppDispatch()
@@ -60,12 +59,14 @@ const JobContainer = () => {
     content = <EmptyResponse />
   }
 
+  // if is searching then show the searched data
   if (isSearching && (searchData! as Job[]).length! > 0) {
     content = (searchData! as Job[])?.map((job: Job, index: number) => (
       <JobItem ref={ref} jobPost={job} index={index} key={job._id} />
     ))
   }
 
+  // if not searching show regular jobs
   if (!isLoading && !isError && data?.length! > 0 && !isSearching) {
     content = (
       <>

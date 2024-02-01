@@ -10,7 +10,7 @@ const FilterLabel = ({
   category: string
   className: string
 }) => {
-  if (category === 'location') {
+  if (category === 'locations') {
     return (
       <div className={`${className} bg-red-400`}>
         <span>
@@ -20,7 +20,7 @@ const FilterLabel = ({
       </div>
     )
   }
-  if (category === 'position') {
+  if (category === 'positions') {
     return (
       <div className={`${className} bg-teal-400`}>
         <span>
@@ -36,7 +36,7 @@ const FilterLabel = ({
         <span>
           <BiSolidCategory />
         </span>
-        <Label htmlFor='location'>{category}</Label>
+        <Label htmlFor='types'>{category}</Label>
       </div>
     )
   }
@@ -46,7 +46,7 @@ const FilterLabel = ({
         <span>
           <FaThumbsUp />
         </span>
-        <Label htmlFor='location'>{category}</Label>
+        <Label htmlFor='benefits'>{category}</Label>
       </div>
     )
   }

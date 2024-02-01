@@ -1,4 +1,6 @@
 'use client'
+import { changeFilter } from '@/app/features/filter/filterSlice'
+import { Dispatch } from '@reduxjs/toolkit'
 import { useState } from 'react'
 
 const MoreOrLessButton = ({
@@ -23,7 +25,7 @@ const MoreOrLessButton = ({
 }
 
 const setSelectItemColor = (category: string) => {
-  if (category === 'location') {
+  if (category === 'locations') {
     return 'bg-red-400'
   }
   if (category === 'types') {
@@ -32,7 +34,7 @@ const setSelectItemColor = (category: string) => {
   if (category === 'benefits') {
     return 'bg-purple-400'
   }
-  if (category === 'position') {
+  if (category === 'positions') {
     return 'bg-teal-400'
   }
 }
@@ -40,8 +42,8 @@ const setSelectItemColor = (category: string) => {
 export interface MultiSelectProps {
   options: string[]
   selected: string[]
-  onChange: React.Dispatch<React.SetStateAction<string[]>>
   className?: string
+  onChange: Dispatch
   category: string
 }
 
@@ -54,7 +56,7 @@ const MultiSelect = ({
   ...props
 }: MultiSelectProps) => {
   const [showMore, setShowMore] = useState<string>('')
-
+  console.log(selected)
   // dynamically set the maximum amount of filter items showed at once
   const setMaxFilterCount = () => {
     if (showMore === category || category === 'types') {
@@ -89,27 +91,19 @@ const MultiSelect = ({
         {options
           .map((option) => (
             <div
-              className='text-xs flex p-2 justify-between border m-1 gap-1 font-semibold  border-black shadow-md'
+              className='text-xs flex p-2 justify-between border m-1 gap-1 font-semibold  border-black shadow-md cursor-pointer'
               key={option}
-              onClick={() => {
-                onChange(
-                  selected.includes(option)
-                    ? selected.filter((item) => item !== option)
-                    : [...selected, option]
-                )
+              onClick={(e) => {
+                console.log(category)
+                e.stopPropagation()
+                onChange(changeFilter({ category, newOption: option }))
               }}
             >
               {option}
               <input
+                readOnly
                 type='checkbox'
                 checked={selected.includes(option)}
-                onChange={() =>
-                  onChange(
-                    selected.includes(option)
-                      ? selected.filter((item) => item !== option)
-                      : [...selected, option]
-                  )
-                }
                 className={`checkbox checkbox-accent checkbox-xs self-center shadow-sm  ${setSelectItemColor(
                   category
                 )} border-white`}

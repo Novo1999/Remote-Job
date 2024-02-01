@@ -1,27 +1,40 @@
 'use client'
 import { Slider } from '@/components/ui/slider'
-import { jobPosts } from '@/utils/dummyData'
 
+import { useGetAllJobsQuery } from '@/app/features/jobsApi/jobsApi'
 import { useState } from 'react'
 import { FaDollarSign } from 'react-icons/fa6'
 import { typesArray } from '../../utils/constants'
 import FilterCategory from './FilterCategory'
-import { useGetAllJobsQuery } from '@/app/features/jobsApi/jobsApi'
+import { useAppDispatch, useAppSelector } from '@/app/hooks'
+import { changeFilter, changeSalary } from '@/app/features/filter/filterSlice'
 
 const Filter = ({ category }: { category: string }) => {
-  const [salary, setSalary] = useState<number[]>([10000])
-  const { data, isLoading } = useGetAllJobsQuery(undefined)
+  const { filterBy } = useAppSelector((state) => state.filter)
+  const dispatch = useAppDispatch()
+  console.log(filterBy)
+  const { data, isLoading } = useGetAllJobsQuery({
+    sortBy: '',
+    limit: 0,
+  })
 
+  const handleSalary = (value: number[]) => {
+    dispatch(changeSalary(value[0]))
+  }
+
+  // getting unique locations, positions and benefits
   const locations =
     !isLoading &&
     data
       ?.map((item) => item.location)
       .filter((value, index, self) => self.indexOf(value) === index)
+
   const positions =
     !isLoading &&
     data
       ?.map((item) => item.position)
       .filter((value, index, self) => self.indexOf(value) === index)
+
   const benefits =
     !isLoading &&
     (data?.reduce((acc: string[], curr) => {
@@ -31,8 +44,6 @@ const Filter = ({ category }: { category: string }) => {
     }, []) ||
       [])
 
-  const [selected, setSelected] = useState<string[]>([])
-
   if (category === 'salary') {
     return (
       <div className='flex flex-col gap-2 sm:col-span-2'>
@@ -40,12 +51,12 @@ const Filter = ({ category }: { category: string }) => {
           htmlFor='salary'
           className='flex items-center bg-blue-600 w-fit p-4 rounded-lg text-white'
         >
-          Salary: <FaDollarSign /> {salary}
+          Salary: <FaDollarSign /> {filterBy.salary}
         </label>
         <Slider
           className='hover:cursor-grab'
-          onValueChange={(value) => setSalary(value)}
-          value={[salary[0]]}
+          onValueChange={handleSalary}
+          value={[filterBy.salary]}
           min={10000}
           max={200000}
           step={1}
@@ -54,11 +65,11 @@ const Filter = ({ category }: { category: string }) => {
     )
   }
 
-  if (category === 'location') {
+  if (category === 'locations') {
     return (
       <FilterCategory
-        onChange={setSelected}
-        selected={selected}
+        onChange={dispatch}
+        selected={filterBy.locations}
         className='text-black'
         options={locations as string[]}
         category={category}
@@ -66,11 +77,11 @@ const Filter = ({ category }: { category: string }) => {
     )
   }
 
-  if (category === 'position') {
+  if (category === 'positions') {
     return (
       <FilterCategory
-        onChange={setSelected}
-        selected={selected}
+        onChange={dispatch}
+        selected={filterBy.positions}
         className='text-black'
         options={positions as string[]}
         category={category}
@@ -80,8 +91,8 @@ const Filter = ({ category }: { category: string }) => {
   if (category === 'benefits') {
     return (
       <FilterCategory
-        onChange={setSelected}
-        selected={selected}
+        onChange={dispatch}
+        selected={filterBy.benefits}
         className='text-black'
         options={benefits as string[]}
         category={category}
@@ -91,8 +102,8 @@ const Filter = ({ category }: { category: string }) => {
   if (category === 'types') {
     return (
       <FilterCategory
-        onChange={setSelected}
-        selected={selected}
+        onChange={dispatch}
+        selected={filterBy.types}
         className='text-black'
         options={typesArray}
         category={category}

@@ -2,15 +2,19 @@ import { usePostedDate } from '@/hooks/usePostedDate'
 import Ping from '../ui/Ping'
 import { Job } from '@/utils/interfaces'
 import { useChangeSearchParams } from '@/hooks/useChangeSearchParams'
+import { useAppDispatch } from '@/app/hooks'
+import { changeSearchInput } from '@/app/features/search/searchSlice'
 
 const SpecialJobs = ({ jobPost }: { jobPost: Job }) => {
   const { isFeatured, isAd, posted } = jobPost
   const { formattedDate } = usePostedDate(posted)
   const { handleSort } = useChangeSearchParams()
+  const dispatch = useAppDispatch()
 
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
     handleSort(e.currentTarget.value)
+    dispatch(changeSearchInput({ isSearching: false, query: '' }))
   }
 
   return (

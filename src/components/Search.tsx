@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input'
 import { CiSearch } from 'react-icons/ci'
 import TypeEffect from './TypeAnimation'
 import { useEffect, useRef, useState } from 'react'
-import { useAppDispatch } from '@/app/hooks'
+import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { changeSearchInput } from '@/app/features/search/searchSlice'
 import { RxCross2 } from 'react-icons/rx'
 
@@ -15,8 +15,17 @@ type InputEvent =
 const Search = () => {
   const [searchIsFocused, setSearchIsFocused] = useState(false)
   const [searchValue, setSearchValue] = useState('')
+  const { isSearching } = useAppSelector((state) => state.search)
+
+  useEffect(() => {
+    if (!isSearching) {
+      setSearchValue('')
+    }
+  }, [isSearching])
+
   const dispatch = useAppDispatch()
   const inputRef = useRef<HTMLInputElement>(null)
+
   // when clicking the input, the user can type
   const handleClick = () => {
     setSearchIsFocused(true)
@@ -30,8 +39,7 @@ const Search = () => {
     if (
       inputRef.current &&
       !inputRef.current.contains(target as Node) &&
-      (!target.classList.contains('search-type-effect') ||
-        !target.classList.contains('search-btn'))
+      !target.classList.contains('search-type-effect')
     ) {
       setSearchIsFocused(false)
     }
@@ -56,7 +64,7 @@ const Search = () => {
       <div className='absolute text-black left-6'>
         <CiSearch />
       </div>
-      {!searchIsFocused && (
+      {!searchIsFocused && !searchValue && (
         <div
           onClick={handleClick}
           className='absolute left-12 bottom-[6px] *:text-lg font-semibold font-poppins text-black search-type-effect w-32 sm:w-96'
@@ -73,17 +81,20 @@ const Search = () => {
         type='text'
       />
 
+      {isSearching && (
+        <Button
+          onClick={() => {
+            setSearchValue('')
+            dispatch(changeSearchInput({ isSearching: false, query: '' }))
+          }}
+          className='bg-white text-black hover:text-white absolute right-20 rounded-full search-btn'
+          type='submit'
+        >
+          <RxCross2 />
+        </Button>
+      )}
       <Button
-        onClick={() => {
-          setSearchValue('')
-          dispatch(changeSearchInput({ isSearching: false, query: '' }))
-        }}
-        className='bg-white text-black hover:text-white absolute right-20 rounded-full search-btn'
-        type='submit'
-      >
-        <RxCross2 />
-      </Button>
-      <Button
+        disabled={!searchValue}
         onClick={handleSubmit}
         className='bg-white text-black hover:text-white absolute right-0 rounded-full search-btn'
         type='submit'
