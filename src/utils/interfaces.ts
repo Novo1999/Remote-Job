@@ -1,4 +1,4 @@
-import { Dispatch } from 'react'
+import { Dispatch } from '@reduxjs/toolkit'
 
 export interface Job {
   _id: string

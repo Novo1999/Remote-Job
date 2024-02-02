@@ -6,6 +6,7 @@ import { useSearch } from '@/hooks/useSearch'
 import { CiSearch } from 'react-icons/ci'
 import { RxCross2 } from 'react-icons/rx'
 import TypeEffect from './TypeAnimation'
+import { useChangeSearchParams } from '@/hooks/useChangeSearchParams'
 
 const Search = () => {
   const {
@@ -18,6 +19,8 @@ const Search = () => {
     dispatch,
     isSearching,
   } = useSearch()
+
+  const { handleResetSearch } = useChangeSearchParams()
 
   return (
     <div className='flex items-center mt-8 w-full lg:w-[26rem] xl:w-[30rem] 2xl:w-[32rem] mx-auto relative'>
@@ -46,6 +49,7 @@ const Search = () => {
           onClick={() => {
             setSearchValue('')
             dispatch(changeSearchInput({ isSearching: false, query: '' }))
+            handleResetSearch()
           }}
           className='bg-white text-black hover:text-white absolute right-20 rounded-full search-btn'
           type='submit'

@@ -4,19 +4,10 @@ import Hero from '@/components/Hero'
 import JobContainer from '@/components/JobContainer'
 import Search from '@/components/Search'
 import Sort from '@/components/Sort'
-import { useAppSelector } from './hooks'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useChangeSearchParams } from '@/hooks/useChangeSearchParams'
 
 export default function Home() {
-  const router = useRouter()
-  const pathname = usePathname()
-  const { isFiltering } = useAppSelector((state) => state.filter)
-  const searchParams = useSearchParams()
-  const handleResetFilter = () => {
-    const params = new URLSearchParams(searchParams.toString())
-    params.set('filter', '')
-    router.push(pathname + '?' + params.toString(), { scroll: false })
-  }
+  const { handleResetFilter, hasFilterValue } = useChangeSearchParams()
 
   return (
     <>
@@ -26,7 +17,7 @@ export default function Home() {
           <Search />
           <div className='flex justify-center item mx-12 xl:mx-60 font-poppins gap-2 font-semibold mt-6 sm:mx-32 lg:mx-48 mb-4'>
             <FilterPopover />
-            {isFiltering && (
+            {hasFilterValue && (
               <button
                 onClick={handleResetFilter}
                 className='text-xs text-red-500 hover:-translate-y-1 transition-all'
