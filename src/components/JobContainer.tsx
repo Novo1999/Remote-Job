@@ -7,22 +7,9 @@ import Skeleton from './Job/Skeleton'
 import { useJob } from '@/hooks/useJob'
 
 const JobContainer = () => {
-  const {
-    isLoading,
-    isError,
-    error,
-    data,
-    searchData,
-    ref,
-    isSearching,
-    filterData,
-    filterLoading,
-    filterError,
-    isFiltering,
-  } = useJob()
+  const { isLoading, isError, error, data, ref, isSearching } = useJob()
 
   let content = null
-  console.log(filterData)
   if (isLoading) {
     // making skeletons for 10 jobs hard coded
     content = Array.from({ length: 10 }).map((_, index) => (
@@ -40,28 +27,8 @@ const JobContainer = () => {
     content = <EmptyResponse />
   }
 
-  // if there are filtered jobs
-  if (isFiltering && filterData && filterData.result.length > 0) {
-    content = filterData.result.map((job: Job, index: number) => (
-      <JobItem ref={ref} jobPost={job} index={index} key={job._id} />
-    ))
-  }
-
-  // if is searching then show the searched data
-  if (isSearching && (searchData! as Job[]).length! > 0) {
-    content = (searchData! as Job[])?.map((job: Job, index: number) => (
-      <JobItem ref={ref} jobPost={job} index={index} key={job._id} />
-    ))
-  }
-
   // if not searching show regular jobs
-  if (
-    !isLoading &&
-    !isError &&
-    data?.length! > 0 &&
-    !isSearching &&
-    !isFiltering
-  ) {
+  if (!isLoading && !isError && data?.length! > 0) {
     content = (
       <>
         <JobChart data={data} />

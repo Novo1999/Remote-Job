@@ -1,4 +1,4 @@
-import { FilterBy, GetJobs, GetRandomJobs, Job } from '@/utils/interfaces'
+import { GetJobs, GetRandomJobs, Job } from '@/utils/interfaces'
 import api from '../api/apiSlice'
 
 const jobsApi = api.injectEndpoints({
@@ -6,7 +6,8 @@ const jobsApi = api.injectEndpoints({
   endpoints: (builder) => ({
     // GET JOBS
     getAllJobs: builder.query<Array<Job>, GetJobs>({
-      query: ({ sortBy, limit = 10 }) => `/all?sortBy=${sortBy}&limit=${limit}`,
+      query: ({ sortBy, limit = 10, filterBy, q }) =>
+        `/all?sortBy=${sortBy}&${filterBy}&limit=${limit}&q=${q}`,
     }),
     // GET SIMILAR JOBS
     getRandomJobs: builder.query<Array<Job>, GetRandomJobs>({
@@ -43,9 +44,6 @@ const jobsApi = api.injectEndpoints({
     getSearchedJob: builder.query<void, string>({
       query: (query) => `/search?q=${query}`,
     }),
-    filterJobs: builder.query<void, string>({
-      query: (filterQuery) => `/filter?${filterQuery}`,
-    }),
   }),
 })
 
@@ -56,5 +54,4 @@ export const {
   useAddViewCountMutation,
   useGetTotalJobsQuery,
   useGetSearchedJobQuery,
-  useFilterJobsQuery,
 } = jobsApi

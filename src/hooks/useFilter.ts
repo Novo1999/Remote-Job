@@ -3,11 +3,14 @@ import { useGetAllJobsQuery } from '@/app/features/jobsApi/jobsApi'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
 
 export const useFilter = () => {
-  const { filterBy } = useAppSelector((state) => state.filter)
+  const { filterBy, filterQuery } = useAppSelector((state) => state.filter)
   const dispatch = useAppDispatch()
+
   const { data, isLoading } = useGetAllJobsQuery({
     sortBy: '',
     limit: 0,
+    filterBy: '',
+    q: '',
   })
 
   const handleSalary = (value: number[]) => {

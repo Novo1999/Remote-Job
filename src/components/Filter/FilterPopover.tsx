@@ -11,28 +11,32 @@ import { Button } from '@/components/ui/button'
 import { constructFilterQuery } from '@/utils/constructFilterQuery'
 import { IoFilterSharp } from 'react-icons/io5'
 import Filter from './Filter'
-import { useEffect } from 'react'
+import { useChangeSearchParams } from '@/hooks/useChangeSearchParams'
 
 // will show when data is loading so user cannot go to filter when data has not arrived yet, as it will break the application
 const spinner = <span className='loading loading-infinity loading-sm'></span>
 
 const FilterPopover = () => {
   const dispatch = useAppDispatch()
+  const { filterBy, filterOpen } = useAppSelector((state) => state.filter)
   const { data, isLoading, isError } = useGetAllJobsQuery({
     sortBy: '',
     limit: 0,
+    filterBy: '',
+    q: '',
   })
-  const { filterBy, filterOpen, filterQuery } = useAppSelector(
-    (state) => state.filter
-  )
-  const { sortBy } = useAppSelector((state) => state.sort)
 
-  console.log(filterQuery)
+  const { handleFilter } = useChangeSearchParams()
 
   const handleSubmit = () => {
     const query = constructFilterQuery(filterBy)
     dispatch(setFilterQuery({ query, isFiltering: true }))
     dispatch(setFilterOpen(false))
+    handleFilter(query)
+    // auto scroll was bugging here so this will fix it for now  :)
+    setTimeout(() => {
+      scroll({ top: 699, behavior: 'smooth' })
+    }, 100)
   }
   // check if there is any filter option selected
   const hasFilter = Object.values(filterBy).some(

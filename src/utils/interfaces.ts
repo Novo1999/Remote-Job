@@ -26,6 +26,8 @@ export interface Job {
 export interface GetJobs {
   sortBy: string | null
   limit: number
+  filterBy?: string
+  q?: string
 }
 export interface GetRandomJobs {
   id: string

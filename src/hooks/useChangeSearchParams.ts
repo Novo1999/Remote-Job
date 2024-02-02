@@ -13,5 +13,17 @@ export const useChangeSearchParams = () => {
     router.push(pathname + '?' + params.toString(), { scroll: false })
   }
 
-  return { handleSort, sortParam, router }
+  const handleFilter = (value: string) => {
+    const params = new URLSearchParams(searchParams.toString())
+    params.set('filter', value)
+    router.push(pathname + '?' + params.toString(), { scroll: false })
+  }
+
+  const handleQuery = (value: string) => {
+    const params = new URLSearchParams(searchParams.toString())
+    params.set('q', value)
+    router.push(pathname + '?' + params.toString(), { scroll: false })
+  }
+
+  return { handleSort, sortParam, router, handleFilter, handleQuery }
 }

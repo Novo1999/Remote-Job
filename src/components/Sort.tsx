@@ -10,8 +10,7 @@ import { useChangeSearchParams } from '@/hooks/useChangeSearchParams'
 import { MdSort } from 'react-icons/md'
 
 const Sort = () => {
-  const { handleSort } = useChangeSearchParams()
-  const { sortParam } = useChangeSearchParams()
+  const { handleSort, sortParam } = useChangeSearchParams()
 
   return (
     <div className='w-full'>

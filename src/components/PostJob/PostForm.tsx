@@ -93,7 +93,7 @@ const PostForm = () => {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    values
   }
   return (
     <Form {...form}>

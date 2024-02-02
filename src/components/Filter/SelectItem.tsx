@@ -5,6 +5,7 @@ import { setMaxFilterCount } from '@/utils/setMaxFilterCount'
 import { setSelectItemColor } from '@/utils/setSelectItemColor'
 import React, { useState } from 'react'
 import MoreOrLessButton from './MoreOrLess'
+import { options } from '../Job/JobChart'
 
 const MultiSelect = ({
   options,

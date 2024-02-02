@@ -1,7 +1,8 @@
 import { FaLocationDot, FaThumbsUp, FaUserTie } from 'react-icons/fa6'
 import { BiSolidCategory } from 'react-icons/bi'
-import { MultiSelect, MultiSelectProps } from './SelectItem'
+import { MultiSelect } from './SelectItem'
 import { Label } from '../ui/label'
+import { MultiSelectProps } from '@/utils/interfaces'
 
 const FilterLabel = ({
   category,
