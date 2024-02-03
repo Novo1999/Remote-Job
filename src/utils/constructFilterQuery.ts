@@ -14,7 +14,7 @@ export const constructFilterQuery = (filterBy: FilterParam) => {
   }
 
   // Add the salary to the end of the query
-  query += `salary=${Math.floor(filterBy.salary / 1000)}`
+  query += `salary=${Math.floor(filterBy.salary / 1000)}` // the backend is implemented in a way where it uses 100 for 100k but frontend inputs are 100000 so had to do this here, could be handled differently
 
   return query
 }

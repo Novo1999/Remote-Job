@@ -6,7 +6,7 @@ export const useChangeSearchParams = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const sortParam = searchParams.get('sort')
-
+  const hasSearchParam = searchParams.has('q')
   const doParamsOperation = (param: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString())
     params.set(param, value)
@@ -59,5 +59,6 @@ export const useChangeSearchParams = () => {
     hasFilterValue,
     handleResetSearch,
     handleResetSort,
+    hasSearchParam,
   }
 }

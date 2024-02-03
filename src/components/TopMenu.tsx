@@ -14,7 +14,7 @@ import { ReactNode } from 'react'
 import { BsFillInfoCircleFill } from 'react-icons/bs'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-
+import { IoMdLogIn } from 'react-icons/io'
 const MenuBtn = ({
   menuText,
   icon,
@@ -64,6 +64,12 @@ const TopMenu = () => {
               className='bg-purple-500 hover:bg-purple-600'
               menuText='About'
               icon={<BsFillInfoCircleFill />}
+            />
+            <MenuBtn
+              onClick={() => handleRouting('/login')}
+              className='bg-blue-500 hover:bg-blue-600'
+              menuText='Sign Up/Log in'
+              icon={<RiLoginBoxFill />}
             />
           </div>
           <NavigationMenuContent>

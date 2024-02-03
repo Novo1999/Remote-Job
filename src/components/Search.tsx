@@ -20,7 +20,7 @@ const Search = () => {
     isSearching,
   } = useSearch()
 
-  const { handleResetSearch } = useChangeSearchParams()
+  const { handleResetSearch, hasSearchParam } = useChangeSearchParams()
 
   return (
     <div className='flex items-center mt-8 w-full lg:w-[26rem] xl:w-[30rem] 2xl:w-[32rem] mx-auto relative'>
@@ -43,8 +43,8 @@ const Search = () => {
         className='pl-12 text-black rounded-full font-montserrat font-semibold'
         type='text'
       />
-
-      {isSearching && (
+      {/* CROSS BUTTON */}
+      {hasSearchParam && (
         <Button
           onClick={() => {
             setSearchValue('')

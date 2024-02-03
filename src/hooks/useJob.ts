@@ -41,7 +41,6 @@ export const useJob = () => {
     isError,
     error,
     data,
-    // searchData,
     isSearching,
     ref,
   }
