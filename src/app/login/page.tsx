@@ -8,8 +8,8 @@ import FormLink from '@/components/AuthForm/FormLink'
 import { useAuth } from '@/hooks/useAuth'
 import Image from 'next/image'
 import Link from 'next/link'
+import { RiLoginCircleFill } from 'react-icons/ri'
 import loginImg from '../../assets/loginImg.jpg'
-import ForgotPassword from '@/components/AuthForm/ForgotPassword'
 
 const Page = () => {
   const { register, handleSubmit, onSubmitLoginUser } = useAuth()
@@ -27,7 +27,7 @@ const Page = () => {
         onSubmit={handleSubmit(onSubmitLoginUser)}
         className='w-full px-6 py-8 md:px-8 lg:w-1/2'
       >
-        <FormHeader text='login with email' />
+        <FormHeader icon={<RiLoginCircleFill />} text='login with email' />
         <FormInput
           label='Email Address'
           register={register}

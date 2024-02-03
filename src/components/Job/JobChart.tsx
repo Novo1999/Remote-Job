@@ -58,7 +58,7 @@ const JobChart = ({ data: jobs }) => {
   }
 
   return (
-    <div className='w-[18rem] h-[20rem] sm:w-[30rem] sm:h-[30rem] lg:w-[40rem] lg:h-[40rem] flex items-center justify-center'>
+    <div className='w-[18rem] h-[20rem] sm:w-[30rem] sm:h-[30rem] lg:w-[40rem] lg:h-[40rem] flex items-center justify-center relative right-3'>
       <Bar width={100} height={100} options={options} data={data} />
     </div>
   )

@@ -1,10 +1,11 @@
+import { ReactNode } from 'react'
 import { RiLoginCircleFill } from 'react-icons/ri'
 
-const FormHeader = ({ text }: { text: string }) => {
+const FormHeader = ({ text, icon }: { text: string; icon: ReactNode }) => {
   return (
     <>
       <div className='flex justify-center mx-auto text-black text-4xl'>
-        <RiLoginCircleFill />
+        {icon}
       </div>
       <p className='mt-3 text-xl text-center text-gray-600 dark:text-gray-200'>
         Welcome back!

@@ -9,6 +9,7 @@ import FormHeader from '@/components/AuthForm/FormHeader'
 import FormInput from '@/components/AuthForm/FormInput'
 import FormButton from '@/components/AuthForm/FormButton'
 import FormLink from '@/components/AuthForm/FormLink'
+import { FaHandshakeSimple } from 'react-icons/fa6'
 
 const Page = () => {
   const { register, handleSubmit, onSubmitRegisterUser } = useAuth()
@@ -25,7 +26,7 @@ const Page = () => {
         onSubmit={handleSubmit(onSubmitRegisterUser)}
         className='w-full px-6 py-8 md:px-8 lg:w-1/2'
       >
-        <FormHeader text='Create an account' />
+        <FormHeader icon={<FaHandshakeSimple />} text='Create an account' />
         <FormInput
           label='Email Address'
           register={register}
