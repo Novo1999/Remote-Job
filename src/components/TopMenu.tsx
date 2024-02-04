@@ -15,17 +15,24 @@ import { BsFillInfoCircleFill } from 'react-icons/bs'
 import { FaBriefcase } from 'react-icons/fa6'
 import { RiAdvertisementFill, RiLoginBoxFill } from 'react-icons/ri'
 import ProfileDropdownMenu from './ProfileDropdownMenu'
+import { Avatar } from './ui/avatar'
+import { RxAvatar } from 'react-icons/rx'
 const MenuBtn = ({
   menuText,
   icon,
   className,
   onClick,
+  isLoggedIn,
 }: {
   menuText: string
   icon: ReactNode
   className: string
   onClick: () => void
+  isLoggedIn?: boolean
 }) => {
+  if (isLoggedIn) {
+    return <ProfileDropdownMenu />
+  }
   return (
     <Button
       onClick={onClick}
@@ -37,13 +44,12 @@ const MenuBtn = ({
 }
 
 const TopMenu = () => {
-  const { user } = useAppSelector((state) => state.user)
-  console.log(user)
+  const { user, isLoading } = useAppSelector((state) => state.user)
   const router = useRouter()
   const handleRouting = (href: string) => {
     router.push(href)
   }
-
+  console.log(user)
   return (
     <NavigationMenu className='font-poppins'>
       <NavigationMenuList>
@@ -67,16 +73,14 @@ const TopMenu = () => {
               menuText='About'
               icon={<BsFillInfoCircleFill />}
             />
-            {!user?.email ? (
-              <MenuBtn
-                onClick={() => handleRouting('/login')}
-                className='bg-blue-500 hover:bg-blue-600'
-                menuText='Sign Up/Log in'
-                icon={<RiLoginBoxFill />}
-              />
-            ) : (
-              <ProfileDropdownMenu />
-            )}
+
+            <MenuBtn
+              onClick={() => handleRouting('/login')}
+              className='bg-blue-500 hover:bg-blue-600'
+              menuText={!user?.email ? 'Sign Up/Log in' : user.displayName!}
+              icon={!user.email && <RiLoginBoxFill />}
+              isLoggedIn={Boolean(user?.email)}
+            />
           </div>
           <NavigationMenuContent>
             <NavigationMenuLink className='w-full px-10'>

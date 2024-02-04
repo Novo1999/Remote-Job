@@ -1,9 +1,11 @@
-import { IFormInput } from '@/hooks/useAuth'
+import { usePathname } from 'next/navigation'
 import { UseFormRegister } from 'react-hook-form'
 import ForgotPassword from './ForgotPassword'
-import { usePathname } from 'next/navigation'
 
 type RegisterName = 'email' | 'password' | 'displayName'
+
+const inputClass =
+  'block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300'
 
 const FormInput = ({
   label,
@@ -11,7 +13,7 @@ const FormInput = ({
   registerName,
 }: {
   label: string
-  register: UseFormRegister<IFormInput>
+  register: UseFormRegister<any>
   registerName: RegisterName
 }) => {
   const pathname = usePathname()
@@ -31,7 +33,8 @@ const FormInput = ({
       </div>
       <input
         {...register(registerName, { required: true })}
-        className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300'
+        className={inputClass}
+        type={registerName === 'password' ? 'password' : 'text'}
       />
     </div>
   )

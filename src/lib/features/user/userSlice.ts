@@ -3,6 +3,7 @@ import { User } from 'firebase/auth'
 
 const initialState = {
   user: {} as User,
+  isLoading: true,
 }
 
 const userSlice = createSlice({
@@ -12,8 +13,11 @@ const userSlice = createSlice({
     setCurrentUser: (state, action) => {
       state.user = action.payload
     },
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload
+    },
   },
 })
 
-export const { setCurrentUser } = userSlice.actions
+export const { setCurrentUser, setIsLoading } = userSlice.actions
 export default userSlice.reducer

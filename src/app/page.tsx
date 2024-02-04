@@ -4,14 +4,12 @@ import Hero from '@/components/Hero'
 import JobContainer from '@/components/JobContainer'
 import Search from '@/components/Search'
 import Sort from '@/components/Sort'
-import { useAuth } from '@/hooks/useAuth'
 import { useChangeSearchParams } from '@/hooks/useChangeSearchParams'
+import useInitAuth from '@/hooks/useInitAuth'
 
 export default function Home() {
   const { handleResetFilter, hasFilterValue } = useChangeSearchParams()
-  const { initAuth } = useAuth()
-
-  initAuth() // logs in current user
+  useInitAuth() // logs in current user
 
   return (
     <>

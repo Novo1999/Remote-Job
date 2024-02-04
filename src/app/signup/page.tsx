@@ -1,19 +1,20 @@
 'use client'
 import AuthForm from '@/components/AuthForm/AuthForm'
-import FormImage from '@/components/AuthForm/FormImage'
-import { useAuth } from '@/hooks/useAuth'
-import Image from 'next/image'
-import Link from 'next/link'
-import signUpImg from '../../assets/signupImg.jpg'
-import FormHeader from '@/components/AuthForm/FormHeader'
-import FormInput from '@/components/AuthForm/FormInput'
 import FormButton from '@/components/AuthForm/FormButton'
+import FormError from '@/components/AuthForm/FormError'
+import FormHeader from '@/components/AuthForm/FormHeader'
+import FormImage from '@/components/AuthForm/FormImage'
+import FormInput from '@/components/AuthForm/FormInput'
 import FormLink from '@/components/AuthForm/FormLink'
-import { FaHandshakeSimple } from 'react-icons/fa6'
-import { z } from 'zod'
+import { useAuth } from '@/hooks/useAuth'
 import { validateEmail } from '@/utils/validateEmail'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Image from 'next/image'
+import Link from 'next/link'
 import { useForm } from 'react-hook-form'
+import { FaHandshakeSimple } from 'react-icons/fa6'
+import { z } from 'zod'
+import signUpImg from '../../assets/signupImg.jpg'
 
 // sign up form schema
 const formSchema = z.object({
@@ -26,7 +27,7 @@ const formSchema = z.object({
       message: 'Name must be at least 6 characters',
     }),
   email: z.string().refine((email) => validateEmail(email), {
-    message: 'Invalid Email',
+    message: 'Invalid email',
   }),
   password: z
     .string()
@@ -41,8 +42,8 @@ const Page = () => {
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
-  console.log(errors)
   const { onSubmitRegisterUser } = useAuth(formSchema)
+
   return (
     <AuthForm>
       <FormImage>
@@ -62,16 +63,25 @@ const Page = () => {
           register={register}
           registerName='displayName'
         />
+        <FormError>
+          {errors.hasOwnProperty('displayName') && errors?.displayName?.message}
+        </FormError>
         <FormInput
           label='Email Address'
           register={register}
           registerName='email'
         />
+        <FormError>
+          {errors.hasOwnProperty('email') && errors?.email?.message}
+        </FormError>
         <FormInput
           label='Password'
           register={register}
           registerName='password'
         />
+        <FormError>
+          {errors.hasOwnProperty('password') && errors?.password?.message}
+        </FormError>
         <FormButton>Sign Up</FormButton>
         <FormLink>
           <Link

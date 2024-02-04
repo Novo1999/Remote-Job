@@ -10,14 +10,21 @@ import { useAuth } from '@/hooks/useAuth'
 import { useAppSelector } from '@/lib/features/hooks'
 
 const ProfileDropdownMenu = () => {
-  const { user } = useAppSelector((state) => state.user)
+  const { user, isLoading } = useAppSelector((state) => state.user)
   const { logoutUser } = useAuth()
   const displayName = user && user.email && user.displayName
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className='bg-white text-black rounded-md px-4 hover:bg-slate-200 transition-colors'>
-        {displayName}
+      <DropdownMenuTrigger
+        disabled={isLoading}
+        className='bg-white text-black rounded-md px-4 hover:bg-slate-200 transition-colors'
+      >
+        {isLoading ? (
+          <span className='loading loading-infinity loading-sm'></span>
+        ) : (
+          displayName
+        )}
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-48 relative right-7'>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>

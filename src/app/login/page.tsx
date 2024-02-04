@@ -14,6 +14,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { validateEmail } from '@/utils/validateEmail'
+import FormError from '@/components/AuthForm/FormError'
 
 // login form schema
 const formSchema = z.object({
@@ -34,7 +35,6 @@ const Page = () => {
     resolver: zodResolver(formSchema),
   })
   const { onSubmitLoginUser } = useAuth(formSchema)
-
   return (
     <AuthForm>
       <FormImage>
@@ -54,11 +54,17 @@ const Page = () => {
           register={register}
           registerName='email'
         />
+        <FormError>
+          {errors.hasOwnProperty('email') && errors?.email?.message}
+        </FormError>
         <FormInput
           label='Password'
           register={register}
           registerName='password'
         />
+        <FormError>
+          {errors.hasOwnProperty('password') && errors?.password?.message}
+        </FormError>
         <FormButton>Log In</FormButton>
         <FormLink>
           <Link

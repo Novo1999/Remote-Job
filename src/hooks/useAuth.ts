@@ -22,23 +22,27 @@ export type FormSchemaType = ZodObject<{
 export const useAuth = (formSchema: FormSchemaType) => {
   const dispatch = useAppDispatch()
 
+  // REGISTER SUBMIT
   const onSubmitRegisterUser: SubmitHandler<z.infer<typeof formSchema>> = (
     data
   ) => {
     registerUser(data.email, data.password, data.displayName as string)
   }
+  // LOGIN SUBMIT
   const onSubmitLoginUser: SubmitHandler<z.infer<typeof formSchema>> = (
     data
   ) => {
     loginUser(data.email, data.password)
   }
 
+  // CHECK AUTH STATUS
   const initAuth = () => {
     onAuthStateChanged(auth, (currentUser) => {
       dispatch(setCurrentUser(currentUser))
     })
   }
 
+  // REGISTER FN
   const registerUser = async (
     email: string,
     password: string,
@@ -50,15 +54,18 @@ export const useAuth = (formSchema: FormSchemaType) => {
       await updateProfile(user.user, {
         displayName: displayName,
       })
-
-      console.log(user)
+      initAuth()
+      toast.success(`Welcome, ${user.user.displayName}`, {
+        position: 'bottom-right',
+      })
     } catch (error) {
       if (error instanceof Error) {
-        toast.error(error.message.split(': ')[1])
+        toast.error(error.message.split(': ')[1]) // omitting the 'firebase: ' text
       }
     }
   }
 
+  // RESET FN
   const handleReset = async (email: string) => {
     try {
       await sendPasswordResetEmail(auth, email)
@@ -69,10 +76,14 @@ export const useAuth = (formSchema: FormSchemaType) => {
     }
   }
 
+  // LOGIN FN
   const loginUser = async (email: string, password: string) => {
     try {
       const user = await signInWithEmailAndPassword(auth, email, password)
-      console.log(user)
+      toast.success(`Welcome, ${user.user.displayName}`, {
+        position: 'bottom-right',
+      })
+      initAuth()
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message.split(': ')[1])
@@ -80,10 +91,12 @@ export const useAuth = (formSchema: FormSchemaType) => {
     }
   }
 
+  // LOG OUT FN
   const logoutUser = async () => {
     await signOut(auth)
   }
 
+  // FORGOT PASSWORD
   const forgotPassword = async (email: string) => {
     await handleReset(email)
   }
