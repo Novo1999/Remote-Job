@@ -2,11 +2,11 @@
 import Advertise from '@/components/Advertise'
 import Navbar from '@/components/Navbar'
 import Newsletter from '@/components/Newsletter'
-
-import { Provider } from 'react-redux'
-import './globals.css'
-import { chewy, montserrat, montserrat2, oswald, poppins } from './fonts'
 import StoreProvider from '@/components/StoreProvider'
+import { chewy, montserrat, montserrat2, oswald, poppins } from './fonts'
+import './globals.css'
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify'
 
 export default function RootLayout({
   children,
@@ -23,6 +23,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Newsletter />
+          <ToastContainer />
         </body>
       </StoreProvider>
     </html>

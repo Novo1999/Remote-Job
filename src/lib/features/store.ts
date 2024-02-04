@@ -4,6 +4,7 @@ import limitReducer from './limit/limitSlice'
 import sortReducer from './sort/sortSlice'
 import searchReducer from './search/searchSlice'
 import filterReducer from './filter/filterSlice'
+import userReducer from './user/userSlice'
 
 export const makeStore = () =>
   configureStore({
@@ -13,8 +14,12 @@ export const makeStore = () =>
       sort: sortReducer,
       search: searchReducer,
       filter: filterReducer,
+      user: userReducer,
     },
-    middleware: (gDM) => gDM().concat(api.middleware),
+    middleware: (gDM) =>
+      gDM({
+        serializableCheck: false,
+      }).concat(api.middleware),
   })
 
 export type AppStore = ReturnType<typeof makeStore>

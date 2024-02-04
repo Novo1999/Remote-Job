@@ -10,9 +10,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { RiLoginCircleFill } from 'react-icons/ri'
 import loginImg from '../../assets/loginImg.jpg'
+import { useEffect } from 'react'
+import { toast } from 'react-toastify'
 
 const Page = () => {
-  const { register, handleSubmit, onSubmitLoginUser } = useAuth()
+  const { register, handleSubmit, onSubmitLoginUser, error } = useAuth()
 
   return (
     <AuthForm>

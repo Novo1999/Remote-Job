@@ -1,4 +1,5 @@
 'use client'
+import { Button } from '@/components/ui/button'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -7,14 +8,13 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
-import { Button } from '@/components/ui/button'
-import { FaBriefcase } from 'react-icons/fa6'
-import { RiAdvertisementFill, RiLoginBoxFill } from 'react-icons/ri'
+import { useAppSelector } from '@/lib/features/hooks'
+import { useRouter } from 'next/navigation'
 import { ReactNode } from 'react'
 import { BsFillInfoCircleFill } from 'react-icons/bs'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { IoMdLogIn } from 'react-icons/io'
+import { FaBriefcase } from 'react-icons/fa6'
+import { RiAdvertisementFill, RiLoginBoxFill } from 'react-icons/ri'
+import ProfileDropdownMenu from './ProfileDropdownMenu'
 const MenuBtn = ({
   menuText,
   icon,
@@ -37,6 +37,8 @@ const MenuBtn = ({
 }
 
 const TopMenu = () => {
+  const { user } = useAppSelector((state) => state.user)
+  console.log(user)
   const router = useRouter()
   const handleRouting = (href: string) => {
     router.push(href)
@@ -65,12 +67,16 @@ const TopMenu = () => {
               menuText='About'
               icon={<BsFillInfoCircleFill />}
             />
-            <MenuBtn
-              onClick={() => handleRouting('/login')}
-              className='bg-blue-500 hover:bg-blue-600'
-              menuText='Sign Up/Log in'
-              icon={<RiLoginBoxFill />}
-            />
+            {!user?.email ? (
+              <MenuBtn
+                onClick={() => handleRouting('/login')}
+                className='bg-blue-500 hover:bg-blue-600'
+                menuText='Sign Up/Log in'
+                icon={<RiLoginBoxFill />}
+              />
+            ) : (
+              <ProfileDropdownMenu />
+            )}
           </div>
           <NavigationMenuContent>
             <NavigationMenuLink className='w-full px-10'>

@@ -1,42 +1,61 @@
 import { auth } from '@/firebase/config'
+import { useAppDispatch } from '@/lib/features/hooks'
+import { setCurrentUser } from '@/lib/features/user/userSlice'
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
-  sendPasswordResetEmail,
+  updateProfile,
 } from 'firebase/auth'
+import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 export interface IFormInput {
   email: string
   password: string
+  displayName: string
 }
+
 export const useAuth = () => {
+  const dispatch = useAppDispatch()
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>()
   const onSubmitRegisterUser: SubmitHandler<IFormInput> = (data) => {
-    registerUser(data.email, data.password)
+    registerUser(data.email, data.password, data.displayName)
   }
   const onSubmitLoginUser: SubmitHandler<IFormInput> = (data) => {
     loginUser(data.email, data.password)
   }
 
-  onAuthStateChanged(auth, (currentUser) => {
-    console.log(currentUser)
-  })
+  const initAuth = () => {
+    onAuthStateChanged(auth, (currentUser) => {
+      dispatch(setCurrentUser(currentUser))
+    })
+  }
 
-  console.log(auth.currentUser?.email)
-
-  const registerUser = async (email: string, password: string) => {
+  const registerUser = async (
+    email: string,
+    password: string,
+    displayName: string
+  ) => {
     try {
       const user = await createUserWithEmailAndPassword(auth, email, password)
+
+      await updateProfile(user.user, {
+        displayName: displayName,
+      })
+
       console.log(user)
     } catch (error) {
-      if (error instanceof Error) console.log(error.message)
+      if (error instanceof Error) {
+        toast.error(error.message.split(': ')[1])
+      }
     }
   }
 
@@ -44,8 +63,9 @@ export const useAuth = () => {
     try {
       await sendPasswordResetEmail(auth, email)
     } catch (error) {
-      if (error instanceof Error)
-        console.error('Error sending reset email:', error.message)
+      if (error instanceof Error) {
+        toast.error(error.message.split(': ')[1])
+      }
     }
   }
 
@@ -54,7 +74,9 @@ export const useAuth = () => {
       const user = await signInWithEmailAndPassword(auth, email, password)
       console.log(user)
     } catch (error) {
-      if (error instanceof Error) console.log(error.message)
+      if (error instanceof Error) {
+        toast.error(error.message.split(': ')[1])
+      }
     }
   }
 
@@ -74,5 +96,6 @@ export const useAuth = () => {
     onSubmitRegisterUser,
     onSubmitLoginUser,
     forgotPassword,
+    initAuth,
   }
 }

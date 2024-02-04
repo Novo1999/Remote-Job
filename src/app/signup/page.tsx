@@ -28,6 +28,11 @@ const Page = () => {
       >
         <FormHeader icon={<FaHandshakeSimple />} text='Create an account' />
         <FormInput
+          label='Name'
+          register={register}
+          registerName='displayName'
+        />
+        <FormInput
           label='Email Address'
           register={register}
           registerName='email'

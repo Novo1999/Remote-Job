@@ -87,12 +87,13 @@ const Dropdown = () => {
         <Content
           onClick={() => handleRouting('/login')}
           className='text-blue-500 hover:text-blue-600'
-          menuText='Login'
+          menuText='Sign up/Login'
           icon={<RiLoginBoxFill />}
         />
       </DropdownMenuContent>
     </DropdownMenu>
   )
 }
+// TODO: WORK ON THE MOBILE DROPDOWN COMPONENT
 
 export default Dropdown
