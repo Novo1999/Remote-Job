@@ -9,27 +9,27 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth'
-import { useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
+import { ZodEffects, ZodObject, ZodString, z } from 'zod'
 
-export interface IFormInput {
-  email: string
-  password: string
-  displayName: string
-}
+export type FormSchemaType = ZodObject<{
+  displayName?: ZodEffects<ZodEffects<ZodString, string, string>>
+  email: ZodEffects<ZodString, string, string>
+  password: ZodEffects<ZodString, string, string>
+}>
 
-export const useAuth = () => {
+export const useAuth = (formSchema: FormSchemaType) => {
   const dispatch = useAppDispatch()
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IFormInput>()
-  const onSubmitRegisterUser: SubmitHandler<IFormInput> = (data) => {
-    registerUser(data.email, data.password, data.displayName)
+
+  const onSubmitRegisterUser: SubmitHandler<z.infer<typeof formSchema>> = (
+    data
+  ) => {
+    registerUser(data.email, data.password, data.displayName as string)
   }
-  const onSubmitLoginUser: SubmitHandler<IFormInput> = (data) => {
+  const onSubmitLoginUser: SubmitHandler<z.infer<typeof formSchema>> = (
+    data
+  ) => {
     loginUser(data.email, data.password)
   }
 
@@ -89,9 +89,6 @@ export const useAuth = () => {
   }
 
   return {
-    register,
-    handleSubmit,
-    errors,
     logoutUser,
     onSubmitRegisterUser,
     onSubmitLoginUser,

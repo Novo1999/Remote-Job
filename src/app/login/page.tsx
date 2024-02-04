@@ -10,11 +10,30 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { RiLoginCircleFill } from 'react-icons/ri'
 import loginImg from '../../assets/loginImg.jpg'
-import { useEffect } from 'react'
-import { toast } from 'react-toastify'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { validateEmail } from '@/utils/validateEmail'
+
+// login form schema
+const formSchema = z.object({
+  email: z.string().refine((email) => validateEmail(email), {
+    message: 'Invalid Email',
+  }),
+  password: z
+    .string()
+    .refine((name) => name !== '', { message: 'Please provide password' }),
+})
 
 const Page = () => {
-  const { register, handleSubmit, onSubmitLoginUser, error } = useAuth()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+  })
+  const { onSubmitLoginUser } = useAuth(formSchema)
 
   return (
     <AuthForm>

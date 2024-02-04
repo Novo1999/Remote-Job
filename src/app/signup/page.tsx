@@ -10,9 +10,39 @@ import FormInput from '@/components/AuthForm/FormInput'
 import FormButton from '@/components/AuthForm/FormButton'
 import FormLink from '@/components/AuthForm/FormLink'
 import { FaHandshakeSimple } from 'react-icons/fa6'
+import { z } from 'zod'
+import { validateEmail } from '@/utils/validateEmail'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+
+// sign up form schema
+const formSchema = z.object({
+  displayName: z
+    .string()
+    .refine((name) => name !== '', {
+      message: 'Please provide a name',
+    })
+    .refine((name) => name.length > 6, {
+      message: 'Name must be at least 6 characters',
+    }),
+  email: z.string().refine((email) => validateEmail(email), {
+    message: 'Invalid Email',
+  }),
+  password: z
+    .string()
+    .refine((name) => name !== '', { message: 'Please provide password' }),
+})
 
 const Page = () => {
-  const { register, handleSubmit, onSubmitRegisterUser } = useAuth()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+  })
+  console.log(errors)
+  const { onSubmitRegisterUser } = useAuth(formSchema)
   return (
     <AuthForm>
       <FormImage>
