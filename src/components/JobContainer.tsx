@@ -4,6 +4,7 @@ import Error, { EmptyResponse } from './Dummies'
 import JobChart from './Job/JobChart'
 import JobItem from './Job/JobItem'
 import Skeleton from './Job/Skeleton'
+import { Job } from '@/utils/interfaces'
 
 const JobContainer = () => {
   const { isLoading, isError, error, data, ref, isSearching } = useJob()
@@ -30,7 +31,7 @@ const JobContainer = () => {
   if (!isLoading && !isError && data?.length! > 0) {
     content = (
       <>
-        <JobChart data={data} />
+        <JobChart data={data as Job[]} />
         {data?.map((job, index) => (
           <JobItem ref={ref} jobPost={job} index={index} key={job._id} />
         ))}

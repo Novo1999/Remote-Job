@@ -1,5 +1,5 @@
 'use client'
-import { changeSearchInput } from '@/app/features/search/searchSlice'
+import { changeSearchInput } from '@/lib/features/search/searchSlice'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useSearch } from '@/hooks/useSearch'

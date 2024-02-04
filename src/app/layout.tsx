@@ -5,8 +5,8 @@ import Newsletter from '@/components/Newsletter'
 
 import { Provider } from 'react-redux'
 import './globals.css'
-import store from './store'
 import { chewy, montserrat, montserrat2, oswald, poppins } from './fonts'
+import StoreProvider from '@/components/StoreProvider'
 
 export default function RootLayout({
   children,
@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <Provider store={store}>
+      <StoreProvider>
         <body
           className={`${oswald.variable} ${poppins.variable} ${montserrat2.variable} ${montserrat.variable} ${chewy.variable}`}
         >
@@ -24,7 +24,7 @@ export default function RootLayout({
           {children}
           <Newsletter />
         </body>
-      </Provider>
+      </StoreProvider>
     </html>
   )
 }

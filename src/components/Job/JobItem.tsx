@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import dummyLogo from '../../../public/images/dummylogo.png'
 
-import { useAddViewCountMutation } from '@/app/features/jobsApi/jobsApi'
+import { useAddViewCountMutation } from '@/lib/features/jobsApi/jobsApi'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { Ref, forwardRef, useState } from 'react'

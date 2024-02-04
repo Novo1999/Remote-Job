@@ -1,4 +1,4 @@
-import { Job } from '@/app/features/jobsApi/jobsApi'
+import { Job } from '@/lib/features/jobsApi/jobsApi'
 import { useState } from 'react'
 import { FaDollarSign, FaLocationDot } from 'react-icons/fa6'
 import Star from './Star'

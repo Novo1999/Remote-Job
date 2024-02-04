@@ -5,7 +5,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import JobItem from '../Job/JobItem'
-import { useGetRandomJobsQuery } from '@/app/features/jobsApi/jobsApi'
+import { useGetRandomJobsQuery } from '@/lib/features/jobsApi/jobsApi'
 import Error, { EmptyResponse } from '../Dummies'
 const SimilarJobs = ({ id, position }: { id: string; position: string }) => {
   const { isLoading, isError, error, data } = useGetRandomJobsQuery({

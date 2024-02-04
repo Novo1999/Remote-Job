@@ -4,9 +4,9 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import {
   setFilterOpen,
   setFilterQuery,
-} from '@/app/features/filter/filterSlice'
-import { useGetAllJobsQuery } from '@/app/features/jobsApi/jobsApi'
-import { useAppDispatch, useAppSelector } from '@/app/hooks'
+} from '@/lib/features/filter/filterSlice'
+import { useGetAllJobsQuery } from '@/lib/features/jobsApi/jobsApi'
+import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
 import { Button } from '@/components/ui/button'
 import { useChangeSearchParams } from '@/hooks/useChangeSearchParams'
 import { constructFilterQuery } from '@/utils/constructFilterQuery'

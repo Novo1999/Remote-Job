@@ -1,9 +1,9 @@
 import {
   useGetAllJobsQuery,
   useGetTotalJobsQuery,
-} from '@/app/features/jobsApi/jobsApi'
-import { changeLimit } from '@/app/features/limit/limitSlice'
-import { useAppDispatch, useAppSelector } from '@/app/hooks'
+} from '@/lib/features/jobsApi/jobsApi'
+import { changeLimit } from '@/lib/features/limit/limitSlice'
+import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
 import { Job } from '@/utils/interfaces'
 import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'

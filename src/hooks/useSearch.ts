@@ -1,7 +1,7 @@
-import { useAppDispatch, useAppSelector } from '@/app/hooks'
+import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
 import { useChangeSearchParams } from './useChangeSearchParams'
 import { useEffect, useRef, useState } from 'react'
-import { changeSearchInput } from '@/app/features/search/searchSlice'
+import { changeSearchInput } from '@/lib/features/search/searchSlice'
 
 type InputEvent =
   | React.KeyboardEvent

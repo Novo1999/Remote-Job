@@ -1,5 +1,5 @@
 'use client'
-import { useGetSingleJobQuery } from '@/app/features/jobsApi/jobsApi'
+import { useGetSingleJobQuery } from '@/lib/features/jobsApi/jobsApi'
 import Error, { EmptyResponse } from '@/components/Dummies'
 import AboutCompany from '@/components/JobDetails/AboutCompany'
 import JobCard from '@/components/JobDetails/JobCard'

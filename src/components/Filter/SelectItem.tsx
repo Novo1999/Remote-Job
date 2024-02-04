@@ -1,5 +1,5 @@
 'use client'
-import { changeFilter } from '@/app/features/filter/filterSlice'
+import { changeFilter } from '@/lib/features/filter/filterSlice'
 import { MultiSelectProps } from '@/utils/interfaces'
 import { setMaxFilterCount } from '@/utils/setMaxFilterCount'
 import { setSelectItemColor } from '@/utils/setSelectItemColor'

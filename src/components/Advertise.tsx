@@ -1,5 +1,5 @@
-import { useGetAllJobsQuery } from '@/app/features/jobsApi/jobsApi'
-import { useAppSelector } from '@/app/hooks'
+import { useGetAllJobsQuery } from '@/lib/features/jobsApi/jobsApi'
+import { useAppSelector } from '@/lib/features/hooks'
 import { Job } from '@/utils/interfaces'
 import { useEffect, useRef, useState } from 'react'
 import { FaCircleInfo } from 'react-icons/fa6'
