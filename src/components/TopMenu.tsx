@@ -1,47 +1,17 @@
 'use client'
-import { Button } from '@/components/ui/button'
 import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 import { useAppSelector } from '@/lib/features/hooks'
 import { useRouter } from 'next/navigation'
-import { ReactNode } from 'react'
 import { BsFillInfoCircleFill } from 'react-icons/bs'
 import { FaBriefcase } from 'react-icons/fa6'
 import { RiAdvertisementFill, RiLoginBoxFill } from 'react-icons/ri'
-import ProfileDropdownMenu from './ProfileDropdownMenu'
-import { Avatar } from './ui/avatar'
-import { RxAvatar } from 'react-icons/rx'
-const MenuBtn = ({
-  menuText,
-  icon,
-  className,
-  onClick,
-  isLoggedIn,
-}: {
-  menuText: string
-  icon: ReactNode
-  className: string
-  onClick: () => void
-  isLoggedIn?: boolean
-}) => {
-  if (isLoggedIn) {
-    return <ProfileDropdownMenu />
-  }
-  return (
-    <Button
-      onClick={onClick}
-      className={`${navigationMenuTriggerStyle()} ${className} flex gap-2 text-white hover:text-white`}
-    >
-      {icon} {menuText}
-    </Button>
-  )
-}
+import MenuBtn from './MenuBtn'
 
 const TopMenu = () => {
   const { user, isLoading } = useAppSelector((state) => state.user)
@@ -78,8 +48,8 @@ const TopMenu = () => {
               onClick={() => handleRouting('/login')}
               className='bg-blue-500 hover:bg-blue-600'
               menuText={!user?.email ? 'Sign Up/Log in' : user.displayName!}
-              icon={!user.email && <RiLoginBoxFill />}
-              isLoggedIn={Boolean(user?.email)}
+              icon={!user?.email && <RiLoginBoxFill />}
+              isLoggedIn={Boolean(user?.email)} // if there is email , returns true
             />
           </div>
           <NavigationMenuContent>

@@ -1,5 +1,5 @@
 'use client'
-import { useJob } from '@/hooks/useJob'
+import { useJob } from '@/hooks/use-job'
 import Error, { EmptyResponse } from './Dummies'
 import JobChart from './Job/JobChart'
 import JobItem from './Job/JobItem'

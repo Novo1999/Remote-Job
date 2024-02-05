@@ -91,18 +91,12 @@ export const useAuth = (formSchema: FormSchemaType) => {
     }
   }
 
-  // LOG OUT FN
-  const logoutUser = async () => {
-    await signOut(auth)
-  }
-
   // FORGOT PASSWORD
   const forgotPassword = async (email: string) => {
     await handleReset(email)
   }
 
   return {
-    logoutUser,
     onSubmitRegisterUser,
     onSubmitLoginUser,
     forgotPassword,

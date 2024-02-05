@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { useChangeSearchParams } from '@/hooks/useChangeSearchParams'
+import { useChangeSearchParams } from '@/hooks/use-change-search-params'
 import { MdSort } from 'react-icons/md'
 
 const Sort = () => {

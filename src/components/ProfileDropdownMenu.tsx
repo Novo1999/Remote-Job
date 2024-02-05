@@ -6,12 +6,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/hooks/use-auth'
 import { useAppSelector } from '@/lib/features/hooks'
+import { logoutUser } from '@/utils/logOut'
 
 const ProfileDropdownMenu = () => {
   const { user, isLoading } = useAppSelector((state) => state.user)
-  const { logoutUser } = useAuth()
+
   const displayName = user && user.email && user.displayName
 
   return (

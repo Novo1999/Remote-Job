@@ -5,7 +5,7 @@ import FormHeader from '@/components/AuthForm/FormHeader'
 import FormImage from '@/components/AuthForm/FormImage'
 import FormInput from '@/components/AuthForm/FormInput'
 import FormLink from '@/components/AuthForm/FormLink'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/hooks/use-auth'
 import Image from 'next/image'
 import Link from 'next/link'
 import { RiLoginCircleFill } from 'react-icons/ri'
@@ -15,6 +15,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { validateEmail } from '@/utils/validateEmail'
 import FormError from '@/components/AuthForm/FormError'
+import useInitAuth from '@/hooks/use-init-auth'
 
 // login form schema
 const formSchema = z.object({
@@ -35,6 +36,8 @@ const Page = () => {
     resolver: zodResolver(formSchema),
   })
   const { onSubmitLoginUser } = useAuth(formSchema)
+  useInitAuth()
+
   return (
     <AuthForm>
       <FormImage>

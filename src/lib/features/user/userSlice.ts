@@ -3,7 +3,7 @@ import { User } from 'firebase/auth'
 
 const initialState = {
   user: {} as User,
-  isLoading: true,
+  isLoading: false,
 }
 
 const userSlice = createSlice({

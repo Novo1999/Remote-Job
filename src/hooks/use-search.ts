@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
-import { useChangeSearchParams } from './useChangeSearchParams'
+import { useChangeSearchParams } from './use-change-search-params'
 import { useEffect, useRef, useState } from 'react'
 import { changeSearchInput } from '@/lib/features/search/searchSlice'
 

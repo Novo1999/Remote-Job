@@ -1,4 +1,4 @@
-import { usePostedDate } from '@/hooks/usePostedDate'
+import { usePostedDate } from '@/hooks/use-posted-date'
 import { Job } from '@/utils/interfaces'
 import { BsFillSignpostFill } from 'react-icons/bs'
 

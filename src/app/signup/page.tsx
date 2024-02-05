@@ -6,7 +6,7 @@ import FormHeader from '@/components/AuthForm/FormHeader'
 import FormImage from '@/components/AuthForm/FormImage'
 import FormInput from '@/components/AuthForm/FormInput'
 import FormLink from '@/components/AuthForm/FormLink'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/hooks/use-auth'
 import { validateEmail } from '@/utils/validateEmail'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
@@ -15,6 +15,7 @@ import { useForm } from 'react-hook-form'
 import { FaHandshakeSimple } from 'react-icons/fa6'
 import { z } from 'zod'
 import signUpImg from '../../assets/signupImg.jpg'
+import useInitAuth from '@/hooks/use-init-auth'
 
 // sign up form schema
 const formSchema = z.object({
@@ -43,6 +44,7 @@ const Page = () => {
     resolver: zodResolver(formSchema),
   })
   const { onSubmitRegisterUser } = useAuth(formSchema)
+  useInitAuth()
 
   return (
     <AuthForm>

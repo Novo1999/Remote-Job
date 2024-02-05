@@ -1,7 +1,7 @@
-import { usePostedDate } from '@/hooks/usePostedDate'
+import { usePostedDate } from '@/hooks/use-posted-date'
 import Ping from '../ui/Ping'
 import { Job } from '@/utils/interfaces'
-import { useChangeSearchParams } from '@/hooks/useChangeSearchParams'
+import { useChangeSearchParams } from '@/hooks/use-change-search-params'
 import { useAppDispatch } from '@/lib/features/hooks'
 import { changeSearchInput } from '@/lib/features/search/searchSlice'
 

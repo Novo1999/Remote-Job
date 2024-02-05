@@ -9,9 +9,10 @@ const useInitAuth = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      dispatch(setCurrentUser(currentUser))
+      dispatch(setIsLoading(true))
       if (currentUser?.email) {
         dispatch(setIsLoading(false))
+        dispatch(setCurrentUser(currentUser))
       }
     })
 

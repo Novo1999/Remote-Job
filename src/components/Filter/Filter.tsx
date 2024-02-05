@@ -1,6 +1,6 @@
 'use client'
 import { Slider } from '@/components/ui/slider'
-import { useFilter } from '@/hooks/useFilter'
+import { useFilter } from '@/hooks/use-filter'
 import { FaDollarSign } from 'react-icons/fa6'
 import { typesArray } from '../../utils/constants'
 import FilterCategory from './FilterCategory'

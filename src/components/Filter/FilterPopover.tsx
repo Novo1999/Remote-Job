@@ -8,7 +8,7 @@ import {
 import { useGetAllJobsQuery } from '@/lib/features/jobsApi/jobsApi'
 import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
 import { Button } from '@/components/ui/button'
-import { useChangeSearchParams } from '@/hooks/useChangeSearchParams'
+import { useChangeSearchParams } from '@/hooks/use-change-search-params'
 import { constructFilterQuery } from '@/utils/constructFilterQuery'
 import { IoFilterSharp } from 'react-icons/io5'
 import Filter from './Filter'

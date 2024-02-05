@@ -2,7 +2,7 @@
 import { Badge } from '@/components/ui/badge'
 import { LuMousePointerClick } from 'react-icons/lu'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { usePostedDate } from '@/hooks/usePostedDate'
+import { usePostedDate } from '@/hooks/use-posted-date'
 import Link from 'next/link'
 import { FaArrowAltCircleRight, FaCheckCircle } from 'react-icons/fa'
 import Star from '../Job/Star'

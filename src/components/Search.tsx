@@ -2,11 +2,11 @@
 import { changeSearchInput } from '@/lib/features/search/searchSlice'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useSearch } from '@/hooks/useSearch'
+import { useSearch } from '@/hooks/use-search'
 import { CiSearch } from 'react-icons/ci'
 import { RxCross2 } from 'react-icons/rx'
 import TypeEffect from './TypeAnimation'
-import { useChangeSearchParams } from '@/hooks/useChangeSearchParams'
+import { useChangeSearchParams } from '@/hooks/use-change-search-params'
 
 const Search = () => {
   const {
