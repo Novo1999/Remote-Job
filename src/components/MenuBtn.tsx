@@ -22,16 +22,14 @@ const MenuBtn = ({
     return <ProfileDropdownMenu />
   }
 
-  if (!isLoggedIn) {
-    return (
-      <Button
-        onClick={onClick}
-        className={`${navigationMenuTriggerStyle()} ${className} flex gap-2 text-white hover:text-white`}
-      >
-        {icon} {menuText}
-      </Button>
-    )
-  }
+  return (
+    <Button
+      onClick={onClick}
+      className={`${navigationMenuTriggerStyle()} ${className} flex gap-2 text-white hover:text-white`}
+    >
+      {icon} {menuText}
+    </Button>
+  )
 }
 
 export default MenuBtn

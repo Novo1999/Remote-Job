@@ -6,20 +6,19 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from '@/components/ui/navigation-menu'
-import { useAppSelector } from '@/lib/features/hooks'
 import { useRouter } from 'next/navigation'
 import { BsFillInfoCircleFill } from 'react-icons/bs'
 import { FaBriefcase } from 'react-icons/fa6'
-import { RiAdvertisementFill, RiLoginBoxFill } from 'react-icons/ri'
+import { RiAdvertisementFill } from 'react-icons/ri'
+import LoginBtn from './LoginBtn'
 import MenuBtn from './MenuBtn'
 
 const TopMenu = () => {
-  const { user, isLoading } = useAppSelector((state) => state.user)
   const router = useRouter()
   const handleRouting = (href: string) => {
     router.push(href)
   }
-  console.log(user)
+
   return (
     <NavigationMenu className='font-poppins'>
       <NavigationMenuList>
@@ -43,14 +42,7 @@ const TopMenu = () => {
               menuText='About'
               icon={<BsFillInfoCircleFill />}
             />
-
-            <MenuBtn
-              onClick={() => handleRouting('/login')}
-              className='bg-blue-500 hover:bg-blue-600'
-              menuText={!user?.email ? 'Sign Up/Log in' : user.displayName!}
-              icon={!user?.email && <RiLoginBoxFill />}
-              isLoggedIn={Boolean(user?.email)} // if there is email , returns true
-            />
+            <LoginBtn />
           </div>
           <NavigationMenuContent>
             <NavigationMenuLink className='w-full px-10'>

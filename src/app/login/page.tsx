@@ -15,7 +15,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { validateEmail } from '@/utils/validateEmail'
 import FormError from '@/components/AuthForm/FormError'
-import useInitAuth from '@/hooks/use-init-auth'
 
 // login form schema
 const formSchema = z.object({
@@ -36,7 +35,6 @@ const Page = () => {
     resolver: zodResolver(formSchema),
   })
   const { onSubmitLoginUser } = useAuth(formSchema)
-  useInitAuth()
 
   return (
     <AuthForm>

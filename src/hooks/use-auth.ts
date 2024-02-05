@@ -6,7 +6,6 @@ import {
   onAuthStateChanged,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
-  signOut,
   updateProfile,
 } from 'firebase/auth'
 import { SubmitHandler } from 'react-hook-form'
@@ -54,7 +53,9 @@ export const useAuth = (formSchema: FormSchemaType) => {
       await updateProfile(user.user, {
         displayName: displayName,
       })
+
       initAuth()
+
       toast.success(`Welcome, ${user.user.displayName}`, {
         position: 'bottom-right',
       })
@@ -100,6 +101,5 @@ export const useAuth = (formSchema: FormSchemaType) => {
     onSubmitRegisterUser,
     onSubmitLoginUser,
     forgotPassword,
-    initAuth,
   }
 }

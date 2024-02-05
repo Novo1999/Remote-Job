@@ -1,18 +1,21 @@
-import { useEffect } from 'react'
-import { onAuthStateChanged } from 'firebase/auth'
-import { useDispatch } from 'react-redux'
-import { setCurrentUser, setIsLoading } from '@/lib/features/user/userSlice'
 import { auth } from '@/firebase/config'
+import { useAppDispatch } from '@/lib/features/hooks'
+import { setCurrentUser, setIsLoading } from '@/lib/features/user/userSlice'
+import { useLogout } from '@/utils/logOut'
+import { onAuthStateChanged } from 'firebase/auth'
+import { useEffect } from 'react'
 
 const useInitAuth = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
+  const logoutUser = useLogout()
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      dispatch(setIsLoading(true))
       if (currentUser?.email) {
         dispatch(setIsLoading(false))
         dispatch(setCurrentUser(currentUser))
+      } else {
+        logoutUser()
       }
     })
 
@@ -20,7 +23,7 @@ const useInitAuth = () => {
       // Unsubscribe when the component unmounts
       unsubscribe()
     }
-  }, [dispatch])
+  }, [dispatch, logoutUser])
 
   return null // You can return something else if needed
 }

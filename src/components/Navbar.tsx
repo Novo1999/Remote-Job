@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import Dropdown from './Dropdown'
 import TopMenu from './TopMenu'
+import useInitAuth from '@/hooks/use-init-auth'
 const Navbar = () => {
+  useInitAuth()
   return (
     <nav className='py-2 flex justify-between px-4 items-center'>
       <Link href='/' className='text-2xl font-chewy'>

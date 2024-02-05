@@ -1,7 +1,7 @@
-import { Job } from '@/lib/features/jobsApi/jobsApi'
 import { useState } from 'react'
 import { FaDollarSign, FaLocationDot } from 'react-icons/fa6'
 import Star from './Star'
+import { Job } from '@/utils/interfaces'
 const JobDetailsPC = ({ jobPost }: { jobPost: Job }) => {
   const [checked, setChecked] = useState(false)
   const {

@@ -5,11 +5,9 @@ import JobContainer from '@/components/JobContainer'
 import Search from '@/components/Search'
 import Sort from '@/components/Sort'
 import { useChangeSearchParams } from '@/hooks/use-change-search-params'
-import useInitAuth from '@/hooks/use-init-auth'
 
-export default function Home() {
+export default function Page() {
   const { handleResetFilter, hasFilterValue } = useChangeSearchParams()
-  useInitAuth() // logs in current user
 
   return (
     <>
