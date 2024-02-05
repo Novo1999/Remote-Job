@@ -25,7 +25,7 @@ const useInitAuth = () => {
     }
   }, [dispatch, logoutUser])
 
-  return null // You can return something else if needed
+  return null
 }
 
 export default useInitAuth

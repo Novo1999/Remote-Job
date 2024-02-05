@@ -1,15 +1,14 @@
 import { useAppSelector } from '@/lib/features/hooks'
 import { useStarJobMutation } from '@/lib/features/jobsApi/jobsApi'
 import { Job } from '@/utils/interfaces'
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useEffect } from 'react'
 
 type Star = {
-  setChecked?: Dispatch<SetStateAction<boolean>>
   className?: string
   job: Job
 }
 
-const Star = ({ setChecked, className, job }: Star) => {
+const Star = ({ className, job }: Star) => {
   const {
     _id,
     isStarred: { userId },
@@ -19,10 +18,16 @@ const Star = ({ setChecked, className, job }: Star) => {
     isLoading,
   } = useAppSelector((state) => state.user) || {}
 
+  useEffect(() => {
+    console.log(2)
+  }, [job])
+
   const [markAsStarred, { isLoading: isStarLoading, isError, error }] =
     useStarJobMutation()
 
   const checked = userId.includes(uid)
+
+  console.log(checked)
 
   const handleCheck = () => {
     markAsStarred({ jobId: _id, userId: uid })

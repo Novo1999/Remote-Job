@@ -1,5 +1,6 @@
 import { GetJobs, GetRandomJobs, Job } from '@/utils/interfaces'
 import api from '../api/apiSlice'
+import { current } from '@reduxjs/toolkit'
 
 const jobsApi = api.injectEndpoints({
   overrideExisting: true,
@@ -26,6 +27,7 @@ const jobsApi = api.injectEndpoints({
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
           jobsApi.util.updateQueryData('getSingleJob', id, (draft: Job) => {
+            console.log(current(draft))
             draft.viewCount += 1
           })
         )
@@ -48,14 +50,29 @@ const jobsApi = api.injectEndpoints({
         body: { userId },
       }),
       async onQueryStarted({ jobId, userId }, { dispatch, queryFulfilled }) {
-        const patchResult = dispatch(
+        // this is for one jobs only
+        const patchResult1 = dispatch(
+          jobsApi.util.updateQueryData('getSingleJob', jobId, (draft: Job) => {
+            console.log(current(draft))
+            // Find the specific job in the draft
+            const jobStarredIdArray = draft.isStarred.userId
+            const idExists = jobStarredIdArray.includes(userId)
+            if (idExists) {
+              const idToRemove = jobStarredIdArray.indexOf(userId)
+              jobStarredIdArray.splice(idToRemove, 1)
+            } else {
+              jobStarredIdArray.push(userId)
+            }
+          })
+        )
+        // for all the jobs, need to update the cache of that
+        const patchResult2 = dispatch(
           jobsApi.util.updateQueryData(
             'getAllJobs',
-            undefined!,
+            { sortBy: '', limit: 0, filterBy: '', q: '' },
             (draft: Job[]) => {
-              const updatedDraft = draft.map((job) => {
+              draft.map((job) => {
                 if (job._id === jobId) {
-                  // Find the specific job in the draft
                   const jobStarredIdArray = job.isStarred.userId
                   const idExists = jobStarredIdArray.includes(userId)
                   if (idExists) {
@@ -67,15 +84,15 @@ const jobsApi = api.injectEndpoints({
                 }
                 return job
               })
-
-              return updatedDraft
+              console.log(current(draft))
             }
           )
         )
         try {
           await queryFulfilled
         } catch (error) {
-          patchResult.undo()
+          patchResult1.undo()
+          patchResult2.undo()
         }
       },
     }),

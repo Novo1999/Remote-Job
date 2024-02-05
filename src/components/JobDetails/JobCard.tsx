@@ -41,7 +41,7 @@ const JobCard = ({ job }: { job: Job }) => {
                 <p className='font-thin flex gap-2 items-center'>
                   <LuMousePointerClick /> Viewed: {viewCount} times
                 </p>
-                <Star />
+                <Star job={job} />
               </div>
             </div>
           </CardTitle>

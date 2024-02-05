@@ -21,6 +21,13 @@ const Advertise = () => {
 
   let content = null
 
+  // for random jobs, as the timer makes the info of ad re render and fetch new, using a ref here shows only one ad and prevents re loading another
+  useEffect(() => {
+    if (!isLoading && !isError) {
+      ref.current = data![Math.floor(Math.random() * data!.length)]
+    }
+  }, [isError, isLoading])
+
   if (isLoading && !ref.current?.company && !ref.current?.position) {
     content = <p>Loading...</p>
   }
@@ -51,13 +58,6 @@ const Advertise = () => {
 
     return () => clearInterval(intervalId)
   }, [])
-
-  // for random jobs, as the timer makes the info of ad re render and fetch new, using a ref here shows only one ad and prevents re loading another
-  useEffect(() => {
-    if (!isLoading && !isError) {
-      ref.current = data![Math.floor(Math.random() * data!.length)]
-    }
-  }, [data, isError, isLoading])
 
   return (
     showAd && (

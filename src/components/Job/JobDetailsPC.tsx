@@ -1,9 +1,7 @@
-import { useState } from 'react'
+import { Job } from '@/utils/interfaces'
 import { FaDollarSign, FaLocationDot } from 'react-icons/fa6'
 import Star from './Star'
-import { Job } from '@/utils/interfaces'
 const JobDetailsPC = ({ jobPost }: { jobPost: Job }) => {
-  const [checked, setChecked] = useState(false)
   const {
     location,
     salary: { max, min },
@@ -23,7 +21,7 @@ const JobDetailsPC = ({ jobPost }: { jobPost: Job }) => {
         </span>
         <button className='text-2xl absolute right-2'>
           <div className='rating rating-md transition-all'>
-            <Star job={jobPost} setChecked={setChecked} />
+            <Star job={jobPost} />
           </div>
         </button>
         <span>

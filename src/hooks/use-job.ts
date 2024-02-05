@@ -1,10 +1,9 @@
+import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
 import {
   useGetAllJobsQuery,
   useGetTotalJobsQuery,
 } from '@/lib/features/jobsApi/jobsApi'
 import { changeLimit } from '@/lib/features/limit/limitSlice'
-import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
-import { Job } from '@/utils/interfaces'
 import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
