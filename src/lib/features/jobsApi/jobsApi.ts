@@ -40,9 +40,44 @@ const jobsApi = api.injectEndpoints({
     getTotalJobs: builder.query<number, void>({
       query: () => '/total-jobs',
     }),
-    // SEARCH JOB
-    getSearchedJob: builder.query<void, string>({
-      query: (query) => `/search?q=${query}`,
+    // STAR JOB
+    starJob: builder.mutation<void, { jobId: string; userId: string }>({
+      query: ({ jobId, userId }) => ({
+        method: 'POST',
+        url: `/star/${jobId}`,
+        body: { userId },
+      }),
+      async onQueryStarted({ jobId, userId }, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          jobsApi.util.updateQueryData(
+            'getAllJobs',
+            undefined!,
+            (draft: Job[]) => {
+              const updatedDraft = draft.map((job) => {
+                if (job._id === jobId) {
+                  // Find the specific job in the draft
+                  const jobStarredIdArray = job.isStarred.userId
+                  const idExists = jobStarredIdArray.includes(userId)
+                  if (idExists) {
+                    const idToRemove = jobStarredIdArray.indexOf(userId)
+                    jobStarredIdArray.splice(idToRemove, 1)
+                  } else {
+                    jobStarredIdArray.push(userId)
+                  }
+                }
+                return job
+              })
+
+              return updatedDraft
+            }
+          )
+        )
+        try {
+          await queryFulfilled
+        } catch (error) {
+          patchResult.undo()
+        }
+      },
     }),
   }),
 })
@@ -53,5 +88,5 @@ export const {
   useGetSingleJobQuery,
   useAddViewCountMutation,
   useGetTotalJobsQuery,
-  useGetSearchedJobQuery,
+  useStarJobMutation,
 } = jobsApi

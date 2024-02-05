@@ -23,7 +23,7 @@ const JobDetailsPC = ({ jobPost }: { jobPost: Job }) => {
         </span>
         <button className='text-2xl absolute right-2'>
           <div className='rating rating-md transition-all'>
-            <Star checked={checked} setChecked={setChecked} />
+            <Star job={jobPost} setChecked={setChecked} />
           </div>
         </button>
         <span>

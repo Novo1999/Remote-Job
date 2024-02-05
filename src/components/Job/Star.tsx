@@ -1,20 +1,39 @@
+import { useAppSelector } from '@/lib/features/hooks'
+import { useStarJobMutation } from '@/lib/features/jobsApi/jobsApi'
+import { Job } from '@/utils/interfaces'
 import React, { Dispatch, SetStateAction } from 'react'
 
-const Star = ({
-  setChecked,
-  checked,
-  className,
-}: {
+type Star = {
   setChecked?: Dispatch<SetStateAction<boolean>>
-  checked?: boolean
   className?: string
-}) => {
+  job: Job
+}
+
+const Star = ({ setChecked, className, job }: Star) => {
+  const {
+    _id,
+    isStarred: { userId },
+  } = job
+  const {
+    user: { uid },
+    isLoading,
+  } = useAppSelector((state) => state.user) || {}
+
+  const [markAsStarred, { isLoading: isStarLoading, isError, error }] =
+    useStarJobMutation()
+
+  const checked = userId.includes(uid)
+
   const handleCheck = () => {
-    setChecked!(!checked)
+    markAsStarred({ jobId: _id, userId: uid })
   }
+
   return (
     <input
-      onClick={(e) => e.stopPropagation()}
+      disabled={isLoading}
+      onClick={(e) => {
+        e.stopPropagation() // so the user does not go to the job page when clicking the star
+      }}
       onChange={handleCheck}
       type='checkbox'
       name='rating-8'

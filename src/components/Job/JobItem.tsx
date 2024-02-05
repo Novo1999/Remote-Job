@@ -49,9 +49,12 @@ const JobItem = forwardRef(
             alt='logo'
             className='w-12 sm:w-16 rounded-full m-auto shadow-lg lg:w-[90px] xl:w-20'
           />
-          <button className='text-lg right-2 sm:hidden'>
+          <button
+            onClick={() => console.log(_id)}
+            className='text-lg right-2 sm:hidden'
+          >
             <div className='rating rating-sm transition-all'>
-              <Star />
+              <Star job={jobPost} />
             </div>
           </button>
         </div>
