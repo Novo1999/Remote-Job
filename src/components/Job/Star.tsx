@@ -1,7 +1,7 @@
 import { useAppSelector } from '@/lib/features/hooks'
 import { useStarJobMutation } from '@/lib/features/jobsApi/jobsApi'
 import { Job } from '@/utils/interfaces'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 type Star = {
@@ -10,18 +10,12 @@ type Star = {
 }
 
 const Star = ({ className, job }: Star) => {
-  const searchParams = useSearchParams()
-
-  console.log(searchParams.get('id'))
-
   const {
     _id,
     isStarred: { userId },
   } = job
-  const {
-    user: { uid },
-    isLoading,
-  } = useAppSelector((state) => state.user) || {}
+  const { user } = useAppSelector((state) => state.user) || {}
+  const uid = user?.uid
   const router = useRouter()
 
   const [markAsStarred] = useStarJobMutation()

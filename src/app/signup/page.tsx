@@ -15,6 +15,7 @@ import { useForm } from 'react-hook-form'
 import { FaHandshakeSimple } from 'react-icons/fa6'
 import { z } from 'zod'
 import signUpImg from '../../assets/signupImg.jpg'
+import PrivateRoute from '@/components/PrivateRoute'
 
 // sign up form schema
 const formSchema = z.object({
@@ -45,54 +46,57 @@ const Page = () => {
   const { onSubmitRegisterUser } = useAuth(formSchema)
 
   return (
-    <AuthForm>
-      <FormImage>
-        <Image
-          src={signUpImg}
-          alt='nomad'
-          className='object-cover w-full h-full'
-        />
-      </FormImage>
-      <form
-        onSubmit={handleSubmit(onSubmitRegisterUser)}
-        className='w-full px-6 py-8 md:px-8 lg:w-1/2'
-      >
-        <FormHeader icon={<FaHandshakeSimple />} text='Create an account' />
-        <FormInput
-          label='Name'
-          register={register}
-          registerName='displayName'
-        />
-        <FormError>
-          {errors.hasOwnProperty('displayName') && errors?.displayName?.message}
-        </FormError>
-        <FormInput
-          label='Email Address'
-          register={register}
-          registerName='email'
-        />
-        <FormError>
-          {errors.hasOwnProperty('email') && errors?.email?.message}
-        </FormError>
-        <FormInput
-          label='Password'
-          register={register}
-          registerName='password'
-        />
-        <FormError>
-          {errors.hasOwnProperty('password') && errors?.password?.message}
-        </FormError>
-        <FormButton>Sign Up</FormButton>
-        <FormLink>
-          <Link
-            href='/login'
-            className='text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline'
-          >
-            or log in
-          </Link>
-        </FormLink>
-      </form>
-    </AuthForm>
+    <PrivateRoute>
+      <AuthForm>
+        <FormImage>
+          <Image
+            src={signUpImg}
+            alt='nomad'
+            className='object-cover w-full h-full'
+          />
+        </FormImage>
+        <form
+          onSubmit={handleSubmit(onSubmitRegisterUser)}
+          className='w-full px-6 py-8 md:px-8 lg:w-1/2'
+        >
+          <FormHeader icon={<FaHandshakeSimple />} text='Create an account' />
+          <FormInput
+            label='Name'
+            register={register}
+            registerName='displayName'
+          />
+          <FormError>
+            {errors.hasOwnProperty('displayName') &&
+              errors?.displayName?.message}
+          </FormError>
+          <FormInput
+            label='Email Address'
+            register={register}
+            registerName='email'
+          />
+          <FormError>
+            {errors.hasOwnProperty('email') && errors?.email?.message}
+          </FormError>
+          <FormInput
+            label='Password'
+            register={register}
+            registerName='password'
+          />
+          <FormError>
+            {errors.hasOwnProperty('password') && errors?.password?.message}
+          </FormError>
+          <FormButton>Sign Up</FormButton>
+          <FormLink>
+            <Link
+              href='/login'
+              className='text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline'
+            >
+              or log in
+            </Link>
+          </FormLink>
+        </form>
+      </AuthForm>
+    </PrivateRoute>
   )
 }
 export default Page
