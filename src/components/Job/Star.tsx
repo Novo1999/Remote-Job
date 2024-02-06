@@ -1,6 +1,7 @@
 import { useAppSelector } from '@/lib/features/hooks'
 import { useStarJobMutation } from '@/lib/features/jobsApi/jobsApi'
 import { Job } from '@/utils/interfaces'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 type Star = {
@@ -9,6 +10,10 @@ type Star = {
 }
 
 const Star = ({ className, job }: Star) => {
+  const searchParams = useSearchParams()
+
+  console.log(searchParams.get('id'))
+
   const {
     _id,
     isStarred: { userId },
@@ -17,35 +22,36 @@ const Star = ({ className, job }: Star) => {
     user: { uid },
     isLoading,
   } = useAppSelector((state) => state.user) || {}
+  const router = useRouter()
 
-  const [
-    markAsStarred,
-    { isLoading: isStarLoading, isError, error, isSuccess },
-  ] = useStarJobMutation()
+  const [markAsStarred] = useStarJobMutation()
 
   const checked = userId.includes(uid)
 
   const handleCheck = () => {
-    markAsStarred({ jobId: _id, userId: uid })
-      .unwrap()
-      .then((job) => {
-        console.log(job)
-        if (job.isStarred.userId.includes(uid)) {
-          toast.success(`${job.title} added to favorites!`, { autoClose: 1000 })
-        } else {
-          toast.success(`${job.title} removed from favorites!`, {
-            autoClose: 1000,
-          })
-        }
-      })
+    if (!uid) {
+      toast.warn('Please log in first!', { autoClose: 3000 })
+      router.push('/login')
+    } else
+      markAsStarred({ jobId: _id, userId: uid })
+        .unwrap()
+        .then(({ isStarred, title }) => {
+          // TOAST
+          if (isStarred.userId.includes(uid)) {
+            toast.success(`${title} added to favorites!`, { autoClose: 1000 })
+          } else {
+            toast.success(`${title} removed from favorites!`, {
+              autoClose: 1000,
+            })
+          }
+        })
   }
 
   return (
     <input
-      disabled={isLoading}
-      onClick={(e) => {
-        e.stopPropagation() // so the user does not go to the job page when clicking the star
-      }}
+      onClick={
+        (e) => e.stopPropagation() // so the user does not go to the job page when clicking the star
+      }
       onChange={handleCheck}
       type='checkbox'
       name='rating-8'

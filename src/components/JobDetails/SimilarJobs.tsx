@@ -5,10 +5,10 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import JobItem from '../Job/JobItem'
-import { useGetRandomJobsQuery } from '@/lib/features/jobsApi/jobsApi'
+import { useGetSimilarJobsQuery } from '@/lib/features/jobsApi/jobsApi'
 import Error, { EmptyResponse } from '../Dummies'
 const SimilarJobs = ({ id, position }: { id: string; position: string }) => {
-  const { isLoading, isError, error, data } = useGetRandomJobsQuery({
+  const { isLoading, isError, error, data } = useGetSimilarJobsQuery({
     id,
     relevant: position.split(' ').at(0) as string,
   })

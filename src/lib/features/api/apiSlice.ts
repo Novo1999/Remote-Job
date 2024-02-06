@@ -9,7 +9,7 @@ const baseQuery = fetchBaseQuery({
 const api = createApi({
   reducerPath: 'api',
   baseQuery,
-  tagTypes: ['all-jobs'],
+  tagTypes: ['all-jobs', 'similar-jobs'],
   endpoints: (builder) => ({}),
 })
 

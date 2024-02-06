@@ -32,7 +32,7 @@ const JobCard = ({ job }: { job: Job }) => {
           <ProfileImage />
           <CardTitle className='text-base lg:text-xl flex gap-2 items-center flex-1'>
             <p className='sm:whitespace-nowrap'>{title}</p>
-            <div className='flex flex-wrap justify-between gap-2 w-48 sm:w-full'>
+            <div className='flex flex-wrap flex-col sm:flex-row justify-between gap-2 sm:w-full'>
               <button className='btn-xs btn transition-all ease-in-out rounded-full flex gap-2 bg-red-500 text-white'>
                 <p className='outline-none'>Apply Now</p>
                 <FaArrowAltCircleRight />

@@ -23,6 +23,7 @@ export const options = {
       text: 'Most Viewed and Most applied Jobs',
     },
   },
+  redraw: true,
 }
 
 const JobChart = ({ data: jobs }: { data: Job[] }) => {

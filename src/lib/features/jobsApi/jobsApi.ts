@@ -1,6 +1,6 @@
-import { GetJobs, GetRandomJobs, Job, StarJob } from '@/utils/interfaces'
-import api from '../api/apiSlice'
+import { GetJobs, GetSimilarJobs, Job, StarJob } from '@/utils/interfaces'
 import { current } from '@reduxjs/toolkit'
+import api from '../api/apiSlice'
 
 const jobsApi = api.injectEndpoints({
   overrideExisting: true,
@@ -12,8 +12,9 @@ const jobsApi = api.injectEndpoints({
       providesTags: ['all-jobs'],
     }),
     // GET SIMILAR JOBS
-    getRandomJobs: builder.query<Array<Job>, GetRandomJobs>({
+    getSimilarJobs: builder.query<Array<Job>, GetSimilarJobs>({
       query: ({ id, relevant }) => `/random/${id}?relevant=${relevant}`,
+      providesTags: ['similar-jobs'],
     }),
     // GET JOB
     getSingleJob: builder.query<Job, string>({
@@ -50,7 +51,7 @@ const jobsApi = api.injectEndpoints({
         url: `/star/${jobId}`,
         body: { userId },
       }),
-      invalidatesTags: ['all-jobs'], // this will refetch the jobs to show the updated ui
+      invalidatesTags: ['all-jobs', 'similar-jobs'], // this will refetch the jobs to show the updated ui
       async onQueryStarted({ jobId, userId }, { dispatch, queryFulfilled }) {
         // this is for one jobs only
         const patchResult1 = dispatch(
@@ -80,7 +81,7 @@ const jobsApi = api.injectEndpoints({
 
 export const {
   useGetAllJobsQuery,
-  useGetRandomJobsQuery,
+  useGetSimilarJobsQuery,
   useGetSingleJobQuery,
   useAddViewCountMutation,
   useGetTotalJobsQuery,

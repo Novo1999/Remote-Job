@@ -30,7 +30,7 @@ export interface GetJobs {
   filterBy?: string
   q?: string
 }
-export interface GetRandomJobs {
+export interface GetSimilarJobs {
   id: string
   relevant: string
 }
