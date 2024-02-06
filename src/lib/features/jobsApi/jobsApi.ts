@@ -1,4 +1,4 @@
-import { GetJobs, GetRandomJobs, Job } from '@/utils/interfaces'
+import { GetJobs, GetRandomJobs, Job, StarJob } from '@/utils/interfaces'
 import api from '../api/apiSlice'
 import { current } from '@reduxjs/toolkit'
 
@@ -9,6 +9,7 @@ const jobsApi = api.injectEndpoints({
     getAllJobs: builder.query<Array<Job>, GetJobs>({
       query: ({ sortBy, limit = 10, filterBy, q }) =>
         `/all?sortBy=${sortBy}&${filterBy}&limit=${limit}&q=${q}`,
+      providesTags: ['all-jobs'],
     }),
     // GET SIMILAR JOBS
     getRandomJobs: builder.query<Array<Job>, GetRandomJobs>({
@@ -43,12 +44,13 @@ const jobsApi = api.injectEndpoints({
       query: () => '/total-jobs',
     }),
     // STAR JOB
-    starJob: builder.mutation<void, { jobId: string; userId: string }>({
+    starJob: builder.mutation<Job, StarJob>({
       query: ({ jobId, userId }) => ({
         method: 'POST',
         url: `/star/${jobId}`,
         body: { userId },
       }),
+      invalidatesTags: ['all-jobs'], // this will refetch the jobs to show the updated ui
       async onQueryStarted({ jobId, userId }, { dispatch, queryFulfilled }) {
         // this is for one jobs only
         const patchResult1 = dispatch(
@@ -65,34 +67,11 @@ const jobsApi = api.injectEndpoints({
             }
           })
         )
-        // for all the jobs, need to update the cache of that
-        const patchResult2 = dispatch(
-          jobsApi.util.updateQueryData(
-            'getAllJobs',
-            { sortBy: '', limit: 0, filterBy: '', q: '' },
-            (draft: Job[]) => {
-              draft.map((job) => {
-                if (job._id === jobId) {
-                  const jobStarredIdArray = job.isStarred.userId
-                  const idExists = jobStarredIdArray.includes(userId)
-                  if (idExists) {
-                    const idToRemove = jobStarredIdArray.indexOf(userId)
-                    jobStarredIdArray.splice(idToRemove, 1)
-                  } else {
-                    jobStarredIdArray.push(userId)
-                  }
-                }
-                return job
-              })
-              console.log(current(draft))
-            }
-          )
-        )
+
         try {
           await queryFulfilled
         } catch (error) {
           patchResult1.undo()
-          patchResult2.undo()
         }
       },
     }),

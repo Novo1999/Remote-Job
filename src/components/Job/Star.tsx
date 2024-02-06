@@ -1,7 +1,7 @@
 import { useAppSelector } from '@/lib/features/hooks'
 import { useStarJobMutation } from '@/lib/features/jobsApi/jobsApi'
 import { Job } from '@/utils/interfaces'
-import React, { Dispatch, SetStateAction, useEffect } from 'react'
+import { toast } from 'react-toastify'
 
 type Star = {
   className?: string
@@ -18,19 +18,26 @@ const Star = ({ className, job }: Star) => {
     isLoading,
   } = useAppSelector((state) => state.user) || {}
 
-  useEffect(() => {
-    console.log(2)
-  }, [job])
-
-  const [markAsStarred, { isLoading: isStarLoading, isError, error }] =
-    useStarJobMutation()
+  const [
+    markAsStarred,
+    { isLoading: isStarLoading, isError, error, isSuccess },
+  ] = useStarJobMutation()
 
   const checked = userId.includes(uid)
 
-  console.log(checked)
-
   const handleCheck = () => {
     markAsStarred({ jobId: _id, userId: uid })
+      .unwrap()
+      .then((job) => {
+        console.log(job)
+        if (job.isStarred.userId.includes(uid)) {
+          toast.success(`${job.title} added to favorites!`, { autoClose: 1000 })
+        } else {
+          toast.success(`${job.title} removed from favorites!`, {
+            autoClose: 1000,
+          })
+        }
+      })
   }
 
   return (

@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang='en'>
       <StoreProvider>
         <body
-          className={`${oswald.variable} ${poppins.variable} ${montserrat2.variable} ${montserrat.variable} ${chewy.variable}`}
+          className={`${oswald.variable} ${poppins.variable} ${montserrat2.variable} ${montserrat.variable} ${chewy.variable} bg-stone-800`}
         >
           <Advertise />
           <Navbar />

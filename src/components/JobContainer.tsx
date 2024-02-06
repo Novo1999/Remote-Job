@@ -1,11 +1,10 @@
 'use client'
 import { useJob } from '@/hooks/use-job'
+import { Job } from '@/utils/interfaces'
 import Error, { EmptyResponse } from './Dummies'
 import JobChart from './Job/JobChart'
 import JobItem from './Job/JobItem'
 import Skeleton from './Job/Skeleton'
-import { Job } from '@/utils/interfaces'
-import { useSearchParams } from 'next/navigation'
 
 const JobContainer = () => {
   const { isLoading, isError, error, data, ref } = useJob()

@@ -5,7 +5,7 @@ import useInitAuth from '@/hooks/use-init-auth'
 const Navbar = () => {
   useInitAuth()
   return (
-    <nav className='py-2 flex justify-between px-4 items-center'>
+    <nav className='py-2 mt-4 flex justify-between px-4 items-center'>
       <Link href='/' className='text-2xl font-chewy'>
         RemoteJumbo
       </Link>

@@ -35,6 +35,11 @@ export interface GetRandomJobs {
   relevant: string
 }
 
+export interface StarJob {
+  jobId: string
+  userId: string
+}
+
 export interface LimitState {
   limit: number
 }
