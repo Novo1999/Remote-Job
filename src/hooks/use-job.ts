@@ -18,7 +18,7 @@ export const useJob = () => {
   const searchQueryParam = searchParams.get('q') as string
 
   const dispatch = useAppDispatch()
-  const { isLoading, isError, error, data } = useGetAllJobsQuery(
+  const { isLoading, isError, error, data, isFetching } = useGetAllJobsQuery(
     {
       sortBy: sortParam,
       limit,
@@ -27,8 +27,9 @@ export const useJob = () => {
     },
     { refetchOnMountOrArgChange: true }
   )
+
   const { ref, inView } = useInView({
-    threshold: 0,
+    threshold: 0.5,
   })
 
   useEffect(() => {
@@ -44,6 +45,8 @@ export const useJob = () => {
     error,
     data,
     isSearching,
+    isFetching,
+    inView,
     ref,
   }
 }

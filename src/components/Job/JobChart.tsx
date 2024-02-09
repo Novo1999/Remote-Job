@@ -8,6 +8,7 @@ import {
   Title,
   Tooltip,
 } from 'chart.js'
+import React from 'react'
 import { Bar } from 'react-chartjs-2'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
@@ -41,9 +42,9 @@ const JobChart = ({ data: jobs }: { data: Job[] }) => {
         label: 'Viewed',
         data: jobs
           .slice() // make copy
-          .sort((a: Job, b: Job) => b.viewCount - a.viewCount) // sort
+          .sort((a: Job, b: Job) => b.viewCount - a.viewCount)
           .slice(0, 10) // get 10
-          .map((job: Job) => job.viewCount), // map
+          .map((job: Job) => job.viewCount),
         backgroundColor: 'rgba(255, 99, 132)',
       },
       {
@@ -64,4 +65,5 @@ const JobChart = ({ data: jobs }: { data: Job[] }) => {
     </div>
   )
 }
+// export default React.memo(JobChart)
 export default JobChart

@@ -5,9 +5,23 @@ import Error, { EmptyResponse } from './Dummies'
 import JobChart from './Job/JobChart'
 import JobItem from './Job/JobItem'
 import Skeleton from './Job/Skeleton'
+import { useEffect, useState } from 'react'
 
 const JobContainer = () => {
-  const { isLoading, isError, error, data, ref } = useJob()
+  const { isLoading, isError, error, data, isFetching, ref, inView } = useJob()
+
+  const [showSkeleton, setShowSkeleton] = useState(false)
+
+  useEffect(() => {
+    let ignore = false
+    if (inView && isFetching && !ignore) {
+      setShowSkeleton(true)
+    } else {
+      setShowSkeleton(false)
+    }
+
+    return () => (ignore = true)
+  }, [inView, isFetching])
 
   let content = null
   if (isLoading) {
@@ -35,6 +49,7 @@ const JobContainer = () => {
         {data?.map((job, index) => (
           <JobItem ref={ref} jobPost={job} index={index} key={job._id} />
         ))}
+        {showSkeleton && <Skeleton />}
       </>
     )
   }
