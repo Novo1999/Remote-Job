@@ -17,8 +17,6 @@ const JobPositions = ({ jobPost }: { jobPost: Job }) => {
 
   const { filterBy } = useAppSelector((state) => state.filter)
 
-  console.log(filterBy)
-
   const { handleFilter } = useChangeSearchParams()
 
   // when user clicks on the buttons on the job item, filter or search will happen
