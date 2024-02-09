@@ -1,5 +1,5 @@
 import { useChangeSearchParams } from '@/hooks/use-change-search-params'
-import { setFilterQuery } from '@/lib/features/filter/filterSlice'
+import { changeFilter, setFilterQuery } from '@/lib/features/filter/filterSlice'
 import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
 import { changeSearchInput } from '@/lib/features/search/searchSlice'
 import { constructFilterQuery } from '@/utils/constructFilterQuery'
@@ -21,11 +21,18 @@ const JobPositions = ({ jobPost }: { jobPost: Job }) => {
 
   const { handleFilter } = useChangeSearchParams()
 
+  // when user clicks on the buttons on the job item, filter or search will happen
   const handleClickableFilter = (
     e: React.MouseEvent<HTMLButtonElement>,
     filterOption: string
   ) => {
     e.stopPropagation()
+    dispatch(
+      changeFilter({
+        category: filterOption,
+        [filterOption]: e.currentTarget.value,
+      })
+    )
     const query = constructFilterQuery({
       ...filterBy,
       [filterOption]: [e.currentTarget.value],

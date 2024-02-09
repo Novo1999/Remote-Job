@@ -35,11 +35,13 @@ const JobDetailsMobile = ({
           <FaLocationDot />
         </span>
         {/* mobile location */}
-        <span className='block sm:hidden w-fit text-center min-[375px]:whitespace-nowrap'>
+        <button
+          value={location}
+          onClick={(e) => handleClickableFilter(e, 'locations')}
+          className='block sm:hidden w-fit text-center min-[375px]:whitespace-nowrap'
+        >
           {locationMobile}
-        </span>
-        {/* not mobile location */}
-        <span className='hidden sm:block'>{location}</span>
+        </button>
       </p>
       {/* salary */}
       <p className='flex items-center bg-lime-400 px-2 rounded-lg whitespace-nowrap w-fit'>
