@@ -56,7 +56,6 @@ const jobsApi = api.injectEndpoints({
         // this is for one jobs only
         const patchResult1 = dispatch(
           jobsApi.util.updateQueryData('getSingleJob', jobId, (draft: Job) => {
-            console.log(current(draft))
             // Find the specific job in the draft
             const jobStarredIdArray = draft.isStarred.userId
             const idExists = jobStarredIdArray.includes(userId)
@@ -68,7 +67,6 @@ const jobsApi = api.injectEndpoints({
             }
           })
         )
-
         try {
           await queryFulfilled
         } catch (error) {

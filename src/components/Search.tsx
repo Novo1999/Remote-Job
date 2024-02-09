@@ -7,6 +7,7 @@ import { CiSearch } from 'react-icons/ci'
 import { RxCross2 } from 'react-icons/rx'
 import TypeEffect from './TypeAnimation'
 import { useChangeSearchParams } from '@/hooks/use-change-search-params'
+import { useEffect } from 'react'
 
 const Search = () => {
   const {
@@ -17,10 +18,16 @@ const Search = () => {
     setSearchValue,
     inputRef,
     dispatch,
-    isSearching,
   } = useSearch()
 
-  const { handleResetSearch, hasSearchParam } = useChangeSearchParams()
+  const { handleResetSearch, hasSearchParam, searchQuery } =
+    useChangeSearchParams()
+
+  useEffect(() => {
+    if (hasSearchParam) {
+      setSearchValue(searchQuery ?? '')
+    }
+  }, [searchQuery, hasSearchParam, setSearchValue])
 
   return (
     <div className='flex items-center mt-8 w-full lg:w-[26rem] xl:w-[30rem] 2xl:w-[32rem] mx-auto relative'>

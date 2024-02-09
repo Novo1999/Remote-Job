@@ -1,27 +1,15 @@
 'use client'
 import { useJob } from '@/hooks/use-job'
+import { useAppSelector } from '@/lib/features/hooks'
 import { Job } from '@/utils/interfaces'
 import Error, { EmptyResponse } from './Dummies'
 import JobChart from './Job/JobChart'
 import JobItem from './Job/JobItem'
 import Skeleton from './Job/Skeleton'
-import { useEffect, useState } from 'react'
 
 const JobContainer = () => {
-  const { isLoading, isError, error, data, isFetching, ref, inView } = useJob()
-
-  const [showSkeleton, setShowSkeleton] = useState(false)
-
-  useEffect(() => {
-    let ignore = false
-    if (inView && isFetching && !ignore) {
-      setShowSkeleton(true)
-    } else {
-      setShowSkeleton(false)
-    }
-
-    return () => (ignore = true)
-  }, [inView, isFetching])
+  const { isLoading, isError, error, data, ref } = useJob()
+  const { showSkeleton } = useAppSelector((state) => state.loader)
 
   let content = null
   if (isLoading) {

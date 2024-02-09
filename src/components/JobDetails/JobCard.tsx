@@ -11,9 +11,11 @@ import ProfileImage from './Avatar'
 import Qualifications from './Qualifications'
 import Warning from './Warning'
 import { Job } from '@/utils/interfaces'
+import { useAppSelector } from '@/lib/features/hooks'
 
 const JobCard = ({ job }: { job: Job }) => {
   const {
+    _id,
     posted,
     title,
     company,
@@ -24,6 +26,7 @@ const JobCard = ({ job }: { job: Job }) => {
     viewCount,
   } = job
   const { formattedDate } = usePostedDate(posted)
+  const { showStarLoader } = useAppSelector((state) => state.loader)
 
   return (
     <Card className='font-poppins bg-gradient-to-bl from-indigo-200 via-red-200 to-yellow-100 h-fit sm:col-span-1'>
@@ -41,7 +44,11 @@ const JobCard = ({ job }: { job: Job }) => {
                 <p className='font-thin flex gap-2 items-center'>
                   <LuMousePointerClick /> Viewed: {viewCount} times
                 </p>
-                <Star job={job} />
+                {showStarLoader === _id ? (
+                  <span className='loading loading-spinner text-warning'></span> // shows loader when clicked on star
+                ) : (
+                  <Star job={job} />
+                )}
               </div>
             </div>
           </CardTitle>

@@ -12,6 +12,7 @@ import { useChangeSearchParams } from '@/hooks/use-change-search-params'
 import { constructFilterQuery } from '@/utils/constructFilterQuery'
 import { IoFilterSharp } from 'react-icons/io5'
 import Filter from './Filter'
+import { scrollAfterSearch } from '@/utils/scrollAfterSearch'
 
 // will show when data is loading so user cannot go to filter when data has not arrived yet, as it will break the application
 const spinner = <span className='loading loading-infinity loading-sm'></span>
@@ -34,9 +35,7 @@ const FilterPopover = () => {
     dispatch(setFilterOpen(false))
     handleFilter(query)
     // auto scroll was bugging here so this will fix it for now  :)
-    setTimeout(() => {
-      scroll({ top: 699, behavior: 'smooth' })
-    }, 100)
+    scrollAfterSearch()
   }
   // check if there is any filter option selected
   const hasFilter = Object.values(filterBy).some(

@@ -1,5 +1,6 @@
-import { useAppSelector } from '@/lib/features/hooks'
+import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
 import { useStarJobMutation } from '@/lib/features/jobsApi/jobsApi'
+import { setShowStarLoader } from '@/lib/features/loader/loaderSlice'
 import { Job } from '@/utils/interfaces'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
@@ -17,16 +18,19 @@ const Star = ({ className, job }: Star) => {
   const { user } = useAppSelector((state) => state.user) || {}
   const uid = user?.uid
   const router = useRouter()
+  const dispatch = useAppDispatch()
 
-  const [markAsStarred] = useStarJobMutation()
+  const [markAsStarred, { isLoading }] = useStarJobMutation()
 
   const checked = userId.includes(uid)
 
   const handleCheck = () => {
+    // if user not logged in, take the user to login page
     if (!uid) {
       toast.warn('Please log in first!', { autoClose: 3000 })
       router.push('/login')
-    } else
+    } else {
+      dispatch(setShowStarLoader(_id))
       markAsStarred({ jobId: _id, userId: uid })
         .unwrap()
         .then(({ isStarred, title }) => {
@@ -38,7 +42,9 @@ const Star = ({ className, job }: Star) => {
               autoClose: 1000,
             })
           }
+          dispatch(setShowStarLoader(''))
         })
+    }
   }
 
   return (

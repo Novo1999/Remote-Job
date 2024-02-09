@@ -7,6 +7,7 @@ export const useChangeSearchParams = () => {
   const searchParams = useSearchParams()
   const sortParam = searchParams.get('sort')
   const hasSearchParam = searchParams.has('q')
+  const searchQuery = searchParams.get('q')
   const doParamsOperation = (param: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString())
     params.set(param, value)
@@ -60,5 +61,6 @@ export const useChangeSearchParams = () => {
     handleResetSearch,
     handleResetSort,
     hasSearchParam,
+    searchQuery,
   }
 }

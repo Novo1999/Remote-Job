@@ -1,6 +1,18 @@
 import { Job } from '@/utils/interfaces'
 import { FaLocationDot } from 'react-icons/fa6'
-const JobDetailsMobile = ({ jobPost }: { jobPost: Job }) => {
+
+export type JobDetailsProp = {
+  jobPost: Job
+  handleClickableFilter: (
+    e: React.MouseEvent<HTMLButtonElement>,
+    filterOption: string
+  ) => null
+}
+
+const JobDetailsMobile = ({
+  jobPost,
+  handleClickableFilter,
+}: JobDetailsProp) => {
   const {
     location,
     salary: { min },
@@ -11,9 +23,13 @@ const JobDetailsMobile = ({ jobPost }: { jobPost: Job }) => {
   return (
     <div className='text-black sm:hidden min-[375px]:flex flex flex-shrink gap-2 w-24'>
       {/* type */}
-      <p className='font-thin bg-purple-500 text-[10px] sm:text-sm text-white whitespace-nowrap rounded-lg px-1 text-center flex items-center w-fit'>
+      <button
+        onClick={(e) => handleClickableFilter(e, 'types')}
+        value={jobType}
+        className='font-thin bg-purple-500 text-[10px] sm:text-sm text-white whitespace-nowrap rounded-lg px-1 text-center flex items-center w-fit'
+      >
         {jobType?.toUpperCase()}
-      </p>
+      </button>
       <p className='flex gap-2 items-center w-fit bg-amber-300 px-2 rounded-lg whitespace-nowrap'>
         <span className='hidden sm:block'>
           <FaLocationDot />

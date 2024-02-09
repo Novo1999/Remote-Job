@@ -4,12 +4,12 @@ import Image from 'next/image'
 import dummyLogo from '../../../public/images/dummylogo.png'
 
 import { useAddViewCountMutation } from '@/lib/features/jobsApi/jobsApi'
+import { Job } from '@/utils/interfaces'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
-import { Ref, forwardRef, useState } from 'react'
+import { Ref, forwardRef } from 'react'
 import JobPositions from './JobPositions'
 import SpecialJobs from './SpecialJobs'
-import { Job } from '@/utils/interfaces'
 import Star from './Star'
 
 type JobItemProp = { jobPost: Job; index: number }

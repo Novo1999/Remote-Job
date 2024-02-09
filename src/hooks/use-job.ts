@@ -4,6 +4,7 @@ import {
   useGetTotalJobsQuery,
 } from '@/lib/features/jobsApi/jobsApi'
 import { changeLimit } from '@/lib/features/limit/limitSlice'
+import { setShowSkeleton } from '@/lib/features/loader/loaderSlice'
 import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
@@ -18,15 +19,12 @@ export const useJob = () => {
   const searchQueryParam = searchParams.get('q') as string
 
   const dispatch = useAppDispatch()
-  const { isLoading, isError, error, data, isFetching } = useGetAllJobsQuery(
-    {
-      sortBy: sortParam,
-      limit,
-      filterBy: filterParam,
-      q: searchQueryParam || '',
-    },
-    { refetchOnMountOrArgChange: true }
-  )
+  const { isLoading, isError, error, data, isFetching } = useGetAllJobsQuery({
+    sortBy: sortParam,
+    limit,
+    filterBy: filterParam,
+    q: searchQueryParam || '',
+  })
 
   const { ref, inView } = useInView({
     threshold: 0.5,
@@ -35,10 +33,15 @@ export const useJob = () => {
   useEffect(() => {
     // fetch more jobs as user scrolls
     if (inView && limit < totalJobs!) {
-      dispatch(changeLimit(10))
+      dispatch(setShowSkeleton(true))
+      dispatch(changeLimit(10)) // the payload is 10 which will be added to the limit as user scrolls so there are +10 data and so on
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView, dispatch, totalJobs])
+    // if there are no jobs, don't show skeleton
+    if (limit === totalJobs || isSearching || filterParam) {
+      dispatch(setShowSkeleton(false))
+    }
+  }, [inView, totalJobs, dispatch, isSearching, filterParam])
+
   return {
     isLoading,
     isError,

@@ -8,9 +8,7 @@ import { RxCross2 } from 'react-icons/rx'
 const Advertise = () => {
   const [timer, setTimer] = useState<number>(5)
   const [showAd, setShowAd] = useState<boolean>(true)
-  const { filterBy, filterOpen, filterQuery } = useAppSelector(
-    (state) => state.filter
-  )
+  const { filterQuery } = useAppSelector((state) => state.filter)
   const { data, isLoading, isError } = useGetAllJobsQuery({
     sortBy: '',
     limit: 0,
