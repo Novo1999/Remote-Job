@@ -44,11 +44,6 @@ const TopMenu = () => {
             />
             <LoginBtn />
           </div>
-          <NavigationMenuContent>
-            <NavigationMenuLink className='w-full px-10'>
-              Link
-            </NavigationMenuLink>
-          </NavigationMenuContent>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>

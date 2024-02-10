@@ -25,9 +25,10 @@ const MenuBtn = ({
   return (
     <Button
       onClick={onClick}
-      className={`${navigationMenuTriggerStyle()} ${className} flex gap-2 text-white hover:text-white`}
+      className={`${navigationMenuTriggerStyle()} ${className} flex gap-2 top-menu-btn text-white hover:text-white`}
     >
-      {icon} {menuText}
+      <span>{icon}</span>
+      <span>{menuText}</span>
     </Button>
   )
 }

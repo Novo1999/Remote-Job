@@ -18,7 +18,7 @@ const Sort = () => {
         value={(sortParam as string) || 'default'}
         onValueChange={handleSort}
       >
-        <SelectTrigger className='w-full hover:bg-slate-200 transition-colors text-xs rounded-full text-black border-0'>
+        <SelectTrigger className='w-full special-btn hover:bg-slate-200 transition-colors text-xs rounded-full text-black border-0'>
           <MdSort />
           <SelectValue placeholder='Sort By' />
         </SelectTrigger>

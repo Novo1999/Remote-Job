@@ -19,7 +19,7 @@ const LoginBtn = () => {
       onClick={() => handleRouting('/login')}
       className={`${navigationMenuTriggerStyle()} bg-blue-500 hover:bg-blue-600 flex gap-2 text-white hover:text-white`}
     >
-      <RiLoginBoxFill /> {'Sign Up/Log in'}
+      <RiLoginBoxFill /> {'Log in'}
     </Button>
   )
 

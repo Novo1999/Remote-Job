@@ -53,11 +53,10 @@ const FilterPopover = () => {
       >
         <Button
           onClick={() => dispatch(setFilterOpen(true))}
-          className='space-x-1 font-semibold w-full text-black rounded-full'
-          variant='outline'
+          className='special-btn flex justify-center items-center'
         >
           <IoFilterSharp />
-          <span>{isLoading ? spinner : 'Filter'}</span>
+          <span className='m-auto'>{isLoading ? spinner : 'Filter'}</span>
         </Button>
       </SheetTrigger>
       <SheetContent
