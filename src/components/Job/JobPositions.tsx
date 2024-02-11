@@ -25,17 +25,12 @@ const JobPositions = ({ jobPost }: { jobPost: Job }) => {
     filterOption: string
   ) => {
     e.stopPropagation()
-    dispatch(
-      changeFilter({
-        category: filterOption,
-        [filterOption]: e.currentTarget.value,
-      })
-    )
     const query = constructFilterQuery({
       ...filterBy,
       [filterOption]: [e.currentTarget.value],
     })
     dispatch(setFilterQuery({ query, isFiltering: true }))
+
     handleFilter(query)
     scrollAfterSearch()
     return null

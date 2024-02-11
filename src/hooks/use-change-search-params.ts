@@ -1,7 +1,10 @@
 'use client'
+import { resetFilter } from '@/lib/features/filter/filterSlice'
+import { useAppDispatch } from '@/lib/features/hooks'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 export const useChangeSearchParams = () => {
+  const dispatch = useAppDispatch()
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -38,6 +41,7 @@ export const useChangeSearchParams = () => {
 
   const handleResetFilter = () => {
     removeQueryParam('filter')
+    dispatch(resetFilter())
   }
 
   const handleResetSearch = () => {

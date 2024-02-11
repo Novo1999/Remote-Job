@@ -5,7 +5,6 @@ import JobContainer from '@/components/JobContainer'
 import Search from '@/components/Search'
 import Sort from '@/components/Sort'
 import { useChangeSearchParams } from '@/hooks/use-change-search-params'
-import { useExtractFilter } from '@/hooks/use-extract-filter'
 
 export default function Page() {
   const { handleResetFilter, hasFilterValue } = useChangeSearchParams()

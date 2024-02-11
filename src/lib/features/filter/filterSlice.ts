@@ -49,9 +49,23 @@ const filterSlice = createSlice({
     setFilterOpen: (state, action) => {
       state.filterOpen = action.payload
     },
+    resetFilter: (state) => {
+      state.filterBy = {
+        locations: [],
+        positions: [],
+        types: [],
+        benefits: [],
+        salary: 90000,
+      }
+    },
   },
 })
 
-export const { changeFilter, changeSalary, setFilterQuery, setFilterOpen } =
-  filterSlice.actions
+export const {
+  changeFilter,
+  changeSalary,
+  setFilterQuery,
+  setFilterOpen,
+  resetFilter,
+} = filterSlice.actions
 export default filterSlice.reducer
