@@ -1,5 +1,5 @@
 import { FilterBy } from '@/utils/interfaces'
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, current } from '@reduxjs/toolkit'
 
 export type Category = 'locations' | 'positions' | 'types' | 'benefits'
 
@@ -23,8 +23,8 @@ const filterSlice = createSlice({
     changeFilter: (state, action) => {
       const category = action.payload.category as Category
       const stateCategory = state.filterBy[category]
-      console.log(stateCategory)
       const { newOption } = action.payload
+      console.log(action.payload)
       // if option already exists, remove it
       if (stateCategory.includes(newOption)) {
         const optionToRemove = stateCategory.findIndex(

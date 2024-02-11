@@ -9,7 +9,8 @@ import { useExtractFilter } from '@/hooks/use-extract-filter'
 
 export default function Page() {
   const { handleResetFilter, hasFilterValue } = useChangeSearchParams()
-  useExtractFilter()
+
+  console.log('RENDER')
 
   return (
     <>

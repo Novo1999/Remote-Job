@@ -13,6 +13,7 @@ import { constructFilterQuery } from '@/utils/constructFilterQuery'
 import { IoFilterSharp } from 'react-icons/io5'
 import Filter from './Filter'
 import { scrollAfterSearch } from '@/utils/scrollAfterSearch'
+import { useExtractFilter } from '@/hooks/use-extract-filter'
 
 // will show when data is loading so user cannot go to filter when data has not arrived yet, as it will break the application
 const spinner = <span className='loading loading-infinity loading-sm'></span>
@@ -26,6 +27,8 @@ const FilterPopover = () => {
     filterBy: '',
     q: '',
   })
+
+  useExtractFilter()
 
   const { handleFilter } = useChangeSearchParams()
 
