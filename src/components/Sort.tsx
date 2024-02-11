@@ -13,12 +13,12 @@ const Sort = () => {
   const { handleSort, sortParam } = useChangeSearchParams()
 
   return (
-    <div className='w-full'>
+    <div>
       <Select
         value={(sortParam as string) || 'default'}
         onValueChange={handleSort}
       >
-        <SelectTrigger className='w-32 special-btn hover:bg-slate-200 transition-colors text-xs rounded-full text-black border-0'>
+        <SelectTrigger className='special-btn hover:bg-slate-200 transition-colors text-xs rounded-full text-black border-0'>
           <MdSort />
           <SelectValue placeholder='Sort By' />
         </SelectTrigger>

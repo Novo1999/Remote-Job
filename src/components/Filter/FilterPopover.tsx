@@ -48,12 +48,12 @@ const FilterPopover = () => {
     >
       <SheetTrigger
         disabled={isLoading || isError || data?.length === 0}
-        className='w-full hover:bg-slate-200 transition-colors rounded-full text-xs text-black'
+        className='hover:bg-slate-200 transition-colors rounded-full text-xs text-black'
         asChild
       >
         <Button
           onClick={() => dispatch(setFilterOpen(true))}
-          className='special-btn w-32 lg:w-48 flex justify-center items-center'
+          className='special-btn w-32 flex justify-center items-center'
         >
           <IoFilterSharp />
           <span className='m-auto'>{isLoading ? spinner : 'Filter'}</span>
