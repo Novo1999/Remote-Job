@@ -23,7 +23,7 @@ const TopMenu = () => {
     <NavigationMenu className='font-poppins'>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <div className='flex gap-4'>
+          <div className='flex gap-4 *:text-xs lg:*:text-sm'>
             <MenuBtn
               onClick={() => handleRouting('/post')}
               className='bg-red-500 hover:bg-red-600'

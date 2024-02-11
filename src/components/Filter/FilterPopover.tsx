@@ -53,7 +53,7 @@ const FilterPopover = () => {
       >
         <Button
           onClick={() => dispatch(setFilterOpen(true))}
-          className='special-btn flex justify-center items-center'
+          className='special-btn w-32 lg:w-48 flex justify-center items-center'
         >
           <IoFilterSharp />
           <span className='m-auto'>{isLoading ? spinner : 'Filter'}</span>
