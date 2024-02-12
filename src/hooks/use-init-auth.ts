@@ -1,5 +1,5 @@
 import { auth } from '@/firebase/config'
-import { useAppDispatch } from '@/lib/features/hooks'
+import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
 import { setCurrentUser, setIsLoading } from '@/lib/features/user/userSlice'
 import { useLogout } from '@/utils/logOut'
 import { onAuthStateChanged } from 'firebase/auth'
@@ -10,6 +10,7 @@ const useInitAuth = () => {
   const logoutUser = useLogout()
 
   useEffect(() => {
+    dispatch(setIsLoading(true))
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser?.email) {
         dispatch(setIsLoading(false))
