@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import ProfileDropdownMenu from './ProfileDropdownMenu'
+import ProfileDropdownMenu from './Profile/ProfileDropdownMenu'
 import { Button } from './ui/button'
 import { navigationMenuTriggerStyle } from './ui/navigation-menu'
 
