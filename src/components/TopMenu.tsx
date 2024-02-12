@@ -1,12 +1,10 @@
 'use client'
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
 } from '@/components/ui/navigation-menu'
-import { useRouter } from 'next/navigation'
+import useRouting from '@/hooks/use-routing'
 import { BsFillInfoCircleFill } from 'react-icons/bs'
 import { FaBriefcase } from 'react-icons/fa6'
 import { RiAdvertisementFill } from 'react-icons/ri'
@@ -14,10 +12,7 @@ import LoginBtn from './LoginBtn'
 import MenuBtn from './MenuBtn'
 
 const TopMenu = () => {
-  const router = useRouter()
-  const handleRouting = (href: string) => {
-    router.push(href)
-  }
+  const handleRouting = useRouting()
 
   return (
     <NavigationMenu className='font-poppins'>

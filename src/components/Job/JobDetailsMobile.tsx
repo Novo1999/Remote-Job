@@ -1,24 +1,15 @@
+import useClickableFilter from '@/hooks/use-clickable-filter'
 import { Job } from '@/utils/interfaces'
 import { FaLocationDot } from 'react-icons/fa6'
 
-export type JobDetailsProp = {
-  jobPost: Job
-  handleClickableFilter: (
-    e: React.MouseEvent<HTMLButtonElement>,
-    filterOption: string
-  ) => null
-}
-
-const JobDetailsMobile = ({
-  jobPost,
-  handleClickableFilter,
-}: JobDetailsProp) => {
+const JobDetailsMobile = ({ jobPost }: { jobPost: Job }) => {
   const {
     location,
     salary: { min },
     jobType,
   } = jobPost
   const locationMobile = location?.split(',')[0]
+  const { handleClickableFilter } = useClickableFilter()
 
   return (
     <div className='text-black sm:hidden min-[375px]:flex flex flex-shrink gap-2 w-24'>

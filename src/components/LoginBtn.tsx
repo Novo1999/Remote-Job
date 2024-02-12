@@ -1,17 +1,15 @@
+import useRouting from '@/hooks/use-routing'
 import { useAppSelector } from '@/lib/features/hooks'
+import { useRouter } from 'next/navigation'
+import { RiLoginBoxFill } from 'react-icons/ri'
 import ProfileDropdownMenu from './ProfileDropdownMenu'
 import { Button } from './ui/button'
 import { navigationMenuTriggerStyle } from './ui/navigation-menu'
-import { useRouter } from 'next/navigation'
-import { RiLoginBoxFill } from 'react-icons/ri'
 
 const LoginBtn = () => {
   const { isLoading, user } = useAppSelector((state) => state.user)
   const isLoggedIn = user?.hasOwnProperty('email')
-  const router = useRouter()
-  const handleRouting = (href: string) => {
-    router.push(href)
-  }
+  const handleRouting = useRouting()
 
   let content = (
     <Button

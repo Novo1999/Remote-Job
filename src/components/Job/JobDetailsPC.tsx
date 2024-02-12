@@ -1,15 +1,17 @@
+import useClickableFilter from '@/hooks/use-clickable-filter'
+import { useAppSelector } from '@/lib/features/hooks'
 import { Job } from '@/utils/interfaces'
 import { FaDollarSign, FaLocationDot } from 'react-icons/fa6'
 import Star from './Star'
-import { useAppSelector } from '@/lib/features/hooks'
-import { JobDetailsProp } from './JobDetailsMobile'
 
-const JobDetailsPC = ({ jobPost, handleClickableFilter }: JobDetailsProp) => {
+const JobDetailsPC = ({ jobPost }: { jobPost: Job }) => {
   const {
     location,
     salary: { max, min },
   } = jobPost
   const { showStarLoader } = useAppSelector((state) => state.loader)
+  const { handleClickableFilter } = useClickableFilter()
+
   return (
     <div className='hidden sm:flex flex-col sm:flex-row gap-0 sm:gap-2 col-span-3 lg:text-base justify-evenly lg:col-span-4 *:border *:border-black *:shadow-md *:sm:text-xs *:lg:text-sm'>
       <div className='flex gap-2 items-center bg-amber-300 px-2 rounded-md hover:bg-amber-400'>

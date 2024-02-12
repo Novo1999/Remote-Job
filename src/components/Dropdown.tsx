@@ -5,7 +5,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { useRouter } from 'next/navigation'
+import useRouting from '@/hooks/use-routing'
 import { ReactNode, useState } from 'react'
 import { BsFillInfoCircleFill } from 'react-icons/bs'
 import { FaBriefcase } from 'react-icons/fa6'
@@ -38,10 +38,7 @@ const Dropdown = () => {
     dropdownIsOpen ? 'my-1' : 'my-[2px]'
   } bg-white transition ease transform duration-300`
 
-  const router = useRouter()
-  const handleRouting = (href: string) => {
-    router.push(href)
-  }
+  const handleRouting = useRouting()
 
   return (
     <DropdownMenu onOpenChange={() => setDropDownIsOpen(!dropdownIsOpen)}>
@@ -94,6 +91,5 @@ const Dropdown = () => {
     </DropdownMenu>
   )
 }
-// TODO: WORK ON THE MOBILE DROPDOWN COMPONENT
 
 export default Dropdown

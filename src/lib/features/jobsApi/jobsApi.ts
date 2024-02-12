@@ -53,8 +53,8 @@ const jobsApi = api.injectEndpoints({
       }),
       invalidatesTags: ['all-jobs', 'similar-jobs'], // this will refetch the jobs to show the updated ui
       async onQueryStarted({ jobId, userId }, { dispatch, queryFulfilled }) {
-        // this is for one jobs only
-        const patchResult1 = dispatch(
+        // this is for one job only
+        const patchResult = dispatch(
           jobsApi.util.updateQueryData('getSingleJob', jobId, (draft: Job) => {
             // Find the specific job in the draft
             const jobStarredIdArray = draft.isStarred.userId
@@ -70,7 +70,7 @@ const jobsApi = api.injectEndpoints({
         try {
           await queryFulfilled
         } catch (error) {
-          patchResult1.undo()
+          patchResult.undo()
         }
       },
     }),
