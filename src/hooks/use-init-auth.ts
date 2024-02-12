@@ -1,5 +1,5 @@
 import { auth } from '@/firebase/config'
-import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
+import { useAppDispatch } from '@/lib/features/hooks'
 import { setCurrentUser, setIsLoading } from '@/lib/features/user/userSlice'
 import { useLogout } from '@/utils/logOut'
 import { onAuthStateChanged } from 'firebase/auth'

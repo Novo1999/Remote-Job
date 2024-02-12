@@ -1,6 +1,5 @@
 import useRouting from '@/hooks/use-routing'
 import { useAppSelector } from '@/lib/features/hooks'
-import { useRouter } from 'next/navigation'
 import { RiLoginBoxFill } from 'react-icons/ri'
 import ProfileDropdownMenu from './Profile/ProfileDropdownMenu'
 import { Button } from './ui/button'

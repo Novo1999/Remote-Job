@@ -27,7 +27,7 @@ const Profile = () => {
           User Profile
         </h3>
         <p className='mt-1 max-w-2xl text-sm text-gray-500'>
-          You are logged in as
+          You are logged in as {name}
         </p>
       </div>
       <div className='border-t border-gray-200 px-4 py-5 sm:p-0'>
