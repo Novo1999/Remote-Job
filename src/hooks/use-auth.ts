@@ -3,6 +3,7 @@ import { useAppDispatch } from '@/lib/features/hooks'
 import { setCurrentUser } from '@/lib/features/user/userSlice'
 import {
   createUserWithEmailAndPassword,
+  getAuth,
   onAuthStateChanged,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
@@ -20,12 +21,14 @@ export type FormSchemaType = ZodObject<{
 
 export const useAuth = (formSchema: FormSchemaType) => {
   const dispatch = useAppDispatch()
+  const auth = getAuth()
 
   // REGISTER SUBMIT
   const onSubmitRegisterUser: SubmitHandler<z.infer<typeof formSchema>> = (
     data
   ) => {
     registerUser(data.email, data.password, data.displayName as string)
+    dispatch(setCurrentUser(auth.currentUser))
   }
   // LOGIN SUBMIT
   const onSubmitLoginUser: SubmitHandler<z.infer<typeof formSchema>> = (
@@ -53,8 +56,6 @@ export const useAuth = (formSchema: FormSchemaType) => {
       await updateProfile(user.user, {
         displayName: displayName,
       })
-
-      initAuth()
 
       toast.success(`Welcome, ${user.user.displayName}`, {
         position: 'bottom-right',

@@ -20,7 +20,7 @@ const LoginBtn = () => {
     </Button>
   )
 
-  if (!isLoading && isLoggedIn) {
+  if (isLoggedIn) {
     content = <ProfileDropdownMenu />
   }
 

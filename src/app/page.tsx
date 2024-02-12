@@ -9,8 +9,6 @@ import { useChangeSearchParams } from '@/hooks/use-change-search-params'
 export default function Page() {
   const { handleResetFilter, hasFilterValue } = useChangeSearchParams()
 
-  console.log('RENDER')
-
   return (
     <>
       <Hero />

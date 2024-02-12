@@ -13,9 +13,8 @@ import { useLogout } from '@/utils/logOut'
 const ProfileDropdownMenu = () => {
   const { user, isLoading } = useAppSelector((state) => state.user)
 
-  console.log(user)
-
   const displayName = user && user.email && user.displayName
+  console.log('DISPLAY - ' + displayName)
   const handleRouting = useRouting()
 
   const logOutUser = useLogout()
