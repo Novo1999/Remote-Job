@@ -1,17 +1,25 @@
 'use client'
-import { useState } from 'react'
 import { Listbox } from '@headlessui/react'
-import { remoteJobBenefits } from '@/utils/constants'
 import { Check, ChevronsUpDownIcon } from 'lucide-react'
+import { useState } from 'react'
 
-function BenefitsListbox() {
+function BenefitsListbox({
+  field,
+  options,
+}: {
+  field: Record<string, any>
+  options: string[]
+}) {
   const [selectedBenefits, setSelectedBenefits] = useState([
-    remoteJobBenefits[0],
-    remoteJobBenefits[1],
+    options[0],
+    options[1],
   ])
+
+  console.log(field)
 
   return (
     <Listbox value={selectedBenefits} onChange={setSelectedBenefits} multiple>
+      <label className='relative top-6'>Job Benefits *</label>
       <Listbox.Button className='bg-white w-full rounded-md py-2 text-black'>
         <span className='pointer-events-none inset-y-0 right-0 flex items-center pr-2'>
           <span className='block w-full'>
@@ -30,11 +38,12 @@ function BenefitsListbox() {
           'bg-white w-full rounded-md py-2 text-black cursor-pointer h-48 overflow-y-scroll'
         }
       >
-        {remoteJobBenefits.map((benefit) => (
+        {options.map((benefit) => (
           <Listbox.Option
             className='p-1 pl-2 border-black border-b-2 flex gap-2 hover:bg-slate-400 transition-colors'
             key={benefit}
             value={benefit}
+            {...field}
           >
             <p>
               <Check

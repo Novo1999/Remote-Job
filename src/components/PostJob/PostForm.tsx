@@ -1,7 +1,6 @@
 'use client'
 import { Button } from '@/components/ui/button'
 import { Form, FormField } from '@/components/ui/form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import {
@@ -18,7 +17,6 @@ import CompanyForm from './CompanyForm'
 import { FilterBar } from './FilterBar'
 import FormRow from './FormRow'
 import { FormRowSelect } from './FormRowSelect'
-import { MultiSelect } from '../Filter/SelectItem'
 import BenefitsListbox from './Listbox'
 
 const jobTypeEnum = z.enum(zodTypesArray)
@@ -41,7 +39,7 @@ export const formSchema = z.object({
   jobType: jobTypeEnum,
   jobLocation: jobLocationEnum,
   jobPosition: jobPositionEnum,
-  jobBenefits: jobBenefitsEnum,
+  jobBenefits: z.array(z.string()),
   salary: z.string().refine((value) => /^\d+-\d+$/.test(value), {
     message: 'Invalid salary range format. It should be like "50-60"',
   }),
@@ -77,19 +75,22 @@ export const formSchema = z.object({
 
 const PostForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+    // resolver: zodResolver(formSchema),
     defaultValues: {
-      jobTitle: '',
+      jobTitle: 'something',
       jobType: 'Full-Time',
-      jobLocation: undefined,
+      jobLocation: 'New York, NY',
+      jobPosition: 'Backend Engineer',
       jobDescription: '',
+      jobBenefits: [],
       companyName: 'The big company',
       companyDescription: '',
     },
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    values
+    console.log('yes')
+    console.log(values)
   }
   return (
     <Form {...form}>
@@ -148,7 +149,9 @@ const PostForm = () => {
         <FormField
           control={form.control}
           name='jobBenefits'
-          render={({ field }) => <BenefitsListbox />}
+          render={({ field }) => (
+            <BenefitsListbox field={field.value} options={remoteJobBenefits} />
+          )}
         />
         <FormField
           control={form.control}

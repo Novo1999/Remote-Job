@@ -23,11 +23,11 @@ const CompanyForm = ({ form }: CompanyFormProps) => {
           />
         )}
       />
-      <FormField
+      {/* <FormField
         control={form.control}
         name='companyImage'
         render={({ field }) => <FormRow label='Company Logo' field={field} />}
-      />
+      /> */}
       <FormField
         control={form.control}
         name='companyDescription'
