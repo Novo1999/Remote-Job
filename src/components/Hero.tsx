@@ -1,6 +1,6 @@
+import { Player } from '@lottiefiles/react-lottie-player'
 import Image from 'next/image'
-import nomadImage from '../../public/images/hero.jpg'
-import { Player, Controls } from '@lottiefiles/react-lottie-player'
+import nomadImage from '../assets/hero.jpg'
 
 const Hero = () => {
   return (

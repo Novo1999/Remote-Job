@@ -2,7 +2,7 @@
 const nextConfig = {}
 
 module.exports = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   webpack(config) {
     config.resolve.extensions.push('.ts', '.tsx')
     return config

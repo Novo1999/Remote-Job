@@ -10,21 +10,14 @@ import useRouting from '@/hooks/use-routing'
 import { useAppSelector } from '@/lib/features/hooks'
 import { useLogout } from '@/utils/logOut'
 import { getAuth } from 'firebase/auth'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '../ui/dialog'
-import { Button } from '../ui/button'
-import { useState } from 'react'
+import { Dialog, DialogTrigger } from '../ui/dialog'
 import FavoriteJobModal from './FavoriteJobModal'
+import { useState } from 'react'
+import { RxAvatar } from 'react-icons/rx'
 
 const ProfileDropdownMenu = () => {
   const { isLoading } = useAppSelector((state) => state.user)
+  const [open, setOpen] = useState(false)
 
   const { currentUser } = getAuth()
 
@@ -34,13 +27,16 @@ const ProfileDropdownMenu = () => {
   const logOutUser = useLogout()
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={() => setOpen(!open)}>
       <DropdownMenu>
         <DropdownMenuTrigger
           disabled={isLoading}
-          className='bg-white text-black rounded-md px-4 hover:bg-slate-200 transition-colors'
+          className='bg-white text-black items-center rounded-md px-4 flex gap-1 hover:bg-slate-200 py-2 transition-colors'
         >
-          {name}
+          <span>
+            <RxAvatar className='text-xl' />
+          </span>
+          <p>{name}</p>
         </DropdownMenuTrigger>
         <DropdownMenuContent className='w-48 relative right-7'>
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -58,11 +54,16 @@ const ProfileDropdownMenu = () => {
             Log Out
           </DropdownMenuItem>
           <DropdownMenuItem className='cursor-pointer hover:bg-slate-400'>
-            <DialogTrigger>My Favorite Jobs</DialogTrigger>
+            <DialogTrigger
+              className='w-full text-start'
+              onClick={() => setOpen(true)}
+            >
+              My Favorite Jobs
+            </DialogTrigger>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <FavoriteJobModal />
+      <FavoriteJobModal setOpen={setOpen} />
     </Dialog>
   )
 }

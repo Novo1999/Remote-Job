@@ -7,15 +7,18 @@ import { useAddViewCountMutation } from '@/lib/features/jobsApi/jobsApi'
 import { Job } from '@/utils/interfaces'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
-import { Ref, forwardRef } from 'react'
+import { Dispatch, Ref, SetStateAction, forwardRef } from 'react'
 import JobPositions from './JobPositions'
 import SpecialJobs from './SpecialJobs'
 import Star from './Star'
 
-type JobItemProp = { jobPost: Job; index: number }
+type JobItemProp = {
+  jobPost: Job
+  onClick?: () => void
+}
 
 const JobItem = forwardRef(
-  ({ jobPost, index }: JobItemProp, ref: Ref<HTMLDivElement>) => {
+  ({ jobPost, onClick }: JobItemProp, ref: Ref<HTMLDivElement>) => {
     const { _id } = jobPost
 
     const [addViewCount] = useAddViewCountMutation()
@@ -26,6 +29,7 @@ const JobItem = forwardRef(
       router.push(`/job/${_id}`, { scroll: true })
       // increment job view count
       addViewCount(_id)
+      onClick?.()
     }
     return (
       <motion.div

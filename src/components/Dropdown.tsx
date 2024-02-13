@@ -10,6 +10,7 @@ import { ReactNode, useState } from 'react'
 import { BsFillInfoCircleFill } from 'react-icons/bs'
 import { FaBriefcase } from 'react-icons/fa6'
 import { RiAdvertisementFill, RiLoginBoxFill } from 'react-icons/ri'
+import LoginBtn from './LoginBtn'
 
 const Content = ({
   menuText,
@@ -80,13 +81,7 @@ const Dropdown = () => {
           menuText='About'
           icon={<BsFillInfoCircleFill />}
         />
-
-        <Content
-          onClick={() => handleRouting('/login')}
-          className='text-blue-500 hover:text-blue-600'
-          menuText='Sign up/Login'
-          icon={<RiLoginBoxFill />}
-        />
+        <LoginBtn className='mt-4' />
       </DropdownMenuContent>
     </DropdownMenu>
   )

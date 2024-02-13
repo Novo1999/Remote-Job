@@ -5,7 +5,7 @@ import ProfileDropdownMenu from './Profile/ProfileDropdownMenu'
 import { Button } from './ui/button'
 import { navigationMenuTriggerStyle } from './ui/navigation-menu'
 
-const LoginBtn = () => {
+const LoginBtn = ({ className }: { className: string }) => {
   const { isLoading, user } = useAppSelector((state) => state.user)
   const isLoggedIn = user?.hasOwnProperty('email')
   const handleRouting = useRouting()
@@ -14,7 +14,7 @@ const LoginBtn = () => {
     <Button
       disabled={!isLoading && !isLoggedIn}
       onClick={() => handleRouting('/login')}
-      className={`${navigationMenuTriggerStyle()} bg-blue-500 hover:bg-blue-600 flex gap-2 text-white hover:text-white`}
+      className={`${navigationMenuTriggerStyle()} ${className} bg-blue-500 hover:bg-blue-600 flex gap-2 text-white hover:text-white`}
     >
       <RiLoginBoxFill /> {'Log in'}
     </Button>
