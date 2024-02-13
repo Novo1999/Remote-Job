@@ -5,7 +5,7 @@ import ProfileDropdownMenu from './Profile/ProfileDropdownMenu'
 import { Button } from './ui/button'
 import { navigationMenuTriggerStyle } from './ui/navigation-menu'
 
-const LoginBtn = ({ className }: { className: string }) => {
+const LoginBtn = ({ className }: { className?: string }) => {
   const { isLoading, user } = useAppSelector((state) => state.user)
   const isLoggedIn = user?.hasOwnProperty('email')
   const handleRouting = useRouting()

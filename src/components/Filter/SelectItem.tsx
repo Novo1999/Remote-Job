@@ -1,6 +1,6 @@
 'use client'
 import { changeFilter } from '@/lib/features/filter/filterSlice'
-import { MultiSelectProps } from '@/utils/interfaces'
+import { MultiSelectProps } from '../../../interfaces'
 import { setMaxFilterCount } from '@/utils/setMaxFilterCount'
 import { setSelectItemColor } from '@/utils/setSelectItemColor'
 import { useState } from 'react'

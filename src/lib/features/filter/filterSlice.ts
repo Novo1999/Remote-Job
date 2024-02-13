@@ -1,5 +1,5 @@
-import { FilterBy } from '@/utils/interfaces'
-import { createSlice, current } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
+import { FilterBy } from '../../../../interfaces'
 
 export type Category = 'locations' | 'positions' | 'types' | 'benefits'
 

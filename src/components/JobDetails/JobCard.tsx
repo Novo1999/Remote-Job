@@ -10,7 +10,7 @@ import ApplyButton from './ApplyButton'
 import ProfileImage from './Avatar'
 import Qualifications from './Qualifications'
 import Warning from './Warning'
-import { Job } from '@/utils/interfaces'
+import { Job } from '../../../interfaces'
 import { useAppSelector } from '@/lib/features/hooks'
 
 const JobCard = ({ job }: { job: Job }) => {

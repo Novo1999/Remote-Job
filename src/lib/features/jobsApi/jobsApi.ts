@@ -1,4 +1,4 @@
-import { GetJobs, GetSimilarJobs, Job, StarJob } from '@/utils/interfaces'
+import { GetJobs, GetSimilarJobs, Job, StarJob } from '../../../../interfaces'
 import { current } from '@reduxjs/toolkit'
 import api from '../api/apiSlice'
 

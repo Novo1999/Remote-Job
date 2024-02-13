@@ -1,5 +1,5 @@
 import useClickableFilter from '@/hooks/use-clickable-filter'
-import { Job } from '@/utils/interfaces'
+import { Job } from '../../../interfaces'
 import { FaLocationDot } from 'react-icons/fa6'
 
 const JobDetailsMobile = ({ jobPost }: { jobPost: Job }) => {

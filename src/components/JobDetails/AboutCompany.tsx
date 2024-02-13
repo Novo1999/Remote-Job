@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import ProfileImage from './Avatar'
-import { Job } from '@/utils/interfaces'
+import { Job } from '../../../interfaces'
 const AboutCompany = ({ job }: { job: Job }) => {
   return (
     <Card className='font-poppins bg-gradient-to-r from-teal-200 to-lime-200 h-full sm:col-span-1'>

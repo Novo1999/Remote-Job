@@ -1,4 +1,4 @@
-import { Job } from '@/utils/interfaces'
+import { Job } from '../../../interfaces'
 import {
   BarElement,
   CategoryScale,

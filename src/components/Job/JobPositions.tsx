@@ -1,5 +1,5 @@
 import useClickableFilter from '@/hooks/use-clickable-filter'
-import { Job } from '@/utils/interfaces'
+import { Job } from '../../../interfaces'
 import JobDate from './JobDate'
 import JobDetailsMobile from './JobDetailsMobile'
 import JobDetailsPC from './JobDetailsPC'

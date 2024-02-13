@@ -3,7 +3,7 @@ import Stats from '@/components/Stats'
 import { Player } from '@lottiefiles/react-lottie-player'
 import { RiRemoteControlFill } from 'react-icons/ri'
 
-export default function Page({ params }: { params: { id: string } }) {
+export default function Page() {
   const playerClassName =
     'size-36 sm:size-48 min-[375px]:size-40 lg:size-60 xl:size-72 relative drop-shadow-md bottom-4 sm:bottom-6'
   return (

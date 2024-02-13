@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
 import { useStarJobMutation } from '@/lib/features/jobsApi/jobsApi'
 import { setShowStarLoader } from '@/lib/features/loader/loaderSlice'
-import { Job } from '@/utils/interfaces'
+import { Job } from '../../../interfaces'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 

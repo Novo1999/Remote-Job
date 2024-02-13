@@ -1,6 +1,6 @@
 import { useGetAllJobsQuery } from '@/lib/features/jobsApi/jobsApi'
 import { useAppSelector } from '@/lib/features/hooks'
-import { Job } from '@/utils/interfaces'
+import { Job } from '../../interfaces'
 import { useEffect, useRef, useState } from 'react'
 import { FaCircleInfo } from 'react-icons/fa6'
 import { RxCross2 } from 'react-icons/rx'

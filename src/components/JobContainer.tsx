@@ -1,7 +1,7 @@
 'use client'
 import { useJob } from '@/hooks/use-job'
 import { useAppSelector } from '@/lib/features/hooks'
-import { Job } from '@/utils/interfaces'
+import { Job } from '../../interfaces'
 import Error, { EmptyResponse } from './Dummies'
 import JobChart from './Job/JobChart'
 import JobItem from './Job/JobItem'

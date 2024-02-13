@@ -1,4 +1,4 @@
-import { FilterParam } from './interfaces'
+import { FilterParam } from '../../interfaces'
 
 export const constructFilterQuery = (filterBy: FilterParam) => {
   let query = ''

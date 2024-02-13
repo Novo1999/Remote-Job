@@ -1,6 +1,6 @@
 import useClickableFilter from '@/hooks/use-clickable-filter'
 import { useAppSelector } from '@/lib/features/hooks'
-import { Job } from '@/utils/interfaces'
+import { Job } from '../../../interfaces'
 import { FaDollarSign, FaLocationDot } from 'react-icons/fa6'
 import Star from './Star'
 
