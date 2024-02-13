@@ -28,7 +28,6 @@ export const useAuth = (formSchema: FormSchemaType) => {
     data
   ) => {
     registerUser(data.email, data.password, data.displayName as string)
-    dispatch(setCurrentUser(auth.currentUser))
   }
   // LOGIN SUBMIT
   const onSubmitLoginUser: SubmitHandler<z.infer<typeof formSchema>> = (
@@ -40,6 +39,7 @@ export const useAuth = (formSchema: FormSchemaType) => {
   // CHECK AUTH STATUS
   const initAuth = () => {
     onAuthStateChanged(auth, (currentUser) => {
+      console.log('this one')
       dispatch(setCurrentUser(currentUser))
     })
   }
@@ -55,8 +55,11 @@ export const useAuth = (formSchema: FormSchemaType) => {
 
       await updateProfile(user.user, {
         displayName: displayName,
+      }).then(() => {
+        dispatch(
+          setCurrentUser({ ...user, name: auth.currentUser?.displayName })
+        )
       })
-
       toast.success(`Welcome, ${user.user.displayName}`, {
         position: 'bottom-right',
       })

@@ -20,7 +20,7 @@ const Star = ({ className, job }: Star) => {
   const router = useRouter()
   const dispatch = useAppDispatch()
 
-  const [markAsStarred, { isLoading }] = useStarJobMutation()
+  const [markAsStarred] = useStarJobMutation()
 
   const checked = userId.includes(uid)
 

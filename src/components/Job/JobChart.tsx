@@ -40,8 +40,7 @@ const JobChart = ({ data: jobs }: { data: Job[] }) => {
     datasets: [
       {
         label: 'Viewed',
-        data: jobs
-          .slice() // make copy
+        data: [...jobs]
           .sort((a: Job, b: Job) => b.viewCount - a.viewCount)
           .slice(0, 10) // get 10
           .map((job: Job) => job.viewCount),
@@ -49,8 +48,7 @@ const JobChart = ({ data: jobs }: { data: Job[] }) => {
       },
       {
         label: 'Applied',
-        data: jobs
-          .slice()
+        data: [...jobs]
           .sort((a: Job, b: Job) => b.applyCount - a.applyCount)
           .slice(0, 10)
           .map((job: Job) => job.applyCount),
@@ -65,5 +63,4 @@ const JobChart = ({ data: jobs }: { data: Job[] }) => {
     </div>
   )
 }
-// export default React.memo(JobChart)
 export default JobChart

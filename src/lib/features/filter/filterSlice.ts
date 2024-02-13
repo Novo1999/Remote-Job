@@ -24,7 +24,6 @@ const filterSlice = createSlice({
       const category = action.payload.category as Category
       const stateCategory = state.filterBy[category]
       const { newOption } = action.payload
-      console.log(action.payload)
       // if option already exists, remove it
       if (stateCategory.includes(newOption)) {
         const optionToRemove = stateCategory.findIndex(

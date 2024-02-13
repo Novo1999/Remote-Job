@@ -44,6 +44,10 @@ const jobsApi = api.injectEndpoints({
     getTotalJobs: builder.query<number, void>({
       query: () => '/total-jobs',
     }),
+    getUserStarredJobs: builder.query<Job[], string>({
+      query: (uid) => `/starred/${uid}`,
+      providesTags: ['user-starred'],
+    }),
     // STAR JOB
     starJob: builder.mutation<Job, StarJob>({
       query: ({ jobId, userId }) => ({
@@ -51,7 +55,7 @@ const jobsApi = api.injectEndpoints({
         url: `/star/${jobId}`,
         body: { userId },
       }),
-      invalidatesTags: ['all-jobs', 'similar-jobs'], // this will refetch the jobs to show the updated ui
+      invalidatesTags: ['all-jobs', 'similar-jobs', 'user-starred'], // this will refetch the jobs to show the updated ui
       async onQueryStarted({ jobId, userId }, { dispatch, queryFulfilled }) {
         // this is for one job only
         const patchResult = dispatch(
@@ -84,4 +88,5 @@ export const {
   useAddViewCountMutation,
   useGetTotalJobsQuery,
   useStarJobMutation,
+  useGetUserStarredJobsQuery,
 } = jobsApi

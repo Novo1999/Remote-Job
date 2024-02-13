@@ -7,7 +7,6 @@ export const useExtractFilter = () => {
   const dispatch = useAppDispatch()
   const params = useSearchParams()
   const urlFilterString = params.getAll('filter')?.at(0)
-  console.log(params.getAll('filter'))
 
   // Loop through each key-value pair and extract the relevant information
   useEffect(() => {
