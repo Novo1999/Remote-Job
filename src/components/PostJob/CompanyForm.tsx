@@ -25,17 +25,6 @@ const CompanyForm = ({ form }: CompanyFormProps) => {
       />
       <FormField
         control={form.control}
-        name='companyWebsite'
-        render={({ field }) => (
-          <FormRow
-            label='Company Website'
-            placeholder='e.g. www.mycompany.com'
-            field={field}
-          />
-        )}
-      />
-      <FormField
-        control={form.control}
         name='companyImage'
         render={({ field }) => <FormRow label='Company Logo' field={field} />}
       />

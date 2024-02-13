@@ -36,10 +36,15 @@ const FormRow = ({
   }
   if (label === 'Company Logo') {
     return (
-      <FormItem>
+      <FormItem className='text-black'>
         <FormLabel className='text-white'>{label}</FormLabel>
         <FormControl>
-          <Input className='text-black' id='picture' type='file' {...field} />
+          <Input
+            className='text-white bg-black cursor-pointer'
+            id='picture'
+            type='file'
+            {...field}
+          />
         </FormControl>
         <FormMessage className='text-xs' />
       </FormItem>

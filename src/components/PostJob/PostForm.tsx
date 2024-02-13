@@ -18,6 +18,8 @@ import CompanyForm from './CompanyForm'
 import { FilterBar } from './FilterBar'
 import FormRow from './FormRow'
 import { FormRowSelect } from './FormRowSelect'
+import { MultiSelect } from '../Filter/SelectItem'
+import BenefitsListbox from './Listbox'
 
 const jobTypeEnum = z.enum(zodTypesArray)
 const jobLocationEnum = z.enum(zodRemoteJobLocations)
@@ -40,8 +42,8 @@ export const formSchema = z.object({
   jobLocation: jobLocationEnum,
   jobPosition: jobPositionEnum,
   jobBenefits: jobBenefitsEnum,
-  salary: z.string().refine((value) => /^\$\d+K - \$\d+K$/.test(value), {
-    message: 'Invalid salary range format. It should be like "$50K - $60K"',
+  salary: z.string().refine((value) => /^\d+-\d+$/.test(value), {
+    message: 'Invalid salary range format. It should be like "50-60"',
   }),
   jobDescription: z
     .string()
@@ -62,11 +64,6 @@ export const formSchema = z.object({
   companyName: z.string().min(6, {
     message: 'Company Name must be at least 6 characters.',
   }),
-  companyWebsite: z
-    .string()
-    .min(10, 'Cannot be less than 10 characters')
-    .optional()
-    .or(z.literal('')),
   companyImage: z.object({
     image: z
       .any()
@@ -84,10 +81,9 @@ const PostForm = () => {
     defaultValues: {
       jobTitle: '',
       jobType: 'Full-Time',
-      jobLocation: 'Chicago, IL',
+      jobLocation: undefined,
       jobDescription: '',
       companyName: 'The big company',
-      companyWebsite: '',
       companyDescription: '',
     },
   })
@@ -152,24 +148,13 @@ const PostForm = () => {
         <FormField
           control={form.control}
           name='jobBenefits'
-          render={({ field }) => (
-            <FilterBar
-              form={form}
-              field={field.value}
-              filterFor='jobBenefits'
-              options={remoteJobBenefits}
-            />
-          )}
+          render={({ field }) => <BenefitsListbox />}
         />
         <FormField
           control={form.control}
           name='salary'
           render={({ field }) => (
-            <FormRow
-              label='Salary *'
-              placeholder='e.g. $50K - $60K'
-              field={field}
-            />
+            <FormRow label='Salary *' placeholder='e.g. 50-60' field={field} />
           )}
         />
         <FormField
