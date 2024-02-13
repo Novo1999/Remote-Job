@@ -14,7 +14,11 @@ const Hero = () => {
         />
         <div className='absolute top-10 min-[375px]:top-16 gap-10 left-0 right-0 bottom-0'>
           <p className='text-center text-xl drop-shadow-md relative lg:text-5xl sm:text-3xl font-semibold font-montserrat animate-in fade-in transition-all duration-500 zoom-in'>
-            Discover remote jobs and work from anywhere
+            Discover remote jobs and work from{' '}
+            <span className='xl:text-gray-800 text-white drop-shadow-md'>
+              {' '}
+              anywhere
+            </span>
           </p>
           <Player
             className='size-36 sm:size-48 min-[375px]:size-40 lg:size-60 xl:size-72 relative drop-shadow-md bottom-4 sm:bottom-6'
