@@ -1,3 +1,4 @@
+import { useAppSelector } from '@/lib/features/hooks'
 import { Job } from '../../../interfaces'
 import {
   BarElement,

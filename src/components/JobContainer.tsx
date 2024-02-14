@@ -14,9 +14,18 @@ const JobContainer = () => {
   let content = null
   if (isLoading) {
     // making skeletons for 10 jobs hard coded
-    content = Array.from({ length: 10 }).map((_, index) => (
-      <Skeleton key={index} />
-    ))
+    content = (
+      <>
+        <div className='flex gap-2 sm:gap-4 lg:gap-6 items-end m-auto h-96 mt-12'>
+          {Array.from({ length: 10 }).map((_, index) => (
+            <div key={index} className='w-4 bg-gray-300 bar'></div>
+          ))}
+        </div>
+        {Array.from({ length: 10 }).map((_, index) => (
+          <Skeleton key={index} />
+        ))}
+      </>
+    )
   }
 
   if (isError) {

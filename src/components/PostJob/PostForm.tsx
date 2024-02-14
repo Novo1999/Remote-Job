@@ -18,6 +18,7 @@ import { FilterBar } from './FilterBar'
 import FormRow from './FormRow'
 import { FormRowSelect } from './FormRowSelect'
 import BenefitsListbox from './Listbox'
+import { useState } from 'react'
 
 const jobTypeEnum = z.enum(zodTypesArray)
 const jobLocationEnum = z.enum(zodRemoteJobLocations)
@@ -87,10 +88,16 @@ const PostForm = () => {
       companyDescription: '',
     },
   })
+  const [selectedBenefits, setSelectedBenefits] = useState([
+    remoteJobBenefits[0],
+    remoteJobBenefits[1],
+  ])
+
+  console.log(selectedBenefits)
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log('yes')
-    console.log(values)
+    console.log({ ...values, jobBenefits: selectedBenefits })
   }
   return (
     <Form {...form}>
@@ -150,7 +157,10 @@ const PostForm = () => {
           control={form.control}
           name='jobBenefits'
           render={({ field }) => (
-            <BenefitsListbox field={field.value} options={remoteJobBenefits} />
+            <BenefitsListbox
+              selectedBenefits={selectedBenefits}
+              setSelectedBenefits={setSelectedBenefits}
+            />
           )}
         />
         <FormField
