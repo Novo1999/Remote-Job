@@ -37,15 +37,13 @@ export function FilterBar({
 }) {
   // setting label dynamically
   let label = ''
-  if (filterFor === 'jobLocation') {
+  if (filterFor === 'location') {
     label = 'Job Location'
   }
-  if (filterFor === 'jobPosition') {
+  if (filterFor === 'position') {
     label = 'Job Position'
   }
-  if (filterFor === 'jobBenefits') {
-    label = 'Job Benefits'
-  }
+
   const [open, setOpen] = useState(false)
   return (
     <FormItem className='flex flex-col'>

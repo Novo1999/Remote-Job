@@ -101,6 +101,7 @@ const PostForm = () => {
     remoteJobBenefits[0],
     remoteJobBenefits[1],
   ])
+  console.log(selectedBenefits)
   const [image, setImage] = useState()
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -108,7 +109,7 @@ const PostForm = () => {
     postJob({
       ...values,
       companyImage: image,
-      jobBenefits: selectedBenefits,
+      benefits: selectedBenefits,
     })
   }
   return (
@@ -148,7 +149,7 @@ const PostForm = () => {
             <FilterBar
               form={form}
               field={field.value}
-              filterFor='jobLocation'
+              filterFor='location'
               options={remoteJobLocations}
             />
           )}
@@ -160,7 +161,7 @@ const PostForm = () => {
             <FilterBar
               form={form}
               field={field.value}
-              filterFor='jobPosition'
+              filterFor='position'
               options={remoteJobPositions}
             />
           )}
