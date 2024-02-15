@@ -18,13 +18,16 @@ const JobCard = ({ job }: { job: Job }) => {
     _id,
     posted,
     title,
-    company,
+    companyName,
     location,
     salary: { min, max },
     position,
     jobType,
     viewCount,
   } = job
+
+  console.log(job)
+
   const { formattedDate } = usePostedDate(posted)
   const { showStarLoader } = useAppSelector((state) => state.loader)
 
@@ -55,7 +58,7 @@ const JobCard = ({ job }: { job: Job }) => {
         </div>
         <div className='flex flex-wrap gap-2'>
           <Badge variant='destructive' className='w-fit'>
-            <Link href='/company'>{company}</Link>
+            <Link href='/company'>{companyName}</Link>
           </Badge>
           <Badge variant='secondary' className='w-fit'>
             <p>{formattedDate}</p>

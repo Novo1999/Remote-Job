@@ -16,11 +16,14 @@ export interface Job {
   }
   isFeatured: boolean
   isAd: boolean
-  company: string
+  companyName: string
   benefits: Array<string>
   applyCount: number
   viewCount: number
   posted: string
+  companyLogo: {
+    url: string
+  }
 }
 
 export interface GetJobs {

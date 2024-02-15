@@ -78,6 +78,13 @@ const jobsApi = api.injectEndpoints({
         }
       },
     }),
+    postJob: builder.mutation({
+      query: (job) => ({
+        method: 'POST',
+        url: '/post-job',
+        body: job,
+      }),
+    }),
   }),
 })
 
@@ -89,4 +96,5 @@ export const {
   useGetTotalJobsQuery,
   useStarJobMutation,
   useGetUserStarredJobsQuery,
+  usePostJobMutation,
 } = jobsApi

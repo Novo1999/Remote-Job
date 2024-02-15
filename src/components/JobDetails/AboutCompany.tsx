@@ -14,10 +14,10 @@ const AboutCompany = ({ job }: { job: Job }) => {
       <CardHeader>
         <div className='flex gap-2 items-center'>
           <ProfileImage />
-          <CardTitle>{job?.company}</CardTitle>
+          <CardTitle>{job?.companyName}</CardTitle>
         </div>
         <CardDescription className='text-xs leading-6 text-black lg:text-base'>
-          <span className='font-bold'>{job?.company} </span>is a dynamic and
+          <span className='font-bold'>{job?.companyName} </span>is a dynamic and
           innovative company specializing in the field of technology and
           software development. Known for its cutting-edge solutions and
           forward-thinking approach, Tech Co is at the forefront of the

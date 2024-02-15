@@ -1,10 +1,9 @@
 import { useGetUserStarredJobsQuery } from '@/lib/features/jobsApi/jobsApi'
 import { User, getAuth } from 'firebase/auth'
+import { Dispatch, SetStateAction } from 'react'
 import Error, { EmptyResponse } from '../Dummies'
 import JobItem from '../Job/JobItem'
-import Skeleton from '../Job/Skeleton'
 import { DialogContent } from '../ui/dialog'
-import { Dispatch, SetStateAction } from 'react'
 
 const FavoriteJobModal = ({
   setOpen,
@@ -30,9 +29,14 @@ const FavoriteJobModal = ({
 
   // if not searching show regular jobs
   if (!isLoading && !isError && data?.length! > 0) {
-    content = data?.map((job) => (
-      <JobItem onClick={() => setOpen(false)} jobPost={job} key={job._id} />
-    ))
+    content = (
+      <>
+        <h4 className='font-semibold'>My Favorite Jobs</h4>
+        {data?.map((job) => (
+          <JobItem onClick={() => setOpen(false)} jobPost={job} key={job._id} />
+        ))}
+      </>
+    )
   }
 
   return <DialogContent className='bg-black'>{content}</DialogContent>

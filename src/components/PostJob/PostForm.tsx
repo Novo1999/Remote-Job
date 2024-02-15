@@ -19,28 +19,34 @@ import FormRow from './FormRow'
 import { FormRowSelect } from './FormRowSelect'
 import BenefitsListbox from './Listbox'
 import { useState } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { usePostJobMutation } from '@/lib/features/jobsApi/jobsApi'
 
 const jobTypeEnum = z.enum(zodTypesArray)
 const jobLocationEnum = z.enum(zodRemoteJobLocations)
 const jobBenefitsEnum = z.enum(zodRemoteJobBenefits)
 const jobPositionEnum = z.enum(zodRemoteJobPositions)
 
-const MAX_FILE_SIZE = 2000000
-const ACCEPTED_IMAGE_TYPES = [
-  'image/jpeg',
-  'image/jpg',
-  'image/png',
-  'image/webp',
-]
+const MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB
+const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp']
+
+// Define the Zod schema for image file validation
+const ImageSchema = z.object({
+  size: z.number().max(MAX_FILE_SIZE, `Max image size is 2MB.`),
+  type: z.enum(
+    ACCEPTED_IMAGE_TYPES,
+    'Only .jpg, .jpeg, .png, and .webp formats are supported.'
+  ),
+})
 
 export const formSchema = z.object({
-  jobTitle: z.string().min(6, {
+  title: z.string().min(6, {
     message: 'Job title must be at least 6 characters.',
   }),
   jobType: jobTypeEnum,
-  jobLocation: jobLocationEnum,
-  jobPosition: jobPositionEnum,
-  jobBenefits: z.array(z.string()),
+  location: jobLocationEnum,
+  position: jobPositionEnum,
+  benefits: z.array(z.string()),
   salary: z.string().refine((value) => /^\d+-\d+$/.test(value), {
     message: 'Invalid salary range format. It should be like "50-60"',
   }),
@@ -63,27 +69,30 @@ export const formSchema = z.object({
   companyName: z.string().min(6, {
     message: 'Company Name must be at least 6 characters.',
   }),
-  companyImage: z.object({
-    image: z
-      .any()
-      .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 2MB.`)
-      .refine(
-        (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-        'Only .jpg, .jpeg, .png and .webp formats are supported.'
-      ),
-  }),
+  companyImage: z.string(),
+  // companyImage: z.object({
+  //   image: z
+  //     .any()
+  //     .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 2MB.`)
+  //     .refine(
+  //       (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+  //       'Only .jpg, .jpeg, .png and .webp formats are supported.'
+  //     ),
+  // }),
 })
 
 const PostForm = () => {
+  const [postJob, { isError, error }] = usePostJobMutation()
+  console.log(isError, error)
   const form = useForm<z.infer<typeof formSchema>>({
     // resolver: zodResolver(formSchema),
     defaultValues: {
-      jobTitle: 'something',
+      title: 'something',
       jobType: 'Full-Time',
-      jobLocation: 'New York, NY',
-      jobPosition: 'Backend Engineer',
+      location: 'New York, NY',
+      position: 'Backend Engineer',
       jobDescription: '',
-      jobBenefits: [],
+      benefits: [],
       companyName: 'The big company',
       companyDescription: '',
     },
@@ -92,12 +101,15 @@ const PostForm = () => {
     remoteJobBenefits[0],
     remoteJobBenefits[1],
   ])
-
-  console.log(selectedBenefits)
+  const [image, setImage] = useState()
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log('yes')
-    console.log({ ...values, jobBenefits: selectedBenefits })
+    postJob({
+      ...values,
+      companyImage: image,
+      jobBenefits: selectedBenefits,
+    })
   }
   return (
     <Form {...form}>
@@ -108,7 +120,7 @@ const PostForm = () => {
         <h1 className='text-2xl font-bold'>Tell us about your Job</h1>
         <FormField
           control={form.control}
-          name='jobTitle'
+          name='title'
           render={({ field }) => (
             <FormRow
               label='Job Title *'
@@ -131,7 +143,7 @@ const PostForm = () => {
         />
         <FormField
           control={form.control}
-          name='jobLocation'
+          name='location'
           render={({ field }) => (
             <FilterBar
               form={form}
@@ -143,7 +155,7 @@ const PostForm = () => {
         />
         <FormField
           control={form.control}
-          name='jobPosition'
+          name='position'
           render={({ field }) => (
             <FilterBar
               form={form}
@@ -155,7 +167,7 @@ const PostForm = () => {
         />
         <FormField
           control={form.control}
-          name='jobBenefits'
+          name='benefits'
           render={({ field }) => (
             <BenefitsListbox
               selectedBenefits={selectedBenefits}
@@ -181,7 +193,7 @@ const PostForm = () => {
             />
           )}
         />
-        <CompanyForm form={form} />
+        <CompanyForm setImage={setImage} form={form} />
         <Button className='hover:bg-white hover:text-black' type='submit'>
           Submit
         </Button>

@@ -4,10 +4,10 @@ import Image from 'next/image'
 import dummyLogo from '../../../public/images/dummylogo.png'
 
 import { useAddViewCountMutation } from '@/lib/features/jobsApi/jobsApi'
-import { Job } from '../../../interfaces'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
-import { Dispatch, Ref, SetStateAction, forwardRef } from 'react'
+import { Ref, forwardRef } from 'react'
+import { Job } from '../../../interfaces'
 import JobPositions from './JobPositions'
 import SpecialJobs from './SpecialJobs'
 import Star from './Star'
@@ -19,7 +19,7 @@ type JobItemProp = {
 
 const JobItem = forwardRef(
   ({ jobPost, onClick }: JobItemProp, ref: Ref<HTMLDivElement>) => {
-    const { _id } = jobPost
+    const { _id, companyLogo } = jobPost
 
     const [addViewCount] = useAddViewCountMutation()
     const router = useRouter()
@@ -44,14 +44,13 @@ const JobItem = forwardRef(
         {/* main items */}
         <div className='flex col-span-1 flex-col gap-1 items-center m-auto sm:flex-row'>
           <Image
-            src={dummyLogo}
+            src={companyLogo?.url ?? dummyLogo}
             alt='logo'
+            width={300}
+            height={300}
             className='w-12 sm:w-16 rounded-full m-auto shadow-lg lg:w-[90px] xl:w-20'
           />
-          <button
-            onClick={() => console.log(_id)}
-            className='text-lg right-2 sm:hidden'
-          >
+          <button className='text-lg right-2 sm:hidden'>
             <div className='rating rating-sm transition-all'>
               <Star job={jobPost} />
             </div>
