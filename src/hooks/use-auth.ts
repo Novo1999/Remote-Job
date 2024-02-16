@@ -1,18 +1,17 @@
-import { auth } from '@/firebase/config'
 import { useAppDispatch } from '@/lib/features/hooks'
 import { setCurrentUser } from '@/lib/features/user/userSlice'
 import {
   createUserWithEmailAndPassword,
   getAuth,
-  onAuthStateChanged,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   updateProfile,
 } from 'firebase/auth'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { ZodEffects, ZodObject, ZodString, z } from 'zod'
-
+1
 export type FormSchemaType = ZodObject<{
   displayName?: ZodEffects<ZodEffects<ZodString, string, string>>
   email: ZodEffects<ZodString, string, string>
@@ -34,14 +33,6 @@ export const useAuth = (formSchema: FormSchemaType) => {
     data
   ) => {
     loginUser(data.email, data.password)
-  }
-
-  // CHECK AUTH STATUS
-  const initAuth = () => {
-    onAuthStateChanged(auth, (currentUser) => {
-      console.log('this one')
-      dispatch(setCurrentUser(currentUser))
-    })
   }
 
   // REGISTER FN
@@ -88,7 +79,6 @@ export const useAuth = (formSchema: FormSchemaType) => {
       toast.success(`Welcome, ${user.user.displayName}`, {
         position: 'bottom-right',
       })
-      initAuth()
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message.split(': ')[1])

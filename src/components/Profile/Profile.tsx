@@ -4,17 +4,20 @@ import { getAuth } from 'firebase/auth'
 import { Loader2 } from 'lucide-react'
 import Image from 'next/image'
 import { ProfileModal } from './ProfileModal'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from '@/firebase/config'
+import ClientOnly from '../PostJob/ClientOnly'
 
 const Profile = () => {
-  const { isLoading } = useAppSelector((state) => state.user)
+  const [user, loading, error] = useAuthState(auth)
 
-  const { currentUser } = getAuth()
+  const name = user?.displayName
+  const email = user?.email
 
-  const name = currentUser?.displayName
-  const email = currentUser?.email
-
-  return isLoading ? (
-    <Loader2 height={100} width={100} className='animate-spin' />
+  return loading ? (
+    <div className='min-h-screen flex justify-center items-center'>
+      <Loader2 height={100} width={100} className='animate-spin' />
+    </div>
   ) : (
     <div className='bg-white overflow-hidden shadow rounded-lg border p-16 mx-6 flex flex-col'>
       <div className='avatar flex justify-center'>

@@ -37,10 +37,13 @@ export const useJob = () => {
       dispatch(changeLimit(10)) // the payload is 10 which will be added to the limit as user scrolls so there are +10 data and so on
     }
     // if there are no jobs, don't show skeleton
-    if (limit === totalJobs || isSearching || filterParam) {
+  }, [inView, totalJobs, dispatch])
+
+  useEffect(() => {
+    if (limit >= totalJobs! || isSearching || filterParam) {
       dispatch(setShowSkeleton(false))
     }
-  }, [inView, totalJobs, dispatch, isSearching, filterParam])
+  }, [dispatch, filterParam, isSearching, limit, totalJobs])
 
   return {
     isLoading,

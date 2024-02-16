@@ -4,7 +4,6 @@ import TopMenu from './TopMenu'
 import useInitAuth from '@/hooks/use-init-auth'
 import { Player } from '@lottiefiles/react-lottie-player'
 const Navbar = () => {
-  useInitAuth()
   return (
     <nav className='mt-4 flex justify-between px-4 items-center'>
       <Link href='/' className='text-2xl flex font-chewy items-center'>

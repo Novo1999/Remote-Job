@@ -1,20 +1,23 @@
-import { useAppSelector } from '@/lib/features/hooks'
+'use client'
+import { auth } from '@/firebase/config'
+import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { ReactNode, useEffect } from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { toast } from 'react-toastify'
 
 const PrivateRoute = ({ children }: { children: ReactNode }) => {
-  const { user } = useAppSelector((state) => state.user)
+  const [user] = useAuthState(auth)
+
   const router = useRouter()
+
   useEffect(() => {
-    if (user?.email) {
-      router.push('/')
-      toast.error('ALREADY LOGGED IN!', { autoClose: 2000 })
+    if (!user?.email) {
+      router.push('/login')
+      toast.error('Please Log in first')
     }
   }, [user, router])
 
-  if (!user?.email) {
-    return <>{children}</>
-  }
+  return <main>{children}</main>
 }
 export default PrivateRoute

@@ -26,8 +26,6 @@ const JobCard = ({ job }: { job: Job }) => {
     viewCount,
   } = job
 
-  console.log(job)
-
   const { formattedDate } = usePostedDate(posted)
   const { showStarLoader } = useAppSelector((state) => state.loader)
 
@@ -94,6 +92,7 @@ const JobCard = ({ job }: { job: Job }) => {
               </p>
             </div>
           </div>
+          {/* just some dummy data here */}
           <p>
             We are looking for a Senior Symfony developer with commercial
             experience for one of our clients. You are a perfect candidate if
