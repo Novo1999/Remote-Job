@@ -1,3 +1,4 @@
+'use client'
 import { Player } from '@lottiefiles/react-lottie-player'
 import Image from 'next/image'
 import nomadImage from '../assets/hero.jpg'
