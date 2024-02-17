@@ -51,7 +51,6 @@ const PostForm = () => {
     remoteJobBenefits[0],
     remoteJobBenefits[1],
   ])
-  console.log(selectedBenefits)
   const [image, setImage] = useState<void>()
 
   function onSubmit(values: z.infer<typeof formSchema>) {
