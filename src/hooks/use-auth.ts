@@ -1,5 +1,3 @@
-import { useAppDispatch } from '@/lib/features/hooks'
-import { setCurrentUser } from '@/lib/features/user/userSlice'
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -7,7 +5,6 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from 'firebase/auth'
-import { useAuthState } from 'react-firebase-hooks/auth'
 import { SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { ZodEffects, ZodObject, ZodString, z } from 'zod'
@@ -19,7 +16,6 @@ export type FormSchemaType = ZodObject<{
 }>
 
 export const useAuth = (formSchema: FormSchemaType) => {
-  const dispatch = useAppDispatch()
   const auth = getAuth()
 
   // REGISTER SUBMIT
@@ -46,10 +42,6 @@ export const useAuth = (formSchema: FormSchemaType) => {
 
       await updateProfile(user.user, {
         displayName: displayName,
-      }).then(() => {
-        dispatch(
-          setCurrentUser({ ...user, name: auth.currentUser?.displayName })
-        )
       })
       toast.success(`Welcome, ${user.user.displayName}`, {
         position: 'bottom-right',

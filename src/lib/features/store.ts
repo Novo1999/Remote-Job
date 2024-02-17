@@ -4,7 +4,6 @@ import limitReducer from './limit/limitSlice'
 import sortReducer from './sort/sortSlice'
 import searchReducer from './search/searchSlice'
 import filterReducer from './filter/filterSlice'
-import userReducer from './user/userSlice'
 import loaderReducer from './loader/loaderSlice'
 
 export const makeStore = () =>
@@ -15,7 +14,6 @@ export const makeStore = () =>
       sort: sortReducer,
       search: searchReducer,
       filter: filterReducer,
-      user: userReducer,
       loader: loaderReducer,
     },
     middleware: (gDM) =>

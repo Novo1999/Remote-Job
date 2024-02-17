@@ -4,22 +4,29 @@ import { Dispatch, SetStateAction } from 'react'
 import Error, { EmptyResponse } from '../Dummies'
 import JobItem from '../Job/JobItem'
 import { DialogContent } from '../ui/dialog'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from '@/firebase/config'
 
 const FavoriteJobModal = ({
   setOpen,
 }: {
   setOpen: Dispatch<SetStateAction<boolean>>
 }) => {
-  const auth = getAuth()
-  const { uid } = auth.currentUser as User
+  const [user] = useAuthState(auth)
+  const { uid } = user as User
 
-  const { data, isLoading, isError, error } = useGetUserStarredJobsQuery(uid)
+  const {
+    data,
+    isLoading,
+    isError,
+    error: starError,
+  } = useGetUserStarredJobsQuery(uid)
 
   let content = null
 
   if (isError) {
-    if ('status' in error!) {
-      content = <Error error={error} />
+    if ('status' in starError!) {
+      content = <Error error={starError} />
     }
   }
 

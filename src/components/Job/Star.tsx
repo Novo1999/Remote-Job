@@ -4,6 +4,8 @@ import { setShowStarLoader } from '@/lib/features/loader/loaderSlice'
 import { Job } from '../../../interfaces'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from '@/firebase/config'
 
 type Star = {
   className?: string
@@ -15,14 +17,14 @@ const Star = ({ className, job }: Star) => {
     _id,
     isStarred: { userId },
   } = job
-  const { user } = useAppSelector((state) => state.user) || {}
+  const [user] = useAuthState(auth)
   const uid = user?.uid
   const router = useRouter()
   const dispatch = useAppDispatch()
 
   const [markAsStarred] = useStarJobMutation()
 
-  const checked = userId.includes(uid)
+  const checked = userId.includes(uid!) ?? false
 
   const handleCheck = () => {
     // if user not logged in, take the user to login page

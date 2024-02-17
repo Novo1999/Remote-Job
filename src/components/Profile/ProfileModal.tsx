@@ -11,18 +11,13 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
-import { setCurrentUser } from '@/lib/features/user/userSlice'
+import { auth } from '@/firebase/config'
+import { useAppDispatch } from '@/lib/features/hooks'
 import { validateEmail } from '@/utils/validateEmail'
 import { ErrorMessage } from '@hookform/error-message'
 import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  User,
-  getAuth,
-  onAuthStateChanged,
-  updateEmail,
-  updateProfile,
-} from 'firebase/auth'
+import { User, getAuth, updateEmail, updateProfile } from 'firebase/auth'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { z } from 'zod'
@@ -41,7 +36,7 @@ const profileSchema = z.object({
 
 export function ProfileModal({ name, email }: ProfileModalProp) {
   const dispatch = useAppDispatch()
-  const { user } = useAppSelector((state) => state.user)
+  const [user] = useAuthState(auth)
   const {
     handleSubmit,
     register,
@@ -54,8 +49,6 @@ export function ProfileModal({ name, email }: ProfileModalProp) {
     },
   })
 
-  const auth = getAuth()
-
   const onSubmit = (values: z.infer<typeof profileSchema>) => {
     const { name: newName, email: newEmail } = values
 
@@ -65,22 +58,15 @@ export function ProfileModal({ name, email }: ProfileModalProp) {
     })
       .then(() => {
         toast.success('Successfully Updated Profile')
-        dispatch(
-          setCurrentUser({ ...user, name: auth.currentUser?.displayName })
-        )
       })
       .catch((error) => {
         console.error('ERROR UPDATING NAME!', error)
       })
 
     // update email
-    updateEmail(auth.currentUser as User, newEmail || email)
-      .then(() => {
-        dispatch(setCurrentUser({ ...user, email: auth.currentUser?.email }))
-      })
-      .catch((error) => {
-        console.error('ERROR UPDATING EMAIL!', error)
-      })
+    updateEmail(auth.currentUser as User, newEmail || email).catch((error) => {
+      console.error('ERROR UPDATING EMAIL!', error)
+    })
   }
 
   return (
