@@ -4,9 +4,11 @@ import { Form, FormField } from '@/components/ui/form'
 import { auth } from '@/firebase/config'
 import { usePostJobMutation } from '@/lib/features/jobsApi/jobsApi'
 import { Loader2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 import * as z from 'zod'
 import {
   remoteJobBenefits,
@@ -33,6 +35,7 @@ const ImageSchema = z.object({
 const PostForm = () => {
   const [user, loading, error] = useAuthState(auth)
   const [postJob, { isError, error: postError }] = usePostJobMutation()
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     // resolver: zodResolver(formSchema),
@@ -58,7 +61,10 @@ const PostForm = () => {
       ...values,
       companyImage: image,
       benefits: selectedBenefits,
+      createdBy: user?.uid,
     })
+      .then(() => router.push('/'))
+      .then(() => toast.success('Added Job Successfully'))
   }
 
   let content = null

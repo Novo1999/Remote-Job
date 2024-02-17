@@ -1,9 +1,9 @@
-import { usePostedDate } from '@/hooks/use-posted-date'
-import Ping from '../ui/Ping'
-import { Job } from '../../../interfaces'
 import { useChangeSearchParams } from '@/hooks/use-change-search-params'
+import { usePostedDate } from '@/hooks/use-posted-date'
 import { useAppDispatch } from '@/lib/features/hooks'
 import { changeSearchInput } from '@/lib/features/search/searchSlice'
+import { Job } from '../../../interfaces'
+import Ping from '../ui/Ping'
 
 const SpecialJobs = ({ jobPost }: { jobPost: Job }) => {
   const { isFeatured, isAd, posted } = jobPost

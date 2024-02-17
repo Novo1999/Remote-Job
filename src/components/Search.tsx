@@ -1,13 +1,13 @@
 'use client'
-import { changeSearchInput } from '@/lib/features/search/searchSlice'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { useChangeSearchParams } from '@/hooks/use-change-search-params'
 import { useSearch } from '@/hooks/use-search'
+import { changeSearchInput } from '@/lib/features/search/searchSlice'
+import { useEffect } from 'react'
 import { CiSearch } from 'react-icons/ci'
 import { RxCross2 } from 'react-icons/rx'
 import TypeEffect from './TypeAnimation'
-import { useChangeSearchParams } from '@/hooks/use-change-search-params'
-import { useEffect } from 'react'
 
 const Search = () => {
   const {
@@ -26,8 +26,9 @@ const Search = () => {
   useEffect(() => {
     if (hasSearchParam) {
       setSearchValue(searchQuery ?? '')
+      dispatch(changeSearchInput({ isSearching: true, query: searchValue }))
     }
-  }, [searchQuery, hasSearchParam, setSearchValue])
+  }, [searchQuery, hasSearchParam, setSearchValue, dispatch])
 
   return (
     <div className='flex items-center mt-8 w-full lg:w-[26rem] xl:w-[30rem] 2xl:w-[32rem] mx-auto relative'>
