@@ -3,11 +3,11 @@ import { Dispatch, SetStateAction } from 'react'
 import { UseFormReturn } from 'react-hook-form'
 import { z } from 'zod'
 import FormRow from './FormRow'
-import { formSchema } from './PostForm'
+import { formSchema } from './formSchema'
 
 interface CompanyFormProps {
   form: UseFormReturn<z.infer<typeof formSchema>>
-  setImage: Dispatch<SetStateAction<ArrayBuffer | string | null>>
+  setImage: () => void
 }
 
 const CompanyForm = ({ form, setImage }: CompanyFormProps) => {

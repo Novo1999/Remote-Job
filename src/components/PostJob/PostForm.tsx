@@ -22,15 +22,12 @@ import BenefitsListbox from './Listbox'
 import { formSchema } from './formSchema'
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB
-const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp']
+const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp'] as const
 
 // Define the Zod schema for image file validation
 const ImageSchema = z.object({
   size: z.number().max(MAX_FILE_SIZE, `Max image size is 2MB.`),
-  type: z.enum(
-    ACCEPTED_IMAGE_TYPES,
-    'Only .jpg, .jpeg, .png, and .webp formats are supported.'
-  ),
+  type: z.enum(ACCEPTED_IMAGE_TYPES),
 })
 
 const PostForm = () => {
@@ -55,10 +52,9 @@ const PostForm = () => {
     remoteJobBenefits[1],
   ])
   console.log(selectedBenefits)
-  const [image, setImage] = useState()
+  const [image, setImage] = useState<void>()
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log('yes')
     postJob({
       ...values,
       companyImage: image,

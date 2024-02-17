@@ -29,9 +29,7 @@ const SimilarJobs = ({ id, position }: { id: string; position: string }) => {
   }
 
   if (!isLoading && !isError && data?.length! > 0) {
-    content = data?.map((job, index) => (
-      <JobItem jobPost={job} index={index} key={job._id} />
-    ))
+    content = data?.map((job, index) => <JobItem jobPost={job} key={job._id} />)
   }
   return (
     <div className='font-poppins col-span-2'>
