@@ -1,12 +1,9 @@
 'use client'
-import { useAppSelector } from '@/lib/features/hooks'
-import { getAuth } from 'firebase/auth'
+import { auth } from '@/firebase/config'
 import { Loader2 } from 'lucide-react'
 import Image from 'next/image'
-import { ProfileModal } from './ProfileModal'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { auth } from '@/firebase/config'
-import ClientOnly from '../PostJob/ClientOnly'
+import { ProfileModal } from './ProfileModal'
 
 const Profile = () => {
   const [user, loading, error] = useAuthState(auth)

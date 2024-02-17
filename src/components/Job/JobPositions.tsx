@@ -5,7 +5,7 @@ import JobDetailsMobile from './JobDetailsMobile'
 import JobDetailsPC from './JobDetailsPC'
 
 const JobPositions = ({ jobPost }: { jobPost: Job }) => {
-  const { title, company, jobType, position } = jobPost
+  const { title, companyName, jobType, position } = jobPost
   const { handleClickableFilter, handlePositionClick } = useClickableFilter()
 
   return (
@@ -25,7 +25,7 @@ const JobPositions = ({ jobPost }: { jobPost: Job }) => {
         </div>
       </div>
       <div className='flex'>
-        <p>{company}</p>
+        <p>{companyName}</p>
         <JobDate jobPost={jobPost} />
       </div>
       <JobDetailsMobile jobPost={jobPost} />
