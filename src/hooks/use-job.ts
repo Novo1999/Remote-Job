@@ -39,8 +39,6 @@ export const useJob = () => {
     // if there are no jobs, don't show skeleton
   }, [inView, totalJobs, dispatch])
 
-  console.log(isSearching)
-
   useEffect(() => {
     if (limit >= totalJobs! || isSearching || filterParam) {
       dispatch(setShowSkeleton(false))
