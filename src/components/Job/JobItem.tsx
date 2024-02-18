@@ -1,26 +1,26 @@
 /* eslint-disable react/display-name */
 'use client'
-import Image from 'next/image'
-import dummyLogo from '../../../public/images/dummylogo.png'
-
+import { useAppDispatch } from '@/lib/features/hooks'
 import { useAddViewCountMutation } from '@/lib/features/jobsApi/jobsApi'
+import { openModal } from '@/lib/features/modal/modalSlice'
 import { motion } from 'framer-motion'
-import { useRouter } from 'next/navigation'
+import Image from 'next/image'
+import { usePathname, useRouter } from 'next/navigation'
 import { Ref, forwardRef } from 'react'
 import { Job } from '../../../interfaces'
+import dummyLogo from '../../../public/images/dummylogo.png'
 import JobPositions from './JobPositions'
 import SpecialJobs from './SpecialJobs'
 import Star from './Star'
 
 type JobItemProp = {
   jobPost: Job
-  onClick?: () => void
 }
 
 const JobItem = forwardRef(
-  ({ jobPost, onClick }: JobItemProp, ref: Ref<HTMLDivElement>) => {
+  ({ jobPost }: JobItemProp, ref: Ref<HTMLDivElement>) => {
     const { _id, companyLogo } = jobPost
-
+    const dispatch = useAppDispatch()
     const [addViewCount] = useAddViewCountMutation()
     const router = useRouter()
     // click handler
@@ -29,12 +29,12 @@ const JobItem = forwardRef(
       router.push(`/job/${_id}`, { scroll: true })
       // increment job view count
       addViewCount(_id)
-      onClick?.()
+      dispatch(openModal(false))
     }
     return (
       <motion.div
-        initial={{ opacity: 0, y: 0 }}
-        whileInView={{ opacity: 1, y: -50 }}
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{
           once: true,
         }}

@@ -1,17 +1,13 @@
+import { auth } from '@/firebase/config'
+import { useAppDispatch } from '@/lib/features/hooks'
 import { useGetUserStarredJobsQuery } from '@/lib/features/jobsApi/jobsApi'
-import { User, getAuth } from 'firebase/auth'
-import { Dispatch, SetStateAction } from 'react'
+import { User } from 'firebase/auth'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import Error, { EmptyResponse } from '../Dummies'
 import JobItem from '../Job/JobItem'
 import { DialogContent } from '../ui/dialog'
-import { useAuthState } from 'react-firebase-hooks/auth'
-import { auth } from '@/firebase/config'
 
-const FavoriteJobModal = ({
-  setOpen,
-}: {
-  setOpen: Dispatch<SetStateAction<boolean>>
-}) => {
+const FavoriteJobModal = () => {
   const [user] = useAuthState(auth)
   const { uid } = user as User
 
@@ -40,12 +36,12 @@ const FavoriteJobModal = ({
       <>
         <h4 className='font-semibold'>My Favorite Jobs</h4>
         {data?.map((job) => (
-          <JobItem onClick={() => setOpen(false)} jobPost={job} key={job._id} />
+          <JobItem jobPost={job} key={job._id} />
         ))}
       </>
     )
   }
 
-  return <DialogContent className='bg-black'>{content}</DialogContent>
+  return <DialogContent className='bg-gray-800'>{content}</DialogContent>
 }
 export default FavoriteJobModal

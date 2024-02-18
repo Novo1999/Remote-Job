@@ -4,9 +4,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import JobItem from '../Job/JobItem'
 import { useGetSimilarJobsQuery } from '@/lib/features/jobsApi/jobsApi'
 import Error, { EmptyResponse } from '../Dummies'
+import JobItem from '../Job/JobItem'
 const SimilarJobs = ({ id, position }: { id: string; position: string }) => {
   const { isLoading, isError, error, data } = useGetSimilarJobsQuery({
     id,

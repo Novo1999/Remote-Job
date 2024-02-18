@@ -24,6 +24,7 @@ export interface Job {
   companyLogo: {
     url: string
   }
+  createdBy: string
 }
 
 export interface GetJobs {

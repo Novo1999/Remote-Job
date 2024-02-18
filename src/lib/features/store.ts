@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import api from './api/apiSlice'
-import limitReducer from './limit/limitSlice'
-import sortReducer from './sort/sortSlice'
-import searchReducer from './search/searchSlice'
 import filterReducer from './filter/filterSlice'
+import limitReducer from './limit/limitSlice'
 import loaderReducer from './loader/loaderSlice'
+import modalReducer from './modal/modalSlice'
+import searchReducer from './search/searchSlice'
+import sortReducer from './sort/sortSlice'
 
 export const makeStore = () =>
   configureStore({
@@ -15,6 +16,7 @@ export const makeStore = () =>
       search: searchReducer,
       filter: filterReducer,
       loader: loaderReducer,
+      modal: modalReducer,
     },
     middleware: (gDM) =>
       gDM({

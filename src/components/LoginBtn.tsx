@@ -1,5 +1,6 @@
 import { auth } from '@/firebase/config'
 import useRouting from '@/hooks/use-routing'
+import { Loader2 } from 'lucide-react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { RiLoginBoxFill } from 'react-icons/ri'
 import ProfileDropdownMenu from './Profile/ProfileDropdownMenu'
@@ -17,7 +18,12 @@ const LoginBtn = ({ className }: { className?: string }) => {
       onClick={() => handleRouting('/login')}
       className={`${navigationMenuTriggerStyle()} ${className} bg-blue-500 hover:bg-blue-600 flex gap-2 text-white hover:text-white`}
     >
-      <RiLoginBoxFill /> {'Log in'}
+      {loading ? (
+        <Loader2 height={12} width={12} className='animate-spin' />
+      ) : (
+        <RiLoginBoxFill />
+      )}{' '}
+      {'Log in'}
     </Button>
   )
 

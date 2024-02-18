@@ -1,5 +1,4 @@
 import { GetJobs, GetSimilarJobs, Job, StarJob } from '../../../../interfaces'
-import { current } from '@reduxjs/toolkit'
 import api from '../api/apiSlice'
 
 const jobsApi = api.injectEndpoints({
@@ -29,7 +28,6 @@ const jobsApi = api.injectEndpoints({
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
           jobsApi.util.updateQueryData('getSingleJob', id, (draft: Job) => {
-            console.log(current(draft))
             draft.viewCount += 1
           })
         )
@@ -78,6 +76,7 @@ const jobsApi = api.injectEndpoints({
         }
       },
     }),
+    // POST JOB
     postJob: builder.mutation({
       query: (job) => ({
         method: 'POST',

@@ -1,11 +1,12 @@
-import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
+import { auth } from '@/firebase/config'
+import { useAppDispatch } from '@/lib/features/hooks'
 import { useStarJobMutation } from '@/lib/features/jobsApi/jobsApi'
 import { setShowStarLoader } from '@/lib/features/loader/loaderSlice'
-import { Job } from '../../../interfaces'
+import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
-import { toast } from 'react-toastify'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { auth } from '@/firebase/config'
+import { toast } from 'react-toastify'
+import { Job } from '../../../interfaces'
 
 type Star = {
   className?: string
@@ -50,7 +51,13 @@ const Star = ({ className, job }: Star) => {
   }
 
   return (
-    <input
+    <motion.input
+      whileTap={{
+        scale: 1.2,
+      }}
+      whileHover={{
+        scale: 1.1,
+      }}
       onClick={
         (e) => e.stopPropagation() // so the user does not go to the job page when clicking the star
       }

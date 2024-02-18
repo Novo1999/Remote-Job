@@ -6,18 +6,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { auth } from '@/firebase/config'
 import useRouting from '@/hooks/use-routing'
+import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
+import { openModal } from '@/lib/features/modal/modalSlice'
 import { useLogout } from '@/utils/logOut'
-import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { RxAvatar } from 'react-icons/rx'
 import { Dialog, DialogTrigger } from '../ui/dialog'
 import FavoriteJobModal from './FavoriteJobModal'
-import { auth } from '@/firebase/config'
 
 const ProfileDropdownMenu = () => {
   const [user, loading, error] = useAuthState(auth)
-  const [open, setOpen] = useState(false)
+  const { modalOpen } = useAppSelector((state) => state.modal)
+  const dispatch = useAppDispatch()
 
   const name = user?.displayName
   const handleRouting = useRouting()
@@ -25,7 +27,10 @@ const ProfileDropdownMenu = () => {
   const logOutUser = useLogout()
 
   return (
-    <Dialog open={open} onOpenChange={() => setOpen(!open)}>
+    <Dialog
+      open={modalOpen}
+      onOpenChange={() => dispatch(openModal(!modalOpen))}
+    >
       <DropdownMenu>
         <DropdownMenuTrigger
           disabled={loading}
@@ -54,14 +59,14 @@ const ProfileDropdownMenu = () => {
           <DropdownMenuItem className='cursor-pointer hover:bg-slate-400'>
             <DialogTrigger
               className='w-full text-start'
-              onClick={() => setOpen(true)}
+              onClick={() => dispatch(openModal(true))}
             >
               My Favorite Jobs
             </DialogTrigger>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <FavoriteJobModal setOpen={setOpen} />
+      <FavoriteJobModal />
     </Dialog>
   )
 }

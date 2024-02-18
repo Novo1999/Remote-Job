@@ -1,6 +1,7 @@
 import { useChangeSearchParams } from '@/hooks/use-change-search-params'
 import { usePostedDate } from '@/hooks/use-posted-date'
 import { useAppDispatch } from '@/lib/features/hooks'
+import { openModal } from '@/lib/features/modal/modalSlice'
 import { changeSearchInput } from '@/lib/features/search/searchSlice'
 import { Job } from '../../../interfaces'
 import Ping from '../ui/Ping'
@@ -15,6 +16,7 @@ const SpecialJobs = ({ jobPost }: { jobPost: Job }) => {
     e.stopPropagation()
     handleSort(e.currentTarget.value)
     dispatch(changeSearchInput({ isSearching: false, query: '' }))
+    dispatch(openModal(false))
   }
 
   return (

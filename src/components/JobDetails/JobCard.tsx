@@ -1,17 +1,23 @@
 'use client'
 import { Badge } from '@/components/ui/badge'
-import { LuMousePointerClick } from 'react-icons/lu'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { auth } from '@/firebase/config'
 import { usePostedDate } from '@/hooks/use-posted-date'
+import { useAppSelector } from '@/lib/features/hooks'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { FaArrowAltCircleRight, FaCheckCircle } from 'react-icons/fa'
+import { LuMousePointerClick } from 'react-icons/lu'
+import { MdDelete } from 'react-icons/md'
+import { Job } from '../../../interfaces'
 import Star from '../Job/Star'
+import { TooltipForButton } from '../Tooltip'
+import { Button } from '../ui/button'
 import ApplyButton from './ApplyButton'
 import ProfileImage from './Avatar'
 import Qualifications from './Qualifications'
 import Warning from './Warning'
-import { Job } from '../../../interfaces'
-import { useAppSelector } from '@/lib/features/hooks'
 
 const JobCard = ({ job }: { job: Job }) => {
   const {
@@ -24,10 +30,13 @@ const JobCard = ({ job }: { job: Job }) => {
     position,
     jobType,
     viewCount,
+    createdBy,
   } = job
 
   const { formattedDate } = usePostedDate(posted)
   const { showStarLoader } = useAppSelector((state) => state.loader)
+
+  const [user] = useAuthState(auth)
 
   return (
     <Card className='font-poppins bg-gradient-to-bl from-indigo-200 via-red-200 to-yellow-100 h-fit sm:col-span-1'>
@@ -61,14 +70,29 @@ const JobCard = ({ job }: { job: Job }) => {
           <Badge variant='secondary' className='w-fit'>
             <p>{formattedDate}</p>
           </Badge>
-          <div className='flex gap-2 flex-wrap'>
-            <p>Tag: </p>
-            <Badge
-              variant='secondary'
-              className='w-fit bg-teal-500 text-white hover:bg-teal-400'
-            >
-              <p>{position}</p>
-            </Badge>
+          <div className='flex gap-2 flex-wrap justify-between'>
+            <div className='flex gap-2 flex-wrap items-center'>
+              <p>Tag: </p>
+              <Badge
+                variant='secondary'
+                className='w-fit bg-teal-500 text-white hover:bg-teal-400'
+              >
+                <p>{position}</p>
+              </Badge>
+            </div>
+            {createdBy === user?.uid && (
+              // TODO: ADD TOOLTIP
+              <Button>
+                <motion.span
+                  whileHover={{
+                    scale: 1.2,
+                    color: '#DC143C',
+                  }}
+                >
+                  <MdDelete className='text-2xl' />
+                </motion.span>
+              </Button>
+            )}
           </div>
         </div>
         <CardContent className='text-xs leading-6 flex flex-col gap-6 p-0 lg:text-base'>
