@@ -3,10 +3,10 @@ import Advertise from '@/components/Advertise'
 import Navbar from '@/components/Navbar'
 import Newsletter from '@/components/Newsletter'
 import StoreProvider from '@/components/StoreProvider'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { chewy, montserrat, montserrat2, oswald, poppins } from './fonts'
 import './globals.css'
-import 'react-toastify/dist/ReactToastify.css'
-import { ToastContainer } from 'react-toastify'
 
 export default function RootLayout({
   children,
