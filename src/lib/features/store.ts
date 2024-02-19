@@ -6,6 +6,7 @@ import loaderReducer from './loader/loaderSlice'
 import modalReducer from './modal/modalSlice'
 import searchReducer from './search/searchSlice'
 import sortReducer from './sort/sortSlice'
+import userNameReducer from './useName/userNameSlice'
 
 export const makeStore = () =>
   configureStore({
@@ -17,6 +18,7 @@ export const makeStore = () =>
       filter: filterReducer,
       loader: loaderReducer,
       modal: modalReducer,
+      userName: userNameReducer,
     },
     middleware: (gDM) =>
       gDM({

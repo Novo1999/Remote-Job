@@ -1,6 +1,8 @@
+import { auth } from '@/firebase/config'
+import { useAppDispatch } from '@/lib/features/hooks'
+import { setUserName } from '@/lib/features/useName/userNameSlice'
 import {
   createUserWithEmailAndPassword,
-  getAuth,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   updateProfile,
@@ -16,8 +18,7 @@ export type FormSchemaType = ZodObject<{
 }>
 
 export const useAuth = (formSchema: FormSchemaType) => {
-  const auth = getAuth()
-
+  const dispatch = useAppDispatch()
   // REGISTER SUBMIT
   const onSubmitRegisterUser: SubmitHandler<z.infer<typeof formSchema>> = (
     data
@@ -42,7 +43,7 @@ export const useAuth = (formSchema: FormSchemaType) => {
 
       await updateProfile(user.user, {
         displayName: displayName,
-      })
+      }).then(() => dispatch(setUserName(user.user.displayName)))
       toast.success(`Welcome, ${user.user.displayName}`, {
         position: 'bottom-right',
       })

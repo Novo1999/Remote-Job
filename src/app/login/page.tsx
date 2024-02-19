@@ -7,11 +7,13 @@ import FormImage from '@/components/AuthForm/FormImage'
 import FormInput from '@/components/AuthForm/FormInput'
 import FormLink from '@/components/AuthForm/FormLink'
 import PrivateRoute from '@/components/PrivateRoute'
+import { auth } from '@/firebase/config'
 import { useAuth } from '@/hooks/use-auth'
 import { validateEmail } from '@/utils/validateEmail'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { useForm } from 'react-hook-form'
 import { RiLoginCircleFill } from 'react-icons/ri'
 import { z } from 'zod'
@@ -36,6 +38,10 @@ const Page = () => {
     resolver: zodResolver(formSchema),
   })
   const { onSubmitLoginUser } = useAuth(formSchema)
+
+  const [, loading] = useAuthState(auth)
+
+  console.log(loading)
 
   return (
     <PrivateRoute>

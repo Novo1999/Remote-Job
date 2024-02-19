@@ -10,7 +10,9 @@ import { auth } from '@/firebase/config'
 import useRouting from '@/hooks/use-routing'
 import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
 import { openModal } from '@/lib/features/modal/modalSlice'
+import { setUserName } from '@/lib/features/useName/userNameSlice'
 import { useLogout } from '@/utils/logOut'
+import { useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { RxAvatar } from 'react-icons/rx'
 import { Dialog, DialogTrigger } from '../ui/dialog'
@@ -20,9 +22,14 @@ const ProfileDropdownMenu = () => {
   const [user, loading, error] = useAuthState(auth)
   const { modalOpen } = useAppSelector((state) => state.modal)
   const dispatch = useAppDispatch()
-
-  const name = user?.displayName
+  const { userName } = useAppSelector((state) => state.userName)
   const handleRouting = useRouting()
+
+  useEffect(() => {
+    if (user?.displayName) {
+      dispatch(setUserName(user.displayName))
+    }
+  }, [user, dispatch])
 
   const logOutUser = useLogout()
 
@@ -33,13 +40,13 @@ const ProfileDropdownMenu = () => {
     >
       <DropdownMenu>
         <DropdownMenuTrigger
-          disabled={loading}
+          disabled={loading || !user}
           className='bg-white text-black items-center rounded-md px-4 flex gap-1 hover:bg-slate-200 py-2 transition-colors'
         >
           <span>
             <RxAvatar className='text-xl' />
           </span>
-          <p>{name}</p>
+          <p>{userName}</p>
         </DropdownMenuTrigger>
         <DropdownMenuContent className='w-48 relative right-7'>
           <DropdownMenuLabel>My Account</DropdownMenuLabel>

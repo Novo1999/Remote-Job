@@ -1,10 +1,10 @@
+import { Button } from '@/components/ui/button'
+import { auth } from '@/firebase/config'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ReactNode } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import ProfileDropdownMenu from './Profile/ProfileDropdownMenu'
-import { auth } from '@/firebase/config'
-import { Button } from '@/components/ui/button'
 import { TooltipForButton } from './Tooltip'
 
 type MenuBtnProp = {
@@ -31,9 +31,10 @@ const MenuBtn = ({
     return <ProfileDropdownMenu />
   }
 
+  // post button tooltip
   if (href === '/post') {
     return (
-      <TooltipForButton buttonDisabled={buttonDisabled}>
+      <TooltipForButton content={buttonDisabled ? 'Please Log in first' : null}>
         <Link href={!buttonDisabled ? href : ''}>
           <Button
             disabled={buttonDisabled}

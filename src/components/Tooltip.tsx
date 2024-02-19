@@ -8,18 +8,16 @@ import { ReactNode } from 'react'
 
 export function TooltipForButton({
   children,
-  buttonDisabled,
+  content,
 }: {
   children: ReactNode
-  buttonDisabled: boolean
+  content?: string
 }) {
   return (
     <TooltipProvider>
       <Tooltip delayDuration={10}>
         <TooltipTrigger asChild>{children}</TooltipTrigger>
-        {buttonDisabled ? (
-          <TooltipContent>Please Log in first</TooltipContent>
-        ) : null}
+        <TooltipContent>{content}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   )

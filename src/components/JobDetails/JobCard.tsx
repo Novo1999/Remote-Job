@@ -82,16 +82,18 @@ const JobCard = ({ job }: { job: Job }) => {
             </div>
             {createdBy === user?.uid && (
               // TODO: ADD TOOLTIP
-              <Button>
-                <motion.span
-                  whileHover={{
-                    scale: 1.2,
-                    color: '#DC143C',
-                  }}
-                >
-                  <MdDelete className='text-2xl' />
-                </motion.span>
-              </Button>
+              <TooltipForButton content='Delete'>
+                <Button>
+                  <motion.span
+                    whileHover={{
+                      scale: 1.2,
+                      color: '#DC143C',
+                    }}
+                  >
+                    <MdDelete className='text-2xl' />
+                  </motion.span>
+                </Button>
+              </TooltipForButton>
             )}
           </div>
         </div>

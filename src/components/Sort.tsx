@@ -54,8 +54,6 @@ const Sort = () => {
   const { handleSort, sortParam } = useChangeSearchParams()
   const [open, setOpen] = useState(false)
 
-  console.log(open)
-
   return (
     <motion.div initial={false} animate={open ? 'open' : 'closed'}>
       <Select
