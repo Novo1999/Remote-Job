@@ -2,9 +2,9 @@
 import { Button } from '@/components/ui/button'
 import { Form, FormField } from '@/components/ui/form'
 import { auth } from '@/firebase/config'
+import useRouting from '@/hooks/use-routing'
 import { usePostJobMutation } from '@/lib/features/jobsApi/jobsApi'
 import { Loader2 } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useForm } from 'react-hook-form'
@@ -35,7 +35,7 @@ const ImageSchema = z.object({
 const PostForm = () => {
   const [user, loading, error] = useAuthState(auth)
   const [postJob, { isError, error: postError }] = usePostJobMutation()
-  const router = useRouter()
+  const handleRouting = useRouting()
 
   const form = useForm<z.infer<typeof formSchema>>({
     // resolver: zodResolver(formSchema),
@@ -63,7 +63,7 @@ const PostForm = () => {
       benefits: selectedBenefits,
       createdBy: user?.uid,
     })
-      .then(() => router.push('/'))
+      .then(() => handleRouting('/'))
       .then(() => toast.success('Added Job Successfully'))
   }
 

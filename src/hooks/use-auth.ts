@@ -10,7 +10,7 @@ import {
 import { SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { ZodEffects, ZodObject, ZodString, z } from 'zod'
-1
+import useRouting from './use-routing'
 export type FormSchemaType = ZodObject<{
   displayName?: ZodEffects<ZodEffects<ZodString, string, string>>
   email: ZodEffects<ZodString, string, string>
@@ -18,6 +18,7 @@ export type FormSchemaType = ZodObject<{
 }>
 
 export const useAuth = (formSchema: FormSchemaType) => {
+  const handleRouting = useRouting()
   const dispatch = useAppDispatch()
   // REGISTER SUBMIT
   const onSubmitRegisterUser: SubmitHandler<z.infer<typeof formSchema>> = (
@@ -43,7 +44,10 @@ export const useAuth = (formSchema: FormSchemaType) => {
 
       await updateProfile(user.user, {
         displayName: displayName,
-      }).then(() => dispatch(setUserName(user.user.displayName)))
+      }).then(() => {
+        dispatch(setUserName(user.user.displayName))
+        handleRouting('/')
+      })
       toast.success(`Welcome, ${user.user.displayName}`, {
         position: 'bottom-right',
       })
@@ -72,6 +76,7 @@ export const useAuth = (formSchema: FormSchemaType) => {
       toast.success(`Welcome, ${user.user.displayName}`, {
         position: 'bottom-right',
       })
+      handleRouting('/')
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message.split(': ')[1])

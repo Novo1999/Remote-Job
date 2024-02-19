@@ -1,11 +1,12 @@
 'use client'
 import { resetFilter } from '@/lib/features/filter/filterSlice'
 import { useAppDispatch } from '@/lib/features/hooks'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
+import useRouting from './use-routing'
 
 export const useChangeSearchParams = () => {
   const dispatch = useAppDispatch()
-  const router = useRouter()
+  const handleRouting = useRouting()
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const sortParam = searchParams.get('sort')
@@ -15,13 +16,13 @@ export const useChangeSearchParams = () => {
   const doParamsOperation = (param: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString())
     params.set(param, value)
-    router.push(pathname + '?' + params.toString(), { scroll: false })
+    handleRouting(pathname + '?' + params.toString())
   }
 
   const removeQueryParam = (param: string) => {
     const params = new URLSearchParams(searchParams.toString())
     params.delete(param)
-    router.push(pathname + '?' + params.toString(), { scroll: false })
+    handleRouting(pathname + '?' + params.toString())
   }
 
   const handleSort = (value: string) => {
@@ -58,7 +59,6 @@ export const useChangeSearchParams = () => {
   return {
     handleSort,
     sortParam,
-    router,
     handleFilter,
     handleQuery,
     handleResetFilter,

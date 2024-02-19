@@ -1,11 +1,11 @@
 import { auth } from '@/firebase/config'
+import useRouting from '@/hooks/use-routing'
 import api from '@/lib/features/api/apiSlice'
-import { useAppDispatch } from '@/lib/features/hooks'
 import { signOut } from 'firebase/auth'
-import { useRouter } from 'next/navigation'
+import router from 'next/router'
 
 export const useLogout = () => {
-  const router = useRouter()
+  const handleRouting = useRouting()
 
   const logOutUser = () => {
     logout().then(() => router.push('/login'))

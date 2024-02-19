@@ -1,11 +1,11 @@
 /* eslint-disable react/display-name */
 'use client'
+import useRouting from '@/hooks/use-routing'
 import { useAppDispatch } from '@/lib/features/hooks'
 import { useAddViewCountMutation } from '@/lib/features/jobsApi/jobsApi'
 import { openModal } from '@/lib/features/modal/modalSlice'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { usePathname, useRouter } from 'next/navigation'
 import { Ref, forwardRef } from 'react'
 import { Job } from '../../../interfaces'
 import dummyLogo from '../../../public/images/dummylogo.png'
@@ -22,11 +22,11 @@ const JobItem = forwardRef(
     const { _id, companyLogo } = jobPost
     const dispatch = useAppDispatch()
     const [addViewCount] = useAddViewCountMutation()
-    const router = useRouter()
+    const handleRouting = useRouting()
     // click handler
     const handleClick = (e: React.SyntheticEvent) => {
       e.preventDefault()
-      router.push(`/job/${_id}`, { scroll: true })
+      handleRouting(`/job/${_id}`)
       // increment job view count
       addViewCount(_id)
       dispatch(openModal(false))
@@ -55,9 +55,9 @@ const JobItem = forwardRef(
           <Image
             src={companyLogo?.url ?? dummyLogo}
             alt='logo'
-            width={300}
-            height={300}
-            className='w-12 sm:w-16 rounded-full m-auto shadow-lg lg:w-[90px] xl:w-20'
+            width={400}
+            height={400}
+            className='w-12 sm:w-16 h-fit rounded-full m-auto shadow-lg lg:w-[90px] xl:w-20'
           />
           <button className='text-lg right-2 sm:hidden'>
             <div className='rating rating-sm transition-all'>

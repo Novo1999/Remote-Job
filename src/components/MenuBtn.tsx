@@ -32,9 +32,9 @@ const MenuBtn = ({
   }
 
   // post button tooltip
-  if (href === '/post') {
+  if (href === '/post' && buttonDisabled) {
     return (
-      <TooltipForButton content={buttonDisabled ? 'Please Log in first' : null}>
+      <TooltipForButton content='Please log in first'>
         <Link href={!buttonDisabled ? href : ''}>
           <Button
             disabled={buttonDisabled}
@@ -47,6 +47,22 @@ const MenuBtn = ({
           </Button>
         </Link>
       </TooltipForButton>
+    )
+  }
+
+  if (href === '/post' && !buttonDisabled) {
+    return (
+      <Link href={!buttonDisabled ? href : ''}>
+        <Button
+          disabled={buttonDisabled}
+          className={`${className} ${
+            isActive ? 'active' : ''
+          } flex gap-2 text-white hover:text-white`}
+        >
+          <span>{icon}</span>
+          <span>{menuText}</span>
+        </Button>
+      </Link>
     )
   }
 

@@ -1,9 +1,9 @@
 import { auth } from '@/firebase/config'
+import useRouting from '@/hooks/use-routing'
 import { useAppDispatch } from '@/lib/features/hooks'
 import { useStarJobMutation } from '@/lib/features/jobsApi/jobsApi'
 import { setShowStarLoader } from '@/lib/features/loader/loaderSlice'
 import { motion } from 'framer-motion'
-import { useRouter } from 'next/navigation'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { toast } from 'react-toastify'
 import { Job } from '../../../interfaces'
@@ -20,7 +20,7 @@ const Star = ({ className, job }: Star) => {
   } = job
   const [user] = useAuthState(auth)
   const uid = user?.uid
-  const router = useRouter()
+  const handleRouting = useRouting()
   const dispatch = useAppDispatch()
 
   const [markAsStarred] = useStarJobMutation()
@@ -31,7 +31,7 @@ const Star = ({ className, job }: Star) => {
     // if user not logged in, take the user to login page
     if (!uid) {
       toast.warn('Please log in first!', { autoClose: 3000 })
-      router.push('/login')
+      handleRouting('/login')
     } else {
       dispatch(setShowStarLoader(_id))
       markAsStarred({ jobId: _id, userId: uid })

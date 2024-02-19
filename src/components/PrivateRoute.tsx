@@ -1,6 +1,7 @@
 'use client'
 import { auth } from '@/firebase/config'
-import { usePathname, useRouter } from 'next/navigation'
+import useRouting from '@/hooks/use-routing'
+import { usePathname } from 'next/navigation'
 import { ReactNode, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { toast } from 'react-toastify'
@@ -11,13 +12,13 @@ const PrivateRoute = ({ children }: { children: ReactNode }) => {
   const [user] = useAuthState(auth)
   const pathName = usePathname()
 
-  const router = useRouter()
+  const handleRouting = useRouting()
 
   useEffect(() => {
     if (!user?.email) {
-      router.push('/login')
+      handleRouting('/login')
     }
-  }, [user, router])
+  }, [user, handleRouting])
 
   useEffect(() => {
     if (!user?.hasOwnProperty('email') && !excludedPaths.includes(pathName)) {

@@ -41,8 +41,6 @@ const Page = () => {
 
   const [, loading] = useAuthState(auth)
 
-  console.log(loading)
-
   return (
     <PrivateRoute>
       <AuthForm>
