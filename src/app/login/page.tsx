@@ -1,4 +1,5 @@
 'use client'
+import AlreadyLoggedIn from '@/components/AuthForm/AlreadyLoggedIn'
 import AuthForm from '@/components/AuthForm/AuthForm'
 import FormButton from '@/components/AuthForm/FormButton'
 import FormError from '@/components/AuthForm/FormError'
@@ -6,6 +7,7 @@ import FormHeader from '@/components/AuthForm/FormHeader'
 import FormImage from '@/components/AuthForm/FormImage'
 import FormInput from '@/components/AuthForm/FormInput'
 import FormLink from '@/components/AuthForm/FormLink'
+import Loading from '@/components/Loading'
 import PrivateRoute from '@/components/PrivateRoute'
 import { auth } from '@/firebase/config'
 import { useAuth } from '@/hooks/use-auth'
@@ -39,51 +41,62 @@ const Page = () => {
   })
   const { onSubmitLoginUser } = useAuth(formSchema)
 
-  const [, loading] = useAuthState(auth)
+  const [user, loading, error] = useAuthState(auth)
 
-  return (
-    <PrivateRoute>
-      <AuthForm>
-        <FormImage>
-          <Image
-            src={loginImg}
-            alt='nomad'
-            className='object-cover w-full h-full'
-          />
-        </FormImage>
-        <form
-          onSubmit={handleSubmit(onSubmitLoginUser)}
-          className='w-full px-6 py-8 md:px-8 lg:w-1/2'
-        >
-          <FormHeader icon={<RiLoginCircleFill />} text='login with email' />
-          <FormInput
-            label='Email Address'
-            register={register}
-            registerName='email'
-          />
-          <FormError>
-            {errors.hasOwnProperty('email') && errors?.email?.message}
-          </FormError>
-          <FormInput
-            label='Password'
-            register={register}
-            registerName='password'
-          />
-          <FormError>
-            {errors.hasOwnProperty('password') && errors?.password?.message}
-          </FormError>
-          <FormButton>Log In</FormButton>
-          <FormLink>
-            <Link
-              href='/signup'
-              className='text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline'
-            >
-              or sign up
-            </Link>
-          </FormLink>
-        </form>
-      </AuthForm>
-    </PrivateRoute>
-  )
+  let content = null
+
+  if (loading && !error) {
+    content = <Loading /> // loading
+  } else if (!loading && !error && user?.email) {
+    content = <AlreadyLoggedIn /> // already logged in
+  } else {
+    content = // if not logged in
+      (
+        <AuthForm>
+          <FormImage>
+            <Image
+              src={loginImg}
+              width={600}
+              height={600}
+              alt='nomad'
+              className='object-cover w-full h-full'
+            />
+          </FormImage>
+          <form
+            onSubmit={handleSubmit(onSubmitLoginUser)}
+            className='w-full px-6 py-8 md:px-8 lg:w-1/2'
+          >
+            <FormHeader icon={<RiLoginCircleFill />} text='login with email' />
+            <FormInput
+              label='Email Address'
+              register={register}
+              registerName='email'
+            />
+            <FormError>
+              {errors.hasOwnProperty('email') && errors?.email?.message}
+            </FormError>
+            <FormInput
+              label='Password'
+              register={register}
+              registerName='password'
+            />
+            <FormError>
+              {errors.hasOwnProperty('password') && errors?.password?.message}
+            </FormError>
+            <FormButton>Log In</FormButton>
+            <FormLink>
+              <Link
+                href='/signup'
+                className='text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline'
+              >
+                or sign up
+              </Link>
+            </FormLink>
+          </form>
+        </AuthForm>
+      )
+  }
+
+  return <PrivateRoute>{content}</PrivateRoute>
 }
 export default Page

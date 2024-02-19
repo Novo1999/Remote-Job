@@ -1,6 +1,6 @@
 'use client'
-import { Loader2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import Loading from '../Loading'
 
 export default function ClientOnly({
   children,
@@ -16,7 +16,7 @@ export default function ClientOnly({
   if (!mounted)
     return (
       <div className='min-h-screen flex justify-center items-center'>
-        <Loader2 height={100} width={100} className='animate-spin' />
+        <Loading />
       </div>
     )
 

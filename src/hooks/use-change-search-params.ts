@@ -1,6 +1,7 @@
 'use client'
 import { resetFilter } from '@/lib/features/filter/filterSlice'
 import { useAppDispatch } from '@/lib/features/hooks'
+import { scrollAfterSearch } from '@/utils/scrollAfterSearch'
 import { usePathname, useSearchParams } from 'next/navigation'
 import useRouting from './use-routing'
 
@@ -17,6 +18,7 @@ export const useChangeSearchParams = () => {
     const params = new URLSearchParams(searchParams.toString())
     params.set(param, value)
     handleRouting(pathname + '?' + params.toString())
+    scrollAfterSearch()
   }
 
   const removeQueryParam = (param: string) => {

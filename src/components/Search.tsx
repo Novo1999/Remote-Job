@@ -28,7 +28,7 @@ const Search = () => {
       setSearchValue(searchQuery ?? '')
       dispatch(changeSearchInput({ isSearching: true, query: searchValue }))
     }
-  }, [searchQuery, hasSearchParam, setSearchValue, dispatch])
+  }, [searchQuery, hasSearchParam, setSearchValue, dispatch]) // value stays in field if searchValue added as dependency
 
   return (
     <div className='flex items-center mt-8 w-full lg:w-[26rem] xl:w-[30rem] 2xl:w-[32rem] mx-auto relative'>

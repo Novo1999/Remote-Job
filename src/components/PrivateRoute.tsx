@@ -10,15 +10,21 @@ const excludedPaths = ['/login', '/signup']
 
 const PrivateRoute = ({ children }: { children: ReactNode }) => {
   const [user] = useAuthState(auth)
+
   const pathName = usePathname()
+
+  const className =
+    pathName === '/login' || pathName === '/signup'
+      ? 'flex justify-center items-center'
+      : ''
 
   const handleRouting = useRouting()
 
   useEffect(() => {
-    if (!user?.email) {
+    if (!user?.email && pathName !== '/signup') {
       handleRouting('/login')
     }
-  }, [user, handleRouting])
+  }, [user, handleRouting, pathName])
 
   useEffect(() => {
     if (!user?.hasOwnProperty('email') && !excludedPaths.includes(pathName)) {
@@ -26,6 +32,6 @@ const PrivateRoute = ({ children }: { children: ReactNode }) => {
     }
   }, [user, pathName])
 
-  return <main>{children}</main>
+  return <main className={`min-h-screen ${className}`}>{children}</main>
 }
 export default PrivateRoute

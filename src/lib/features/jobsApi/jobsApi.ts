@@ -6,7 +6,7 @@ const jobsApi = api.injectEndpoints({
   endpoints: (builder) => ({
     // GET JOBS
     getAllJobs: builder.query<Array<Job>, GetJobs>({
-      query: ({ sortBy, limit = 10, filterBy, q }) =>
+      query: ({ sortBy, limit, filterBy, q }) =>
         `/all?sortBy=${sortBy}&${filterBy}&limit=${limit}&q=${q}`,
       providesTags: ['all-jobs'],
     }),

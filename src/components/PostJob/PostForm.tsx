@@ -4,7 +4,6 @@ import { Form, FormField } from '@/components/ui/form'
 import { auth } from '@/firebase/config'
 import useRouting from '@/hooks/use-routing'
 import { usePostJobMutation } from '@/lib/features/jobsApi/jobsApi'
-import { Loader2 } from 'lucide-react'
 import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useForm } from 'react-hook-form'
@@ -71,9 +70,7 @@ const PostForm = () => {
 
   if (loading && !error) {
     content = (
-      <div className='min-h-screen flex justify-center items-center'>
-        <Loader2 height={100} width={100} className='animate-spin' />
-      </div>
+      <div className='min-h-screen flex justify-center items-center'></div>
     )
   }
 
