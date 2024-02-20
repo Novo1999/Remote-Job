@@ -22,7 +22,7 @@ const ProfileDropdownMenu = () => {
   const [user, loading, error] = useAuthState(auth)
   const { modalOpen } = useAppSelector((state) => state.modal)
   const dispatch = useAppDispatch()
-  const { userName } = useAppSelector((state) => state.userName)
+  const { userName } = useAppSelector((state) => state.user)
   const handleRouting = useRouting()
 
   useEffect(() => {

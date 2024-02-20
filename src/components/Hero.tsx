@@ -1,7 +1,7 @@
 import { Player } from '@lottiefiles/react-lottie-player'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import nomadImage from '../assets/hero.jpg'
+import heroImg from '../assets/hero.jpg'
 
 const message = 'Discover remote jobs and work from anywhere'
 const wordArr = message.split(' ')
@@ -11,7 +11,7 @@ const Hero = () => {
     <section className='flex justify-center'>
       <div className='h-full w-full flex-col items-center relative justify-center py-4'>
         <Image
-          src={nomadImage}
+          src={heroImg}
           alt='nomad image'
           className='object-cover sm:h-60 lg:h-96'
           placeholder='blur'
@@ -22,7 +22,7 @@ const Hero = () => {
               <motion.span
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: index / 10 }}
+                transition={{ duration: 3, delay: index / 20 }}
                 key={index}
               >
                 {word}{' '}
@@ -41,5 +41,3 @@ const Hero = () => {
   )
 }
 export default Hero
-
-// <span className='xl:text-gray-800 text-white drop-shadow-md'></span>
