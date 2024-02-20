@@ -14,28 +14,43 @@ import { Label } from '@/components/ui/label'
 import { auth } from '@/firebase/config'
 import { useAppDispatch } from '@/lib/features/hooks'
 import { setEmail, setUserName } from '@/lib/features/useName/userSlice'
+import uploadImage from '@/utils/uploadUserImage'
 import { validateEmail } from '@/utils/validateEmail'
 import { ErrorMessage } from '@hookform/error-message'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { User, updateEmail } from 'firebase/auth'
 import { Loader2 } from 'lucide-react'
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { useAuthState, useUpdateProfile } from 'react-firebase-hooks/auth'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { z } from 'zod'
+
+const MAX_FILE_SIZE = 500000000
+const ACCEPTED_IMAGE_TYPES = [
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
+  'image/gif',
+]
 
 const profileSchema = z.object({
   name: z.string().min(6, { message: 'Name must be at least 6 characters' }),
   email: z.string().refine((email) => validateEmail(email), {
     message: 'Wrong Email Pattern',
   }),
+  picture: z.any().optional(),
 })
-
 export function ProfileModal() {
   const dispatch = useAppDispatch()
   const [modalOpen, setModalOpen] = useState(false)
   const [user] = useAuthState(auth)
+  const [image, setImage] = useState<any>()
+
+  console.log(image)
+
+  console.log(user)
 
   const {
     handleSubmit,
@@ -50,13 +65,22 @@ export function ProfileModal() {
     },
   })
 
+  // to track changes
   const watchedName = watch('name')
   const watchedEmail = watch('email')
-
   const [updateProfile, updating, error] = useUpdateProfile(auth)
 
+  const handleImage = (e: FormEvent<HTMLInputElement>) => {
+    const file = (e.target as HTMLInputElement).files![0]
+    setImage(file)
+  }
+
   const onSubmit = (values: z.infer<typeof profileSchema>) => {
-    const { name: newName, email: newEmail } = values
+    const { name: newName, email: newEmail, picture } = values
+
+    if (picture) {
+      uploadImage(picture[0].name, image)
+    }
 
     // update name
     if (user?.displayName !== newName) {
@@ -86,6 +110,7 @@ export function ProfileModal() {
     }
   }
 
+  // render button content
   let btnContent = null
 
   if (updating && !error) {
@@ -117,6 +142,26 @@ export function ProfileModal() {
             </DialogDescription>
           </DialogHeader>
           <div className='grid gap-4 py-4'>
+            <div className='flex flex-col items-start gap-4 '>
+              <Label htmlFor='name' className='text-right'>
+                Username
+              </Label>
+              <Input
+                type='file'
+                accept='image/png, image/gif, image/jpeg'
+                {...register('picture')}
+                onChange={handleImage}
+                id='picture'
+                className='col-span-3 text-white bg-black cursor-pointer'
+              />
+              <ErrorMessage
+                errors={errors}
+                name='picture'
+                render={({ message }) => (
+                  <p className='text-red-500 text-xs w-full'>{message}</p>
+                )}
+              />
+            </div>
             <div className='flex flex-col items-start gap-4 '>
               <Label htmlFor='name' className='text-right'>
                 Username
