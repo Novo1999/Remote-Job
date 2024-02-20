@@ -13,11 +13,12 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { auth } from '@/firebase/config'
 import { useAppDispatch } from '@/lib/features/hooks'
+import { setUserName } from '@/lib/features/useName/userSlice'
 import { validateEmail } from '@/utils/validateEmail'
 import { ErrorMessage } from '@hookform/error-message'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { User, getAuth, updateEmail, updateProfile } from 'firebase/auth'
-import { useAuthState } from 'react-firebase-hooks/auth'
+import { User, updateEmail } from 'firebase/auth'
+import { useAuthState, useUpdateProfile } from 'react-firebase-hooks/auth'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { z } from 'zod'
@@ -48,24 +49,26 @@ export function ProfileModal({ name, email }: ProfileModalProp) {
       email: email,
     },
   })
+  const [updateProfile, updating, error] = useUpdateProfile(auth)
 
   const onSubmit = (values: z.infer<typeof profileSchema>) => {
     const { name: newName, email: newEmail } = values
 
     // update name
-    updateProfile(auth.currentUser as User, {
+    updateProfile({
       displayName: newName || name,
     })
       .then(() => {
         toast.success('Successfully Updated Profile')
+        dispatch(setUserName(user?.displayName))
       })
       .catch((error) => {
-        console.error('ERROR UPDATING NAME!', error)
+        toast.error('ERROR UPDATING NAME!', error)
       })
 
     // update email
     updateEmail(auth.currentUser as User, newEmail || email).catch((error) => {
-      console.error('ERROR UPDATING EMAIL!', error)
+      toast.error('ERROR UPDATING EMAIL!', error)
     })
   }
 

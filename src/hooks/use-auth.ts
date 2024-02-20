@@ -1,6 +1,6 @@
 import { auth } from '@/firebase/config'
 import { useAppDispatch } from '@/lib/features/hooks'
-import { setUserName } from '@/lib/features/useName/userNameSlice'
+import { setUserName } from '@/lib/features/useName/userSlice'
 import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,

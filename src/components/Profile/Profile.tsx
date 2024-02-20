@@ -19,7 +19,7 @@ const Profile = () => {
           <Loader2 height={100} width={100} className='animate-spin' />
         </div>
       ) : (
-        <div className='bg-white overflow-hidden shadow rounded-lg border p-16 mx-6 flex flex-col'>
+        <div className='bg-white overflow-hidden shadow rounded-lg border p-16 mx-6 flex flex-col mb-20'>
           <div className='avatar flex justify-center'>
             <div className='w-48 rounded-xl'>
               <Image

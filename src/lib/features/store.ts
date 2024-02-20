@@ -6,7 +6,7 @@ import loaderReducer from './loader/loaderSlice'
 import modalReducer from './modal/modalSlice'
 import searchReducer from './search/searchSlice'
 import sortReducer from './sort/sortSlice'
-import userNameReducer from './useName/userNameSlice'
+import userNameReducer from './useName/userSlice'
 
 export const makeStore = () =>
   configureStore({
