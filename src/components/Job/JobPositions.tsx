@@ -6,7 +6,7 @@ import JobDetailsPC from './JobDetailsPC'
 
 const JobPositions = ({ jobPost }: { jobPost: Job }) => {
   const { title, companyName, jobType, position } = jobPost
-  const { handleClickableFilter, handlePositionClick } = useClickableFilter()
+  const { handleClickableFilter } = useClickableFilter()
 
   return (
     <div className='flex flex-col ml-4 flex-1 gap-2 lg:gap-3 w-fit col-span-6 sm:gap-3 sm:col-span-5 lg:col-span-6 z-50'>
