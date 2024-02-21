@@ -1,6 +1,9 @@
 'use client'
 import { useJob } from '@/hooks/use-job'
-import { useAppSelector } from '@/lib/features/hooks'
+import { changeSalary } from '@/lib/features/filter/filterSlice'
+import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
+import { useGetMaxSalaryQuery } from '@/lib/features/jobsApi/jobsApi'
+import { useEffect } from 'react'
 import { Job } from '../../interfaces'
 import Error, { EmptyResponse } from './Dummies'
 import JobChart from './Job/JobChart'
@@ -10,6 +13,15 @@ import Skeleton from './Job/Skeleton'
 const JobContainer = () => {
   const { isLoading, isError, error, data, ref } = useJob()
   const { showSkeleton } = useAppSelector((state) => state.loader)
+  const dispatch = useAppDispatch()
+
+  const { data: maxSalary } = useGetMaxSalaryQuery()
+
+  useEffect(() => {
+    if (maxSalary) {
+      dispatch(changeSalary(maxSalary.max * 10000))
+    } else return
+  }, [maxSalary, dispatch])
 
   let content = null
   if (isLoading) {

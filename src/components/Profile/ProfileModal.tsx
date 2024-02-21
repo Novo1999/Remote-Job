@@ -12,8 +12,8 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import useProfile from '@/hooks/use-profile'
-import { ErrorMessage } from '@hookform/error-message'
 import { Loader2 } from 'lucide-react'
+import ErrorElement from './ErrorElement'
 
 export function ProfileModal() {
   const {
@@ -40,7 +40,7 @@ export function ProfileModal() {
     btnContent = 'Save Changes'
   }
 
-  const isSubmitDisabled = submitDisabled()
+  const isSubmitDisabled = submitDisabled() // check if submit button should be disabled
 
   return (
     <Dialog open={modalOpen} onOpenChange={() => setModalOpen(!modalOpen)}>
@@ -75,13 +75,7 @@ export function ProfileModal() {
                 id='picture'
                 className='col-span-3 text-white bg-black cursor-pointer'
               />
-              <ErrorMessage
-                errors={errors}
-                name='picture'
-                render={({ message }) => (
-                  <p className='text-red-500 text-xs w-full'>{message}</p>
-                )}
-              />
+              <ErrorElement errors={errors} name='picture' />
             </div>
             <div className='flex flex-col items-start gap-4 '>
               <Label htmlFor='name' className='text-right'>
@@ -92,13 +86,7 @@ export function ProfileModal() {
                 id='name'
                 className='col-span-3 text-black'
               />
-              <ErrorMessage
-                errors={errors}
-                name='name'
-                render={({ message }) => (
-                  <p className='text-red-500 text-xs w-full'>{message}</p>
-                )}
-              />
+              <ErrorElement errors={errors} name='name' />
             </div>
             <div className='flex flex-col items-start gap-4 '>
               <Label htmlFor='email' className='text-right'>
@@ -109,21 +97,11 @@ export function ProfileModal() {
                 id='email'
                 className='col-span-3 text-black'
               />
-              <ErrorMessage
-                errors={errors}
-                name='email'
-                render={({ message }) => (
-                  <p className='text-red-500 text-xs w-full'>{message}</p>
-                )}
-              />
+              <ErrorElement errors={errors} name='email' />
             </div>
           </div>
           <DialogFooter>
             <Button
-              // disabled={
-              //   watchedName === user?.displayName &&
-              //   watchedEmail === user?.email
-              // }
               disabled={isSubmitDisabled}
               type='submit'
               className='bg-gray-700 hover:bg-gray-500'

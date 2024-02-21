@@ -16,8 +16,8 @@ const JobPositions = ({ jobPost }: { jobPost: Job }) => {
         </p>
         <div>
           <button
-            onClick={handlePositionClick}
-            value={position.split(' ').at(0)}
+            onClick={(e) => handleClickableFilter(e, 'positions')}
+            value={position}
             className='bg-teal-400 w-fit text-xs rounded-md whitespace-nowrap px-2 hidden sm:flex justify-center items-center hover:bg-teal-300 transition-all shadow-md lg:p-1'
           >
             {position.split(' ').at(0)}

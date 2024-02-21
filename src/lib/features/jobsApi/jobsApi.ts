@@ -19,6 +19,10 @@ const jobsApi = api.injectEndpoints({
     getSingleJob: builder.query<Job, string>({
       query: (id) => `/${id}`,
     }),
+    // GET MAX SALARY
+    getMaxSalary: builder.query<{ max: number }, void>({
+      query: () => '/max-salary',
+    }),
     // INCREMENT VIEW COUNT WHEN USER CLICKS
     addViewCount: builder.mutation<void, string>({
       query: (id) => ({
@@ -55,6 +59,7 @@ const jobsApi = api.injectEndpoints({
       }),
       invalidatesTags: ['all-jobs', 'similar-jobs', 'user-starred'], // this will refetch the jobs to show the updated ui
       async onQueryStarted({ jobId, userId }, { dispatch, queryFulfilled }) {
+        // cache update
         // this is for one job only
         const patchResult = dispatch(
           jobsApi.util.updateQueryData('getSingleJob', jobId, (draft: Job) => {
@@ -96,4 +101,5 @@ export const {
   useStarJobMutation,
   useGetUserStarredJobsQuery,
   usePostJobMutation,
+  useGetMaxSalaryQuery,
 } = jobsApi

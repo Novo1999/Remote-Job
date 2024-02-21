@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { FilterBy } from '../../../../interfaces'
 
-export type Category = 'locations' | 'positions' | 'types' | 'benefits'
+type Category = 'locations' | 'positions' | 'types' | 'benefits'
 
 const initialState: FilterBy = {
   filterBy: {
@@ -9,7 +9,7 @@ const initialState: FilterBy = {
     positions: [],
     types: [],
     benefits: [],
-    salary: 90000,
+    salary: 0,
   },
   filterQuery: '',
   isFiltering: false,
@@ -54,7 +54,7 @@ const filterSlice = createSlice({
         positions: [],
         types: [],
         benefits: [],
-        salary: 90000,
+        salary: state.filterBy.salary,
       }
     },
   },
