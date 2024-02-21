@@ -11,117 +11,23 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { auth } from '@/firebase/config'
-import { useAppDispatch } from '@/lib/features/hooks'
-import {
-  setEmail,
-  setProfileImgURL,
-  setUserName,
-} from '@/lib/features/useName/userSlice'
-import uploadImage from '@/utils/uploadUserImage'
-import { validateEmail } from '@/utils/validateEmail'
+import useProfile from '@/hooks/use-profile'
 import { ErrorMessage } from '@hookform/error-message'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { User, updateEmail } from 'firebase/auth'
 import { Loader2 } from 'lucide-react'
-import { FormEvent, useState } from 'react'
-import { useAuthState, useUpdateProfile } from 'react-firebase-hooks/auth'
-import { useForm } from 'react-hook-form'
-import { toast } from 'react-toastify'
-import { z } from 'zod'
 
-const MAX_FILE_SIZE = 500000000
-const ACCEPTED_IMAGE_TYPES = [
-  'image/jpeg',
-  'image/jpg',
-  'image/png',
-  'image/webp',
-  'image/gif',
-]
-
-const profileSchema = z.object({
-  name: z.string().min(6, { message: 'Name must be at least 6 characters' }),
-  email: z.string().refine((email) => validateEmail(email), {
-    message: 'Wrong Email Pattern',
-  }),
-  picture: z.any().optional(),
-})
 export function ProfileModal() {
-  const dispatch = useAppDispatch()
-  const [modalOpen, setModalOpen] = useState(false)
-  const [user] = useAuthState(auth)
-  const [image, setImage] = useState<any>()
-
-  console.log(user)
-
   const {
+    updating,
+    error,
+    modalOpen,
+    setModalOpen,
     handleSubmit,
+    onSubmit,
     register,
-    watch,
-    formState: { errors },
-  } = useForm<z.infer<typeof profileSchema>>({
-    resolver: zodResolver(profileSchema),
-    defaultValues: {
-      name: user?.displayName!,
-      email: user?.email!,
-    },
-  })
-
-  // to track changes
-
-  const [updateProfile, updating, error] = useUpdateProfile(auth)
-
-  const handleImage = (e: FormEvent<HTMLInputElement>) => {
-    const file = (e.target as HTMLInputElement).files![0]
-    setImage(file)
-  }
-
-  const onSubmit = async (values: z.infer<typeof profileSchema>) => {
-    const { name: newName, email: newEmail, picture } = values
-
-    console.log(picture.length)
-    let photoUrl
-
-    // check if picture exists
-    if (picture.length > 0) {
-      photoUrl = await uploadImage(picture[0].name, image)
-      updateProfile({
-        photoURL: photoUrl,
-      })
-      if (photoUrl) {
-        dispatch(setProfileImgURL(photoUrl))
-      }
-      setModalOpen(false)
-    }
-
-    // update name
-    if (user?.displayName !== newName) {
-      updateProfile({
-        displayName: newName || user?.displayName,
-        photoURL: photoUrl,
-      })
-        .then(() => {
-          toast.success('Successfully Updated name')
-          dispatch(setUserName(user?.displayName))
-          setModalOpen(false)
-        })
-        .catch((error) => {
-          toast.error('ERROR UPDATING NAME!', error)
-        })
-    }
-
-    // update email
-    if (user?.email !== newEmail) {
-      updateEmail(auth.currentUser as User, newEmail || user?.email!)
-        .then(() => {
-          dispatch(setEmail(user?.email))
-          setModalOpen(false)
-        })
-        .catch((error) => {
-          toast.error('ERROR UPDATING EMAIL!', error)
-        })
-    }
-  }
+    errors,
+    handleImage,
+    submitDisabled,
+  } = useProfile()
 
   // render button content
   let btnContent = null
@@ -133,6 +39,8 @@ export function ProfileModal() {
   } else {
     btnContent = 'Save Changes'
   }
+
+  const isSubmitDisabled = submitDisabled()
 
   return (
     <Dialog open={modalOpen} onOpenChange={() => setModalOpen(!modalOpen)}>
@@ -216,6 +124,7 @@ export function ProfileModal() {
               //   watchedName === user?.displayName &&
               //   watchedEmail === user?.email
               // }
+              disabled={isSubmitDisabled}
               type='submit'
               className='bg-gray-700 hover:bg-gray-500'
             >
