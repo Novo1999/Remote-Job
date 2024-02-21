@@ -2,6 +2,7 @@
 import Advertise from '@/components/Advertise'
 import Navbar from '@/components/Navbar'
 import Newsletter from '@/components/Newsletter'
+import ScrollProgress from '@/components/ScrollProgress'
 import StoreProvider from '@/components/StoreProvider'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
