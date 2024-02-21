@@ -4,6 +4,7 @@ const initialState = {
   userName: '',
   token: '',
   email: '',
+  url: '',
 }
 
 const userSlice = createSlice({
@@ -19,8 +20,12 @@ const userSlice = createSlice({
     setEmail: (state, action) => {
       state.email = action.payload
     },
+    setProfileImgURL: (state, action) => {
+      state.url = action.payload
+    },
   },
 })
 
-export const { setUserName, setToken, setEmail } = userSlice.actions
+export const { setUserName, setToken, setEmail, setProfileImgURL } =
+  userSlice.actions
 export default userSlice.reducer

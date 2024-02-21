@@ -8,7 +8,10 @@ module.exports = {
       {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
-        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'firebasestorage.googleapis.com',
       },
     ],
   },

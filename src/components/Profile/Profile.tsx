@@ -1,7 +1,11 @@
 'use client'
 import { auth } from '@/firebase/config'
 import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
-import { setEmail, setUserName } from '@/lib/features/useName/userSlice'
+import {
+  setEmail,
+  setProfileImgURL,
+  setUserName,
+} from '@/lib/features/useName/userSlice'
 import { useLogout } from '@/utils/logOut'
 import { Loader2 } from 'lucide-react'
 import Image from 'next/image'
@@ -13,17 +17,9 @@ import { Meteors } from '../ui/meteors'
 import { ProfileModal } from './ProfileModal'
 
 const Profile = () => {
-  const [user, loading] = useAuthState(auth)
+  const [, loading] = useAuthState(auth)
   const logout = useLogout()
-  const { userName, email } = useAppSelector((state) => state.user)
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    if (user) {
-      dispatch(setUserName(user.displayName))
-      dispatch(setEmail(user.email))
-    }
-  }, [user, dispatch])
+  const { userName, email, url } = useAppSelector((state) => state.user)
 
   return (
     <PrivateRoute>
@@ -40,7 +36,7 @@ const Profile = () => {
                 <Image
                   width={300}
                   height={300}
-                  src='/images/av.jpg'
+                  src={url || '/images/av.jpg'}
                   alt='avatar'
                 />
               </div>
@@ -68,7 +64,7 @@ const Profile = () => {
               </dl>
             </div>
             <div className='gap-4 flex flex-col'>
-              <ProfileModal name={userName!} email={email!} />
+              <ProfileModal />
               <Button onClick={logout}>Log Out</Button>
             </div>
           </div>

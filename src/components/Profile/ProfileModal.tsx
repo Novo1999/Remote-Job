@@ -13,7 +13,11 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { auth } from '@/firebase/config'
 import { useAppDispatch } from '@/lib/features/hooks'
-import { setEmail, setUserName } from '@/lib/features/useName/userSlice'
+import {
+  setEmail,
+  setProfileImgURL,
+  setUserName,
+} from '@/lib/features/useName/userSlice'
 import uploadImage from '@/utils/uploadUserImage'
 import { validateEmail } from '@/utils/validateEmail'
 import { ErrorMessage } from '@hookform/error-message'
@@ -48,8 +52,6 @@ export function ProfileModal() {
   const [user] = useAuthState(auth)
   const [image, setImage] = useState<any>()
 
-  console.log(image)
-
   console.log(user)
 
   const {
@@ -66,8 +68,7 @@ export function ProfileModal() {
   })
 
   // to track changes
-  const watchedName = watch('name')
-  const watchedEmail = watch('email')
+
   const [updateProfile, updating, error] = useUpdateProfile(auth)
 
   const handleImage = (e: FormEvent<HTMLInputElement>) => {
@@ -75,17 +76,29 @@ export function ProfileModal() {
     setImage(file)
   }
 
-  const onSubmit = (values: z.infer<typeof profileSchema>) => {
+  const onSubmit = async (values: z.infer<typeof profileSchema>) => {
     const { name: newName, email: newEmail, picture } = values
 
-    if (picture) {
-      uploadImage(picture[0].name, image)
+    console.log(picture.length)
+    let photoUrl
+
+    // check if picture exists
+    if (picture.length > 0) {
+      photoUrl = await uploadImage(picture[0].name, image)
+      updateProfile({
+        photoURL: photoUrl,
+      })
+      if (photoUrl) {
+        dispatch(setProfileImgURL(photoUrl))
+      }
+      setModalOpen(false)
     }
 
     // update name
     if (user?.displayName !== newName) {
       updateProfile({
         displayName: newName || user?.displayName,
+        photoURL: photoUrl,
       })
         .then(() => {
           toast.success('Successfully Updated name')
@@ -144,7 +157,7 @@ export function ProfileModal() {
           <div className='grid gap-4 py-4'>
             <div className='flex flex-col items-start gap-4 '>
               <Label htmlFor='name' className='text-right'>
-                Username
+                Profile Picture
               </Label>
               <Input
                 type='file'
@@ -199,10 +212,10 @@ export function ProfileModal() {
           </div>
           <DialogFooter>
             <Button
-              disabled={
-                watchedName === user?.displayName &&
-                watchedEmail === user?.email
-              }
+              // disabled={
+              //   watchedName === user?.displayName &&
+              //   watchedEmail === user?.email
+              // }
               type='submit'
               className='bg-gray-700 hover:bg-gray-500'
             >

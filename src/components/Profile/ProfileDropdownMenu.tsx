@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
 import { openModal } from '@/lib/features/modal/modalSlice'
 import { setUserName } from '@/lib/features/useName/userSlice'
 import { useLogout } from '@/utils/logOut'
+import Image from 'next/image'
 import { useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { RxAvatar } from 'react-icons/rx'
@@ -20,6 +21,7 @@ import FavoriteJobModal from './FavoriteJobModal'
 
 const ProfileDropdownMenu = () => {
   const [user, loading, error] = useAuthState(auth)
+  const { url } = useAppSelector((state) => state.user)
   const { modalOpen } = useAppSelector((state) => state.modal)
   const dispatch = useAppDispatch()
   const { userName } = useAppSelector((state) => state.user)
@@ -41,10 +43,18 @@ const ProfileDropdownMenu = () => {
       <DropdownMenu>
         <DropdownMenuTrigger
           disabled={loading || !user}
-          className='bg-white text-black items-center rounded-md px-4 flex gap-1 hover:bg-slate-200 py-2 transition-colors'
+          className='bg-white text-black rounded-md px-4 flex gap-1 hover:bg-slate-200 py-2 transition-colors items-center'
         >
-          <span>
-            <RxAvatar className='text-xl' />
+          <span className='relative top-[2px]'>
+            {url ? (
+              <div className='avatar'>
+                <div className='w-5 mr-2 rounded-full border border-black'>
+                  <Image width={200} height={200} src={url} alt='avatar' />
+                </div>
+              </div>
+            ) : (
+              <RxAvatar className='text-xl' />
+            )}
           </span>
           <p>{userName}</p>
         </DropdownMenuTrigger>
