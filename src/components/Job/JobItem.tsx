@@ -31,6 +31,7 @@ const JobItem = forwardRef(
       addViewCount(_id)
       dispatch(openModal(false))
     }
+
     return (
       <motion.div
         initial={{ opacity: 0, y: 100 }}

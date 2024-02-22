@@ -3,6 +3,8 @@ export const usePostedDate = (posted: string) => {
   const postedDate = moment(posted)
 
   const daysAgo = moment().diff(postedDate, 'days')
+  const monthsAgo = moment().diff(postedDate, 'month')
+
   let formattedDate = ''
 
   // showing how many days / weeks / months ago the job was posted by comparing todays date with the date the job has
@@ -18,10 +20,12 @@ export const usePostedDate = (posted: string) => {
         daysAgo === 7 ? 'week' : 'weeks'
       } ago`
       break
-    default:
+    case daysAgo >= 30:
       formattedDate = `${Math.floor(daysAgo / 30)} ${
-        daysAgo === 30 ? 'month' : 'months'
+        monthsAgo === 1 ? 'month' : 'months'
       } ago`
+    default:
+      break
   }
 
   const mobilePostedAgo =

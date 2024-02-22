@@ -9,7 +9,6 @@ import Error, { EmptyResponse } from './Dummies'
 import JobChart from './Job/JobChart'
 import JobItem from './Job/JobItem'
 import Skeleton from './Job/Skeleton'
-import ScrollToTop from './ScrollToTop'
 
 const JobContainer = () => {
   const { isLoading, isError, error, data, ref } = useJob()
@@ -18,6 +17,7 @@ const JobContainer = () => {
 
   const { data: maxSalary } = useGetMaxSalaryQuery()
 
+  // this will set the maximum salary so the user can search and get result as the backend is built in such a way where if the user does not provide salary, no result will come
   useEffect(() => {
     if (maxSalary) {
       dispatch(changeSalary(maxSalary.max * 10000))

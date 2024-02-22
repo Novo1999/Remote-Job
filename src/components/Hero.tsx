@@ -8,7 +8,7 @@ const wordArr = message.split(' ')
 
 const Hero = () => {
   return (
-    <section className='flex justify-center'>
+    <section className='flex justify-center -mt-4'>
       <div className='h-full w-full flex-col items-center relative justify-center py-4'>
         <Image
           src={heroImg}
