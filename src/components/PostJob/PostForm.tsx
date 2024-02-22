@@ -4,6 +4,7 @@ import { Form, FormField } from '@/components/ui/form'
 import { auth } from '@/firebase/config'
 import useRouting from '@/hooks/use-routing'
 import { usePostJobMutation } from '@/lib/features/jobsApi/jobsApi'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useForm } from 'react-hook-form'
@@ -22,22 +23,13 @@ import { FormRowSelect } from './FormRowSelect'
 import BenefitsListbox from './Listbox'
 import { formSchema } from './formSchema'
 
-const MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB
-const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp'] as const
-
-// Define the Zod schema for image file validation
-const ImageSchema = z.object({
-  size: z.number().max(MAX_FILE_SIZE, `Max image size is 2MB.`),
-  type: z.enum(ACCEPTED_IMAGE_TYPES),
-})
-
 const PostForm = () => {
   const [user, loading, error] = useAuthState(auth)
   const [postJob, { isError, error: postError }] = usePostJobMutation()
   const handleRouting = useRouting()
 
   const form = useForm<z.infer<typeof formSchema>>({
-    // resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema),
     defaultValues: {
       title: 'something',
       jobType: 'Full-Time',
@@ -79,7 +71,7 @@ const PostForm = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className='space-y-8 font-poppins mx-4 min-[425px]:mx-6 sm:mx-32 lg:mx-60 xl:mx-96'
+          className='space-y-8 font-poppins mx-4 min-[425px]:mx-6 sm:mx-32 lg:mx-60 xl:mx-96 mt-10'
         >
           <h1 className='text-2xl font-bold'>Tell us about your Job</h1>
           <FormField

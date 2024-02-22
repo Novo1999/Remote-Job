@@ -6,7 +6,7 @@ import TopMenu from './TopMenu'
 const Navbar = () => {
   return (
     <>
-      <nav className='mt-4 flex justify-between items-center bg-zinc-800 sticky z-50 top-0 py-3 px-4'>
+      <nav className='mt-4 flex justify-between items-center bg-zinc-800 sticky z-50 top-0 py-3 px-4 navbar'>
         <Link href='/' className='text-2xl flex font-chewy items-center'>
           <Player
             className='h-12 w-12 top-0 right-0'

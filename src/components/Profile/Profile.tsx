@@ -1,15 +1,9 @@
 'use client'
 import { auth } from '@/firebase/config'
-import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
-import {
-  setEmail,
-  setProfileImgURL,
-  setUserName,
-} from '@/lib/features/useName/userSlice'
+import { useAppSelector } from '@/lib/features/hooks'
 import { useLogout } from '@/utils/logOut'
 import { Loader2 } from 'lucide-react'
 import Image from 'next/image'
-import { useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import PrivateRoute from '../PrivateRoute'
 import { Button } from '../ui/button'

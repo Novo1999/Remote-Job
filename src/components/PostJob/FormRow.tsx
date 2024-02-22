@@ -60,10 +60,12 @@ const FormRow = ({
         <FormLabel className='text-white'>{label}</FormLabel>
         <FormControl>
           <Input
+            accept='image/png, image/gif, image/jpeg'
             onChange={handleImage}
             className='text-white bg-black cursor-pointer'
-            id='picture'
+            id='companyImage'
             type='file'
+            {...field}
           />
         </FormControl>
         <FormMessage className='text-xs' />

@@ -9,6 +9,7 @@ import Error, { EmptyResponse } from './Dummies'
 import JobChart from './Job/JobChart'
 import JobItem from './Job/JobItem'
 import Skeleton from './Job/Skeleton'
+import ScrollToTop from './ScrollToTop'
 
 const JobContainer = () => {
   const { isLoading, isError, error, data, ref } = useJob()

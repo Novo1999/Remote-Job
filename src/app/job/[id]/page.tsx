@@ -1,9 +1,9 @@
 'use client'
-import { useGetSingleJobQuery } from '@/lib/features/jobsApi/jobsApi'
 import Error, { EmptyResponse } from '@/components/Dummies'
 import AboutCompany from '@/components/JobDetails/AboutCompany'
 import JobCard from '@/components/JobDetails/JobCard'
 import SimilarJobs from '@/components/JobDetails/SimilarJobs'
+import { useGetSingleJobQuery } from '@/lib/features/jobsApi/jobsApi'
 
 export default function Page({ params }: { params: { id: string } }) {
   const {
