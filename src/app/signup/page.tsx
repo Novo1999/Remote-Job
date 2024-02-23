@@ -13,6 +13,7 @@ import { auth } from '@/firebase/config'
 import { useAuth } from '@/hooks/use-auth'
 import { validateEmail } from '@/utils/validateEmail'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -47,15 +48,15 @@ const Page = () => {
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
-  const { onSubmitRegisterUser } = useAuth(formSchema)
+  const { onSubmitRegisterUser, loading, updating } = useAuth(formSchema)
 
-  const [user, loading, error] = useAuthState(auth)
+  const [user, authLoading, error] = useAuthState(auth)
 
   let content = null
 
-  if (loading && !error) {
+  if (authLoading && !error) {
     content = <Loading /> // loading
-  } else if (!loading && !error && user?.email) {
+  } else if (!authLoading && !error && user?.email) {
     content = <AlreadyLoggedIn /> // already logged in
   } else {
     content = // if not logged in
@@ -98,7 +99,15 @@ const Page = () => {
             <FormError>
               {errors.hasOwnProperty('password') && errors?.password?.message}
             </FormError>
-            <FormButton>Sign Up</FormButton>
+
+            <FormButton disabled={Boolean(loading) || Boolean(updating)}>
+              {loading || updating ? (
+                <Loader2 className='animate-spin m-auto' />
+              ) : (
+                'Sign up'
+              )}
+            </FormButton>
+
             <FormLink>
               <Link
                 href='/login'

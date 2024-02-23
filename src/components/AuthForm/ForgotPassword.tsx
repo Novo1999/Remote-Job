@@ -1,8 +1,4 @@
 'use client'
-import { auth } from '@/firebase/config'
-import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth'
-import { toast } from 'react-toastify'
-
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -14,11 +10,14 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { auth } from '@/firebase/config'
 import { validateEmail } from '@/utils/validateEmail'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
 import { useState } from 'react'
+import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 import { z } from 'zod'
 import ErrorElement from '../Profile/ErrorElement'
 
@@ -33,6 +32,7 @@ const ForgotPassword = () => {
     handleSubmit,
     register,
     watch,
+    reset,
     formState: { errors },
   } = useForm<z.infer<typeof forgotPasswordSchema>>({
     resolver: zodResolver(forgotPasswordSchema),
@@ -52,6 +52,9 @@ const ForgotPassword = () => {
       if (success) {
         toast.success(`Email sent to ${email}`)
       }
+      if (error) {
+        toast.error('Error sending email')
+      }
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message.split(': ')[1])
@@ -63,21 +66,28 @@ const ForgotPassword = () => {
     await handleReset(email)
   }
 
+  const handleModal = () => {
+    setModalOpen(!modalOpen)
+    if (!modalOpen) {
+      reset() // reset the form on modal close
+    }
+  }
+
   const onSubmit = async (values: z.infer<typeof forgotPasswordSchema>) => {
     await forgotPassword(values.email)
     setModalOpen(false)
+    reset()
   }
 
   return (
-    <Dialog open={modalOpen} onOpenChange={() => setModalOpen(!modalOpen)}>
+    <Dialog open={modalOpen} onOpenChange={handleModal}>
       <DialogTrigger asChild>
-        <Button
+        <p
           onClick={() => setModalOpen(true)}
-          className='text-black'
-          variant='outline'
+          className='text-xs underline underline-offset-2 cursor-pointer text-blue-500'
         >
-          Edit Profile
-        </Button>
+          Forgot Password?
+        </p>
       </DialogTrigger>
       <DialogContent className='sm:max-w-[425px] text-white bg-stone-900'>
         <form onSubmit={handleSubmit(onSubmit)}>

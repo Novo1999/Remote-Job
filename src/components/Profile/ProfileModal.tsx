@@ -27,6 +27,7 @@ export function ProfileModal() {
     errors,
     handleImage,
     submitDisabled,
+    reset,
   } = useProfile()
 
   // render button content
@@ -42,8 +43,15 @@ export function ProfileModal() {
 
   const isSubmitDisabled = submitDisabled() // check if submit button should be disabled
 
+  const handleModal = () => {
+    setModalOpen(!modalOpen)
+    if (!modalOpen) {
+      reset() // reset the form on modal close
+    }
+  }
+
   return (
-    <Dialog open={modalOpen} onOpenChange={() => setModalOpen(!modalOpen)}>
+    <Dialog open={modalOpen} onOpenChange={handleModal}>
       <DialogTrigger asChild>
         <Button
           onClick={() => setModalOpen(true)}

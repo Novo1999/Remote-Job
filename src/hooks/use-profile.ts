@@ -58,6 +58,7 @@ const useProfile = () => {
     handleSubmit,
     register,
     watch,
+    reset,
     formState: { errors },
   } = useForm<z.infer<typeof profileSchema>>({
     resolver: zodResolver(profileSchema),
@@ -144,6 +145,7 @@ const useProfile = () => {
     errors,
     handleImage,
     submitDisabled,
+    reset,
   }
 }
 export default useProfile
