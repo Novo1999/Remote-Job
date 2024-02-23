@@ -3,7 +3,6 @@ import { useAppDispatch } from '@/lib/features/hooks'
 import { setUserName } from '@/lib/features/useName/userSlice'
 import {
   createUserWithEmailAndPassword,
-  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   updateProfile,
 } from 'firebase/auth'
@@ -20,6 +19,7 @@ export type FormSchemaType = ZodObject<{
 export const useAuth = (formSchema: FormSchemaType) => {
   const handleRouting = useRouting()
   const dispatch = useAppDispatch()
+
   // REGISTER SUBMIT
   const onSubmitRegisterUser: SubmitHandler<z.infer<typeof formSchema>> = (
     data
@@ -58,17 +58,6 @@ export const useAuth = (formSchema: FormSchemaType) => {
     }
   }
 
-  // RESET FN
-  const handleReset = async (email: string) => {
-    try {
-      await sendPasswordResetEmail(auth, email)
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error(error.message.split(': ')[1])
-      }
-    }
-  }
-
   // LOGIN FN
   const loginUser = async (email: string, password: string) => {
     try {
@@ -84,14 +73,8 @@ export const useAuth = (formSchema: FormSchemaType) => {
     }
   }
 
-  // FORGOT PASSWORD
-  const forgotPassword = async (email: string) => {
-    await handleReset(email)
-  }
-
   return {
     onSubmitRegisterUser,
     onSubmitLoginUser,
-    forgotPassword,
   }
 }

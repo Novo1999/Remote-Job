@@ -52,6 +52,8 @@ const useProfile = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [user] = useAuthState(auth)
   const [image, setImage] = useState<any>()
+  const [updateProfile, updating, error] = useUpdateProfile(auth)
+
   const {
     handleSubmit,
     register,
@@ -65,7 +67,8 @@ const useProfile = () => {
     },
   })
 
-  // to track if user changed any information in the form
+  // to track if user changed any information in the form, keep the submit button disabled if user didn't
+  // user changes image or name or email -> submit enabled
   const submitDisabled = () => {
     const watchedEmail = watch('email')
     const watchedName = watch('name')
@@ -77,10 +80,6 @@ const useProfile = () => {
       return true
     }
   }
-
-  // user changes image or name or email -> submit enabled
-
-  const [updateProfile, updating, error] = useUpdateProfile(auth)
 
   const handleImage = (e: FormEvent<HTMLInputElement>) => {
     const file = (e.target as HTMLInputElement).files![0]
