@@ -99,3 +99,14 @@ export const remoteJobBenefits = [
   'Remote work flexibility',
   'Team collaboration',
 ]
+
+export const OPTIONS = [
+  { value: 'default', label: 'Sort By' },
+  { value: 'salary(low-high)', label: 'Salary(Low-High)' },
+  { value: 'salary(high-low)', label: 'Salary(High-Low)' },
+  { value: 'most-applied', label: 'Most Applied' },
+  { value: 'most-viewed', label: 'Most Viewed' },
+  { value: 'new-jobs', label: 'New Jobs' },
+  { value: 'featured-jobs', label: 'Featured Jobs' },
+  { value: 'ads', label: 'Advertisements' },
+]

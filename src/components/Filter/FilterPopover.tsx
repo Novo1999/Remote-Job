@@ -1,19 +1,19 @@
 'use client'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 
+import { Button } from '@/components/ui/button'
+import { useChangeSearchParams } from '@/hooks/use-change-search-params'
+import { useExtractFilter } from '@/hooks/use-extract-filter'
 import {
   setFilterOpen,
   setFilterQuery,
 } from '@/lib/features/filter/filterSlice'
-import { useGetAllJobsQuery } from '@/lib/features/jobsApi/jobsApi'
 import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
-import { Button } from '@/components/ui/button'
-import { useChangeSearchParams } from '@/hooks/use-change-search-params'
+import { useGetAllJobsQuery } from '@/lib/features/jobsApi/jobsApi'
 import { constructFilterQuery } from '@/utils/constructFilterQuery'
+import { scrollAfterSearch } from '@/utils/scrollAfterSearch'
 import { IoFilterSharp } from 'react-icons/io5'
 import Filter from './Filter'
-import { scrollAfterSearch } from '@/utils/scrollAfterSearch'
-import { useExtractFilter } from '@/hooks/use-extract-filter'
 
 // will show when data is loading so user cannot go to filter when data has not arrived yet, as it will break the application
 const spinner = <span className='loading loading-infinity loading-sm'></span>
@@ -37,8 +37,6 @@ const FilterPopover = () => {
     dispatch(setFilterQuery({ query, isFiltering: true }))
     dispatch(setFilterOpen(false))
     handleFilter(query)
-    // auto scroll was bugging here so this will fix it for now  :)
-    scrollAfterSearch()
   }
   // check if there is any filter option selected
   const hasFilter = Object.values(filterBy).some(

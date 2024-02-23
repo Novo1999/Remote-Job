@@ -2,7 +2,6 @@ import { setFilterQuery } from '@/lib/features/filter/filterSlice'
 import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
 import { openModal } from '@/lib/features/modal/modalSlice'
 import { constructFilterQuery } from '@/utils/constructFilterQuery'
-import { scrollAfterSearch } from '@/utils/scrollAfterSearch'
 import { usePathname } from 'next/navigation'
 import { useChangeSearchParams } from './use-change-search-params'
 import useRouting from './use-routing'
@@ -30,7 +29,6 @@ const useClickableFilter = () => {
     dispatch(setFilterQuery({ query, isFiltering: true }))
     dispatch(openModal(false))
     handleFilter(query)
-    scrollAfterSearch()
   }
 
   return { handleClickableFilter }

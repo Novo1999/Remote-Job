@@ -18,7 +18,10 @@ export const useChangeSearchParams = () => {
     const params = new URLSearchParams(searchParams.toString())
     params.set(param, value)
     handleRouting(pathname + '?' + params.toString())
-    scrollAfterSearch()
+    // scrolling down after the params operation
+    setTimeout(() => {
+      scrollAfterSearch()
+    }, 1000)
   }
 
   const removeQueryParam = (param: string) => {
