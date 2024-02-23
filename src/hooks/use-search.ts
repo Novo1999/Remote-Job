@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
-import { useChangeSearchParams } from './use-change-search-params'
-import { useEffect, useRef, useState } from 'react'
 import { changeSearchInput } from '@/lib/features/search/searchSlice'
+import { useEffect, useRef, useState } from 'react'
+import { useChangeSearchParams } from './use-change-search-params'
 
 type InputEvent =
   | React.KeyboardEvent
@@ -10,14 +10,7 @@ type InputEvent =
 export const useSearch = () => {
   const [searchIsFocused, setSearchIsFocused] = useState(false)
   const [searchValue, setSearchValue] = useState('')
-  const { isSearching } = useAppSelector((state) => state.search)
   const { handleQuery } = useChangeSearchParams()
-
-  useEffect(() => {
-    if (!isSearching) {
-      setSearchValue('')
-    }
-  }, [isSearching])
 
   const dispatch = useAppDispatch()
   const inputRef = useRef<HTMLInputElement>(null)
@@ -51,7 +44,7 @@ export const useSearch = () => {
 
   const handleSubmit = (e: InputEvent) => {
     if ((e as React.KeyboardEvent).key === 'Enter' || e.type === 'click') {
-      dispatch(changeSearchInput({ isSearching: true, query: searchValue }))
+      dispatch(changeSearchInput({ query: searchValue }))
       handleQuery(searchValue)
     }
   }
@@ -64,6 +57,5 @@ export const useSearch = () => {
     setSearchValue,
     inputRef,
     dispatch,
-    isSearching,
   }
 }

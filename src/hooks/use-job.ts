@@ -12,7 +12,6 @@ import { useInView } from 'react-intersection-observer'
 export const useJob = () => {
   const searchParams = useSearchParams()
   const { limit } = useAppSelector((state) => state.limit)
-  const { isSearching } = useAppSelector((state) => state.search)
   const { data: totalJobs } = useGetTotalJobsQuery()
   const sortParam = searchParams.get('sort')
   const filterParam = searchParams.get('filter') as string
@@ -40,17 +39,16 @@ export const useJob = () => {
   }, [inView, totalJobs, dispatch])
 
   useEffect(() => {
-    if (limit >= totalJobs! || isSearching || filterParam) {
+    if (limit >= totalJobs! || searchQueryParam || filterParam) {
       dispatch(setShowSkeleton(false))
     }
-  }, [dispatch, filterParam, isSearching, limit, totalJobs])
+  }, [dispatch, filterParam, limit, searchQueryParam, totalJobs])
 
   return {
     isLoading,
     isError,
     error,
     data,
-    isSearching,
     isFetching,
     inView,
     ref,

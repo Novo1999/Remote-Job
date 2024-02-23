@@ -22,21 +22,16 @@ const PrivateRoute = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!loading && !error && user?.email) return
-    if (!loading && !error && !user?.email && pathName !== '/signup') {
-      handleRouting('/login')
-    }
-  }, [user, handleRouting, pathName, loading, error])
-
-  useEffect(() => {
     if (
       !loading &&
       !error &&
       !user?.email &&
       !excludedPaths.includes(pathName)
     ) {
+      handleRouting('/login')
       toast.error('Please Log in first')
     }
-  }, [user, pathName, loading, error])
+  }, [user, handleRouting, pathName, loading, error])
 
   return <main className={`min-h-screen ${className}`}>{children}</main>
 }

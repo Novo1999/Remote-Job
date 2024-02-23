@@ -26,7 +26,7 @@ const Search = () => {
   useEffect(() => {
     if (hasSearchParam) {
       setSearchValue(searchQuery ?? '')
-      dispatch(changeSearchInput({ isSearching: true, query: searchValue }))
+      dispatch(changeSearchInput({ query: searchValue }))
     }
   }, [searchQuery, hasSearchParam, setSearchValue, dispatch]) // value stays in field if searchValue added as dependency
 
@@ -56,7 +56,7 @@ const Search = () => {
         <Button
           onClick={() => {
             setSearchValue('')
-            dispatch(changeSearchInput({ isSearching: false, query: '' }))
+            dispatch(changeSearchInput({ query: '' }))
             handleResetSearch()
           }}
           className='bg-white text-black hover:text-white absolute right-20 rounded-full search-btn'

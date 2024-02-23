@@ -15,7 +15,7 @@ const SpecialJobs = ({ jobPost }: { jobPost: Job }) => {
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
     handleSort(e.currentTarget.value)
-    dispatch(changeSearchInput({ isSearching: false, query: '' }))
+    dispatch(changeSearchInput({ query: '' }))
     dispatch(openModal(false))
   }
 

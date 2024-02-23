@@ -1,9 +1,9 @@
 import { changeSalary } from '@/lib/features/filter/filterSlice'
-import { useGetAllJobsQuery } from '@/lib/features/jobsApi/jobsApi'
 import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
+import { useGetAllJobsQuery } from '@/lib/features/jobsApi/jobsApi'
 
 export const useFilter = () => {
-  const { filterBy, filterQuery } = useAppSelector((state) => state.filter)
+  const { filterBy } = useAppSelector((state) => state.filter)
   const dispatch = useAppDispatch()
 
   const { data, isLoading } = useGetAllJobsQuery({

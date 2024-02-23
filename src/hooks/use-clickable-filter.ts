@@ -34,20 +34,6 @@ const useClickableFilter = () => {
     scrollAfterSearch()
   }
 
-  // const handlePositionClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-  //   e.stopPropagation()
-  //   const query = constructFilterQuery({
-  //     ...filterBy,
-  //     positions: [e.currentTarget.value],
-  //   })
-  //   dispatch(setFilterQuery({ query, isFiltering: true }))
-  //   // dispatch(
-  //   //   changeSearchInput({ query: e.currentTarget.value, isSearching: true }) // this is not doing anything but setting the isSearching to true is necessary so the app does not show skeleton under the jobs
-  //   // )
-  //   dispatch(openModal(false))
-  //   scrollAfterSearch()
-  // }
-
   return { handleClickableFilter }
 }
 

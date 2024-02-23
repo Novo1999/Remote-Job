@@ -10,10 +10,8 @@ import { auth } from '@/firebase/config'
 import useRouting from '@/hooks/use-routing'
 import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
 import { openModal } from '@/lib/features/modal/modalSlice'
-import { setUserName } from '@/lib/features/useName/userSlice'
 import { useLogout } from '@/utils/logOut'
 import Image from 'next/image'
-import { useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { RxAvatar } from 'react-icons/rx'
 import { Dialog, DialogTrigger } from '../ui/dialog'
@@ -26,13 +24,6 @@ const ProfileDropdownMenu = () => {
   const dispatch = useAppDispatch()
   const { userName } = useAppSelector((state) => state.user)
   const handleRouting = useRouting()
-
-  useEffect(() => {
-    if (user?.displayName) {
-      dispatch(setUserName(user.displayName))
-    }
-  }, [user, dispatch])
-
   const logOutUser = useLogout()
 
   return (

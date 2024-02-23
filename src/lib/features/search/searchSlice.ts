@@ -2,12 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 
 interface SearchState {
   query: string
-  isSearching: boolean
 }
 
 const initialState: SearchState = {
   query: '',
-  isSearching: false,
 }
 
 const searchSlice = createSlice({
@@ -16,7 +14,6 @@ const searchSlice = createSlice({
   reducers: {
     changeSearchInput: (state, action) => {
       state.query = action.payload.query
-      state.isSearching = action.payload.isSearching
     },
   },
 })

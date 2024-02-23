@@ -1,9 +1,9 @@
-import { useGetAllJobsQuery } from '@/lib/features/jobsApi/jobsApi'
 import { useAppSelector } from '@/lib/features/hooks'
-import { Job } from '../../interfaces'
+import { useGetAllJobsQuery } from '@/lib/features/jobsApi/jobsApi'
 import { useEffect, useRef, useState } from 'react'
 import { FaCircleInfo } from 'react-icons/fa6'
 import { RxCross2 } from 'react-icons/rx'
+import { Job } from '../../interfaces'
 
 const Advertise = () => {
   const [timer, setTimer] = useState<number>(5)
@@ -21,8 +21,8 @@ const Advertise = () => {
 
   // for random jobs, as the timer makes the info of ad re render and fetch new, using a ref here shows only one ad and prevents re loading another
   useEffect(() => {
-    if (!isLoading && !isError) {
-      ref.current = data![Math.floor(Math.random() * data!.length)]
+    if (!isLoading && !isError && data) {
+      ref.current = data[Math.floor(Math.random() * data!.length)]
     }
   }, [isError, isLoading])
 
