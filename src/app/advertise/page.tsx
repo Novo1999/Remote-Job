@@ -1,6 +1,8 @@
 'use client'
 import Stats from '@/components/Stats'
+import { LampContainer } from '@/components/ui/lamp'
 import { Player } from '@lottiefiles/react-lottie-player'
+import { motion } from 'framer-motion'
 import { RiRemoteControlFill } from 'react-icons/ri'
 
 export default function Page() {
@@ -10,9 +12,22 @@ export default function Page() {
     <main className='font-poppins flex gap-4 flex-col items-center sm:mx-8 mt-6 mx-4 lg:mx-20 xl:mx-60 2xl:mx-96 '>
       <header className='text-white py-4 text-center'>
         <h1 className='text-xl md:text-3xl font-bold flex gap-2 items-center'>
-          Advertise with{' '}
-          <p className='text-xl md:text-3xl font-chewy'>RemoteJumbo</p>
-          <RiRemoteControlFill />
+          <LampContainer>
+            <motion.h1
+              initial={{ opacity: 0.5, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: 0.3,
+                duration: 0.8,
+                ease: 'easeInOut',
+              }}
+              className='mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl'
+            >
+              Advertise with{' '}
+              <p className='text-xl md:text-3xl font-chewy'>RemoteJumbo</p>
+              <RiRemoteControlFill />
+            </motion.h1>
+          </LampContainer>
         </h1>
       </header>
       <div>

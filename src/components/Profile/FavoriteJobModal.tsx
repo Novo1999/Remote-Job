@@ -1,5 +1,4 @@
 import { auth } from '@/firebase/config'
-import { useAppDispatch } from '@/lib/features/hooks'
 import { useGetUserStarredJobsQuery } from '@/lib/features/jobsApi/jobsApi'
 import { User } from 'firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'

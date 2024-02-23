@@ -22,7 +22,7 @@ const Hero = () => {
               <motion.span
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 3, delay: index / 20 }}
+                transition={{ duration: 2, delay: index / 20 }}
                 key={index}
               >
                 {word}{' '}
