@@ -1,7 +1,6 @@
 import { setFilterQuery } from '@/lib/features/filter/filterSlice'
 import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
 import { openModal } from '@/lib/features/modal/modalSlice'
-import { changeSearchInput } from '@/lib/features/search/searchSlice'
 import { constructFilterQuery } from '@/utils/constructFilterQuery'
 import { scrollAfterSearch } from '@/utils/scrollAfterSearch'
 import { usePathname } from 'next/navigation'

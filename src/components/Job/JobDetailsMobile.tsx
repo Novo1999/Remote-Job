@@ -1,8 +1,14 @@
 import useClickableFilter from '@/hooks/use-clickable-filter'
-import { Job } from '../../../interfaces'
 import { FaLocationDot } from 'react-icons/fa6'
+import { Job } from '../../../interfaces'
 
-const JobDetailsMobile = ({ jobPost }: { jobPost: Job }) => {
+const JobDetailsMobile = ({
+  jobPost,
+  inJobPathOrFavoriteModalOpen,
+}: {
+  jobPost: Job
+  inJobPathOrFavoriteModalOpen: boolean
+}) => {
   const {
     location,
     salary: { min },
@@ -15,6 +21,7 @@ const JobDetailsMobile = ({ jobPost }: { jobPost: Job }) => {
     <div className='text-black sm:hidden min-[375px]:flex flex flex-shrink gap-2 w-24'>
       {/* type */}
       <button
+        disabled={inJobPathOrFavoriteModalOpen}
         onClick={(e) => handleClickableFilter(e, 'types')}
         value={jobType}
         className='font-thin bg-purple-500 text-[10px] sm:text-sm text-white whitespace-nowrap rounded-lg px-1 text-center flex items-center w-fit'
@@ -27,6 +34,7 @@ const JobDetailsMobile = ({ jobPost }: { jobPost: Job }) => {
         </span>
         {/* mobile location */}
         <button
+          disabled={inJobPathOrFavoriteModalOpen}
           value={location}
           onClick={(e) => handleClickableFilter(e, 'locations')}
           className='block sm:hidden w-fit text-center min-[375px]:whitespace-nowrap'

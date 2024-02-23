@@ -1,10 +1,16 @@
 import useClickableFilter from '@/hooks/use-clickable-filter'
 import { useAppSelector } from '@/lib/features/hooks'
-import { Job } from '../../../interfaces'
 import { FaDollarSign, FaLocationDot } from 'react-icons/fa6'
+import { Job } from '../../../interfaces'
 import Star from './Star'
 
-const JobDetailsPC = ({ jobPost }: { jobPost: Job }) => {
+const JobDetailsPC = ({
+  jobPost,
+  inJobPathOrFavoriteModalOpen,
+}: {
+  jobPost: Job
+  inJobPathOrFavoriteModalOpen: boolean
+}) => {
   const {
     location,
     salary: { max, min },
@@ -19,6 +25,7 @@ const JobDetailsPC = ({ jobPost }: { jobPost: Job }) => {
           <FaLocationDot />
         </span>
         <button
+          disabled={inJobPathOrFavoriteModalOpen}
           onClick={(e) => handleClickableFilter(e, 'locations')}
           value={location?.split(',')[0]}
           className='block lg:hidden'
@@ -26,6 +33,7 @@ const JobDetailsPC = ({ jobPost }: { jobPost: Job }) => {
           {location?.split(',')[0]}
         </button>
         <button
+          disabled={inJobPathOrFavoriteModalOpen}
           onClick={(e) => handleClickableFilter(e, 'locations')}
           value={location}
           className='hidden lg:block'

@@ -1,8 +1,9 @@
 import { useChangeSearchParams } from '@/hooks/use-change-search-params'
 import { usePostedDate } from '@/hooks/use-posted-date'
-import { useAppDispatch } from '@/lib/features/hooks'
+import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
 import { openModal } from '@/lib/features/modal/modalSlice'
 import { changeSearchInput } from '@/lib/features/search/searchSlice'
+import { usePathname } from 'next/navigation'
 import { Job } from '../../../interfaces'
 import Ping from '../ui/Ping'
 
@@ -11,6 +12,9 @@ const SpecialJobs = ({ jobPost }: { jobPost: Job }) => {
   const { formattedDate } = usePostedDate(posted)
   const { handleSort } = useChangeSearchParams()
   const dispatch = useAppDispatch()
+  const { modalOpen } = useAppSelector((state) => state.modal)
+  const pathName = usePathname()
+  const inJobPathOrFavoriteModalOpen = pathName.includes('job') || modalOpen
 
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
@@ -27,6 +31,7 @@ const SpecialJobs = ({ jobPost }: { jobPost: Job }) => {
             <div className='flex gap-2 flex-col sm:flex-row'>
               {isFeatured && (
                 <button
+                  disabled={inJobPathOrFavoriteModalOpen}
                   value='featured-jobs'
                   onClick={handleButtonClick}
                   className='bg-orange-400 hover:bg-orange-300 px-1 rounded-full sm:p-2 transition-all shadow-md'
@@ -36,6 +41,7 @@ const SpecialJobs = ({ jobPost }: { jobPost: Job }) => {
               )}
               {formattedDate === 'Today' && (
                 <button
+                  disabled={inJobPathOrFavoriteModalOpen}
                   value='new-jobs'
                   onClick={handleButtonClick}
                   className='relative self-end'
@@ -50,6 +56,7 @@ const SpecialJobs = ({ jobPost }: { jobPost: Job }) => {
 
             {isAd && (
               <button
+                disabled={inJobPathOrFavoriteModalOpen}
                 value='ads'
                 onClick={handleButtonClick}
                 className='bg-slate-500 shadow-md rounded-full w-fit px-2 self-end sm:py-2 hover:bg-slate-400'
