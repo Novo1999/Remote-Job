@@ -97,6 +97,35 @@ const jobsApi = api.injectEndpoints({
       }),
       invalidatesTags: ['all-jobs'],
     }),
+    // APPLY JOB
+    applyJob: builder.mutation<Job, StarJob>({
+      query: ({ jobId, userId }) => ({
+        method: 'POST',
+        url: `/apply/${jobId}`,
+        body: { userId },
+      }),
+      async onQueryStarted({ jobId, userId }, { dispatch, queryFulfilled }) {
+        // cache update
+        const patchResult = dispatch(
+          jobsApi.util.updateQueryData('getSingleJob', jobId, (draft: Job) => {
+            // Find the specific job in the draft
+            const jobStarredAppliedArray = draft.appliedBy.userId
+            const idExists = jobStarredAppliedArray.includes(userId)
+            if (idExists) {
+              const idToRemove = jobStarredAppliedArray.indexOf(userId)
+              jobStarredAppliedArray.splice(idToRemove, 1)
+            } else {
+              jobStarredAppliedArray.push(userId)
+            }
+          })
+        )
+        try {
+          await queryFulfilled
+        } catch (error) {
+          patchResult.undo()
+        }
+      },
+    }),
   }),
 })
 
@@ -111,4 +140,5 @@ export const {
   usePostJobMutation,
   useGetMaxSalaryQuery,
   useDeleteJobMutation,
+  useApplyJobMutation,
 } = jobsApi

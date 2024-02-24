@@ -9,6 +9,7 @@ import { useAppDispatch } from '@/lib/features/hooks'
 import {
   setEmail,
   setProfileImgURL,
+  setToken,
   setUserName,
 } from '@/lib/features/useName/userSlice'
 import { useEffect } from 'react'
@@ -23,6 +24,17 @@ const TopMenu = () => {
   const dispatch = useAppDispatch()
   const [user, loading] = useAuthState(auth)
 
+  // setting the token for the header
+  user
+    ?.getIdToken(true)
+    .then(function (idToken) {
+      if (idToken) dispatch(setToken(idToken))
+    })
+    .catch(function (error) {
+      console.error(error)
+    })
+
+  // on load, set the details in the store, without these, there would be potential bugs in the auth
   useEffect(() => {
     if (user) {
       dispatch(setUserName(user.displayName))

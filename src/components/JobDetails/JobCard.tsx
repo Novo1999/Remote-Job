@@ -8,10 +8,9 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { FaArrowAltCircleRight, FaCheckCircle } from 'react-icons/fa'
+import { FaArrowAltCircleRight } from 'react-icons/fa'
 import { LuMousePointerClick } from 'react-icons/lu'
 import { MdDelete } from 'react-icons/md'
-import { RxCross1 } from 'react-icons/rx'
 import { Job } from '../../../interfaces'
 import Star from '../Job/Star'
 import { TooltipForButton } from '../Tooltip'
@@ -19,7 +18,7 @@ import { Button } from '../ui/button'
 import ApplyButton from './ApplyButton'
 import ProfileImage from './Avatar'
 import JobDeleteModal from './JobDeleteModal'
-import Qualifications from './Qualifications'
+import ResponsibilitiesAndQualifications from './Reponsibilities&Qualifications'
 import Warning from './Warning'
 
 const JobCard = ({ job }: { job: Job }) => {
@@ -34,6 +33,7 @@ const JobCard = ({ job }: { job: Job }) => {
     jobType,
     viewCount,
     createdBy,
+    appliedBy,
   } = job
 
   const { formattedDate } = usePostedDate(posted)
@@ -127,41 +127,14 @@ const JobCard = ({ job }: { job: Job }) => {
               </p>
             </div>
           </div>
-          {/* just some dummy data here */}
-          <p>
-            We are looking for a Senior Symfony developer with commercial
-            experience for one of our clients. You are a perfect candidate if
-            you are growth-oriented, you love what you do, and you enjoy working
-            on new ideas to develop exciting products and growth features.
-          </p>
-          <CardTitle className='text-base lg:text-xl bg-black text-white rounded-md px-2 py-1 flex items-center gap-2'>
-            <FaCheckCircle />
-            Responsibilities
-          </CardTitle>
-          <div className='text-xs leading-6 flex flex-col gap-6 sm:gap-20 text-black lg:text-base h-fit'>
-            <span>
-              <li>
-                Work as part of a team to deliver digital solutions across web
-                and mobile platforms
-              </li>
-              <li>
-                Translate high-level requirements into executable software
-                designs
-              </li>
-              <li>
-                Implement software solutions using Symfony / PHP programming
-                language
-              </li>
-              <li>
-                Ensure all code is thoroughly tested and meets development
-                criteria
-              </li>
-              <li>Identify and address technical debt in the codebase</li>
-            </span>
-          </div>
-          <Qualifications />
+          <ResponsibilitiesAndQualifications />
           <div className='flex flex-col gap-2'>
-            <ApplyButton />
+            <ApplyButton
+              appliedBy={appliedBy}
+              title={title}
+              id={_id}
+              company={companyName}
+            />
             <Warning />
           </div>
         </CardContent>

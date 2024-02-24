@@ -18,6 +18,9 @@ export interface Job {
   isAd: boolean
   companyName: string
   benefits: Array<string>
+  appliedBy: {
+    userId: Array<string>
+  }
   applyCount: number
   viewCount: number
   posted: string
