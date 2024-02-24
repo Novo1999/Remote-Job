@@ -5,6 +5,7 @@ import { auth } from '@/firebase/config'
 import useRouting from '@/hooks/use-routing'
 import { usePostJobMutation } from '@/lib/features/jobsApi/jobsApi'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader2 } from 'lucide-react'
 import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useForm } from 'react-hook-form'
@@ -25,27 +26,29 @@ import { formSchema } from './formSchema'
 
 const PostForm = () => {
   const [user, loading, error] = useAuthState(auth)
-  const [postJob, { isError, error: postError }] = usePostJobMutation()
+  const [postJob, { isError, error: postError, isLoading, isSuccess }] =
+    usePostJobMutation()
   const handleRouting = useRouting()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: 'something',
+      title: '',
       jobType: 'Full-Time',
       location: 'New York, NY',
       position: 'Backend Engineer',
       jobDescription: '',
       benefits: [],
-      companyName: 'The big company',
+      companyName: '',
       companyDescription: '',
+      salary: '',
     },
   })
   const [selectedBenefits, setSelectedBenefits] = useState([
     remoteJobBenefits[0],
     remoteJobBenefits[1],
   ])
-  const [image, setImage] = useState<void>()
+  const [image, setImage] = useState<void>() // image state
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     postJob({
@@ -53,9 +56,13 @@ const PostForm = () => {
       companyImage: image,
       benefits: selectedBenefits,
       createdBy: user?.uid,
+    }).then(() => {
+      handleRouting('/')
+      toast.success('Added Job Successfully')
     })
-      .then(() => handleRouting('/'))
-      .then(() => toast.success('Added Job Successfully'))
+    if (isError) {
+      toast.error('Error posting job')
+    }
   }
 
   let content = null
@@ -155,7 +162,7 @@ const PostForm = () => {
           />
           <CompanyForm setImage={setImage} form={form} />
           <Button className='hover:bg-white hover:text-black' type='submit'>
-            Submit
+            {isLoading ? <Loader2 className='animate-spin' /> : 'Submit'}
           </Button>
         </form>
       </Form>

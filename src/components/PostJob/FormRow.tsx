@@ -8,17 +8,14 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Dispatch, FormEvent, SetStateAction } from 'react'
 
-const FormRow = ({
-  label,
-  placeholder,
-  field,
-  setImage,
-}: {
+type FormRowProp = {
   label: string
   placeholder?: string
-  field: Record<string, any>
+  field?: Record<string, any>
   setImage?: Dispatch<SetStateAction<ArrayBuffer | string | null>>
-}) => {
+}
+
+const FormRow = ({ label, placeholder, field, setImage }: FormRowProp) => {
   // image handler
   const handleImage = (e: FormEvent<HTMLInputElement>) => {
     const file = (e.target as HTMLInputElement).files![0]
@@ -60,12 +57,13 @@ const FormRow = ({
         <FormLabel className='text-white'>{label}</FormLabel>
         <FormControl>
           <Input
+            required
             accept='image/png, image/gif, image/jpeg'
             onChange={handleImage}
             className='text-white bg-black cursor-pointer'
             id='companyImage'
             type='file'
-            {...field}
+            defaultValue=''
           />
         </FormControl>
         <FormMessage className='text-xs' />

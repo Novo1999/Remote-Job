@@ -42,22 +42,4 @@ export const formSchema = z.object({
   companyName: z.string().min(6, {
     message: 'Company Name must be at least 6 characters.',
   }),
-  companyImage: z
-    .any()
-    .refine((files) => {
-      if (files && files.length > 0) {
-        return files[0].size <= MAX_FILE_SIZE
-      }
-      return true
-    }, `Max image size is 2MB.`)
-    .refine((files) => {
-      if (files && files.length > 0) {
-        return ACCEPTED_IMAGE_TYPES.includes(files[0].type)
-      }
-      return true
-    }, 'Only .jpg, .jpeg, .png, .gif, and .webp formats are supported.')
-    .refine(
-      (value) => value !== null && value !== undefined && value.length > 0,
-      { message: 'Company image is required.', path: [] }
-    ),
 })

@@ -24,13 +24,10 @@ const CompanyForm = ({ form, setImage }: CompanyFormProps) => {
           />
         )}
       />
-      <FormField
-        control={form.control}
-        name='companyImage'
-        render={({ field }) => (
-          <FormRow setImage={setImage} label='Company Logo' field={field} />
-        )}
-      />
+
+      {/* image */}
+      <FormRow setImage={setImage} label='Company Logo' />
+
       <FormField
         control={form.control}
         name='companyDescription'
