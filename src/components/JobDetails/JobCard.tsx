@@ -6,16 +6,19 @@ import { usePostedDate } from '@/hooks/use-posted-date'
 import { useAppSelector } from '@/lib/features/hooks'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { FaArrowAltCircleRight, FaCheckCircle } from 'react-icons/fa'
 import { LuMousePointerClick } from 'react-icons/lu'
 import { MdDelete } from 'react-icons/md'
+import { RxCross1 } from 'react-icons/rx'
 import { Job } from '../../../interfaces'
 import Star from '../Job/Star'
 import { TooltipForButton } from '../Tooltip'
 import { Button } from '../ui/button'
 import ApplyButton from './ApplyButton'
 import ProfileImage from './Avatar'
+import JobDeleteModal from './JobDeleteModal'
 import Qualifications from './Qualifications'
 import Warning from './Warning'
 
@@ -35,6 +38,8 @@ const JobCard = ({ job }: { job: Job }) => {
 
   const { formattedDate } = usePostedDate(posted)
   const { showStarLoader } = useAppSelector((state) => state.loader)
+
+  const [modalOpen, setModalOpen] = useState(false)
 
   const [user] = useAuthState(auth)
 
@@ -81,20 +86,24 @@ const JobCard = ({ job }: { job: Job }) => {
               </Badge>
             </div>
             {createdBy === user?.uid && (
-              // TODO: ADD TOOLTIP
               <TooltipForButton content='Delete'>
-                <Button>
-                  <motion.span
-                    whileHover={{
-                      scale: 1.2,
-                      color: '#DC143C',
-                    }}
-                  >
+                <motion.div
+                  whileHover={{
+                    scale: 1.1,
+                  }}
+                >
+                  <Button onClick={() => setModalOpen(true)}>
                     <MdDelete className='text-2xl' />
-                  </motion.span>
-                </Button>
+                  </Button>
+                </motion.div>
               </TooltipForButton>
             )}
+            <JobDeleteModal
+              id={_id}
+              modalOpen={modalOpen}
+              setModalOpen={setModalOpen}
+            />{' '}
+            {/* job delete modal */}
           </div>
         </div>
         <CardContent className='text-xs leading-6 flex flex-col gap-6 p-0 lg:text-base'>

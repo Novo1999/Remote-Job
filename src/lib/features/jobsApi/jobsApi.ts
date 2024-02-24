@@ -89,6 +89,14 @@ const jobsApi = api.injectEndpoints({
         body: job,
       }),
     }),
+    // DELETE JOB
+    deleteJob: builder.mutation({
+      query: (id) => ({
+        method: 'DELETE',
+        url: `/delete/${id}`,
+      }),
+      invalidatesTags: ['all-jobs'],
+    }),
   }),
 })
 
@@ -102,4 +110,5 @@ export const {
   useGetUserStarredJobsQuery,
   usePostJobMutation,
   useGetMaxSalaryQuery,
+  useDeleteJobMutation,
 } = jobsApi
