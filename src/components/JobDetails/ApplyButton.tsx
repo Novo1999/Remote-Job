@@ -30,17 +30,25 @@ const ApplyButton = ({ id, title, company, appliedBy }: ApplyButtonProp) => {
     })
   }
 
+  // tooltip content
+  let content
+  if (!user) {
+    content = 'Please log in first'
+  } else if (user && alreadyApplied) {
+    content = 'You have applied'
+  } else {
+    content = 'Tap to apply'
+  }
+
   return (
-    <TooltipForButton
-      content={alreadyApplied ? 'You Have Applied' : 'Tap to apply'}
-    >
+    <TooltipForButton content={content}>
       <motion.button
-        disabled={alreadyApplied}
+        disabled={alreadyApplied || !user}
         onClick={handleApply}
         whileTap={{ scale: 0.8 }}
         transition={{ type: 'spring', stiffness: 200, damping: 10 }}
         className={`button ${
-          alreadyApplied ? '!bg-gray-500' : ''
+          alreadyApplied || !user ? '!bg-gray-500' : ''
         } transition-all ease-in-out sm:self-end`}
       >
         {isLoading ? <Loader2 className='animate-spin' /> : 'Apply Now'}

@@ -44,8 +44,6 @@ const Page = () => {
 
   const [user, authLoading, error] = useAuthState(auth)
 
-  console.log(loginLoading)
-
   let content = null
 
   if (authLoading && !error) {

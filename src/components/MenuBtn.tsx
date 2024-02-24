@@ -35,7 +35,7 @@ const MenuBtn = ({
   if (href === '/post' && buttonDisabled) {
     return (
       <TooltipForButton content='Please log in first'>
-        <Link href={!buttonDisabled ? href : ''}>
+        <Link href={!buttonDisabled ? href : '/login'}>
           <Button
             disabled={buttonDisabled}
             className={`${className} ${

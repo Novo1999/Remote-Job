@@ -8,6 +8,7 @@ import { setShowSkeleton } from '@/lib/features/loader/loaderSlice'
 import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
+import { toast } from 'react-toastify'
 
 export const useJob = () => {
   const searchParams = useSearchParams()
@@ -35,7 +36,6 @@ export const useJob = () => {
       dispatch(setShowSkeleton(true))
       dispatch(changeLimit(10)) // the payload is 10 which will be added to the limit as user scrolls so there are +10 data and so on
     }
-    // if there are no jobs, don't show skeleton
   }, [inView, totalJobs, dispatch])
 
   useEffect(() => {
