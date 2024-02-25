@@ -6,21 +6,12 @@ import { motion } from 'framer-motion'
 import { RiRemoteControlFill } from 'react-icons/ri'
 
 export default function Page() {
-  const playerClassName =
-    'size-36 sm:size-48 relative top-20 min-[375px]:size-40 lg:size-60 xl:size-96 relative drop-shadow-md bottom-4 sm:bottom-6'
+  const playerClassName = 'size-36 sm:size-48'
   return (
     <main className='font-poppins flex gap-4 flex-col items-center sm:mx-8 mt-6 mx-4 lg:mx-20 xl:mx-60 2xl:mx-96 '>
       <header className='text-white py-4 text-center'>
-        <div className='text-xl md:text-3xl font-bold flex gap-2 items-center w-full'>
+        <div className='text-xl md:text-3xl font-bold flex gap-2 items-center'>
           <LampContainer>
-            <div className='mb-12'>
-              <Player
-                className={playerClassName}
-                autoplay
-                loop
-                src='https://lottie.host/2cce4e16-209a-4460-b96c-a93a125e33f6/SjRgrWSbB4.json'
-              />
-            </div>
             <motion.h1
               initial={{ opacity: 0.5, y: 100 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -29,12 +20,18 @@ export default function Page() {
                 duration: 0.8,
                 ease: 'easeInOut',
               }}
-              className='mt-8 bg-white py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl'
+              className='bg-white py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl'
             >
               Advertise with{' '}
               <p className='text-xl md:text-3xl font-chewy'>RemoteJumbo</p>
               <RiRemoteControlFill />
             </motion.h1>
+            <Player
+              className={playerClassName}
+              autoplay
+              loop
+              src='https://lottie.host/2cce4e16-209a-4460-b96c-a93a125e33f6/SjRgrWSbB4.json'
+            />
           </LampContainer>
         </div>
       </header>

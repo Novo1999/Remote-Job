@@ -38,7 +38,7 @@ const Search = () => {
       {!searchIsFocused && !searchValue && (
         <div
           onClick={handleClick}
-          className='absolute left-12 bottom-[6px] *:text-lg font-semibold font-poppins text-black search-type-effect w-32 sm:w-96'
+          className='absolute left-12 bottom-[6px] *:text-lg font-semibold font-poppins text-black search-type-effect w-32 sm:w-[33rem] lg:w-[23rem] xl:w-[27rem]'
         >
           <TypeEffect />
         </div>

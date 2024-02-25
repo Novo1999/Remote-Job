@@ -9,7 +9,7 @@ import useRouting from '@/hooks/use-routing'
 import { ReactNode, useState } from 'react'
 import { BsFillInfoCircleFill } from 'react-icons/bs'
 import { FaBriefcase } from 'react-icons/fa6'
-import { RiAdvertisementFill, RiLoginBoxFill } from 'react-icons/ri'
+import { RiAdvertisementFill } from 'react-icons/ri'
 import LoginBtn from './LoginBtn'
 
 const Content = ({

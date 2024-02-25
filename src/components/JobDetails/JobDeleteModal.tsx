@@ -63,7 +63,10 @@ const JobDeleteModal = ({ modalOpen, setModalOpen, id }: ModalPropType) => {
                   {isLoading ? <Loader2 className='animate-spin' /> : 'Delete'}
                 </CardItem>
               </motion.div>
-              <motion.div whileHover={{ scale: 1.1 }}>
+              <motion.div
+                onClick={() => setModalOpen(false)}
+                whileHover={{ scale: 1.1 }}
+              >
                 <CardItem
                   translateZ={20}
                   as='button'
