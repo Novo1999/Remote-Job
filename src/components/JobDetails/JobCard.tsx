@@ -129,12 +129,7 @@ const JobCard = ({ job }: { job: Job }) => {
           </div>
           <ResponsibilitiesAndQualifications />
           <div className='flex flex-col gap-2'>
-            <ApplyButton
-              appliedBy={appliedBy}
-              title={title}
-              id={_id}
-              company={companyName}
-            />
+            <ApplyButton job={job} />
             <Warning />
           </div>
         </CardContent>

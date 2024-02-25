@@ -1,6 +1,8 @@
 'use client'
 import { Slider } from '@/components/ui/slider'
 import { useFilter } from '@/hooks/use-filter'
+import { useAppSelector } from '@/lib/features/hooks'
+import { useGetMaxSalaryQuery } from '@/lib/features/jobsApi/jobsApi'
 import { FaDollarSign } from 'react-icons/fa6'
 import { typesArray } from '../../utils/constants'
 import FilterCategory from './FilterCategory'
@@ -8,6 +10,7 @@ import FilterCategory from './FilterCategory'
 const Filter = ({ category }: { category: string }) => {
   const { handleSalary, locations, positions, benefits, filterBy, dispatch } =
     useFilter()
+  const { data: maxSalary, isLoading } = useGetMaxSalaryQuery()
 
   if (category === 'salary') {
     return (
@@ -22,8 +25,8 @@ const Filter = ({ category }: { category: string }) => {
           className='hover:cursor-grab'
           onValueChange={handleSalary}
           value={[filterBy.salary]}
-          min={90000}
-          max={200000}
+          min={10000}
+          max={!isLoading && maxSalary ? maxSalary.max * 1000 : 500000}
           step={1}
         />
       </div>

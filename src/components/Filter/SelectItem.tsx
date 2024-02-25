@@ -1,9 +1,9 @@
 'use client'
 import { changeFilter } from '@/lib/features/filter/filterSlice'
-import { MultiSelectProps } from '../../../interfaces'
 import { setMaxFilterCount } from '@/utils/setMaxFilterCount'
 import { setSelectItemColor } from '@/utils/setSelectItemColor'
 import { useState } from 'react'
+import { MultiSelectProps } from '../../../interfaces'
 import MoreOrLessButton from './MoreOrLess'
 
 const MultiSelect = ({
@@ -43,7 +43,7 @@ const MultiSelect = ({
         {options
           .map((option) => (
             <div
-              className='text-xs flex p-2 justify-between border m-1 gap-1 font-semibold border-black shadow-md cursor-pointer'
+              className='text-xs flex p-2 justify-between border m-1 gap-1 font-semibold border-black shadow-md cursor-pointer capitalize'
               key={option}
               onClick={() => {
                 handleFilterChange(option)

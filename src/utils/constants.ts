@@ -1,17 +1,17 @@
 export const typesArray = [
-  'Full-Time',
-  'Part-Time',
-  'Freelance',
-  'Intern',
-  'Contract',
+  'full-time',
+  'part-time',
+  'freelance',
+  'intern',
+  'contract',
 ]
 
 export const zodTypesArray = [
-  'Full-Time',
-  'Part-Time',
-  'Freelance',
-  'Intern',
-  'Contract',
+  'full-time',
+  'part-time',
+  'freelance',
+  'intern',
+  'contract',
 ] as const
 
 export const remoteJobLocations = [

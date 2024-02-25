@@ -26,7 +26,7 @@ import { formSchema } from './formSchema'
 
 const PostForm = () => {
   const [user, loading, error] = useAuthState(auth)
-  const [postJob, { isError, error: postError, isLoading, isSuccess }] =
+  const [postJob, { isError, error: postError, isLoading }] =
     usePostJobMutation()
   const handleRouting = useRouting()
 
@@ -34,7 +34,7 @@ const PostForm = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: '',
-      jobType: 'Full-Time',
+      jobType: 'full-time',
       location: 'New York, NY',
       position: 'Backend Engineer',
       jobDescription: '',
@@ -161,7 +161,11 @@ const PostForm = () => {
             )}
           />
           <CompanyForm setImage={setImage} form={form} />
-          <Button className='hover:bg-white hover:text-black' type='submit'>
+          <Button
+            disabled={isLoading}
+            className='hover:bg-white hover:text-black'
+            type='submit'
+          >
             {isLoading ? <Loader2 className='animate-spin' /> : 'Submit'}
           </Button>
         </form>
