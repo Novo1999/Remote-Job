@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import { CardBody, CardContainer, CardItem } from '../ui/3d-card'
 import { Dialog, DialogContent } from '../ui/dialog'
 
-type ModalPropType = {
+export type ModalPropType = {
   modalOpen: boolean
   setModalOpen: Dispatch<SetStateAction<boolean>>
   id: string

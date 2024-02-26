@@ -10,7 +10,7 @@ import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { FaArrowAltCircleRight } from 'react-icons/fa'
 import { LuMousePointerClick } from 'react-icons/lu'
-import { MdDelete } from 'react-icons/md'
+import { MdDelete, MdEdit } from 'react-icons/md'
 import { Job } from '../../../interfaces'
 import Star from '../Job/Star'
 import { TooltipForButton } from '../Tooltip'
@@ -18,6 +18,7 @@ import { Button } from '../ui/button'
 import ApplyButton from './ApplyButton'
 import ProfileImage from './Avatar'
 import JobDeleteModal from './JobDeleteModal'
+import JobEditModal from './JobEditModal'
 import ResponsibilitiesAndQualifications from './Reponsibilities&Qualifications'
 import Warning from './Warning'
 
@@ -40,6 +41,7 @@ const JobCard = ({ job }: { job: Job }) => {
   const { showStarLoader } = useAppSelector((state) => state.loader)
 
   const [modalOpen, setModalOpen] = useState(false)
+  const [editModalOpen, setEditModalOpen] = useState(false)
 
   const [user] = useAuthState(auth)
 
@@ -86,24 +88,44 @@ const JobCard = ({ job }: { job: Job }) => {
               </Badge>
             </div>
             {createdBy === user?.uid && (
-              <TooltipForButton content='Delete'>
-                <motion.div
-                  whileHover={{
-                    scale: 1.1,
-                  }}
-                >
-                  <Button onClick={() => setModalOpen(true)}>
-                    <MdDelete className='text-2xl' />
-                  </Button>
-                </motion.div>
-              </TooltipForButton>
+              <div className='flex gap-2'>
+                {/* EDIT */}
+                <TooltipForButton content='Edit'>
+                  <motion.div
+                    whileHover={{
+                      scale: 1.1,
+                    }}
+                  >
+                    <Button onClick={() => setEditModalOpen(true)}>
+                      <MdEdit className='text-2xl' />
+                    </Button>
+                  </motion.div>
+                </TooltipForButton>
+                {/* DELETE */}
+                <TooltipForButton content='Delete'>
+                  <motion.div
+                    whileHover={{
+                      scale: 1.1,
+                    }}
+                  >
+                    <Button onClick={() => setModalOpen(true)}>
+                      <MdDelete className='text-2xl' />
+                    </Button>
+                  </motion.div>
+                </TooltipForButton>
+              </div>
             )}
+            {/* job delete modal */}
             <JobDeleteModal
               id={_id}
               modalOpen={modalOpen}
               setModalOpen={setModalOpen}
             />{' '}
-            {/* job delete modal */}
+            <JobEditModal
+              id={_id}
+              modalOpen={editModalOpen}
+              setModalOpen={setEditModalOpen}
+            />
           </div>
         </div>
         <CardContent className='text-xs leading-6 flex flex-col gap-6 p-0 lg:text-base'>

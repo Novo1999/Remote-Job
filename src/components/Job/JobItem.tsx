@@ -58,7 +58,7 @@ const JobItem = forwardRef(
             alt='logo'
             width={400}
             height={400}
-            className='w-12 sm:w-16 h-20 object-cover rounded-full m-auto shadow-lg lg:w-[90px] xl:w-20'
+            className='w-12 object-cover h-8 min-[375px]:h-9 min-[425px]:h-10 sm:h-16 sm:w-16 rounded-full m-auto shadow-lg xl:w-16'
           />
           <button className='text-lg right-2 sm:hidden'>
             <div className='rating rating-sm transition-all'>
