@@ -5,7 +5,7 @@ import JobCard from '@/components/JobDetails/JobCard'
 import SimilarJobs from '@/components/JobDetails/SimilarJobs'
 import { useGetSingleJobQuery } from '@/lib/features/jobsApi/jobsApi'
 
-export default function Page({ params }: { params: { id: string } }) {
+function Page({ params }: { params: { id: string } }) {
   const {
     data: job,
     isLoading,
@@ -44,3 +44,5 @@ export default function Page({ params }: { params: { id: string } }) {
     </main>
   )
 }
+
+export default Page

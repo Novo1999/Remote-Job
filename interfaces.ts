@@ -28,6 +28,8 @@ export interface Job {
     url: string
   }
   createdBy: string
+  jobDescription?: string
+  companyDescription?: string
 }
 
 export interface GetJobs {

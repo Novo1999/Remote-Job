@@ -11,6 +11,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import * as z from 'zod'
+import { Job } from '../../../interfaces'
 import {
   remoteJobBenefits,
   remoteJobLocations,
@@ -24,30 +25,55 @@ import { FormRowSelect } from './FormRowSelect'
 import BenefitsListbox from './Listbox'
 import { formSchema } from './formSchema'
 
-const PostForm = () => {
+const PostForm = ({ data }: { data?: Job }) => {
   const [user, loading, error] = useAuthState(auth)
   const [postJob, { isError, error: postError, isLoading }] =
     usePostJobMutation()
   const handleRouting = useRouting()
+  const {
+    title,
+    jobType,
+    location,
+    position,
+    jobDescription,
+    companyDescription,
+    companyName,
+    salary,
+    benefits,
+  } = data! ?? {}
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      title: '',
-      jobType: 'full-time',
-      location: 'New York, NY',
-      position: 'Backend Engineer',
-      jobDescription: '',
-      benefits: [],
-      companyName: '',
-      companyDescription: '',
-      salary: '',
-    },
+    defaultValues: data
+      ? {
+          title,
+          jobType,
+          location,
+          position,
+          jobDescription,
+          benefits,
+          companyName,
+          companyDescription,
+          salary: `${salary.min}-${salary.max}`,
+        }
+      : {
+          title: '',
+          jobType: 'full-time',
+          location: 'New York, NY',
+          position: 'Backend Engineer',
+          jobDescription: '',
+          benefits: [],
+          companyName: '',
+          companyDescription: '',
+          salary: '',
+        },
   })
+
   const [selectedBenefits, setSelectedBenefits] = useState([
     remoteJobBenefits[0],
     remoteJobBenefits[1],
   ])
+
   const [image, setImage] = useState<void>() // image state
 
   function onSubmit(values: z.infer<typeof formSchema>) {

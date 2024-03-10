@@ -1,5 +1,4 @@
 import { useAppSelector } from '@/lib/features/hooks'
-import { Job } from '../../../interfaces'
 import {
   BarElement,
   CategoryScale,
@@ -11,6 +10,7 @@ import {
 } from 'chart.js'
 import React from 'react'
 import { Bar } from 'react-chartjs-2'
+import { Job } from '../../../interfaces'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 

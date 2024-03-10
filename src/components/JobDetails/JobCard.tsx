@@ -96,8 +96,10 @@ const JobCard = ({ job }: { job: Job }) => {
                       scale: 1.1,
                     }}
                   >
-                    <Button onClick={() => setEditModalOpen(true)}>
-                      <MdEdit className='text-2xl' />
+                    <Button>
+                      <Link href={`/edit-job/${_id}`}>
+                        <MdEdit className='text-2xl' />
+                      </Link>
                     </Button>
                   </motion.div>
                 </TooltipForButton>
