@@ -1,21 +1,33 @@
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
 import { auth } from '@/firebase/config'
+import { useMenuAnimation } from '@/hooks/use-menu-animation'
 import useRouting from '@/hooks/use-routing'
 import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
 import { openModal } from '@/lib/features/modal/modalSlice'
 import { useLogout } from '@/utils/logOut'
+import { motion } from 'framer-motion'
 import Image from 'next/image'
+import { ReactNode, Ref, useEffect, useRef, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { RxAvatar } from 'react-icons/rx'
-import { Dialog, DialogTrigger } from '../ui/dialog'
+import { Dialog } from '../ui/dialog'
 import FavoriteJobModal from './FavoriteJobModal'
+
+const MenuListItem = ({
+  children,
+  onClick,
+}: {
+  children: string
+  onClick: () => void
+}) => {
+  return (
+    <li
+      onClick={onClick}
+      className='text-black flex flex-start p-3 pl-4 transform origin-left translate-x-20 cursor-pointer hover:bg-slate-400 duration-300'
+    >
+      {children}
+    </li>
+  )
+}
 
 const ProfileDropdownMenu = () => {
   const [user, loading, error] = useAuthState(auth)
@@ -25,16 +37,42 @@ const ProfileDropdownMenu = () => {
   const { userName } = useAppSelector((state) => state.user)
   const handleRouting = useRouting()
   const logOutUser = useLogout()
+  const scope = useMenuAnimation(modalOpen)
+  const menuRef = useRef<HTMLUListElement>(null)
+  const [favoriteModalOpen, setFavoriteModalOpen] = useState(false)
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        dispatch(openModal(false))
+      }
+    }
+
+    if (modalOpen) {
+      document.addEventListener('click', handleOutsideClick)
+    }
+
+    return () => {
+      document.removeEventListener('click', handleOutsideClick)
+    }
+  }, [modalOpen, dispatch])
 
   return (
     <Dialog
       open={modalOpen}
-      onOpenChange={() => dispatch(openModal(!modalOpen))}
+      onOpenChange={() => {
+        setFavoriteModalOpen(!favoriteModalOpen)
+      }}
     >
-      <DropdownMenu>
-        <DropdownMenuTrigger
+      <nav
+        className='w-fit relative p-2 bg-white text-black rounded-md'
+        ref={scope}
+      >
+        <motion.button
           disabled={loading || !user}
-          className='bg-white text-black rounded-md px-4 flex gap-1 hover:bg-slate-200 py-2 transition-colors items-center'
+          whileTap={{ scale: 0.97 }}
+          onClick={() => dispatch(openModal(!modalOpen))}
+          className='flex items-center gap-3 justify-center relative top-0.5'
         >
           <span className='relative top-[2px]'>
             {url ? (
@@ -48,33 +86,35 @@ const ProfileDropdownMenu = () => {
             )}
           </span>
           <p>{userName}</p>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className='w-48 relative right-7'>
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onClick={() => handleRouting('/profile')}
-            className='cursor-pointer hover:bg-slate-400'
-          >
+          <div className='arrow' style={{ transformOrigin: '50% 55%' }}>
+            <svg width='15' height='15' viewBox='0 0 20 20'>
+              <path d='M0 7 L 20 7 L 10 16' />
+            </svg>
+          </div>
+        </motion.button>
+        <ul
+          ref={menuRef}
+          className='flex shadow flex-col gap-2 top-12 bg-white absolute right-8 w-[300px]'
+          style={{
+            pointerEvents: modalOpen ? 'auto' : 'none',
+            clipPath: 'inset(10% 50% 90% 50% round 10px)',
+          }}
+        >
+          <MenuListItem onClick={() => handleRouting('/profile')}>
             Profile
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={logOutUser}
-            className='cursor-pointer hover:bg-slate-400'
+          </MenuListItem>
+          <MenuListItem onClick={logOutUser}>Logout</MenuListItem>
+          <MenuListItem
+            onClick={() => {
+              setFavoriteModalOpen(true)
+              dispatch(openModal(true))
+            }}
           >
-            Log Out
-          </DropdownMenuItem>
-          <DropdownMenuItem className='cursor-pointer hover:bg-slate-400'>
-            <DialogTrigger
-              className='w-full text-start'
-              onClick={() => dispatch(openModal(true))}
-            >
-              My Favorite Jobs
-            </DialogTrigger>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-      <FavoriteJobModal />
+            My Favorite Jobs
+          </MenuListItem>
+        </ul>{' '}
+      </nav>
+      {favoriteModalOpen && <FavoriteJobModal />}
     </Dialog>
   )
 }

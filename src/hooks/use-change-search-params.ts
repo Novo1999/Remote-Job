@@ -19,7 +19,6 @@ export const useChangeSearchParams = () => {
     params.set(param, value)
     handleRouting(pathname + '?' + params.toString())
     // scrolling down after the params operation
-    scrollAfterSearch()
   }
 
   const removeQueryParam = (param: string) => {

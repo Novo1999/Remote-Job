@@ -11,7 +11,6 @@ import {
 import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
 import { useGetAllJobsQuery } from '@/lib/features/jobsApi/jobsApi'
 import { constructFilterQuery } from '@/utils/constructFilterQuery'
-import { scrollAfterSearch } from '@/utils/scrollAfterSearch'
 import { IoFilterSharp } from 'react-icons/io5'
 import Filter from './Filter'
 
