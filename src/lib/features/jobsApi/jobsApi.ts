@@ -89,6 +89,13 @@ const jobsApi = api.injectEndpoints({
         body: job,
       }),
     }),
+    editJob: builder.mutation({
+      query: ({ id, updatedJob }) => ({
+        method: 'PATCH',
+        url: `/edit-job/${id}`,
+        body: updatedJob,
+      }),
+    }),
     // DELETE JOB
     deleteJob: builder.mutation({
       query: (id) => ({
@@ -131,6 +138,7 @@ const jobsApi = api.injectEndpoints({
 
 export const {
   useGetAllJobsQuery,
+  useEditJobMutation,
   useGetSimilarJobsQuery,
   useGetSingleJobQuery,
   useAddViewCountMutation,

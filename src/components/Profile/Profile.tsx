@@ -11,6 +11,7 @@ import { Meteors } from '../ui/meteors'
 import { ProfileModal } from './ProfileModal'
 
 const Profile = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
   const [, loading] = useAuthState(auth)
   const logout = useLogout()
   const { userName, email, url } = useAppSelector((state) => state.user)

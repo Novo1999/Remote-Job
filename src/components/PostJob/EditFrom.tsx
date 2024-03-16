@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Form, FormField } from '@/components/ui/form'
 import { auth } from '@/firebase/config'
 import useRouting from '@/hooks/use-routing'
-import { usePostJobMutation } from '@/lib/features/jobsApi/jobsApi'
+import { useEditJobMutation } from '@/lib/features/jobsApi/jobsApi'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
 import { useState } from 'react'
@@ -25,14 +25,37 @@ import { FormRowSelect } from './FormRowSelect'
 import BenefitsListbox from './Listbox'
 import { formSchema } from './formSchema'
 
-const PostForm = ({ data }: { data?: Job }) => {
+const EditForm = ({ data }: { data?: Job }) => {
   const [user, loading, error] = useAuthState(auth)
-  const [postJob, { isError, error: postError, isLoading }] =
-    usePostJobMutation()
+  const [editJob, { isError, error: editError, isLoading }] =
+    useEditJobMutation()
   const handleRouting = useRouting()
+  const {
+    title,
+    _id,
+    jobType,
+    location,
+    position,
+    jobDescription,
+    companyDescription,
+    companyName,
+    salary,
+    benefits,
+  } = data! ?? {}
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      title,
+      jobType,
+      location,
+      position,
+      jobDescription,
+      benefits,
+      companyName,
+      companyDescription,
+      salary: `${salary.min}-${salary.max}`,
+    },
   })
 
   const [selectedBenefits, setSelectedBenefits] = useState([
@@ -43,12 +66,7 @@ const PostForm = ({ data }: { data?: Job }) => {
   const [image, setImage] = useState<void>() // image state
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    postJob({
-      ...values,
-      companyImage: image,
-      benefits: selectedBenefits,
-      createdBy: user?.uid,
-    }).then(() => {
+    editJob({ id: _id, updatedJob: values }).then(() => {
       handleRouting('/')
       toast.success('Added Job Successfully')
     })
@@ -167,4 +185,4 @@ const PostForm = ({ data }: { data?: Job }) => {
 
   return content
 }
-export default PostForm
+export default EditForm

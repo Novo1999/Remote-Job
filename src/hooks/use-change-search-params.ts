@@ -1,7 +1,6 @@
 'use client'
 import { resetFilter } from '@/lib/features/filter/filterSlice'
 import { useAppDispatch } from '@/lib/features/hooks'
-import { scrollAfterSearch } from '@/utils/scrollAfterSearch'
 import { usePathname, useSearchParams } from 'next/navigation'
 import useRouting from './use-routing'
 
@@ -18,7 +17,6 @@ export const useChangeSearchParams = () => {
     const params = new URLSearchParams(searchParams.toString())
     params.set(param, value)
     handleRouting(pathname + '?' + params.toString())
-    // scrolling down after the params operation
   }
 
   const removeQueryParam = (param: string) => {
@@ -32,6 +30,7 @@ export const useChangeSearchParams = () => {
       handleResetSort()
     } else {
       doParamsOperation('sort', value)
+      window.scrollTo({ top: 1200, behavior: 'smooth' })
     }
   }
 
