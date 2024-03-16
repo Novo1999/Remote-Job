@@ -23,7 +23,7 @@ import { FilterBar } from './FilterBar'
 import FormRow from './FormRow'
 import { FormRowSelect } from './FormRowSelect'
 import BenefitsListbox from './Listbox'
-import { formSchema } from './formSchema'
+import { editFormSchema, formSchema } from './formSchema'
 
 const EditForm = ({ data }: { data?: Job }) => {
   const [user, loading, error] = useAuthState(auth)
@@ -43,8 +43,8 @@ const EditForm = ({ data }: { data?: Job }) => {
     benefits,
   } = data! ?? {}
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof editFormSchema>>({
+    resolver: zodResolver(editFormSchema),
     defaultValues: {
       title,
       jobType,
@@ -65,7 +65,7 @@ const EditForm = ({ data }: { data?: Job }) => {
 
   const [image, setImage] = useState<void>() // image state
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof editFormSchema>) {
     editJob({ id: _id, updatedJob: values }).then(() => {
       handleRouting('/')
       toast.success('Added Job Successfully')
@@ -87,7 +87,7 @@ const EditForm = ({ data }: { data?: Job }) => {
     content = (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit(onSubmit!)}
           className='space-y-8 font-poppins mx-4 min-[425px]:mx-6 sm:mx-32 lg:mx-60 xl:mx-96 mt-10'
         >
           <h1 className='text-2xl font-bold'>Tell us about your Job</h1>

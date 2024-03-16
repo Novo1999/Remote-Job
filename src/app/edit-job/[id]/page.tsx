@@ -1,5 +1,6 @@
 'use client'
 
+import EditForm from '@/components/PostJob/EditForm'
 import PostForm from '@/components/PostJob/PostForm'
 import { useGetSingleJobQuery } from '@/lib/features/jobsApi/jobsApi'
 import { Loader } from 'lucide-react'
@@ -19,7 +20,7 @@ const Page = () => {
           <Loader className='animate-spin' />
         </div>
       ) : (
-        <PostForm data={data as Job} />
+        <EditForm data={data as Job} />
       )}
     </div>
   )

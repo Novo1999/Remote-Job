@@ -12,7 +12,7 @@ const jobTypeEnum = z.enum(zodTypesArray)
 const jobLocationEnum = z.enum(zodRemoteJobLocations)
 const jobPositionEnum = z.enum(zodRemoteJobPositions)
 
-export const formSchema = z.object({
+const initialSchemaObject = {
   title: z.string().min(6, {
     message: 'Job title must be at least 6 characters.',
   }),
@@ -42,4 +42,13 @@ export const formSchema = z.object({
   companyName: z.string().min(6, {
     message: 'Company Name must be at least 6 characters.',
   }),
+}
+
+export const formSchema = z.object(initialSchemaObject)
+
+export const editFormSchema = z.object({
+  ...initialSchemaObject,
+  jobType: z.string(),
+  location: z.string(),
+  position: z.string(),
 })

@@ -2,10 +2,10 @@ import { FormField } from '@/components/ui/form'
 import { UseFormReturn } from 'react-hook-form'
 import { z } from 'zod'
 import FormRow from './FormRow'
-import { formSchema } from './formSchema'
+import { editFormSchema } from './formSchema'
 
 interface CompanyFormProps {
-  form: UseFormReturn<z.infer<typeof formSchema>>
+  form: UseFormReturn<z.infer<typeof editFormSchema>>
   setImage: () => void
 }
 
