@@ -13,9 +13,16 @@ type FormRowProp = {
   placeholder?: string
   field?: Record<string, any>
   setImage?: Dispatch<SetStateAction<ArrayBuffer | string | null>>
+  formOf?: string
 }
 
-const FormRow = ({ label, placeholder, field, setImage }: FormRowProp) => {
+const FormRow = ({
+  label,
+  placeholder,
+  field,
+  setImage,
+  formOf,
+}: FormRowProp) => {
   // image handler
   const handleImage = (e: FormEvent<HTMLInputElement>) => {
     const file = (e.target as HTMLInputElement).files![0]
@@ -57,7 +64,7 @@ const FormRow = ({ label, placeholder, field, setImage }: FormRowProp) => {
         <FormLabel className='text-white'>{label}</FormLabel>
         <FormControl>
           <Input
-            required
+            required={formOf === 'post'}
             accept='image/png, image/gif, image/jpeg'
             onChange={handleImage}
             className='text-white bg-black cursor-pointer'

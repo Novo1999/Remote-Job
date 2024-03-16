@@ -11,7 +11,7 @@ function Page({ params }: { params: { id: string } }) {
     isLoading,
     isError,
     error,
-  } = useGetSingleJobQuery(params.id)
+  } = useGetSingleJobQuery(params.id, { refetchOnMountOrArgChange: true })
 
   let content = null
   if (isLoading) {

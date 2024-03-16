@@ -152,7 +152,7 @@ const PostForm = ({ data }: { data?: Job }) => {
               />
             )}
           />
-          <CompanyForm setImage={setImage} form={form} />
+          <CompanyForm setImage={setImage} form={form} formOf='post' />
           <Button
             disabled={isLoading}
             className='hover:bg-white hover:text-black'

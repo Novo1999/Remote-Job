@@ -4,13 +4,16 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { auth } from '@/firebase/config'
 import { usePostedDate } from '@/hooks/use-posted-date'
 import { useAppSelector } from '@/lib/features/hooks'
+import { useApplyJobMutation } from '@/lib/features/jobsApi/jobsApi'
 import { motion } from 'framer-motion'
+import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { FaArrowAltCircleRight } from 'react-icons/fa'
 import { LuMousePointerClick } from 'react-icons/lu'
 import { MdDelete, MdEdit } from 'react-icons/md'
+import { toast } from 'react-toastify'
 import { Job } from '../../../interfaces'
 import Star from '../Job/Star'
 import { TooltipForButton } from '../Tooltip'
@@ -35,6 +38,7 @@ const JobCard = ({ job }: { job: Job }) => {
     viewCount,
     createdBy,
     appliedBy,
+    companyLogo,
   } = job
 
   const { formattedDate } = usePostedDate(posted)
@@ -43,20 +47,41 @@ const JobCard = ({ job }: { job: Job }) => {
   const [modalOpen, setModalOpen] = useState(false)
   const [editModalOpen, setEditModalOpen] = useState(false)
 
-  const [user] = useAuthState(auth)
+  const [user, loading] = useAuthState(auth)
+  const userId = !loading && user ? user.uid : ''
+  const [applyJob, { isLoading }] = useApplyJobMutation()
+  const alreadyApplied = appliedBy?.userId.includes(userId)
+
+  const handleApply = async () => {
+    if (!user || alreadyApplied || createdBy === userId) return
+    applyJob({ jobId: _id, userId }).then((result: any) => {
+      if (result.error) {
+        toast.error(result.error.data.msg)
+      } else toast.success(`Applied for ${title} at ${companyName}`)
+    })
+  }
 
   return (
     <Card className='font-poppins bg-gradient-to-bl from-indigo-200 via-red-200 to-yellow-100 h-fit sm:col-span-1'>
       <CardHeader>
         <div className='flex gap-2 justify-between items-center flex-wrap'>
-          <ProfileImage />
+          <ProfileImage companyLogo={companyLogo?.url} />
           <CardTitle className='text-base lg:text-xl flex gap-2 items-center flex-1'>
             <p className='sm:whitespace-nowrap'>{title}</p>
             <div className='flex flex-wrap flex-col sm:flex-row justify-between gap-2 sm:w-full'>
-              <button className='btn-xs btn transition-all ease-in-out rounded-full flex gap-2 bg-red-500 text-white'>
-                <p className='outline-none'>Apply Now</p>
-                <FaArrowAltCircleRight />
-              </button>
+              <ApplyButton job={job}>
+                <button
+                  onClick={handleApply}
+                  className={`btn-xs transition-all ease-in-out rounded-full flex gap-2 bg-red-500 text-white button ${
+                    alreadyApplied || !user || createdBy === userId
+                      ? '!bg-gray-500 cursor-default'
+                      : ''
+                  } transition-all ease-in-out sm:self-end`}
+                >
+                  <p className='outline-none text-xs'>Apply Now</p>
+                  <FaArrowAltCircleRight />
+                </button>
+              </ApplyButton>
               <div className='rating rating-md transition-all flex gap-2'>
                 <p className='font-thin flex gap-2 items-center'>
                   <LuMousePointerClick /> Viewed: {viewCount} times
@@ -153,7 +178,22 @@ const JobCard = ({ job }: { job: Job }) => {
           </div>
           <ResponsibilitiesAndQualifications />
           <div className='flex flex-col gap-2'>
-            <ApplyButton job={job} />
+            <ApplyButton job={job}>
+              <motion.button
+                disabled={alreadyApplied || !user || createdBy === userId}
+                onClick={handleApply}
+                whileTap={{ scale: 0.8 }}
+                transition={{ type: 'spring', stiffness: 200, damping: 10 }}
+                className={`button ${
+                  alreadyApplied || !user || createdBy === userId
+                    ? '!bg-gray-500 cursor-default'
+                    : ''
+                } transition-all ease-in-out sm:self-end`}
+              >
+                {isLoading ? <Loader2 className='animate-spin' /> : 'Apply Now'}
+                <FaArrowAltCircleRight />
+              </motion.button>
+            </ApplyButton>
             <Warning />
           </div>
         </CardContent>

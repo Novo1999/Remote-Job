@@ -1,12 +1,14 @@
 import { Avatar } from '@/components/ui/avatar'
-import dummyLogo from '../../../public/images/dummylogo.png'
 import Image from 'next/image'
+import dummyLogo from '../../../public/images/dummylogo.png'
 
-const ProfileImage = () => {
+const ProfileImage = ({ companyLogo }: { companyLogo: string }) => {
   return (
     <Avatar>
       <Image
-        src={dummyLogo}
+        width={200}
+        height={200}
+        src={companyLogo ?? dummyLogo}
         alt='logo'
         className='w-12 sm:w-16 rounded-full m-auto shadow-lg lg:w-[90px] xl:w-20'
       />

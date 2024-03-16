@@ -25,6 +25,7 @@ const Search = () => {
 
   useEffect(() => {
     if (hasSearchParam) {
+      window.scroll({ top: 400, behavior: 'smooth' })
       setSearchValue(searchQuery ?? '')
       dispatch(changeSearchInput({ query: searchValue }))
     }

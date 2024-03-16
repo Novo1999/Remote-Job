@@ -23,7 +23,7 @@ import { FilterBar } from './FilterBar'
 import FormRow from './FormRow'
 import { FormRowSelect } from './FormRowSelect'
 import BenefitsListbox from './Listbox'
-import { editFormSchema, formSchema } from './formSchema'
+import { editFormSchema } from './formSchema'
 
 const EditForm = ({ data }: { data?: Job }) => {
   const [user, loading, error] = useAuthState(auth)
@@ -41,6 +41,7 @@ const EditForm = ({ data }: { data?: Job }) => {
     companyName,
     salary,
     benefits,
+    createdBy,
   } = data! ?? {}
 
   const form = useForm<z.infer<typeof editFormSchema>>({
@@ -66,8 +67,16 @@ const EditForm = ({ data }: { data?: Job }) => {
   const [image, setImage] = useState<void>() // image state
 
   function onSubmit(values: z.infer<typeof editFormSchema>) {
-    editJob({ id: _id, updatedJob: values }).then(() => {
-      handleRouting('/')
+    editJob({
+      id: _id,
+      updatedJob: {
+        ...values,
+        companyImage: image,
+        benefits: selectedBenefits || benefits,
+        createdBy,
+      },
+    }).then(() => {
+      handleRouting(`/job/${_id}`)
       toast.success('Added Job Successfully')
     })
     if (isError) {
@@ -170,7 +179,7 @@ const EditForm = ({ data }: { data?: Job }) => {
               />
             )}
           />
-          <CompanyForm setImage={setImage} form={form} />
+          <CompanyForm setImage={setImage} form={form} formOf='edit' />
           <Button
             disabled={isLoading}
             className='hover:bg-white hover:text-black'
