@@ -29,7 +29,7 @@ export const options = {
 }
 
 const JobChart = ({ data: jobs }: { data: Job[] }) => {
-  // getting the labels from the jobs that have
+  // getting the labels from the jobs
   const labels = [...jobs]
     .sort((a, b) => b.viewCount - a.viewCount)
     .slice(0, 10)

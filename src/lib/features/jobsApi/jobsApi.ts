@@ -133,6 +133,9 @@ const jobsApi = api.injectEndpoints({
         }
       },
     }),
+    getJobsStats: builder.query({
+      query: (uid) => `/admin/job-stats/${uid}`,
+    }),
   }),
 })
 
@@ -148,5 +151,6 @@ export const {
   usePostJobMutation,
   useGetMaxSalaryQuery,
   useDeleteJobMutation,
+  useGetJobsStatsQuery,
   useApplyJobMutation,
 } = jobsApi

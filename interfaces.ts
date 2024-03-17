@@ -81,3 +81,18 @@ export interface FilterParam {
   benefits: string[]
   salary: number
 }
+
+export interface JobData {
+  mostViewedJobs: {
+    jobs: Job[]
+    count: number
+  }
+  mostStarredJobs: {
+    jobs: Job[]
+    count: number
+  }
+  mostAppliedJobs: {
+    jobs: Job[]
+    count: number
+  }
+}
