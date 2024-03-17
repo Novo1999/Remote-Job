@@ -20,7 +20,6 @@ const data = {
 
 const PieChart = ({ jobData }: { jobData: JobData }) => {
   const [pieData, setPieData] = useState(data)
-  console.log(jobData?.mostViewedJobs?.count)
   useEffect(() => {
     setPieData((prevData) => ({
       ...prevData,

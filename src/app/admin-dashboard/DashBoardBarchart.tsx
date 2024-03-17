@@ -26,8 +26,6 @@ export const options = {
   },
 }
 
-const labels = ['Most Viewed', 'Most Starred', 'Most Applied']
-
 export const DashBoardBarchart = ({ jobData }: { jobData: JobData }) => {
   const [all, setAll] = useState<Job[]>([])
 
@@ -40,25 +38,23 @@ export const DashBoardBarchart = ({ jobData }: { jobData: JobData }) => {
     setAll([...viewedJobs, ...starredJobs, ...appliedJobs])
   }, [jobData])
 
-  console.log(all)
-
   const data = {
     labels: all.map((job) => job.title),
     datasets: [
       {
         label: 'Viewed',
         data: all?.map((job) => job.viewCount),
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        backgroundColor: '#ec0d0d',
       },
       {
         label: 'Starred',
-        data: all?.map((job) => Object.keys(job.isStarred).length),
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        data: all?.map((job) => job.isStarred.userId.length),
+        backgroundColor: '#0b9af9',
       },
       {
         label: 'Applied',
         data: all?.map((job) => job.applyCount),
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        backgroundColor: '#fade09',
       },
     ],
   }

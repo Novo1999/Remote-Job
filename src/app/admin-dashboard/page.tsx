@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { JobData } from '../../../interfaces'
 import { DashBoardBarchart } from './DashBoardBarchart'
+import JobsGrid from './JobsGrid'
 import PieChart from './PieChart'
 
 export default function Page() {
@@ -17,9 +18,7 @@ export default function Page() {
     mostAppliedJobs: { jobs: [], count: 0 },
   })
 
-  const { data, isLoading, isError, error } = useGetJobsStatsQuery(
-    '4f4vhBDNImYe2JuHt7SLpvf2wLZ2'
-  )
+  const { data } = useGetJobsStatsQuery('4f4vhBDNImYe2JuHt7SLpvf2wLZ2')
 
   useEffect(() => {
     if (!authLoading && user?.uid) {
@@ -27,22 +26,32 @@ export default function Page() {
     }
   }, [authLoading, data, user])
 
-  console.log(data)
-
   return (
     <ClientOnly>
-      <div className='min-h-[80vh] p-20'>
-        <p>Hi there, {user?.displayName}</p>
-        <div className='mockup-window border w-fit m-auto bg-base-300 mt-4'>
-          <div className='flex flex-col lg:flex-row justify-between items-center lg:items-start px-4 py-16 bg-base-200'>
+      <div className='min-h-[80vh] pt-20 px-10 2xl:px-[24rem]'>
+        <section className='flex justify-between items-end'>
+          <p className='large rise font-oswald'>
+            Hi there, {user?.displayName}
+          </p>
+          <p className='text-4xl font-oswald'>Summary</p>
+        </section>
+        <div className='mockup-window w-fit m-auto mt-4 bg-white'>
+          <div className='flex flex-col lg:flex-row justify-between items-center lg:items-start px-4 py-16 bg-base-200 dashboard'>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
             <div className='w-[34rem] lg:w-[36rem] xl:w-[50rem] h-96 hidden sm:block'>
               <DashBoardBarchart jobData={jobData} />
             </div>
-            <div className='w-48 sm:w-60 lg:w-72'>
+            <div className='w-48 sm:w-60 lg:w-72 min-h-72'>
               <PieChart jobData={jobData} />
             </div>
           </div>
         </div>
+        <section className='mt-20'>
+          <JobsGrid />
+        </section>
       </div>
     </ClientOnly>
   )
