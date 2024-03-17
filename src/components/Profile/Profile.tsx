@@ -4,6 +4,7 @@ import { useAppSelector } from '@/lib/features/hooks'
 import { useLogout } from '@/utils/logOut'
 import { Loader2 } from 'lucide-react'
 import Image from 'next/image'
+import { useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import PrivateRoute from '../PrivateRoute'
 import { Button } from '../ui/button'
@@ -11,7 +12,10 @@ import { Meteors } from '../ui/meteors'
 import { ProfileModal } from './ProfileModal'
 
 const Profile = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+  useEffect(() => {
+    document.body.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
+
   const [, loading] = useAuthState(auth)
   const logout = useLogout()
   const { userName, email, url } = useAppSelector((state) => state.user)

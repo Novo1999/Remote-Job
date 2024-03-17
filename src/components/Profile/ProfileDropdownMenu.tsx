@@ -48,12 +48,20 @@ const ProfileDropdownMenu = () => {
       }
     }
 
-    if (modalOpen) {
-      document.addEventListener('click', handleOutsideClick)
+    // Function to check if the device is mobile
+    const isMobileDevice = () => {
+      return window.matchMedia('(max-width: 640px)').matches
     }
 
-    return () => {
-      document.removeEventListener('click', handleOutsideClick)
+    if (!isMobileDevice()) {
+      // Add event listener only if it's not a mobile device
+      if (modalOpen) {
+        document.addEventListener('click', handleOutsideClick)
+      }
+
+      return () => {
+        document.removeEventListener('click', handleOutsideClick)
+      }
     }
   }, [modalOpen, dispatch])
 
@@ -94,13 +102,20 @@ const ProfileDropdownMenu = () => {
         </motion.button>
         <ul
           ref={menuRef}
-          className='flex shadow flex-col gap-2 top-12 bg-white absolute right-8 w-[300px]'
+          className={`shadow flex-col gap-2 top-14 md:absolute ${
+            modalOpen ? 'md:flex' : 'md:block hidden'
+          } bg-white right-8 w-[300px]`}
           style={{
             pointerEvents: modalOpen ? 'auto' : 'none',
             clipPath: 'inset(10% 50% 90% 50% round 10px)',
           }}
         >
-          <MenuListItem onClick={() => handleRouting('/profile')}>
+          <MenuListItem
+            onClick={() => {
+              handleRouting('/profile')
+              dispatch(openModal(false))
+            }}
+          >
             Profile
           </MenuListItem>
           <MenuListItem onClick={logOutUser}>Logout</MenuListItem>
@@ -112,7 +127,7 @@ const ProfileDropdownMenu = () => {
           >
             My Favorite Jobs
           </MenuListItem>
-        </ul>{' '}
+        </ul>
       </nav>
       {favoriteModalOpen && <FavoriteJobModal />}
     </Dialog>

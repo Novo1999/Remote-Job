@@ -6,14 +6,14 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import ProfileImage from './Avatar'
 import { Job } from '../../../interfaces'
+import ProfileImage from './Avatar'
 const AboutCompany = ({ job }: { job: Job }) => {
   return (
     <Card className='font-poppins bg-gradient-to-r from-teal-200 to-lime-200 h-full sm:col-span-1'>
       <CardHeader>
         <div className='flex gap-2 items-center'>
-          <ProfileImage />
+          <ProfileImage companyLogo={job?.companyLogo?.url} />
           <CardTitle>{job?.companyName}</CardTitle>
         </div>
         <CardDescription className='text-xs leading-6 text-black lg:text-base'>
