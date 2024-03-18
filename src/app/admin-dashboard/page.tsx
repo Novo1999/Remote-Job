@@ -29,12 +29,12 @@ export default function Page() {
   return (
     <ClientOnly>
       <div className='min-h-[80vh] pt-20 px-10 2xl:px-[24rem]'>
-        <section className='flex justify-between items-end'>
-          <p className='large rise font-oswald'>
+        <div className='flex justify-between items-end'>
+          <p className='large rise sm:text-4xl font-oswald'>
             Hi there, {user?.displayName}
           </p>
-          <p className='text-4xl font-oswald'>Summary</p>
-        </section>
+          <p className='text-md sm:text-4xl font-oswald'>Top Jobs Summary</p>
+        </div>
         <div className='mockup-window w-fit m-auto mt-4 bg-white'>
           <div className='flex flex-col lg:flex-row justify-between items-center lg:items-start px-4 py-16 bg-base-200 dashboard'>
             <span></span>

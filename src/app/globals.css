@@ -265,9 +265,6 @@ body {
   width: 100%;
 }
 
-.large {
-  font-size: 2rem;
-}
 .rise {
   text-shadow: -0.01em -0.01em 0.01em #000;
   animation: rise 2s ease-in-out 0.5s forwards;

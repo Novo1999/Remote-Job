@@ -56,7 +56,7 @@ const JobContainer = () => {
     content = (
       <>
         <JobChart data={data as Job[]} />
-        {data?.map((job) => (
+        {data?.map((job: Job) => (
           <JobItem ref={ref} jobPost={job} key={job._id} />
         ))}
         {showSkeleton && <Skeleton />}
