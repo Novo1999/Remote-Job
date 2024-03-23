@@ -5,9 +5,9 @@ import { useGetJobsStatsQuery } from '@/lib/features/jobsApi/jobsApi'
 import { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { JobData } from '../../../interfaces'
-import { DashBoardBarchart } from './DashBoardBarchart'
-import JobsGrid from './JobsGrid'
-import PieChart from './PieChart'
+import { DashBoardBarchart } from '../../components/Dashboard/DashBoardBarchart'
+import JobsGrid from '../../components/Dashboard/JobsGrid'
+import PieChart from '../../components/Dashboard/PieChart'
 
 export default function Page() {
   const [user, authLoading] = useAuthState(auth)

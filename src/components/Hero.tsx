@@ -1,3 +1,4 @@
+'use client'
 import { Player } from '@lottiefiles/react-lottie-player'
 import { motion } from 'framer-motion'
 import Image from 'next/image'

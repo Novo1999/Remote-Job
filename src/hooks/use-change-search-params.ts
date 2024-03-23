@@ -1,4 +1,3 @@
-'use client'
 import { resetFilter } from '@/lib/features/filter/filterSlice'
 import { useAppDispatch } from '@/lib/features/hooks'
 import { usePathname, useSearchParams } from 'next/navigation'

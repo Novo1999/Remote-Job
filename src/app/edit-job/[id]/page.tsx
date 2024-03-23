@@ -1,7 +1,5 @@
 'use client'
-
 import EditForm from '@/components/PostJob/EditForm'
-import PostForm from '@/components/PostJob/PostForm'
 import { useGetSingleJobQuery } from '@/lib/features/jobsApi/jobsApi'
 import { Loader } from 'lucide-react'
 import { useParams } from 'next/navigation'
@@ -10,8 +8,6 @@ import { Job } from '../../../../interfaces'
 const Page = () => {
   const { id }: { id: string } = useParams()
   const { data, isLoading, isError, error } = useGetSingleJobQuery(id)
-
-  console.log(data)
 
   return (
     <div>
