@@ -52,5 +52,6 @@ export const useJob = () => {
     isFetching,
     inView,
     ref,
+    totalJobs,
   }
 }

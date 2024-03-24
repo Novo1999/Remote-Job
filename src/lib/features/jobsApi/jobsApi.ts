@@ -45,6 +45,7 @@ const jobsApi = api.injectEndpoints({
     // TOTAL JOB COUNT
     getTotalJobs: builder.query<number, void>({
       query: () => '/total-jobs',
+      providesTags: ['total-jobs'],
     }),
     getUserStarredJobs: builder.query<Job[], string>({
       query: (uid) => `/starred/${uid}`,
@@ -104,6 +105,14 @@ const jobsApi = api.injectEndpoints({
       }),
       invalidatesTags: ['all-jobs'],
     }),
+    // DELETE AS ADMIN
+    deleteJobAsAdmin: builder.mutation({
+      query: ({ id, adminId }) => ({
+        method: 'DELETE',
+        url: `/admin/delete-as-admin/${adminId}/${id}`,
+      }),
+      invalidatesTags: ['all-jobs', 'total-jobs'],
+    }),
     // APPLY JOB
     applyJob: builder.mutation<Job, StarJob>({
       query: ({ jobId, userId }) => ({
@@ -141,6 +150,7 @@ const jobsApi = api.injectEndpoints({
 
 export const {
   useGetAllJobsQuery,
+  useDeleteJobAsAdminMutation,
   useEditJobMutation,
   useGetSimilarJobsQuery,
   useGetSingleJobQuery,

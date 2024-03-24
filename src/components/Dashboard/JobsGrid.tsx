@@ -1,12 +1,16 @@
 import Error, { EmptyResponse } from '@/components/Dummies'
 import Skeleton from '@/components/Job/Skeleton'
 import { useJob } from '@/hooks/use-job'
+import { useDeleteJobAsAdminMutation } from '@/lib/features/jobsApi/jobsApi'
+import { Loader } from 'lucide-react'
 import Image from 'next/image'
 import { Job } from '../../../interfaces'
 import dummyLogo from '../../../public/images/dummylogo.png'
 
 const JobsGrid = () => {
-  const { isLoading, isError, error, data, ref } = useJob()
+  const { isLoading, isError, error, data, ref, totalJobs } = useJob()
+
+  const [deleteJobAsAdmin] = useDeleteJobAsAdminMutation()
 
   let content = null
   if (isLoading) {
@@ -52,20 +56,20 @@ const JobsGrid = () => {
             return (
               <div
                 key={_id}
-                className='card card-side bg-white text-black shadow-xl px-4'
+                className='card card-side bg-gray-100 text-black shadow-xl min-[375px]:px-2 py-6 flex flex-col sm:flex-row'
               >
                 <figure>
                   <Image
-                    className='size-full object-contain rounded-full'
+                    className='size-12 rounded-full'
                     src={companyLogo?.url ?? dummyLogo}
                     height={200}
                     width={200}
                     alt='Movie'
                   />
                 </figure>
-                <div className='card-body'>
-                  <h2 className='card-title'>{title}</h2>
-                  <div className='flex gap-2 w-48 flex-wrap'>
+                <div className='card-body sm:w-48'>
+                  <h2 className='card-title text-sm'>{title}</h2>
+                  <div className='flex gap-2 flex-wrap'>
                     <p className='bg-yellow-300 text-xs font-bold rounded-full w-fit px-2 m-auto'>
                       {jobType.toUpperCase()}
                     </p>
@@ -83,14 +87,28 @@ const JobsGrid = () => {
                     </p>
                   </div>
                   <div className='card-actions justify-end'>
-                    <button className='btn btn-error'>Delete</button>
+                    <button
+                      onClick={() =>
+                        deleteJobAsAdmin({
+                          id: _id,
+                          adminId: process.env.NEXT_PUBLIC_ADMIN_UID,
+                        })
+                      }
+                      className='btn btn-error'
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
               </div>
             )
           }
         )}
-        <div ref={ref}></div>
+        {data?.length! < totalJobs! && (
+          <div ref={ref} className='flex justify-center items-center min-h-60'>
+            <Loader className='animate-spin' />
+          </div>
+        )}
       </section>
     )
   }
