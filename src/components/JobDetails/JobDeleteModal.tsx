@@ -1,10 +1,7 @@
-import useRouting from '@/hooks/use-routing'
-import { useDeleteJobMutation } from '@/lib/features/jobsApi/jobsApi'
 import { motion } from 'framer-motion'
 import { Loader2 } from 'lucide-react'
 import { Dispatch, SetStateAction } from 'react'
 import { RxCross1 } from 'react-icons/rx'
-import { toast } from 'react-toastify'
 import { CardBody, CardContainer, CardItem } from '../ui/3d-card'
 import { Dialog, DialogContent } from '../ui/dialog'
 

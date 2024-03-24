@@ -1,4 +1,4 @@
-import { Card, CardContent, CardTitle } from '@/components/ui/card'
+import { CardTitle } from '@/components/ui/card'
 import { BsStars } from 'react-icons/bs'
 const Qualifications = () => {
   return (

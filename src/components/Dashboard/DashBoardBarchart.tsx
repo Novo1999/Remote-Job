@@ -10,9 +10,9 @@ import {
   Title,
   Tooltip,
 } from 'chart.js'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2'
-import { Job, JobData } from '../../../interfaces'
+import { Job } from '../../../interfaces'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
