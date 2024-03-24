@@ -8,9 +8,8 @@ import { setShowSkeleton } from '@/lib/features/loader/loaderSlice'
 import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { toast } from 'react-toastify'
 
-export const useJob = () => {
+export const useJob = (search?: string) => {
   const searchParams = useSearchParams()
   const { limit } = useAppSelector((state) => state.limit)
   const { data: totalJobs } = useGetTotalJobsQuery()
@@ -23,7 +22,7 @@ export const useJob = () => {
     sortBy: sortParam,
     limit,
     filterBy: filterParam,
-    q: searchQueryParam || '',
+    q: searchQueryParam || search || '',
   })
 
   const { ref, inView } = useInView({

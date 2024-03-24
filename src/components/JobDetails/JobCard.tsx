@@ -3,8 +3,12 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { auth } from '@/firebase/config'
 import { usePostedDate } from '@/hooks/use-posted-date'
+import useRouting from '@/hooks/use-routing'
 import { useAppSelector } from '@/lib/features/hooks'
-import { useApplyJobMutation } from '@/lib/features/jobsApi/jobsApi'
+import {
+  useApplyJobMutation,
+  useDeleteJobMutation,
+} from '@/lib/features/jobsApi/jobsApi'
 import { motion } from 'framer-motion'
 import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
@@ -43,6 +47,8 @@ const JobCard = ({ job }: { job: Job }) => {
 
   const { formattedDate } = usePostedDate(posted)
   const { showStarLoader } = useAppSelector((state) => state.loader)
+  const [deleteJob, { isLoading: isDeleteLoading }] = useDeleteJobMutation()
+  const handleRouting = useRouting()
 
   const [modalOpen, setModalOpen] = useState(false)
   const [editModalOpen, setEditModalOpen] = useState(false)
@@ -145,6 +151,23 @@ const JobCard = ({ job }: { job: Job }) => {
             {/* job delete modal */}
             <JobDeleteModal
               id={_id}
+              isDeleteLoading={isDeleteLoading}
+              handleCancel={() => setModalOpen(false)}
+              handleDelete={() => {
+                deleteJob(_id)
+                  .then(
+                    () => {
+                      toast.success('Deleted Job Successfully')
+                      handleRouting('/')
+                    },
+                    () => {
+                      toast.error('Could not delete the job')
+                    }
+                  )
+                  .finally(() => {
+                    setModalOpen(false)
+                  })
+              }}
               modalOpen={modalOpen}
               setModalOpen={setModalOpen}
             />{' '}

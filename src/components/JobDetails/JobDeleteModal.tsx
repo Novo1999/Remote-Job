@@ -9,33 +9,23 @@ import { CardBody, CardContainer, CardItem } from '../ui/3d-card'
 import { Dialog, DialogContent } from '../ui/dialog'
 
 export type ModalPropType = {
-  modalOpen: boolean
-  setModalOpen: Dispatch<SetStateAction<boolean>>
+  modalOpen?: boolean
+  setModalOpen?: Dispatch<SetStateAction<boolean>>
   id: string
+  handleDelete?: () => void
+  handleCancel?: () => void
+  isDeleteLoading?: boolean
 }
 
-const JobDeleteModal = ({ modalOpen, setModalOpen, id }: ModalPropType) => {
-  const [deleteJob, { isLoading }] = useDeleteJobMutation()
-  const handleRouting = useRouting()
-
-  const handleDelete = () => {
-    deleteJob(id)
-      .then(
-        () => {
-          toast.success('Deleted Job Successfully')
-          handleRouting('/')
-        },
-        () => {
-          toast.error('Could not delete the job')
-        }
-      )
-      .finally(() => {
-        setModalOpen(false)
-      })
-  }
-
+const JobDeleteModal = ({
+  modalOpen,
+  setModalOpen,
+  handleDelete,
+  isDeleteLoading,
+  handleCancel,
+}: ModalPropType) => {
   return (
-    <Dialog open={modalOpen} onOpenChange={() => setModalOpen(!modalOpen)}>
+    <Dialog open={modalOpen} onOpenChange={() => setModalOpen!(!modalOpen)}>
       <DialogContent className='w-fit text-white bg-transparent invisible font-montserrat'>
         <CardContainer className='inter-var visible'>
           <CardBody className='bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  '>
@@ -48,7 +38,7 @@ const JobDeleteModal = ({ modalOpen, setModalOpen, id }: ModalPropType) => {
               </CardItem>
               <motion.button whileHover={{ rotate: 90 }}>
                 <RxCross1
-                  onClick={() => setModalOpen(false)}
+                  onClick={handleCancel}
                   className='text-black cursor-pointer'
                 />
               </motion.button>
@@ -60,13 +50,14 @@ const JobDeleteModal = ({ modalOpen, setModalOpen, id }: ModalPropType) => {
                   as='button'
                   className='px-4 py-2 rounded-xl bg-red-500 dark:bg-white hover:bg-red-600 hover:shadow-md dark:text-black text-white text-xs font-bold'
                 >
-                  {isLoading ? <Loader2 className='animate-spin' /> : 'Delete'}
+                  {isDeleteLoading ? (
+                    <Loader2 className='animate-spin' />
+                  ) : (
+                    'Delete'
+                  )}
                 </CardItem>
               </motion.div>
-              <motion.div
-                onClick={() => setModalOpen(false)}
-                whileHover={{ scale: 1.1 }}
-              >
+              <motion.div onClick={handleCancel} whileHover={{ scale: 1.1 }}>
                 <CardItem
                   translateZ={20}
                   as='button'

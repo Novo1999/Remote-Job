@@ -29,6 +29,8 @@ export const options = {
 export const DashBoardBarchart = ({ jobData }: { jobData: JobData }) => {
   const [all, setAll] = useState<Job[]>([])
 
+  console.log(all)
+
   useEffect(() => {
     const viewedJobs = jobData?.mostViewedJobs?.jobs || []
     const starredJobs = jobData?.mostStarredJobs?.jobs || []

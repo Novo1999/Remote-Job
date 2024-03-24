@@ -21,14 +21,12 @@ export default function Page() {
   const { data } = useGetJobsStatsQuery('4f4vhBDNImYe2JuHt7SLpvf2wLZ2')
 
   useEffect(() => {
-    if (!authLoading && user?.uid) {
-      setJobData(data)
-    }
-  }, [authLoading, data, user])
+    setJobData(data)
+  }, [data])
 
   return (
     <ClientOnly>
-      <div className='min-h-[80vh] pt-20 px-10 2xl:px-[24rem]'>
+      <div className='min-h-[80vh] pt-20 px-10 2xl:px-[24rem] bg-stone-800'>
         <div className='flex justify-between items-end'>
           <p className='large rise sm:text-4xl font-oswald'>
             Hi there, {user?.displayName}
