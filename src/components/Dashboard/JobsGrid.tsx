@@ -1,3 +1,5 @@
+'use client'
+
 import Error, { EmptyResponse } from '@/components/Dummies'
 import useDebounce from '@/hooks/use-debounce'
 import { useJob } from '@/hooks/use-job'

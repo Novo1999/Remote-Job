@@ -1,11 +1,15 @@
+'use client'
+
+import { loadData } from '@/lib/features/adminJobData/adminJobDataSlice'
+import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
+import { useGetJobsStatsQuery } from '@/lib/features/jobsApi/jobsApi'
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js'
 import React, { useEffect, useState } from 'react'
 import { Pie } from 'react-chartjs-2'
-import { JobData } from '../../../interfaces'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
-const data = {
+const defaultData = {
   labels: ['Most Viewed', 'Most Starred', 'Most Applied'],
   datasets: [
     {
@@ -18,8 +22,15 @@ const data = {
   ],
 }
 
-const PieChart = ({ jobData }: { jobData: JobData }) => {
-  const [pieData, setPieData] = useState(data)
+const PieChart = () => {
+  const { data } = useGetJobsStatsQuery(process.env.NEXT_PUBLIC_ADMIN_UID)
+  const dispatch = useAppDispatch()
+  const { jobData } = useAppSelector((state) => state.adminJobData)
+  useEffect(() => {
+    dispatch(loadData(data))
+  }, [data, dispatch])
+
+  const [pieData, setPieData] = useState(defaultData)
   useEffect(() => {
     setPieData((prevData) => ({
       ...prevData,

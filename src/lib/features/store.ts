@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
+import adminJobDataReducer from './adminJobData/adminJobDataSlice'
 import api from './api/apiSlice'
 import filterReducer from './filter/filterSlice'
 import limitReducer from './limit/limitSlice'
@@ -19,6 +20,7 @@ export const makeStore = () =>
       loader: loaderReducer,
       modal: modalReducer,
       user: userReducer,
+      adminJobData: adminJobDataReducer,
     },
     middleware: (gDM) =>
       gDM({

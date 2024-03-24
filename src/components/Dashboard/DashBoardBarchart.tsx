@@ -1,3 +1,6 @@
+'use client'
+
+import { useAppSelector } from '@/lib/features/hooks'
 import {
   BarElement,
   CategoryScale,
@@ -26,10 +29,10 @@ export const options = {
   },
 }
 
-export const DashBoardBarchart = ({ jobData }: { jobData: JobData }) => {
-  const [all, setAll] = useState<Job[]>([])
+export const DashBoardBarchart = () => {
+  const { jobData } = useAppSelector((state) => state.adminJobData)
 
-  console.log(all)
+  const [all, setAll] = useState<Job[]>([])
 
   useEffect(() => {
     const viewedJobs = jobData?.mostViewedJobs?.jobs || []

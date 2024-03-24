@@ -1,4 +1,10 @@
-import { GetJobs, GetSimilarJobs, Job, StarJob } from '../../../../interfaces'
+import {
+  GetJobs,
+  GetSimilarJobs,
+  Job,
+  JobData,
+  StarJob,
+} from '../../../../interfaces'
 import api from '../api/apiSlice'
 
 const jobsApi = api.injectEndpoints({
