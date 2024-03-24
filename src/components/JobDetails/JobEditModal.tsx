@@ -4,7 +4,7 @@ import { ModalPropType } from './JobDeleteModal'
 
 const JobEditModal = ({ modalOpen, setModalOpen }: ModalPropType) => {
   return (
-    <Dialog open={modalOpen} onOpenChange={() => setModalOpen(!modalOpen)}>
+    <Dialog open={modalOpen} onOpenChange={() => setModalOpen?.(!modalOpen)}>
       <DialogContent className='text-white bg-transparent font-montserrat'>
         <PostForm />
       </DialogContent>
