@@ -3,27 +3,31 @@ import { auth } from '@/firebase/config'
 import useRouting from '@/hooks/use-routing'
 import { useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import ClientOnly from '../PostJob/ClientOnly'
+import { toast } from 'react-toastify'
 
 const NameHeader = () => {
-  const [user] = useAuthState(auth)
+  const [user, isLoading] = useAuthState(auth)
   const handleRouting = useRouting()
-  console.log(user)
+
+  // this checks if user is logged in or if they are logged in, check if they are admin or else,re-route to home or login page
   useEffect(() => {
-    if (!user || user.uid! !== process.env.NEXT_PUBLIC_ADMIN_UID) {
+    if (!isLoading && !user?.uid) {
       handleRouting('/login')
+      toast.error('Please log in first')
     }
-  }, [user, handleRouting])
+    if (user && user.uid! !== process.env.NEXT_PUBLIC_ADMIN_UID) {
+      handleRouting('/')
+      toast.error('This page is only for admin')
+    }
+  }, [user, handleRouting, isLoading])
 
   return (
-    <ClientOnly>
-      <div className='flex justify-between items-end'>
-        <p className='large rise sm:text-4xl font-oswald'>
-          Hi there, {user?.displayName}
-        </p>
-        <p className='text-md sm:text-4xl font-oswald'>Top Jobs Summary</p>
-      </div>
-    </ClientOnly>
+    <div className='flex justify-between items-end'>
+      <p className='large rise sm:text-4xl font-oswald'>
+        Hi there, {user?.displayName}
+      </p>
+      <p className='text-md sm:text-4xl font-oswald'>Top Jobs Summary</p>
+    </div>
   )
 }
 export default NameHeader

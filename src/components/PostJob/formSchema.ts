@@ -5,9 +5,6 @@ import {
   zodTypesArray,
 } from '../../utils/constants'
 
-const MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB
-const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp'] as const
-
 const jobTypeEnum = z.enum(zodTypesArray)
 const jobLocationEnum = z.enum(zodRemoteJobLocations)
 const jobPositionEnum = z.enum(zodRemoteJobPositions)

@@ -80,7 +80,6 @@ export const useAuth = (formSchema: FormSchemaType) => {
         dispatch(setUserName(user.user.displayName))
         handleRouting('/')
       }
-      handleRouting('/')
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message.split(': ')[1])
@@ -94,5 +93,6 @@ export const useAuth = (formSchema: FormSchemaType) => {
     loading,
     updating,
     loginLoading,
+    loginError,
   }
 }

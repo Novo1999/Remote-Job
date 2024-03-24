@@ -14,7 +14,6 @@ import {
 } from '@/lib/features/useName/userSlice'
 import { useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { BsFillInfoCircleFill } from 'react-icons/bs'
 import { FaBriefcase } from 'react-icons/fa6'
 import { MdAdminPanelSettings } from 'react-icons/md'
 import { RiAdvertisementFill } from 'react-icons/ri'

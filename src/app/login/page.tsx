@@ -14,8 +14,10 @@ import { useAuth } from '@/hooks/use-auth'
 import { validateEmail } from '@/utils/validateEmail'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
+import error from 'next/error'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useForm } from 'react-hook-form'
 import { RiLoginCircleFill } from 'react-icons/ri'
@@ -36,14 +38,25 @@ const Page = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
-  const { onSubmitLoginUser, loginLoading } = useAuth(formSchema)
+
+  const { onSubmitLoginUser, loginLoading, loginError } = useAuth(formSchema)
+
+  useEffect(() => {
+    if (loginError?.message) {
+      setError('root.serverError', {
+        type: 'random',
+        message: loginError.message.split(':')[1],
+      })
+    }
+  }, [loginError, setError])
 
   const [user, authLoading, error] = useAuthState(auth)
-
+  console.log(error)
   let content = null
 
   if (authLoading && !error) {
@@ -100,6 +113,10 @@ const Page = () => {
                 or sign up
               </Link>
             </FormLink>
+            <p className='text-red-500'>
+              {errors?.root?.serverError?.type === 'random' &&
+                errors?.root?.serverError?.message}
+            </p>
           </form>
         </AuthForm>
       )
