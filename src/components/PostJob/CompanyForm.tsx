@@ -35,20 +35,17 @@ const CompanyForm = ({ form, setImage, formOf }: CompanyFormProps) => {
       {/* image */}
       <FormRow formOf={formOf} setImage={setImage} label='Company Logo' />
 
-      {/* Render company description only for 'edit' form */}
-      {formOf === 'edit' && (
-        <FormField
-          control={form.control as FormControlType}
-          name='companyDescription'
-          render={({ field }) => (
-            <FormRow
-              label='Company Description *'
-              placeholder='Company Description...'
-              field={field}
-            />
-          )}
-        />
-      )}
+      <FormField
+        control={form.control as FormControlType}
+        name='companyDescription'
+        render={({ field }) => (
+          <FormRow
+            label='Company Description *'
+            placeholder='Company Description...'
+            field={field}
+          />
+        )}
+      />
     </section>
   )
 }

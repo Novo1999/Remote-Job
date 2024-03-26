@@ -11,7 +11,6 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import * as z from 'zod'
-import { Job } from '../../../interfaces'
 import {
   remoteJobBenefits,
   remoteJobLocations,
@@ -25,7 +24,7 @@ import { FormRowSelect } from './FormRowSelect'
 import BenefitsListbox from './Listbox'
 import { formSchema } from './formSchema'
 
-const PostForm = ({ data }: { data?: Job }) => {
+const PostForm = () => {
   const [user, loading, error] = useAuthState(auth)
   const [postJob, { isError, error: postError, isLoading }] =
     usePostJobMutation()
@@ -40,9 +39,12 @@ const PostForm = ({ data }: { data?: Job }) => {
     remoteJobBenefits[1],
   ])
 
+  console.log(form.formState.errors)
+
   const [image, setImage] = useState<void>() // image state
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    console.log('SUBMIT')
     postJob({
       ...values,
       companyImage: image,

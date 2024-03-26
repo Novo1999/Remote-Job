@@ -2,17 +2,15 @@ import { FaCheckCircle } from 'react-icons/fa'
 import { CardTitle } from '../ui/card'
 import Qualifications from './Qualifications'
 
-const ResponsibilitiesAndQualifications = () => {
+const ResponsibilitiesAndQualifications = ({ jd }: { jd: string }) => {
   {
     /* just some dummy data here */
   }
   return (
     <>
-      <p>
-        We are looking for a Senior Symfony developer with commercial experience
-        for one of our clients. You are a perfect candidate if you are
-        growth-oriented, you love what you do, and you enjoy working on new
-        ideas to develop exciting products and growth features.
+      <p className='break-all'>
+        {jd ??
+          'We are looking for a Senior Symfony developer with commercial experience for one of our clients. You are a perfect candidate if you are growth-oriented, you love what you do, and you enjoy working on new ideas to develop exciting products and growth features.'}
       </p>
       <CardTitle className='text-base lg:text-xl bg-black text-white rounded-md px-2 py-1 flex items-center gap-2'>
         <FaCheckCircle />

@@ -43,8 +43,8 @@ const JobCard = ({ job }: { job: Job }) => {
     createdBy,
     appliedBy,
     companyLogo,
+    jobDescription,
   } = job
-
   const { formattedDate } = usePostedDate(posted)
   const { showStarLoader } = useAppSelector((state) => state.loader)
   const [deleteJob, { isLoading: isDeleteLoading }] = useDeleteJobMutation()
@@ -71,15 +71,21 @@ const JobCard = ({ job }: { job: Job }) => {
     <Card className='font-poppins bg-gradient-to-bl from-indigo-200 via-red-200 to-yellow-100 h-fit sm:col-span-1'>
       <CardHeader>
         <div className='flex gap-2 justify-between items-center flex-wrap'>
+          {/* profile image */}
           <ProfileImage companyLogo={companyLogo?.url} />
           <CardTitle className='text-base lg:text-xl flex gap-2 items-center flex-1'>
+            {/* job title */}
             <p className='sm:whitespace-nowrap'>{title}</p>
             <div className='flex flex-wrap flex-col sm:flex-row justify-between gap-2 sm:w-full'>
+              {/* apply */}
               <ApplyButton job={job}>
                 <button
                   onClick={handleApply}
                   className={`btn-xs transition-all ease-in-out rounded-full flex gap-2 bg-red-500 text-white button ${
-                    alreadyApplied || !user || createdBy === userId
+                    alreadyApplied ||
+                    !user ||
+                    createdBy === userId ||
+                    userId === process.env.NEXT_PUBLIC_ADMIN_UID
                       ? '!bg-gray-500 cursor-default'
                       : ''
                   } transition-all ease-in-out sm:self-end`}
@@ -102,8 +108,11 @@ const JobCard = ({ job }: { job: Job }) => {
           </CardTitle>
         </div>
         <div className='flex flex-wrap gap-2'>
-          <Badge variant='destructive' className='w-fit'>
-            <Link href='/company'>{companyName}</Link>
+          {/* company name */}
+          <Badge variant='destructive' className='w-48 break-all'>
+            <Link className='m-auto' href='/company'>
+              {companyName}
+            </Link>
           </Badge>
           <Badge variant='secondary' className='w-fit'>
             <p>{formattedDate}</p>
@@ -199,16 +208,25 @@ const JobCard = ({ job }: { job: Job }) => {
               </p>
             </div>
           </div>
-          <ResponsibilitiesAndQualifications />
+          <ResponsibilitiesAndQualifications jd={jobDescription as string} />
           <div className='flex flex-col gap-2'>
             <ApplyButton job={job}>
               <motion.button
-                disabled={alreadyApplied || !user || createdBy === userId}
+                // disabled if user already has applied or no user or its the users posted job or if the user is admin
+                disabled={
+                  alreadyApplied ||
+                  !user ||
+                  createdBy === userId ||
+                  userId === process.env.NEXT_PUBLIC_ADMIN_UID
+                }
                 onClick={handleApply}
                 whileTap={{ scale: 0.8 }}
                 transition={{ type: 'spring', stiffness: 200, damping: 10 }}
                 className={`button ${
-                  alreadyApplied || !user || createdBy === userId
+                  alreadyApplied ||
+                  !user ||
+                  createdBy === userId ||
+                  userId === process.env.NEXT_PUBLIC_ADMIN_UID
                     ? '!bg-gray-500 cursor-default'
                     : ''
                 } transition-all ease-in-out sm:self-end`}

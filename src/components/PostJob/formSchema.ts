@@ -16,7 +16,7 @@ const initialSchemaObject = {
   jobType: jobTypeEnum,
   location: jobLocationEnum,
   position: jobPositionEnum,
-  benefits: z.array(z.string()),
+  benefits: z.array(z.string()).optional(),
   salary: z.string().refine((value) => /^\d+-\d+$/.test(value), {
     message: 'Invalid salary range format. It should be like "MIN-MAX"',
   }),
