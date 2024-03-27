@@ -39,8 +39,6 @@ const PostForm = () => {
     remoteJobBenefits[1],
   ])
 
-  console.log(form.formState.errors)
-
   const [image, setImage] = useState<void>() // image state
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
@@ -72,7 +70,7 @@ const PostForm = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className='space-y-8 font-poppins mx-4 min-[425px]:mx-6 sm:mx-32 lg:mx-60 xl:mx-96 mt-10'
+          className='space-y-8 font-poppins mx-4 min-[425px]:mx-6 sm:mx-32 lg:mx-60 xl:mx-96 2xl:mx-[36rem] mt-10'
         >
           <h1 className='text-2xl font-bold'>Tell us about your Job</h1>
           <FormField
