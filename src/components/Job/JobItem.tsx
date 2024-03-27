@@ -22,7 +22,7 @@ const JobItem = forwardRef(
     const { _id, companyLogo } = jobPost
     const dispatch = useAppDispatch()
     const [addViewCount] = useAddViewCountMutation()
-    const handleRouting = useRouting()
+    const handleRouting = useRouting({ scroll: true })
     // click handler
     const handleClick = (e: React.SyntheticEvent) => {
       e.preventDefault()

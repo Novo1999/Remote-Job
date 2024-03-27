@@ -42,7 +42,7 @@ const FavoriteJobModal = () => {
   }
 
   return (
-    <DialogContent className='bg-gray-800 h-[500px] overflow-y-auto'>
+    <DialogContent className='bg-gray-800 max-h-96 overflow-y-auto'>
       {content}
     </DialogContent>
   )

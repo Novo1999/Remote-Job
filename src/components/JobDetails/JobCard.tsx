@@ -57,6 +57,11 @@ const JobCard = ({ job }: { job: Job }) => {
   const userId = !loading && user ? user.uid : ''
   const [applyJob, { isLoading }] = useApplyJobMutation()
   const alreadyApplied = appliedBy?.userId.includes(userId)
+  const applyBtnDisabled =
+    alreadyApplied ||
+    !user ||
+    createdBy === userId ||
+    userId === process.env.NEXT_PUBLIC_ADMIN_UID
 
   const handleApply = async () => {
     if (!user || alreadyApplied || createdBy === userId) return
@@ -80,6 +85,7 @@ const JobCard = ({ job }: { job: Job }) => {
               {/* apply */}
               <ApplyButton job={job}>
                 <button
+                  disabled={applyBtnDisabled}
                   onClick={handleApply}
                   className={`btn-xs transition-all ease-in-out rounded-full flex gap-2 bg-red-500 text-white button ${
                     alreadyApplied ||
@@ -213,12 +219,7 @@ const JobCard = ({ job }: { job: Job }) => {
             <ApplyButton job={job}>
               <motion.button
                 // disabled if user already has applied or no user or its the users posted job or if the user is admin
-                disabled={
-                  alreadyApplied ||
-                  !user ||
-                  createdBy === userId ||
-                  userId === process.env.NEXT_PUBLIC_ADMIN_UID
-                }
+                disabled={applyBtnDisabled}
                 onClick={handleApply}
                 whileTap={{ scale: 0.8 }}
                 transition={{ type: 'spring', stiffness: 200, damping: 10 }}

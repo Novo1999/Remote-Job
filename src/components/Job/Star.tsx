@@ -39,10 +39,14 @@ const Star = ({ className, job }: Star) => {
         .then(({ isStarred, title }) => {
           // TOAST
           if (isStarred.userId.includes(uid)) {
-            toast.success(`${title} added to favorites!`, { autoClose: 1000 })
+            toast.success(`${title} added to favorites!`, {
+              autoClose: 1000,
+              position: 'bottom-right',
+            })
           } else {
             toast.success(`${title} removed from favorites!`, {
               autoClose: 1000,
+              position: 'bottom-right',
             })
           }
           dispatch(setShowStarLoader(''))

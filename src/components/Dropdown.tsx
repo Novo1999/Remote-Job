@@ -39,7 +39,7 @@ const Dropdown = () => {
     dropdownIsOpen ? 'my-1' : 'my-[2px]'
   } bg-white transition ease transform duration-300`
 
-  const handleRouting = useRouting()
+  const handleRouting = useRouting({ scroll: true })
 
   return (
     <DropdownMenu onOpenChange={() => setDropDownIsOpen(!dropdownIsOpen)}>

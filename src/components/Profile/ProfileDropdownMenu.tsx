@@ -35,7 +35,8 @@ const ProfileDropdownMenu = () => {
   const { modalOpen } = useAppSelector((state) => state.modal)
   const dispatch = useAppDispatch()
   const { userName } = useAppSelector((state) => state.user)
-  const handleRouting = useRouting()
+  const handleRouting = useRouting({ scroll: true })
+
   const logOutUser = useLogout()
   const scope = useMenuAnimation(modalOpen)
   const menuRef = useRef<HTMLUListElement>(null)
@@ -48,7 +49,7 @@ const ProfileDropdownMenu = () => {
       }
     }
 
-    // Function to check if the device is mobile
+    //  check if the device is mobile
     const isMobileDevice = () => {
       return window.matchMedia('(max-width: 640px)').matches
     }
