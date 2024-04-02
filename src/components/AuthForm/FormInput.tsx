@@ -1,5 +1,10 @@
+import { EyeIcon } from 'lucide-react'
 import { usePathname } from 'next/navigation'
+import { useRef, useState } from 'react'
 import { UseFormRegister } from 'react-hook-form'
+import { FaRegEyeSlash } from 'react-icons/fa'
+import { FaRegEye } from 'react-icons/fa6'
+import { MdPassword } from 'react-icons/md'
 import ForgotPassword from './ForgotPassword'
 
 type RegisterName = 'email' | 'password' | 'displayName'
@@ -16,6 +21,7 @@ const FormInput = ({
   register: UseFormRegister<any>
   registerName: RegisterName
 }) => {
+  const [showPassword, setShowPassword] = useState(false)
   const pathname = usePathname()
   return (
     <div className='mt-4'>
@@ -31,11 +37,26 @@ const FormInput = ({
           <ForgotPassword />
         )}
       </div>
-      <input
-        {...register(registerName, { required: true })}
-        className={inputClass}
-        type={registerName === 'password' ? 'password' : 'text'}
-      />
+      <div className='relative'>
+        <input
+          {...register(registerName, { required: true })}
+          className={inputClass}
+          type={
+            registerName === 'password' && !showPassword ? 'password' : 'text'
+          }
+        />
+        {label === 'Password' && (
+          <button
+            onClick={() => {
+              setShowPassword(!showPassword)
+            }}
+            type='button'
+            className='absolute text-black right-2 bottom-3'
+          >
+            {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+          </button>
+        )}
+      </div>
     </div>
   )
 }

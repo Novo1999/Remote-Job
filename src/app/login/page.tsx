@@ -55,7 +55,6 @@ const Page = () => {
   }, [loginError, setError])
 
   const [user, authLoading, error] = useAuthState(auth)
-  console.log(error)
   let content = null
 
   if (authLoading && !error) {

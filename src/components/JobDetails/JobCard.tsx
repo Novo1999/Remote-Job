@@ -133,7 +133,7 @@ const JobCard = ({ job }: { job: Job }) => {
                 <p>{position}</p>
               </Badge>
             </div>
-            {createdBy === user?.uid && (
+            {user?.uid && createdBy === user?.uid && (
               <div className='flex gap-2'>
                 {/* EDIT */}
                 <TooltipForButton content='Edit'>
