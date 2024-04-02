@@ -29,8 +29,8 @@ const formSchema = z.object({
     .refine((name) => name !== '', {
       message: 'Please provide a name',
     })
-    .refine((name) => name.length > 6, {
-      message: 'Name must be at least 6 characters',
+    .refine((name) => name.length > 4, {
+      message: 'Name must be at least 5 characters',
     }),
   email: z.string().refine((email) => validateEmail(email), {
     message: 'Invalid email',
