@@ -36,16 +36,11 @@ const JobItem = forwardRef(
       <motion.div
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{
-          once: true,
-        }}
         ref={ref}
         onClick={handleClick}
         whileHover={{ scale: 1.01 }}
         transition={{
           type: 'tween',
-          stiffness: 100,
-          duration: 0.2,
         }}
         className='group w-full relative py-2 px-2 sm:py-3 rounded-lg bg-gradient-to-r from-rose-100 to-teal-100 text-black grid grid-cols-9 sm:grid-cols-7 lg:grid-cols-8 sm:items-start lg:items-center text-xs font-poppins z-10 cursor-pointer'
       >
