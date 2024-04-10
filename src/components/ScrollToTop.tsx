@@ -1,3 +1,4 @@
+'use client'
 import useDebounce from '@/hooks/use-debounce'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'

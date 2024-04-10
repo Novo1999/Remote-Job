@@ -1,4 +1,3 @@
-'use client'
 import Advertise from '@/components/Advertise'
 import Navbar from '@/components/Navbar'
 import Newsletter from '@/components/Newsletter'
@@ -16,18 +15,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' className='bg-zinc-800'>
-      <StoreProvider>
-        <body
-          className={`${oswald.variable} ${poppins.variable} ${montserrat2.variable} ${montserrat.variable} ${chewy.variable} bg-zinc-800`}
-        >
+      <body
+        className={`${oswald.variable} ${poppins.variable} ${montserrat2.variable} ${montserrat.variable} ${chewy.variable} bg-zinc-800`}
+      >
+        <StoreProvider>
           <Advertise />
           <Navbar />
           {children}
-          <ScrollToTop />
-          <Newsletter />
-          <ToastContainer />
-        </body>
-      </StoreProvider>
+        </StoreProvider>
+        <ScrollToTop />
+        <Newsletter />
+        <ToastContainer />
+      </body>
     </html>
   )
 }

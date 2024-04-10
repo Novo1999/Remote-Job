@@ -1,3 +1,4 @@
+'use client'
 import { useAppSelector } from '@/lib/features/hooks'
 import { useGetAllJobsQuery } from '@/lib/features/jobsApi/jobsApi'
 import { useEffect, useRef, useState } from 'react'
