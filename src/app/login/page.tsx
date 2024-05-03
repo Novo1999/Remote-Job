@@ -79,6 +79,10 @@ const Page = () => {
             className='w-full px-6 py-8 md:px-8 lg:w-1/2'
           >
             <FormHeader icon={<RiLoginCircleFill />} text='login with email' />
+            <p className='text-blue-500 italic'>
+              Admin Email & password: admin11@gmail.com
+            </p>
+
             <FormInput
               label='Email Address'
               register={register}

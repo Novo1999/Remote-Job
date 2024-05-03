@@ -1,4 +1,3 @@
-'use client'
 import Search from '../components/Search'
 import FilterButtons from './FilterButtons'
 import Hero from './Hero'
